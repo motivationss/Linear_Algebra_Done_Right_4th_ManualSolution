@@ -1,0 +1,244 @@
+\documentclass{extarticle}
+\sloppy
+\input{packages.tex}
+\input{math_commands.tex}
+
+
+\title{\vspace{-2em}Chapter 4: Polynomials}
+\author{\emph{Linear Algebra Done Right}, by Sheldon Axler}
+\date{}
+
+\begin{document}
+\maketitle 
+
+\begin{definition}[Re z, Im z]
+    Suppose \(z = a + b i\), where \(a\) and \(b\) are real numbers. 
+    \begin{itemize}
+        \item The \textbf{real part} of \(z\), denoted by Re\(z\), is defined by Re\(z=a\).
+        \item The \textbf{imaginary part} of \(z\), denoted by Im\(z\), is defined by Im\(z=a\).
+    \end{itemize}
+\end{definition}
+
+
+\begin{definition}[complex conjugate, \(\zo\), absolute value, \(|z|\)]
+    Suppose \(z \in \C\). 
+    \begin{itemize}
+        \item The \textbf{complex conjugate} of \(z \in \C\), denoted by \(\zo\), is defined by 
+        \[\zo = \text{Re}z - \text{Im}z\]
+        \item The \textbf{absolute value} of a complex number \(z\), denoted by \(|z|\), is defined by 
+        \[|z| = \sqrt{(\text{Re}(z))^2 + (\text{Im}(z))^2}\]
+    \end{itemize}
+\end{definition}
+
+A function \(p \colon \F \to \F\) is called a polynomial of degree \(m\) if there exists 
+\(a_0, \ldots, a_m \in \F\) with \(a_m \neq 0\) such that 
+\[p(z) = a_0 + a_1z + \cdots + a_m z^m\]
+for all \(z \in \F\). 
+
+\begin{definition}[zero of a polynomial]
+    A number \(\lambda \in \F\) is called a \textbf{zero} (or \textbf{root}) of a polynomial 
+    \(p \in\Pc(\F)\) if 
+    \[p(\lambda) = 0.\]
+\end{definition}
+
+
+\begin{lemma}[each zero of a polynomial corresponds to a degree-one factor]
+    Suppose \(m\) is a positive integer and \(p \in \Pc(\F)\) is a polynomial of degree \(m\). 
+    Suppose \(\lambda \in \F\). Then \(p(\lambda) = 0\) if and only if there exists a polynomial 
+    \(q \in \Pc(\F)\) of degree \(m - 1\) such that 
+    \[p(z) = (z - \lambda)q(z)\]
+    for every \(z \in \F\). 
+\end{lemma}
+
+\begin{thm}[degree \(m\) implies at most \(m\) zeros]
+    Suppose \(m\) is a positive integer and \(p \in \Pc(\F)\) is a polynomial of degree \(m\). 
+    Then \(p\) has at most \(m\) zeros in \(\F\). 
+\end{thm}
+
+\begin{thm}[division algorithm for polynomials]
+    Suppose that \(p, s \in \Pc(\F)\) with \(s \neq 0\). Then there exist unique polynomials 
+    \(q, r \in \Pc(\F)\) such that 
+    \[p = sq + r\]
+    and \(\deg r < \deg s\). 
+\end{thm}
+
+\begin{thm}[fundamental theorem of algebra, first version]
+    Every nonconstant polynomial with complex coefficients has a zero in \(\C\). 
+\end{thm}
+
+\begin{thm}[fundamental theorem of algebra, second version]
+    If \(p \in \Pc(\C)\) is a nonconstant polynomial, then \(p\) has a unique factorization 
+    (except for the order of the factors) of the form 
+    \[p(z) = c(z - \lambda_1) \cdots (z - \lambda_m),\]
+    where \(c, \lambda_1, \ldots, \lambda_m \in \C\). 
+\end{thm}
+
+\begin{lemma}[polynomials with real coefficients have nonreal zeros in pairs]
+    Suppose \(p \in \Pc(\C)\) is a polynomial with real coefficients. If \(\lambda \in \C\)
+    is a zero of \(p\), then so is \(\overline{\lambda}\). 
+\end{lemma}
+
+\begin{thm}[factorization of a quadratic polynomial]
+    Suppose \(b, c \in \R\). Then there is a polynomial factorization of the form 
+    \[x^2 + bx + c = (x - \lambda_1)(x - \lambda_2)\]
+    with \(\lambda_1, \lambda_2 \in \R\) if and only if \(b^2 \geq 4c\). 
+\end{thm}
+
+
+\begin{thm}[factorization of a polynomial over \(\R\)]
+    Suppose \(p \in \Pc(\R)\) is a nonconstant polynomial. Then \(p\) has a unique factorization 
+    (except for the order of the factors) of the form 
+    \[p(x) = c(x-\lambda_1)\cdots(x - \lambda_m)(x^2 + b_1x + c_1) \cdots(x^2 + b_M x + c_M)\]
+    where \(c, \lambda_1, \ldots, \lambda_m, c_1, \ldots, c_M \in \R\), with 
+    \(b_k^2 < 4 c_k\) for each \(k\). 
+\end{thm}
+
+
+
+
+\newpage 
+
+\begin{problem}{1}
+    Suppose \(w, z \in \C\). Verify the following equalities and inequalities. 
+    \begin{enumerate}[label=(\alph*)]
+        \item \(z + \zo = 2 \Re z\) 
+        \item \(z - \zo = 2 (\Im z)i\)  
+        \item \(z \zo = |z|^2\) 
+        \item \(\overline{w + z} = \wo + \zo\) and \(\overline{wz} = \wo \zo\) 
+        \item \(\overline{\zo} = z\) 
+        \item \(|\Re z| \leq |z|\) and \(|\Im z|= \leq |z|\)
+        \item \(|\zo| = |z|\) 
+        \item \(|wz| = |w| |z|\)
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+Suppose \(z = a + bi, w = c + di\). We verify these as follows:
+\begin{enumerate}[label=(\alph*)]
+    \item \(z + \zo = (a+bi) + (a-bi) = 2a = 2\Re z\)
+    \item \(z - \zo = (a+bi) - (a-bi) = 2bi = 2 (\Im z)i\)
+    \item \(z\zo = (a+bi)(a-bi)= a^2 + b^2 = |z|^2\)
+    \item \(\overline{w+z} = \overline{(a+c)+(b+d)i} = (a+c) - (b+d)i = (a-bi)+(c-di) = \zo + \wo\)
+    \item \(\overline{\zo}=\overline{a-bi}=a+bi = z\)
+    \item \(|\Re z| = a^2 \leq a^2 + b^2 = |z|^2;\ \ |\Im z| = b^2 \leq a^2 + b^2 = |z|^2\)
+    \item \(|\zo| = |a-bi| = |a+bi| = |z|\) 
+    \item \(|wz| = |(c+di)(a+bi)| = | (ca - db) + (cb + da)i| = (ca - db)^2 + (cd + ba)^2\)
+    This further equals that  \(|wz| = c^2a^2 +d^2b^2 + c^2d^2 + b^2a^2\).
+    At the same time \(|w||z| = (c^2 + d^2)(a^2 + b^2) = c^2 a^2 + c^2 b^2 + d^2 a^2 + d^2 b^2\).
+    Therefore they equal each other.
+\end{enumerate}
+\end{proof}
+
+\begin{problem}{2}
+    Prove the \textbf{reverse triangle inequality}: if \(w, z \in \C\), then 
+    \(||w| - |z| | \leq |w - z|\). 
+\end{problem}
+
+\begin{proof}
+Suppose \(z = a + b i, w = c + d i\). We have that 
+\begin{align*}
+    |w - z|^2 
+    &= (w - z) (\wo - \zo) \\ 
+    &= w\wo + z\zo - w\zo - z\wo \\ 
+    &= |w|^2 + |z|^2 - w\zo - \overline{w \zo} \\ 
+    &= |w|^2 + |z|^2 - 2\Re(w\zo) \\ 
+    &\leq |w|^2 + |z|^2 - 2|w\zo| \\ 
+    &= |w|^2 + |z|^2 - 2|w||z| \\ 
+    &= (|w| - |z|)^2
+\end{align*}
+Taking the square root gets the desired equality. 
+\end{proof}
+
+
+\begin{problem}{3}
+    Suppose \(V\) is a complex vector space and \(\varphi \in V'\). Define 
+    \(\sigma \colon V \to \R\) by \(\sigma(v) = \Re \varphi(v)\) for each \(v \in V\). Show that 
+    \[\varphi(v)  =\sigma(v) - i \sigma(iv)\]
+    for all \(v \in V\). 
+\end{problem}
+
+\begin{proof}
+\begin{align*}
+    \varphi(v) 
+    &= \Re \varphi(v) + \Im \varphi(v)  \\ 
+    &= \sigma(v) + i \Re(- ii v) \\ 
+    &= \sigma(v) - i \sigma(iv)
+\end{align*}
+\end{proof}
+
+
+\begin{problem}{6}
+    Suppose that \(m\) and \(n\) are positive integers wih \(m \leq n\), and suppose 
+    \(\lambda_1, \ldots, \lambda_m \in \F\). Prove that there exists a polynomial 
+    \(p \in \Pc(\F)\) with \(\deg p = n\) such that \(0 = p(\lambda_1) = \cdots = p(\lambda_m)\)
+    and such that \(p\) has no other zeros. 
+\end{problem}
+
+\begin{proof}
+We can first construct \(p(x) = (x - \lambda_1)(x - \lambda_2)\cdots(x-\lambda_m)\) for \(x \in \F\). 
+This is a polynomial with degree \(m\) and has exactly \(m\) zeros. To increase the degree without 
+introducing additional roots, we can make that \(p(x) = (x - \lambda_1)\cdots(x - \lambda_m)^{n-m+1}\). 
+This polynomial doesn't have additional roots, as the proof procedure follows from the second 
+version of fundamental theorem of algebra. 
+\end{proof}
+
+
+
+\begin{problem}{7}
+    Suppose that \(m\) is a nonnegative integer, \(z_1, \ldots, z_{m+1}\) are distinct elements 
+    of \(\F\), and \(w_1, \ldots, w_{m+1} \in \F\). Prove that there exists a unique polynomial 
+    \(p \in \Pc_m(\F)\) such that 
+    \[p(z_k) = w_k\]
+    for each \(k = 1, \ldots, m+1\). 
+\end{problem}
+
+\begin{proof}
+Define a linear map \(T \colon \Pc_m(\F) \to \F^{m+1}\) by 
+\[T(p) = (p(z_1), \ldots, p(z_{m+1}))\]
+We can tell that \(T\) is injective because if there exists nonzero \(p \in \nul T\), then 
+this means there are \(m+1\) roots for the \(m\)-deg polynomial, forming a contradiction. Therefore, 
+\(T\) is an isomorphism as the dimension matches. 
+
+This implies the existence of the unique solution as the question asks. 
+\end{proof}
+
+\begin{problem}{9}
+    Prove that every polynomial of odd degree with real coefficients has a real zero.
+\end{problem}
+
+\begin{proof}
+Suppose for the sake of contradiction that there is no real root. Then the factorization would become 
+\[p(x) = (x^2 + b_1x + c_1) \cdots (x^2 + b_Mx + c_M)\]
+but this contradicts that the degree is odd. 
+\end{proof}
+
+\begin{problem}{11}
+    Suppose \(p \in \Pc(\C)\). Define \(q \colon \C \to \C\) by 
+    \[q(z) = p(z) \overline{p(\zo)}\]
+    Prove that \(q\) is a polynomial with real coefficients. 
+\end{problem}
+
+\begin{proof}
+Suppose \(p(z) = \sum_{i=0}^{n} a_i z^i\) for \(a_i \in \C, z \in \C\). Then we can find that 
+\[p(\zo) = \sum_{i=0}^{n}a_i \zo^i\]
+and thus  
+\[\overline{p(\zo)} = \overline{\sum_{i=0}^{n}a_i \zo^i}
+= \sum_{i=0}^{n} \ao_i z^i\]
+Finally we can get that 
+\[q(z) = p(z)\overline{p(\zo)} 
+= (\sum_{i=0}^{n}a_i z^i)(\sum_{i=0}^{n}\ao_i z^i)\]
+
+We can consider the general form of a coefficient of \(z^k\):
+\[c_k = \sum_{i+j=k} a_i \ao_j = \sum_{j+i=k} \ao_j a_i = \overline{c_k}\]
+
+Thus the coefficients are real.
+
+
+\end{proof}
+
+
+
+
+
+\end{document}
+

@@ -1,0 +1,2054 @@
+\documentclass{extarticle}
+\sloppy
+\input{packages.tex}
+\input{math_commands.tex}
+\usepackage{hyperref}
+
+
+\title{\vspace{-2em}Chapter 7: Operators on Inner Product Spaces}
+\author{\emph{Linear Algebra Done Right}, by Sheldon Axler}
+\date{}
+
+\begin{document}
+\maketitle 
+\tableofcontents
+
+\newpage 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 7A %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage 
+\section*{7A: Self-Adjoint and Normal Operators}
+\addcontentsline{toc}{section}{7A: Self-Adjoint and Normal Operators}
+
+
+\begin{definition}[adjoint, \(T^*\)]
+    Suppose \( T \in \Lc(V, W)\). The \textbf{adjoint} of \(T\) is the function \(T^* \colon W \to V\) such 
+    that 
+    \[\langle Tv,w \rangle = \langle v,T^* w \rangle\]
+    for every \(v \in V\) and every \(w \in W\).
+\end{definition}
+
+\begin{corollary}
+    If \(T \in \Lc(V, W)\), then \(T^* \in \Lc(W, V)\). In other words, the adjoint of 
+    a linear map is a linear map.
+\end{corollary}
+
+
+\begin{corollary}[properties of the adjoint]
+    Suppose \(T \in \Lc(V, W)\). Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item \((S + T)^* = S^* + T^*\) for all \(S \in \Lc(V, W)\); 
+        \item \((\lambda T)^* = \overline{\lambda} T^*\) for all \(\lambda \in \F\); 
+        \item \((T^*)^* = T\); 
+        \item \((ST)^* = T^* S^*\) for all \(S \in \Lc(W, U)\) (here \(U\) is a finite-dimensional 
+        inner product space over \(\F\)). 
+        \item \(I^* = I\); 
+        \item if \(T\) is invertible, then \(T^*\) is invertible and \((T^*)^{-1} = (T^{-1})^*\).
+    \end{enumerate}
+\end{corollary}
+
+\begin{thm}[null space and range of \(T^*\)]
+Suppose \(T \in \Lc(V, W)\). Then 
+\begin{enumerate}[label=(\alph*)]
+    \item \(\nul T^* = (\range T)^\perp\); 
+    \item \(\range T^* = (\nul T)^\perp\); 
+    \item \(\nul T = (\range T^*)^\perp\); 
+    \item \(\range T = (\nul T^*)^\perp\).
+\end{enumerate}
+\end{thm}
+
+
+\begin{definition}[conjugate transpose, \(A^*\)]
+    The \textbf{conjugate transpose} of an m-by-n matrix \(A\) is the n-by-m matrix 
+    \(A^*\) obtained by interchanging the rows and columns and then taking the complex conjugate 
+    of each entry. In other words, if \(j \in \{1, \ldots, n\}\) and \(k \in \{1, \ldots, m\}\), 
+    then 
+    \[(A^*)_{j, k} = \overline{A_{k, j}}\]
+\end{definition}
+
+\begin{remark}
+    We denote \(A^\top\) (transpose) when we know the matrix is real. Note that wrt. nonorthonormal 
+    bases, the matrix of \(T^*\) does not necessarily equal the conjugate transpose of the matrix 
+    of \(T\).
+\end{remark}
+
+
+\begin{thm}[matrix of \(T^*\) equals conjugate transpose of matrix of \(T\)]
+    Let \(T \in \Lc(V, W)\). Suppose \(e_1, \ldots, e_n\) is an orthonormal basis of \(V\) and 
+    \(f_1, \ldots, f_m\) is an orthonormal basis of \(W\). Then \(\Mc(T^*, (f_1, \ldots, f_m), 
+    (e_1, \ldots, e_n))\) is the conjugate transpose of \(\Mc(T, (e_1, \ldots, e_n), (f_1, \ldots, f_m))\). 
+    In other words, 
+    \[\Mc(T^*) = (\Mc(T))^*\]
+\end{thm}
+
+\begin{remark}
+    Orthogonal complements and adjoints are concepts that are easier to work with than 
+    annihilators and dual maps in the context of inner product spaces.
+\end{remark}
+
+\begin{definition}[self-adjoint]
+    An operator \( T \in \Lc(V)\) is called \textbf{self-adjoint} if \(T = T^*\). In other words, 
+    an operator \(T \in \Lc(V)\) is self-adjoint if and only if 
+    \[\langle Tv,w \rangle = \langle v,Tw \rangle\] 
+    for all \(v, w \in V\).
+\end{definition}
+
+\begin{corollary}
+    Every eigenvalue of a self-adjoint operator is real. 
+\end{corollary}
+
+
+\begin{corollary}
+    Suppose \(V\) is a \textbf{complex} inner product space and \(T \in \Lc(V)\). Then 
+    \[\langle Tv,v \rangle = 0 \text{ for every } v \in V \Longleftrightarrow T = 0.\]
+\end{corollary}
+
+
+\begin{corollary}
+    Suppose \(V\) is a \textbf{complex} inner product space and \(T \in \Lc(V)\). Then 
+    \[T \text{ is self-adjoint} \Longleftrightarrow \langle Tv,v \rangle \in \R \text{ for every } v \in V\]
+\end{corollary}
+
+\begin{remark}
+    The above two corollaries do not hold for real inner product spaces.
+\end{remark}
+
+
+\begin{thm}
+    Suppose \(T\) is a self-adjoint operator on \(V\). Then 
+    \[\langle Tv,v \rangle = 0 \text{ for every } v \in V \Longleftrightarrow T = 0\]
+\end{thm}
+
+\begin{definition}[normal]
+    An operator on an inner product space is called \textbf{normal} if it commutes with its adjoint. 
+    In other words, \(T \in \Lc(V)\) is normal if \(TT^* = T^* T\).
+\end{definition}
+
+\begin{remark}
+    Every self-adjoint opeartor is normal, but not vice versa.
+\end{remark}
+
+\begin{thm}
+    Suppose \(T \in \Lc(V)\). Then 
+    \[T \text{ is normal } \Longleftrightarrow \norm{Tv} = \norm{T^* v} \text{ for every }v \in V\]
+\end{thm}
+
+\begin{corollary}[range, null space, and eigenvectors of a normal operator]
+    Suppose \(T \in \Lc(V)\) is normal. Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item \(\nul T = \nul T^*\); 
+        \item \(\range T = \range T^*\); 
+        \item \(V = \nul T \oplus \range T\); 
+        \item \(T - \lambda I\) is normal for every \(\lambda \in \F\); 
+        \item if \(v \in V\) and \(\lambda \in \F\), then \(Tv = \lambda v\) if and only if 
+        \(T^* v = \overline{\lambda}v\).
+    \end{enumerate}
+\end{corollary}
+
+\begin{thm}
+    Suppose \(T \in \Lc(V)\) is normal. Then eigenvectors of \(T\) corresponding to distinct 
+    eigenvalues are orthogonal. 
+\end{thm}
+
+\begin{thm}
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\). Then \(T\) is normal if and only if there exist 
+    commuting self-adjoint operators \(A\) and \(B\) such that \(T = A + i B\).
+\end{thm}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 7A PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+\addcontentsline{toc}{subsection}{7A Problem Sets}
+
+
+\begin{problem}{1}
+    Suppose \(n\) is a positive integer. Define \(T \in \Lc(\F^n)\) by 
+    \[T(z_1, \ldots, z_n) = (0, z_1, \ldots, z_{n-1})\]
+    Find a formula for \(T^*(z_1, \ldots, z_n)\).
+\end{problem}
+
+\begin{proof}
+We have that 
+\begin{align*}
+    \langle T(x_1, \ldots, x_n),(y_1, \ldots, y_n) \rangle 
+    &= \langle (0, x_1, \ldots, x_{n-1}),(y_1, \ldots, y_n) \rangle \\ 
+    &= x_1 y_2 + \cdots + x_{n-1}y_n \\ 
+    &= \langle (x_1, \ldots, x_n), (y_2, \ldots, y_{n}, 0) \rangle \\ 
+    &= \langle (x_1, \ldots, x_n), T^*(y_1, \ldots, y_n) \rangle
+\end{align*}
+where \(T^*(z_1, \ldots, z_n) = (z_2, \ldots, z_n, 0)\).
+\end{proof}
+
+
+\begin{problem}{2}
+    Suppose \(T \in \Lc(V, W)\). Prove that 
+    \[T = 0 \Longleftrightarrow T^* = 0 \Longleftrightarrow T^*T = 0 \Longleftrightarrow TT^* = 0\]
+\end{problem}
+
+\begin{proof}
+\begin{align*}
+    T = 0 
+    &\Longleftrightarrow \langle Tv,v \rangle = 0 \text{ for all } v \\ 
+    &\Longleftrightarrow \langle v,T^*v \rangle = 0 \text{ for all } v \\ 
+    &\Longleftrightarrow T^* = 0 \\ 
+    &\Longleftrightarrow T^*T = T^*(0) = 0 \\ 
+    &\Longleftrightarrow TT^* = 0 
+\end{align*}
+\end{proof}
+
+
+\begin{problem}{4}
+    Suppose \(T \in \Lc(V)\) and \(U\) is a subspace of \(V\). Prove that 
+    \[U \text{ is invariant under } T \Longleftrightarrow U^\perp \text{ is invariant under }T^*\]
+\end{problem}
+
+\begin{proof}
+Let \(u \in U\) and \(w \in U^\perp\), then we know that 
+\[\langle Tu,w \rangle = \langle u,T^*w \rangle\]
+Thus 
+\[\langle Tu,w \rangle = 0 \Longleftrightarrow \langle u,T^*w \rangle = 0\]
+which implies the desired result.
+\end{proof}
+
+
+\begin{problem}{5}
+    Suppose \(T \in \Lc(V, W)\). Suppose \(e_1, \ldots, e_n\) is an orthonormal basis of \(V\) and 
+    \(f_1, \ldots, f_m\) is an orthonormal basis of \(W\). Prove that 
+    \[\norm{T e_1}^2 + \cdots + \norm{T e_n}^2 = \norm{T^* f_1 }^2 + \cdots + \norm{T^* f_m}^2\]
+\end{problem}
+
+\begin{proof}
+Note that first we have 
+\[\norm{T e_k}^2 = \langle T e_k, T e_k \rangle 
+= \langle Te_k, \sum_{j=1}^{m} \langle T e_k, f_j \rangle f_j \rangle 
+= \sum_{j=1}^{m} |\langle T e_k, f_j \rangle|^2\]
+
+At the same time, we have 
+\[ \langle Te_k, f_j \rangle = \langle e_k, T^* f_j \rangle\]
+Combining the two equations yields that 
+\begin{align*}
+    \sum_{i=1}^{n} \norm{T e_i}^2  
+    = \sum_{i=1}^{n} \sum_{j=1}^{m} |\langle T e_i,f_j \rangle|^2  
+    = \sum_{j=1}^{m} \sum_{i=1}^{n} |\langle e_i,T^* f_j \rangle|^2 
+    = \sum_{j=1}^{m} \norm{T^* f_j}^2
+\end{align*}
+\end{proof}
+
+
+\begin{problem}{9}
+    Prove that the product of two self-adjoint operators on \(V\) is self-adjoint if and only if the 
+    two operatos commute.
+\end{problem}
+
+\begin{proof}
+Let \(T\) and \(S\) be two self-adjoint operators on \(V\). First if \(ST = TS\), then \((ST)^* 
+= (TS)^*\). It suffices to show the forward direction. Let's suppose WLOG that \(ST\) is self-adjoint. 
+Then we know that \((ST)^* = T^* S^* = S^* T^* = (TS)^*\). This implies that for arbitrary 
+\(v, w \in V\), we have 
+\begin{align*}
+    \langle v,T^* S^* w \rangle 
+    &= \langle v, S^* T^* w \rangle = \langle TSv,w \rangle \\ 
+    &= \langle STv,w \rangle
+\end{align*}
+This implies that \(TS = ST\).
+\end{proof}
+
+
+\begin{problem}{10}
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\). Prove that \(T\) is self-adjoint if and only if 
+    \[\langle Tv,v \rangle = \langle T^* v,v \rangle\]
+    for all \(v \in V\).
+\end{problem}
+
+\begin{proof}
+\begin{align*}
+    T \text{ self-adjoint } \Longleftrightarrow
+    T = T^* \Longleftrightarrow \langle Tv,v \rangle = \langle T^*v,v \rangle
+\end{align*}
+\end{proof}
+
+\begin{problem}{12}
+    An operator \(B \in \Lc(V)\) is called \textbf{skew} if 
+    \[B^* = - B\]
+    Suppose that \(T \in \Lc(V)\). Prove that \(T\) is normal if and only if there exist commuting 
+    operators \(A\) and \(B\) such that \(A\) is self-adjoint, \(B\) is a skew operator, and 
+    \(T = A + B\).
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) Take \(A = \frac{T + T^*}{2}\) and \(B = \frac{T - T^*}{2}\), so it holds that 
+\(T = A + B\). We first verify that \(A\) is self-adjoint. 
+\begin{align*}
+    4AA^* &= (T + T^*)(T + T^*)^* = (T + T^*)(T^* + T) = TT^* + TT + T^*T^* T^*T\\ 
+    4A^*A &= (T + T^*)^* (T + T^*) = (T^* + T) (T + T^*) = T^*T + T^*T^* + TT + TT^*
+\end{align*}
+Therefore \(AA^* = A^*A\) and \(A\) is self-adjoint. For \(B\), we have that 
+\[B^* = \frac{T^* - T}{2} = - B\]
+
+\(\Leftarrow\) We have that \(T^* = (A+B)^* = A^* - B = A - B\)
+\begin{align*}
+    TT^* &= (A+B)(A-B) = A^2 - AB + BA - B^2 = A^2 - B^2 \\ 
+    T^*T &= (A - B)(A + B) = A^2 + AB - BA - B^2 = A^2 - B^2
+\end{align*}
+since \(A\) and \(B\) commute. 
+\end{proof}
+
+
+\begin{problem}{15}
+    Suppose \(T \in \Lc(V)\) is invertible. Prove that 
+    \begin{enumerate}[label=(\alph*)]
+        \item \(T\) is self-adjoint \(\Longleftrightarrow\) \(T^{-1}\) is self-adjoint; 
+        \item \(T\) is normal \(\Longleftrightarrow\) \(T^{-1}\) is normal.
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+(a) \(T\) is self-adjoint \(\Longleftrightarrow\) \(T = T^*\) \(\Longleftrightarrow\) \(T^{-1} = (T^*)^{-1} = (T^{-1})^*\)
+\(\Longleftrightarrow\) \(T^{-1}\) is self-adjoint. 
+
+(b) \(T\) is normal \(\Longleftrightarrow\) \(TT^* = T^*T\) \(\Longleftrightarrow\)
+\((T^*)^{-1}T^{-1} = T^{-1}(T^*)^{-1}\) \(\Longleftrightarrow\) \(T^{-1}\) is normal.
+\end{proof}
+
+
+
+
+\begin{problem}{19}
+    Suppose \(T \in \Lc(V)\) and \(\norm{T^* v} \leq \norm{Tv}\) for every \(v \in V\). Prove that 
+    \(T\) is normal.
+\end{problem}
+
+\begin{proof}
+% By result 7.20, it is equivalent to show that \(\norm{T^* v} = \norm{Tv}\) for every \(v \in V\). Assume 
+% for contradiction that there exists \(v \in V\) such that \(\norm{T^*v} < \norm{Tv}\). Then this 
+% implies that 
+
+Note that we have 
+\begin{align*}
+    \norm{T^* v}^2 \leq \norm{T v}^2
+    &\Longleftrightarrow \langle T^*v,T^* v \rangle \leq \langle Tv,Tv \rangle \\ 
+    &\Longleftrightarrow \langle TT^*v,v \rangle \leq \langle T^* Tv,v \rangle \\ 
+    &\Longleftrightarrow \langle (T^*T - TT^*)v,v \rangle \leq 0 \\ 
+    &\Longleftrightarrow T^* T - TT^* \leq 0
+\end{align*}
+
+We want to borrow the fact from later chapters to make the proof substantially easier: 
+\[\tr(T^* T - TT^*) = 0 \]
+which means that the sum of the eigenvalues are 0. However, by the fact derived above, let 
+\((\lambda, v)\) be arbitrary eigenpair of \(T^* T - TT^*\), we have that 
+\[\lambda \langle v,v \rangle = \langle (T^* T - TT^* )v,v \rangle \leq 0\]
+meaning that \(\lambda \leq 0\) and therefore all \(\lambda = 0\). Notice that 
+\(T^*T - TT^*\) is self-adjoint as 
+\[(T^*T - TT^*)^* = (T^* T)^* - (TT^*)^* = T^* T - TT^*\]
+Hence we can claim that \(T^* T - TT^* = 0\), and by the result 7.20 \(T\) is normal.
+\end{proof}
+
+
+
+\begin{problem}{20}
+    Suppose \(P \in \Lc(V)\) is such that \(P^2 = P\). Prove that the following are equivalent. 
+    \begin{enumerate}[label=(\alph*)]
+        \item \(P\) is self-adjoint. 
+        \item \(P\) is normal. 
+        \item There is a subspace \(U\) of \(V\) such that \(P = P_U\). 
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\((a) \Rightarrow (b)\) Trivial. 
+
+\((b) \Rightarrow (c)\) Take arbitrary \(v \in V\), then we have that 
+\[P(v - Pv) = Pv - P^2 v = 0\]
+which means that \(v - Pv \in \nul P\). Since \(P\) is normal, we know that 
+\(V = \nul P \oplus \range P\) and thus every \(v\) can be written as 
+\[v = Pv + (v - Pv)\]
+which means that \(P = P_{\range P}\). 
+
+\((c) \Rightarrow (a)\) Take any \(v_1, v_2 \in V\), then we know that \(v_1 = u_1 + w_1\) and 
+\(v_2 = u_2 + w_2\) for \(u_1, u_2 \in U\) and \(w_1, w_2 \in U^\perp\). It suffices to show that 
+\(\langle Pv_1,v_2 \rangle = \langle v_1, P v_2 \rangle\). 
+\begin{align*}
+    \langle Pv_1,v_2 \rangle
+    &= \langle u_1, u_2 + w_2 \rangle \\ 
+    &= \langle u_1, u_2 \rangle + \langle w_1,u_2  \rangle \\ 
+    &= \langle v_1,Pv_2 \rangle
+\end{align*}
+\end{proof}
+
+
+
+\begin{problem}{23}
+    Suppose \(T\) is a normal operator on \(V\). Suppose also that \(v, w \in V\) satisfy the 
+    equations 
+    \[\norm{v} = \norm{w} = 2, \ \ Tv = 3v, \ \ Tw = 4w\]
+    Show that \(\norm{T(v+w)} = 10\).
+\end{problem}
+
+\begin{proof}
+We note that \(v\) and \(w\) are distinct eigenvectors with different eigenvalues. As \(T\) is normal, 
+\(v\) and \(w\) are thus orthogonal. We have that 
+\begin{align*}
+    \norm{T(v+w)}^2 = \norm{Tv}^2 + \norm{Tw}^2 = 9 \norm{v}^2 + 16 \norm{w}^2 = 100
+\end{align*}
+which shows the desired result. 
+\end{proof}
+
+
+\begin{problem}{25}
+    Suppose \(T \in \Lc(V)\). Prove that  \(T\) is diagnoalizable if and only if \(T^*\) is diagnoalizable. 
+\end{problem}
+
+\begin{proof}
+We know that \((\lambda, v)\) is an eigenpair of \(T\) if and only if \((\overline{\lambda},v)\) is 
+an eigenpair of \(T^*\). Since \(T\) and \(T^*\) shares the same eigenvectors, \(V\) has eigenbasis 
+consisting of \(T\)'s eigenvectors iff \(V\) has eigenbasis consisting of \(T^*\)'s eigenvectors, 
+completing the proof.
+\end{proof}
+
+
+\begin{problem}{27}
+    Suppose \(T \in \Lc(V)\) is normal. Prove that 
+    \[\nul T^k = \nul T \text{ and } \range T^k = \range T\]
+    for every positive integer \(k\).
+\end{problem}
+
+
+\begin{proof}
+
+It is obvious that \(\nul T \subseteq \nul T^k\) and \(\range T^k \subseteq 
+\range T\). We aim at proving the other direction. 
+
+If \(T\) is self-adjoint, then the inclusion for other direction of null space is simpler to prove. 
+Suppose \(v \in \nul T^k\), then 
+\[\langle T^k v, T^{k-2} v \rangle = \langle T^{k-1} v, T^{k-1}v \rangle = 0\]
+which shows that \(T^{k-1} v= 0\). Doing this recursively gives that \(T v = 0\). 
+
+Now let's consider the normal operator \(T\), then 
+\[(T^* T)^k v = (T^*)^k T^k v = 0\]
+So \(v \in \nul (T^* T)^k\). Notice that \((T^* T)\) is a self-adjoint operator and applying the fact 
+proved above yields that \(v \in \nul T^* T \). Hence we have that 
+\[\langle T^* Tv,v \rangle = \langle Tv, Tv \rangle = 0\]
+which shows that \(v \in \nul T\). 
+
+For proving the range-related inclusion, this can relate to the null space, where we have that 
+\begin{align*}
+    \range (T^k) = (\nul (T^k)^*)^\perp = (\nul (T^*)^k)^\perp = (\nul T^*)^\perp = \range T  
+\end{align*}
+
+\end{proof}
+
+
+
+\begin{problem}{30}
+    Suppose that \(T \in \Lc(\F^3)\) is normal and \(T(1, 1 ,1) = (2, 2, 2)\). Suppose 
+    \((z_1, z_2, z_3) \in \nul T\). Prove that \(z_1 + z_2 + z_3 = 0\).
+\end{problem}
+
+\begin{proof}
+We can see that \((1,1,1)\) is an eigenvector of \(T\) with \(2\) to be the eigenvalue. Then 
+\(z_1, z_2, z_3\) is orthogonal to \((1,1,1)\), so we have that 
+\[z_1 + z_2 + z_3 = 0\]
+by takng the inner product. 
+\end{proof}
+
+
+\begin{problem}{32}
+    Suppose \(T \colon V \to W\) is a linear map. Show that under the standard identification of 
+    \(V\) with \(V'\) and the corresponding identification of \(W\) with \(W'\), the adjoint map 
+    \(T^* \colon W \to V\) corresponds to the dual map \(T' \colon W' \to V'\). More precisely, show 
+    that 
+    \[T'(\varphi_w) = \varphi_{T^* w}\] 
+    for all \(w \in W\), where \(\varphi_w\) and \(\varphi_{T^* w}\) are defined previously in the 
+    book. 
+\end{problem}
+
+\begin{proof}
+We first know that \(T'(\varphi_w) = \varphi_w \circ T\), so 
+\[T'(\varphi_w)(u) = \langle Tu, w \rangle = \langle u, T^* w \rangle = \varphi_{T^* w}(u)\]
+
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 7B %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage 
+\section*{7B: Spectral Theorem}
+\addcontentsline{toc}{section}{7B: Spectral Theorem}
+
+
+\begin{lemma}[invertible quadratic expressions]
+    Suppose \(T \in \Lc(V)\) is self-adjoint and \(b, c \in \R\) are such that \(b^2 < 4c\). Then 
+    \[T^2 + bT + cI\]
+    is an invertible operator. 
+\end{lemma}
+
+
+\begin{lemma}[minimal polynomial of self-adjoint operator]
+    Suppose \(T \in \Lc(V)\) is self-adjoint. Then the minimal polynomial of \(T\) equals 
+    \((z - \lambda_1)\cdots(z - \lambda_m)\) for some \(\lambda_1, \ldots, \lambda_m \in \R\).
+\end{lemma}
+
+\begin{thm}[\textcolor{red}{REAL SPECTRAL THEOREM}]
+Suppose \(\F = \R\) and \(T \in \Lc(V)\). Then the following are equivalent. 
+\begin{enumerate}[label=(\alph*)]
+    \item \(T\) is self-adjoint. 
+    \item \(T\) has a diagonal matrix with respect to some orthonormal basis of \(V\). 
+    \item \(V\) has an orthonormal basis consisting of eigenvectors of \(T\).
+\end{enumerate}    
+\end{thm}
+
+
+\begin{thm}[\textcolor{red}{COMPLEX SPECTRAL THEOREM}]
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\). Then the following are equivalent. 
+    \begin{enumerate}[label=(\alph*)]
+        \item \(T\) is normal. 
+        \item \(T\) has a diagonal matrix with respect to some orthonormal basis of \(V\). 
+        \item \(V\) has an orthonormal basis consisting of eigenvectors of \(T\).
+    \end{enumerate}
+\end{thm}
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 7B PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+\addcontentsline{toc}{subsection}{7B Problem Sets}
+
+
+\begin{problem}{1}
+    Prove that a normal operator on a complex inner product space is self-adjoint if and only if 
+    all its eigenvalues are real. 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) Assume the normal operator \(T\) is self-adjoint, then we know that \(T = T^*\) and 
+their eigenvalue and eigenvectors are the same. However, we know that \((\lambda, v)\) is an eigenpair 
+of \(T\) if and only if \((\overline{\lambda}, v)\) is an eigenpair of \(T^*\). This means that 
+\(\lambda = \overline{\lambda}\) and thus all eigenvalues are real. 
+
+\(\Leftarrow\) Conversely, since \(T\) is normal, \(T\) has a diagnoal entry wrt some orthonormal 
+basis of \(V\) where the entires are the eigenvalues. Since the eigenvalues are real, the conjugate transpose of 
+the matrix equals itself, therefore completing the proof.
+\end{proof}
+
+
+\begin{problem}{3}
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\) is normal. Prove that the set of eigenvalues 
+    of \(T\) is contained in \(\{0, 1\}\) if and only if there is a subspace \(U\) of \(V\) such 
+    that \(T = P_U\). 
+\end{problem}
+
+\begin{proof}
+Since \(T\) is normal, there exists a diagnoal matrix representation of \(T\) wrt. some orthonormal 
+basis \(e_1, \ldots, e_n\). Then we have that 
+\begin{align*}
+    \text{eigenvalues of } T \text{ contained in } \{0, 1\} 
+    &\Longleftrightarrow Te_k = 0 \text{ or } T e_k = 1 \\ 
+    &\Longleftrightarrow \exists U = \Span\{e_i\}_{i \in J} \text{ for some index set}\\ 
+    &J \text{ s.t. } Tv \in U \text{ for all } v \in V 
+\end{align*}
+\end{proof}
+
+
+
+\begin{problem}{4}
+    Prove that a normal operator on a complex inner product space is skew (meaning it equals the negative 
+    of its adjoint) if and only if all its eigenvalues are purely imaginary (meaining that they have 
+    real part equal to 0).
+\end{problem}
+
+\begin{proof}
+Suppose \(T\) is normal, then we know that \(\lambda\) is an eigenvalue of \(T\) if and only if 
+\(\overline{\lambda}\) is an eigenvalue of \(T^*\).  
+\begin{align*}
+    T \text{ is skew } 
+    &\Longleftrightarrow -\langle Tv,v \rangle = \langle T^*v,v \rangle = - \lambda \langle v,v \rangle \\ 
+    &\Longleftrightarrow -\lambda = \overline{\lambda} \\ 
+    &\Longleftrightarrow \lambda \text{ is purely imaginary} 
+\end{align*}
+\end{proof}
+
+
+\begin{problem}{6}
+    Suppose \(V\) is a complex inner product space and \(T \in \Lc(V)\) is a normal operator such 
+    that \(T^9 = T^8\). Prove that \(T\) is self-adjoint and \(T^2 = T\).
+\end{problem}
+
+\begin{proof}
+Let \((\lambda, v)\) be an eigenpair of \(T\). Then we know that 
+\[T^9v = \lambda^9 v = T^8v = \lambda^8 v\]
+Therefore \(\lambda^9 = \lambda^8\) and thus \(\lambda = \{0, 1\}\), then by P1 we know \(T\) 
+is self-adjoint and by P3 we know that \(T\) is a projection operator and thus \(T^2 = T\).
+\end{proof}
+
+
+\begin{problem}{8}
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\). Prove that \(T\) is normal if and only if 
+    every eigenvector of \(T\) is also an eigenvector of \(T^*\).
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) This follows by the theorem on the book. 
+
+\(\Leftarrow\) Since we are concerned with the field \(\C\), there exists a matrix of \(T\) that 
+is upper-triangular wrt some orthonormal basis \(e_1, \ldots, e_n\) such that 
+\(T e_j = \sum_{i=1}^{j} a_{ij} e_i\). In particular, \(e_1\) is an eigenvector of \(T\) and it is 
+also an eigenvector of \(T^*\). So the first column of \(T^*\) only has the first term nonzero. We can 
+repeat the statement for other eigenvectors of \(T\) to that of \(T^*\). Note that since the field 
+is taken over \(\C\), \(T\) is guaranteed to have \(n\) eigenvalues and therefore the corresponding 
+eigenvectors. This means that \(T\) and \(T^*\) are simultaenously diagnoalizable and thus they 
+commute, completing the proof.  
+\end{proof}
+
+
+\begin{problem}{10}
+    Suppose \(V\) is a complex inner product space. Prove that every normal operator on \(V\) 
+    has a square root. (Note that an operator \(S \in \Lc(V)\) is called a square root of \(T 
+    \in \Lc(V)\) if \(S^2 = T\)).
+\end{problem}
+
+\begin{proof}
+Suppose \(T\) is a normal operator on \(V\). By complex spectral theorem, \(T = \diag(\lambda_1, 
+\ldots, \lambda_n)\) wrt to some orthonormal bases \(e_1, \ldots, e_n\). We can naturally define 
+an operator \(S\) such that 
+\[Se_k = \sqrt{\lambda_k} e_k\]
+Then we have that 
+\begin{align*}
+    S^2(v) = S(\sum_{i=1}^{n} a_i S(e_i)) = S(\sum_{i=1}^{n} a_i \sqrt{\lambda_i} e_i) 
+    = \sum_{i=1}^{n} a_i \lambda_i e_i = \sum_{i=1}^{n} a_i T(e_i) = T(v)
+\end{align*}
+\end{proof}
+
+
+\begin{problem}{11}
+    Prove that every self-adjoint operator on \(V\) has a cube root. 
+\end{problem}
+
+\begin{proof}
+We can do the similar proof as above. The only difference is that the self-adjoint operators have 
+real eigenvales and therefore their cube root is also real and uniquely determined. 
+\end{proof}
+
+
+\begin{problem}{12}
+    Suppose \(V\) is a complex vector space and \(T \in \Lc(V)\) is normal. Prove that if \(S\)
+    is an operator on \(V\) that commutes with \(T\), then \(S\) commutes with \(T^*\).
+\end{problem}
+
+\begin{proof}
+Let \(v\) be an eigenvector of \(T\) with eigenvalue of \(\lambda\). We have that 
+\[T(Sv) = STv = S (\lambda v) = \lambda(Sv)\]
+So \(Sv\) is an eigenvector of \(T\) with eigenvalue \(\lambda\). This means that it is also an eigenvector 
+of \(T^*\) with eigenvalue \(\overline{\lambda}\). Hence we have 
+\[T^*(Sv) = \overline{\lambda}Sv = S(\overline{\lambda} v) = S T^*v\]
+completing the proof. 
+\end{proof}
+
+
+
+\begin{problem}{14}
+    Suppose \(\F = \R\) and \(T \in \Lc(V)\). Prove that \(T\) is self-adjoint if and only if 
+    all pairs of eigenvectors corresponding to distinct eigenvalues of \(T\) are orthogonal and 
+    \(V = E(\lambda_1, T) \oplus \cdots \oplus E(\lambda_m, T)\), where \(\lambda_1, \ldots, \lambda_m\)
+    denote the distinct eigenvalues of \(T\).
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) Given an self-adjoint operator \(T\), we know that there exists an orthonormal basis 
+of \(V\) consisting of eigenvectors of \(T\) and thus we know that \(V = E(\lambda_1, T) \oplus 
+\cdots \oplus E(\lambda_m, T)\). Let's say we have arbitrary eigenpairs \((\lambda_1, v_1)\) and 
+\((\lambda_2, v_2)\) with \(\lambda_1 \neq \lambda_2\). Then 
+\begin{align*}
+    0 = \langle Tv_1,v_2 \rangle - \langle v_1,Tv_2 \rangle 
+    = (\lambda_1 - \lambda_2) \langle v_1,v_2 \rangle
+\end{align*}
+Therefore \(\langle v_1,v_2 \rangle = 0\). 
+
+\(\Leftarrow\) Conversely, Such eigenvectors form a basis of \(V\) and thus \(T\) is self-adjoint. 
+\end{proof}
+
+
+\begin{problem}{16}
+    Suppose \(\F = \C\) and \(\Ec \subseteq \Lc(V)\). Prove that there is an orthonormal basis of 
+    \(V\) with respect to which every element of \(\Ec\) has a diagonal matrix if and only if 
+    \(S\) and \(T\) are commuting normal operators for all \(S, T \in \Ec\).
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) Since \(S, T \in \Ec\) are diagonal, they commute and are normal. 
+
+\(\Leftarrow\) This side follows as what we've done in ch5E P2.
+\end{proof}
+
+
+\begin{problem}{19}
+    Suppose \(T \in \Lc(V)\) is self-adjoint and \(U\) is a subspace of \(V\) that is invariant 
+    under \(T\). 
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove that \(U^\perp\) is invariant under \(T\). 
+        \item Prove that \(T|_U \in \Lc(V)\) is self-adjoint. 
+        \item Prove that \(T |_{U^\perp} \in \Lc(U^\perp)\) is self-adjoint.
+    \end{enumerate}
+\end{problem}
+
+
+\begin{proof}
+(a) Let \(u \in U\) and \(w \in U^\perp\), then 
+\[\langle u,Tw \rangle = \langle Tu,w \rangle = 0\]
+since \(Tu \in U\). Thus \(Tw \in U^\perp\).
+
+(b) Take \(u_1, u_2 \in U\), then we know that \(u_1, u_2 \in V\). Since \(T\) is self-adjoint, then 
+\[\langle Tu_1, u_2 \rangle = \langle u_1,Tu_2 \rangle\]
+which shows that \(T|_U\) is self-adjoint. 
+
+(c) This follows similarly.
+\end{proof}
+
+
+\begin{problem}{21}
+    Suppose that \(T\) is a self-adjoint operator on a finite-dimensional inner product space and 
+    that 2 and 3 are the only eigenvalues of \(T\). Prove that 
+    \[T^2 - 5T + 6I = 0\]
+\end{problem}
+
+\begin{proof}
+We know that \(T - 2I\) and \(T - 3I\) equals 0. Combining them to the polynomial of \(T\) gives that 
+\[(T - 2I)(T - 3I) = T^2 - 55T + 6I = 0\]
+
+note that we can do this since \(T\) is self-adjoint.
+\end{proof}
+
+\begin{problem}{23}
+    Suppose \(T \in \Lc(V)\) is self-adjoint, \(\lambda \in \F\), and \(\epsilon > 0\). Suppose there 
+    exists \(v \in V\) such that \(\norm{v} = 1\) and 
+    \[\norm{Tv - \lambda v} < \epsilon\]
+    Prove that \(T\) has an eigenvalue \(\lambda'\) such that \(|\lambda - \lambda'| < \epsilon\).
+\end{problem}
+
+\begin{proof}
+Since \(T\) is self-adjoint, there exists an eigenbasis \(e_1, \ldots, e_n\) with corresponding 
+eigenvalues \(\lambda_1, \ldots, \lambda_n\). WLOG we suppose \(\lambda_1 < \cdots < \lambda_n\). Then 
+we know that any \(v \in V\) can be expressed as \(v = \sum_{i=1}^{n} a_i e_i\). We now have that 
+\begin{align*}
+    Tv = \sum_{i=1}^{n} a_i \lambda_i e_i 
+\end{align*}
+
+Furthermore, 
+\begin{align*}
+    \norm{Tv - \lambda v} 
+    &= \norm{ \sum_{i=1}^{n} a_i \lambda_i e_i  - \lambda \sum_{i=1}^{n} a_i e_i } \\ 
+    &= \norm{ \sum_{i=1}^{n} a_i e_i (\lambda_i - \lambda)} \\ 
+    &= \sum_{i=1}^{n} \norm{a_i (\lambda_i - \lambda)} \\ 
+    &\geq \sum_{i=1}^{n} |a_i| |\lambda' - \lambda| 
+\end{align*}
+
+where we define \(\lambda' = \text{argmin}_i |\lambda_i - \lambda| \). This gives that 
+\[|\lambda' - \lambda| < \epsilon / (\sum_{i=1}^{n} |a_i|) = \epsilon / 1 = \epsilon\]
+where in the last step we use the fact that \(\norm{v} = 1\).
+
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 7C %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage 
+\section*{7C: Positive Operators}
+\addcontentsline{toc}{section}{7C: Positive Operators}
+
+
+\begin{definition}[positive operator]
+    An operator \(T \in \Lc(V)\) is called \textbf{positive} if \(T\) is self-adjoint and 
+    \[\langle Tv,v \rangle \geq 0\]
+    for all \(v \in V\).
+\end{definition}
+
+\begin{remark}
+    Positive operators are also known as positive definite operators.
+\end{remark}
+
+\begin{definition}[square root]
+    An operator \(R\) is called a \textbf{squared root} of an operator \(T\) if \(R^2 = T\).
+\end{definition}
+
+\begin{thm}[characterizations of positive operators]
+    Let \(T \in \Lc(V)\). Then the following are equivalent. 
+    \begin{enumerate}[label=(\alph*)]
+        \item \(T\) is a positive operator. 
+        \item \(T\) is self-adjoint and all eigenvalues of \(T\) are nonnegative. 
+        \item With respect to some orthonormal basis of \(V\), the matrix of \(T\) is a diagonal 
+        matrix with only nonnegative numbers on the diagonal. 
+        \item \(T\) has a positive square root. 
+        \item \(T\) has a self-adjoint square root. 
+        \item \(T = R^* R\) for some \(R \in \Lc(V)\).
+    \end{enumerate}
+\end{thm}
+
+\begin{thm}
+    Every positive operator on \(V\) has a unique positive square root. 
+\end{thm}
+
+
+\begin{remark}
+    For \(T\) a positive operator, \(\sqrt{T}\) denotes the unique positive square root of \(T\).
+\end{remark}
+
+
+\begin{corollary}
+    Suppose \(T\) is a positive operator on \(V\) and \(v \in V\) is such that \(\langle Tv,v \rangle = 0\). 
+    Then \(Tv = 0\).
+\end{corollary}
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 7C PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+\addcontentsline{toc}{subsection}{7C Problem Sets}
+
+\begin{problem}{1}
+    Suppose \(T \in \Lc(V)\). Prove that if both \(T\) and \(-T\) are positive operators, then 
+    \(T = 0\).
+\end{problem}
+
+\begin{proof}
+This means that 
+\[\langle Tv,v \rangle \geq 0 \ \ \ \langle Tv,v \rangle \leq 0\]
+for all \(v \in V\), so \(T = 0\).
+\end{proof}
+
+\begin{problem}{3}
+    Suppose \(n\) is a positive integer and \(T \in \Lc(\F^n)\) is the operator whose matrix (wrt 
+    the standard basis) consists of all 1's. Show that \(T\) is a positive operator.
+\end{problem}
+
+\begin{proof}
+Suppose \(v = (v_1, \ldots, v_n) \in V\), then we have that 
+\[\langle Tv,v \rangle 
+= \langle (\sum_{i=1}^{n} v_i, \ldots, \sum_{i=1}^{n} v_i), (v_1, \ldots, v_n) \rangle
+= (\sum_{i=1}^{n} v_i)^2 \geq 0\]
+\end{proof}
+
+\begin{problem}{6}
+    Prove that the sum of two positive operators on \(V\) is a positive operator.
+\end{problem}
+
+\begin{proof}
+Let \(S, T\) be two positive operator and take \(v \in V\). Then 
+\[\langle (S+T)v,v \rangle = \langle Sv,v \rangle + \langle Tv,v \rangle \geq 0\]
+\end{proof}
+
+
+\begin{problem}{7}
+    Suppose \(S \in \Lc(V)\) is an invertible positive operator and \(T \in \Lc(V)\) is a positive 
+    operator. Prove that \(S + T\) is invertible.
+\end{problem}
+
+\begin{proof}
+Take any nonzero \(v \in V\), then 
+\[\langle (S+T)v,v \rangle = \langle Sv,v \rangle + \langle Tv,v \rangle > 0\]
+So \(\nul (S+T) = \{0\}\) and thus \(S+T\) is injective and therefore invertible.
+\end{proof}
+
+
+\begin{problem}{9}
+    Suppose \(T \in \Lc(V)\) is a positive operator and \(S \in \Lc(W, V)\). Prove that 
+    \(S^* T S\) is a positive operator on \(W\).
+\end{problem}
+
+\begin{proof}
+We have that 
+\begin{align*}
+    \langle S^*TS w,w \rangle 
+    = \langle T(Sw), (Sw) \rangle \geq 0
+\end{align*}
+as \(T\) is positive.
+\end{proof}
+
+
+\begin{problem}{10}
+    Suppose \(T\) is a positive operator on \(V\). Suppose \(v, w \in V\) are such that 
+    \[Tv = w \ \ \ Tw = v\]
+    Prove that \(v = w\).
+\end{problem}
+
+\begin{proof}
+We have that 
+\[T^2 v = T(Tv) = Tw = v\]
+Thus \((T^2 - I)v = 0\). This means that either \(v = 0\) or \(T = \pm I\). In the first case, 
+\(w = Tv = 0 = v\) and \(Tw = 0 = v\). In the second case, if \(T = I\), then \(v = w\). Note that 
+\(T\) cannot be \(-I\) as \(T\) is a positive operator (all eigenvalues nonnegative).
+\end{proof}
+
+
+\begin{problem}{12}
+    Suppose \(T \in \Lc(V)\) is a positive operator. Prove that \(T^k\) is a positive operator 
+    for every positive integer \(k\).
+\end{problem}
+
+\begin{proof}
+If \(k\) is even, then 
+\[\langle T^k v,v \rangle = \langle T^{\frac{k}{2}}v,T^{\frac{k}{2}}v \rangle \geq 0\]
+If \(k\) is odd, then 
+\[\langle T^k v,v \rangle = \langle T(T^{\frac{k-1}{2}}v), (T^{\frac{k-1}{2}}v) \rangle \geq 0\]
+as \(T\) is positive.
+\end{proof}
+
+
+\begin{problem}{13}
+    Suppose \(T \in \Lc(V)\) is self-adjoint and \(\alpha \in \R\). 
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove that \(T - \alpha I\) is a positive operator if and only if \(\alpha\) is less 
+        than or equal to every eigenvalue of \(T\).
+        \item Prove that \(\alpha I - T\) is a positive operator if and only if \(\alpha\) is 
+        greater than or equal to every eigenvalue of \(T\).
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+Let \(v_1, \ldots, v_n\) be the eigenbasis of \(V\) with corresponding sorted eigenvalues \(\lambda_1, 
+\ldots, \lambda_n\) (\(\lambda_1\) being smallest). Note that \(\lambda\) is a eigenvalue of \(T\) iff \(T- \alpha I\) is 
+an eigenvalue of \(T - \alpha I\) iff \(\alpha - \lambda\) is an eigenvalue of \(\alpha I - T\). You 
+may verify this.
+
+(a) \(T - \alpha I\) positive \(\Longleftrightarrow\) \(\lambda_1 - \alpha \geq 0\) 
+\(\Longleftrightarrow\) \(\alpha \leq \lambda_i\) for all \(i\). 
+(b) \(\alpha I  -T\) positive \(\Longleftrightarrow\) \(\alpha - \lambda_n \geq 0\) 
+\(\Longleftrightarrow\) \(\alpha \geq \lambda_i\) for all \(i\).
+
+\end{proof}
+
+
+\begin{problem}{14}
+    Suppose \(T\) is a positive operator on \(V\) and \(v_1, \ldots, v_m \in V\). Prove that 
+    \[\sum_{j=1}^{m} \sum_{k=1}^{m} \langle Tv_k,v_j \rangle \geq 0\]
+\end{problem}
+
+\begin{proof}
+\[\sum_{j=1}^{m} \sum_{k=1}^{m} \langle Tv_k,v_j \rangle  
+= \langle T(\sum_{i=1}^{m} v_i), (\sum_{i=1}^{m} v_i) \rangle \geq 0\]
+\end{proof}
+
+\begin{problem}{15}
+    Suppose \(T \in \Lc(V)\) is self-adjoint. Prove that there exist positive operators \(A, B 
+    \in \Lc(V)\) such that 
+    \[T = A - B \text{ and } \sqrt{T^* T} = A + B \text{ and } AB = BA = 0\]
+\end{problem}
+
+\begin{proof}
+Define \(|T| = \sqrt{T^2}\) and that 
+\[A = \frac{|T| + T}{2} \ \ \ B = \frac{|T| - T}{2}\]
+So \(A - B = T\) and \(A+B = |T| = \sqrt{T^* T}\). Finally, 
+\[AB = \frac{|T| + T}{2} \frac{|T| - T}{2} = \frac{|T|^2 - |T|T + T|T| - T^2}{4} = 0\] 
+As \(|T|^2 = T^2\) and \(|T|T = T|T|\). Similarly, \(BA = 0\).
+\end{proof}
+
+
+\begin{problem}{16}
+    Suppose \(T\) is a positive operator on \(V\). Prove that 
+    \[\nul \sqrt{T} = \nul T \text{  and  } \range \sqrt{T} = \range T\]
+\end{problem}
+
+\begin{proof}
+We've shown that the unique square root \(\sqrt{T}\) is obtained from simply taking the square root 
+of the eigenvalues of \(T\). This means that \(\sqrt{T}\) and \(T\) share the same eigenbasis, which 
+determines the respective null and range space and completes the proof.
+\end{proof}
+
+
+\begin{problem}{18}
+    Suppose \(S\) and \(T\) are positive operators on \(V\). Prove that \(ST\) is a positive 
+    operator if and only if \(S\) and \(T\) commute. 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) Given \(ST\) is positive, then 
+\[ST = (ST)^* = T^* S^* = TS \]
+
+\(\Leftarrow\) Given \(ST = TS\), then \((ST)^* = T^* S^* = TS = ST\). In addition,
+\[\langle ST v,v \rangle = \langle S\sqrt{T}v,\sqrt{T}v \rangle \geq 0\]
+\end{proof}
+
+
+\begin{problem}{22}
+    Suppose \(T \in \Lc(V)\) is a positive operator and \(u \in V\) is such that 
+    \(\norm{u} =1\) and \(\norm{Tu} \geq \norm{Tv}\) for all \(v \in V\) with \(\norm{v} = 1\). 
+    Show that \(u\) is an eigenvector of \(T\) corresponding to the largest eigenvalue of \(T\).
+\end{problem}
+
+\begin{proof}
+Let \(e_1, \ldots, e_n\) be the orthogonal eigenbasis of \(V\) and the corresponding eigenvalues 
+to be \(\lambda_1, \ldots, \lambda_n\) with sorted from smallest to largest. Then we have that 
+\[\norm{Tu} = \norm{\sum_{i=1}^{n} a_i \lambda_i e_i} = \sqrt{\sum_{i=1}^{n} |a_i|^2 \lambda_i^2}\]
+We can take \(v = e_n\), then we have that 
+\[\norm{Tu}^2 = \sum_{i=1}^{n} |a_i|^2 \lambda_i^2 \geq \sum_{i=1}^{n} |a_i|^2 \lambda_n^2 
+= \lambda_n^2 = \norm{Tv}^2\]
+which shows the desired conclusion. 
+\end{proof}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 7D %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage 
+\section*{7D: Isometries, Unitary Operators, and Matrix Factorization}
+\addcontentsline{toc}{section}{7D: Isometries, Unitary Operators, and Matrix Factorization}
+
+
+\begin{definition}[isometry]
+    A linear map \(S \in \Lc(V, W)\) is called an \textbf{isometry} if 
+    \[\norm{Sv} = \norm{v}\]
+    for every \(v \in V\). In other words, a linear map is an isometry if it preserves norms. 
+\end{definition}
+
+\begin{remark}
+    Every isometry is injective. 
+\end{remark}
+
+\begin{thm}[characterizations of isometries]
+    Suppose \(S \in \Lc(V, W)\). Suppose \(e_1, \ldots, e_n\) is an orthonormal basis of \(V\) 
+    and \(f_1, \ldots, f_m\) is an orthonormal basis of \(W\). Then the following are equivalent. 
+    \begin{enumerate}[label=(\alph*)]
+        \item \(S\) is an isometry. 
+        \item \(S^* S = I\). 
+        \item \(\langle Su,Sv \rangle = \langle u,v \rangle\) for all \(u, v \in V\). 
+        \item \(Se_1, \ldots, Se_n\) is an orthonoral list in \(W\). 
+        \item The columns of \(\Mc(S, (e_1, \ldots, e_n), (f_1, \ldots, f_m))\) form an orthonormal 
+        list in \(\F^m\) with respect to the Euclidean inner product. 
+    \end{enumerate}
+\end{thm}
+
+
+\begin{definition}[Unitary Operators]
+    An operator \(S \in \Lc(V)\) is called \textbf{unitary} if \(S\) is an invertible isometry. 
+\end{definition}
+
+
+\begin{remark}
+    Note that every isometry is injective and therefore invertible on a finite-dimensional vector 
+    space. The author makes the distinction simply to avoid confusion in more abstract stages. One 
+    might think of unitary operators being equivalent to isometries in finite-dimensional space. 
+\end{remark}
+
+\begin{thm}[characterizations of unitary operators]
+    Suppose \(S \in \Lc(V)\). Suppose \(e_1, \ldots, e_n\) is an orthonormal basis of \(V\). 
+    Then the following are equivalent. 
+    \begin{enumerate}[label=(\alph*)]
+        \item \(S\) is a unitary operator.  
+        \item \(S^* S = SS^* =  I\). 
+        \item \(S\) is invertible and \(S^{-1} =S^*\).  
+        \item \(Se_1, \ldots, Se_n\) is an orthonoral list in \(W\). 
+        \item The rows of \(\Mc(S, (e_1, \ldots, e_n))\) form an orthonormal 
+        basis of \(\F^m\) with respect to the Euclidean inner product. 
+        \item \(S^*\) is a unitary operator. 
+    \end{enumerate}
+\end{thm}
+
+
+\begin{corollary}
+    Suppoe \(\lambda\) is an eigenvalue of a unitary operator. Then 
+    \(|\lambda| = 1\).
+\end{corollary}
+
+\begin{corollary}
+    Suppose \(\F = \C\) and \(S \in \Lc(V)\). Then the following are equivalent. 
+    \begin{enumerate}[label=(\alph*)]
+        \item \(S\) is a unitary operator. 
+        \item There is an orthonormal basis of \(V\) consisting of eigenvectors of \(S\) whose 
+        corresponding eigenvalues all have absolute value 1. 
+    \end{enumerate}
+\end{corollary}
+
+
+
+\begin{definition}[unitary matrix]
+    An n-by-n matrix is called \textbf{unitary} if its columns form an orthonormal list in \(\F^n\).
+\end{definition}
+
+
+\begin{thm}[characterizations of unitary matrices]
+    Suppose \(Q\) is an n-by-n matrix. Then the following are equivalent. 
+    \begin{enumerate}[label=(\alph*)]
+        \item \(Q\) is a unitary matrix. 
+        \item The rows of \(Q\) form an orthonormal list in \(\F^n\). 
+        \item \(\norm{Qv} = \norm{v}\) for every \(v \in \F^n\). 
+        \item \(Q^* Q = Q Q^* = I_n\).
+    \end{enumerate}
+\end{thm}
+
+
+\begin{thm}[QR factorization]
+    Suppose \(A\) is a square matrix with linearly independent columns. Then there exists 
+    unique matrices \(Q\) and \(R\) such that \(Q\) is unitary, \(R\) is upper triangular 
+    with only positive numbers on its diagonal, and 
+    \[A = QR.\]
+\end{thm}
+
+\begin{lemma}[positive invertible operator]
+    A self-adjoint operator \(T \in \Lc(V)\) is a positive invertible operator if and only 
+    if \(\langle Tv,v \rangle > 0\) for every nonzero \(v \in V\).
+\end{lemma}
+
+\begin{definition}[positive definite]
+    A matrix \(B \in \F^{n, n}\) is called \textbf{positive definite} if \(B^* = B\) and 
+    \[\langle Bx,x \rangle > 0\]
+    for every nonzero \(x \in \F^n\).
+\end{definition}
+
+\begin{thm}[Cholesky factorization]
+    Suppose \(B\) is a positive definite matrix. Then there exists a unique upper-triangular 
+    matrix \(R\) with only positive numbers on its diagonal such that 
+    \[B = R^* R\]
+\end{thm}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 7D PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+\addcontentsline{toc}{subsection}{7D Problem Sets}
+
+
+\begin{problem}{1}
+    Suppose \(\dim V \geq 2\) and \(S \in \Lc(V, W)\). Prove that \(S\) is an isometry if 
+    and only if \(S e_1, S e_2\) is an orthonormal list in \(W\) for every orthonormal 
+    list \(e_1, e_2\) of length two in \(V\).
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) Let \(v \in V\), then 
+\[\norm{v}^2 = \norm{\langle v,e_1 \rangle e_1  + \langle v,e_2 \rangle e_2}^2 =  |
+\langle v,e_1 \rangle|^2 + |\langle v,e_2 \rangle|^2 = \norm{Sv}^2\]
+
+\(\Leftarrow\) we know that 
+\[\norm{Sv}^2 = \norm{\langle v,e_1 \rangle Se_1 + \langle v,e_2 \rangle Se_2}^2 
+= |\langle v,e_1 \rangle|^2 + |\langle v,e_2 \rangle|^2 = \norm{v}^2\]
+as \(Se_1, Se_2\) are orthonormal basis with norm 1.
+\end{proof}
+
+
+\begin{problem}{2}
+    Suppose \(T \in \Lc(V, W)\). Prove that \(T\) is a scalar multiple of an isometry if and only 
+    if \(T\) preserves orthogonality. 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) if \(T = aS\) for \(S\) to be an isometry, then suppose \(\langle u,v \rangle = 0\), 
+\[\langle Tu,Tv\rangle = |a|^2 \langle Su,Sv \rangle = |a|^2 \langle u,v \rangle = 0\]
+
+\(\Leftarrow\) Suppose for all \(\langle u,v \rangle = 0\), \(\langle Tu,Tv \rangle = 0\). Take 
+an orthonormal basis \(\{e_1, \ldots, e_n\}\) of \(V\). Then we have that 
+\[\langle e_i + e_j,e_i - e_j \rangle = \norm{e_i}^2 - \langle e_i,e_j \rangle + 
+\langle e_j,e_i \rangle - \norm{e_j}^2 = 1 - 1 = 0\]
+This means that 
+\[\langle T(e_i + e_j), T(e_i - e_j) \rangle 
+= \norm{T e_i}^2 - \norm{T e_j}^2 = 0\]
+which means that \(\norm{T e_k} = a\) for some scalar \(a\). Take any \(v \in V\), then 
+\[\norm{Tv}^2 = \sum_{i=1}^{n} |\langle v,e_i \rangle|^2 \norm{T e_i}^2 + \sum_{i \neq j} 
+|\langle v,e_i \rangle \langle v,e_j \rangle| \langle Te_i,Te_j \rangle 
+= \sum_{i=1}^{n} |\langle v,e_i \rangle|^2 |a|^2 = \norm{av}^2\]
+This means that 
+\[\norm{Tv} = a \norm{v}\]
+for some \(a\) and thus completes the proof (\(\frac{1}{a} T\) is an isometry).
+\end{proof}
+
+
+\begin{problem}{3}
+    \begin{enumerate}[label=(\alph*)]
+        \item Show that the product of two unitary operators on \(V\) is a unitary operator. 
+        \item Show that the inverse of a unitary operator on \(V\) is a unitary operator.
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+Let \(T, S\) be two unitary operators. 
+
+(a) we have 
+\[(TS)^*(TS) = S^* T^* TS = S^*IS = S^*S = I\] 
+
+(b) since \(S^{-1} = S^*\) and \(S^*\) is a unitary operator, \(S^{-1}\) is also unitary. 
+\end{proof}
+
+
+
+\begin{problem}{5}
+    Suppose \(S \in \Lc(V)\). Prove that the following are equivalent. 
+    \begin{enumerate}[label=(\alph*)]
+        \item \(S\) is a self-adjoint unitary operator. 
+        \item \(S = 2P - I\) for some orthogonal projection \(P\) on \(V\). 
+        \item There exists a subspace \(U\) of \(V\) such that \(Su = u\) for every 
+        \(u \in U\) and \(Sw = -w\) for every \(w \in U^\perp\).
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+(a) \(\Rightarrow\) (b), (c) Since \(S\) is unitary, its eigenvalues are either -1 or 1. Since 
+\(S\) is self-adjoint, we can decompose \(V\) into its eigenspace \(E(-1)\) and 
+\(E(1)\) such that \(V = E(-1) \oplus E(1)\). This means that for all \(w \in E(-1), 
+Sw = - w\) and \(u \in E(1), S u = u\) where \(E(1) = U\). So part (c) is completed. For 
+each \(v \in V\), \(v = v_1 + v_{-1}\) where \(v_1 \in E(1), v_{-1} \in E(-1)\). Then define 
+\(P(v) = v_1\) and we have that \(Sv = Sv_1 + S v_{-1} = v_1 - v_{-1} = P(v) - (I - P)(v) 
+= (2P - I) v\). Part(b) is also completed. 
+
+(b), (c) \(\Rightarrow\) (a) Conversely, first assume (b) holds, then this means that 
+\[S^* = (2P - I)^* = 2P - I = S\]
+so \(S\) is self-adjoint. To see that it is unitary, 
+\[SS^* = S^2 = (2P - I)(2P - I) = 4P^2 - 2P - 2P + I = I\]
+Next assume (c) holds, then Let \(P\) define to be the projection operator into \(U\) and then 
+\((I - P)\) is the projection into \(U^\perp\), then we have that \(S = P - (I - P) = 2P - I\), so 
+applying the previous proof finishes the problem. 
+\end{proof}
+
+
+\begin{problem}{6}
+    Suppose \(T_1, T_2\) are both normal operators on \(\F^3\) with 2,5,7 as eigenvalues. Prove 
+    that there exists a unitary operator \(S \in \Lc(\F^3)\) such that \(T_1 = S^* T_2 S\).
+\end{problem}
+
+\begin{proof}
+By complex spectral theorem, \(T_1\) has \(\{a_1, a_2, a_3\}\) as a set of orthonormal eigenvectors that 
+form a basis with eigenvalues 2,5,7. Similarly, \(T_2\) has \(\{b_1, b_2, b_3\}\). What we want to 
+do here is simply define a change-of-basis operator that is also unitary. Define \(S \in \Lc(\F^3)\) s.t. 
+\[S a_i = b_i\] 
+Clearly \(S\) is unitary. Now it suffices to prove that the desired equation holds. 
+We also have that \(S^{-1} = S^* \) so \(S^* b_i = a_i\). Take any 
+\(v = \alpha_1 a_1 + \alpha_2 a_2 + \alpha_3 a_3\), then 
+\begin{align*}
+    S^*T_2S (v) 
+    &= S^*T_2S(\sum_{i=1}^{3} \alpha_i a_i) \\ 
+    &= S^*T_2( \sum_{i=1}^{3} \alpha_i S(a_i) ) \\ 
+    &= S^* (\sum_{i=1}^{3} \alpha_i T_2(b_i)) \\ 
+    &= S^*( \alpha_1 2b_1 + \alpha_2 5b_2 + \alpha_3 7b_3) \\ 
+    &= 2 \alpha_1 a_1 + 5 \alpha_2 a_2 + 7 \alpha_3 a_3 
+\end{align*}
+
+Note that we also have that 
+
+\begin{align*}
+    T_1 (v) 
+    &= T_1 (\sum_{i=1}^{3} \alpha_i a_i) \\ 
+    &= 2\alpha_1 a_1 + 5 \alpha_2 a_2 + 7 \alpha_3 a_3
+\end{align*}
+\end{proof}
+
+
+\begin{problem}{9}
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\). Suppose every eigenvalue of \(T\) has absolute value 
+    1 and \(\norm{Tv} \leq \norm{v}\) for every \(v \in V\). Prove that \(T\) is a unitary operator.
+\end{problem}
+
+\begin{proof}
+Since \(T\) has no eigenvalue 0, it is invertible. We also have that 
+\begin{align*}
+    \norm{Tv} \leq \norm{v} 
+    &\Longleftrightarrow \langle Tv,Tv \rangle \leq \langle v,v \rangle \\ 
+    &\Longleftrightarrow \langle T^*T v,v \rangle \leq \langle v,v \rangle \\ 
+    &\Longleftrightarrow \langle (T^* T - I)v,v \rangle \leq 0 
+\end{align*}
+which gives that \(T^*T \leq I\). Since the eigenvalue of \(T^*T\) are all one and it is 
+self-adjoint, there exists eigenbasis all with eigenvalue one. This implies that \(T^*T = I\) 
+and thus \(T\) is unitary. 
+\end{proof}
+
+
+
+
+\begin{problem}{10}
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\) is a self-adjoint operator such that 
+    \(\norm{Tv} \leq \norm{v}\) for all \(v \in V\). 
+    \begin{enumerate}[label=(\alph*)]
+        \item Show that \(I - T^2\) is a positive operator. 
+        \item Show that \(T + i \sqrt{I - T^2}\) is a unitary operator. 
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+(a)  take any \(v \in V\), then 
+\begin{align*}
+    \langle (I - T^2)v,v \rangle 
+    &= \langle v,v \rangle - \langle Tv,T^*v \rangle \\ 
+    &= \langle v,v \rangle - \langle Tv,Tv \rangle \\ 
+    &= \langle (I - T)v, (I - T)v \rangle \geq 0 
+\end{align*}
+
+(b) Let \(A = T, B = \sqrt{I - T^2}\). Then we have that 
+\[(A+Bi)(A+Bi)^* = A^2 -iAB + iBA + B^2\]
+We know that \(A\) is self-adjoint so \(A^2\) is as well. By (a), \(B^2\) is also 
+self-adjoint. Note that \(AB = BA\) algebraically. Thus, we have that 
+\[(A+Bi)(A+Bi)^* = A^2 + B^2 = I\]
+which shows that \(A+Bi\) is unitary.
+\end{proof}
+
+
+\begin{problem}{11}
+    Suppose \(S \in \Lc(V)\). Prove that \(S\) is a unitary operator if and only if 
+    \[\{Sv \colon v \in V \text{ and } \norm{v} \leq 1\} = \{v \in V \colon \norm{v} \leq 1\}\]
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) take any \(v \in r.h.s.\), then since \(S\) is invertible and thus surjective, there exists 
+\(u \in V\) such that \(Sv = u\). As \(\norm{v} \leq 1\) and \(\norm{Su} = \norm{u} = \norm{v} \leq 1\), 
+so \(v \in l.h.s.\). Conversely, take any \(Sv \in l.h.s.\), then \(\norm{Sv} = \norm{v} \leq 1\), so 
+\(Sv \in r.h.s.\). Hence we complete this direction. 
+
+\(\Leftarrow\) Take any \(v \in V\) and consider \(u \coloneqq \frac{v}{\norm{v}}\). Then we know that 
+there exists \(w\) with \(\norm{w} \leq 1\) such that \(Sw = u \).  
+
+\end{proof}
+
+
+\begin{problem}{13}
+    Explain why the columns of a square matrix of complex numbers form an orthonormal list in \(\C^n\) 
+    if and only if the rows of the matrix form an orthonormal list in \(\C^n\). 
+\end{problem}
+
+\begin{proof}
+A square matirx \(Q\) is unitary iff \(Q^*\) is unitary, completing the proof.
+\end{proof}
+
+
+\begin{problem}{18}
+    A square matrix \(A\) is called \emph{symmetric} if it equals its transpose. Prove that if 
+    \(A\) is a symmetric matrix with real entries, then there exists a unitary matrix \(Q\) with 
+    real entries such that \(Q^* A Q\) is a diagonal matrix. 
+\end{problem}
+
+\begin{proof}
+So we know that \(A\) is self-adjoint, so it is orthogonally diagonalizable. There exists eigenbasis 
+\(v_1, \ldots, v_n\) that are orthogonal. We can thus define \(Q\) to be consisting of such eigenvectors
+as 
+\[Av_i = \lambda_i v_i\]
+Writing this in matrix form gives that 
+\[AQ = QD\]
+for unitary matrix \(Q\) and diagonal matrix \(D\) with entries to be the corresponding eigenvalues. 
+Hence we get that 
+\[Q^*AQ\]
+is diagonal. 
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 7E %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage 
+\section*{7E: Singular Value Decomposition}
+\addcontentsline{toc}{section}{7E: Singular Value Decomposition}
+
+\begin{lemma}[properties of \(T^* T\)]
+    Suppose \(T \in \Lc(V, W)\). Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item \(T^* T \) is a positive operator on \(V\); 
+        \item \(\nul T^* T = \nul T\); 
+        \item \(\range T^* T = \range T^*\);
+        \item \(\dim \range T = \dim \range T^* = \dim \range T^* T\).
+    \end{enumerate}
+\end{lemma}
+
+\begin{definition}[singular values]
+    Suppose \(T \in \Lc(V, W)\). The \textbf{singular values} of \(T\) are the nonnegative square 
+    root of the eigenvalues of \(T^* T\), listed in decreasing order, each included as many 
+    times as the dimension of the corresponding eigenspace of \(T^*T\). 
+\end{definition}
+
+
+\begin{thm}[role of positive singular values]
+    Suppose that \(T \in \Lc(V, W)\). Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item \(T\) is injective \(\Longleftrightarrow\) 0 is not a singular value of \(T\); 
+        \item the number of positive singular values of \(T\) equals \(\dim \range T\); 
+        \item \(T\) is surjective \(\Longleftrightarrow\) number of positive singular values of \(T\) equals \(\dim W\).
+    \end{enumerate}
+\end{thm}
+
+
+\begin{corollary}
+    Suppose \(S \in \Lc(V, W)\). Then 
+    \[S \text{ is an isometry } \Longleftrightarrow \text{ all singular values of } S \text{ equal 1.}\]
+\end{corollary}
+
+
+\begin{thm}[\textcolor{red}{SINGULAR VALUE DECOMPOSITION}]
+    Suppose \(T \in \Lc(V, W)\) and the positive singular values of \(T\) are \(s_1, \ldots, s_m\). 
+    Then there exist orthonormal lists \(e_1, \ldots, e_m\) in \(V\) and \(f_1, \ldots, f_m\) in \(W\)
+    such that 
+    \[Tv = s_1 \langle v,e_1 \rangle f_1 + \cdots + s_m \langle v,e_m \rangle f_m\]
+    for every \(v \in V\).
+\end{thm}
+
+
+\begin{remark}
+    In the proof, we first let \(s_1, \ldots, s_n\) to denote the singular values of \(T\) (thus 
+    \(n = \dim V\)). Then the spectral theorem implies that there exists an orthonormal list \(e_1, \ldots, e_n\)
+    of \(V\) with 
+    \[T^* T e_k = s_k^2 e_k\]
+    For each \(k = 1, \ldots, m\), define 
+    \[f_k = \frac{T e_k}{s_k}\]
+\end{remark}
+
+\begin{remark}
+    Suppose \(T \in \Lc(V, W)\), the positive singular values of \(T\) are \(s_1, \ldots, s_m\) 
+    and \(e_1, \ldots, e_m\) and \(f_1, \ldots, f_m\) are as in the singular decomposition above. 
+    Then the two orthonormal lists can both be extended to basis of the respective vector space.  Where 
+    we can now define 
+    \[Te_k = \begin{cases}
+        s_k f_k &\text{if } 1 \leq k \leq m, \\ 
+        0 &\text{if } m < k \leq \dim V
+    \end{cases}\]
+\end{remark}
+
+
+\begin{definition}[diagonal matrix]
+    An M-by-N matrix \(A\) is called a \textbf{diagonal matrix} if all entries of the matrix are 0 
+    except possibly \(A_{k, k}\) for \(k = 1, \ldots \min \{M, N\}\).
+\end{definition}
+
+\begin{thm}[singular value decomposition of adjoint and pseudoinverse]
+    Suppose \(T \in \Lc(V, W)\) and the positive singular values of \(T\) are 
+    \(s_1, \ldots, s_m\). Suppose \(e_1, \ldots, e_m\) and \(f_1, \ldots, f_m\) are orthonormal 
+    list in \(V\) and \(W\) such that 
+    \[Tv = s_1 \langle v,e_1 \rangle f_1 + \cdots + s_m \langle v,e_m \rangle f_m\]
+    for every \(v \in V\). Then 
+    \[T^*w = s_1 \langle w,f_1 \rangle e_1 + s_m \langle w,f_m \rangle e_m\]
+    and 
+    \[T^\dagger w = \frac{\langle w,f_1 \rangle}{s_1}e_1 + \cdots + \frac{\langle w,f_m \rangle}{s_m}e_m\]
+    for every \(w \in W\).
+\end{thm}
+
+\begin{thm}[matrix version of SVD]
+    Suppose \(A\) is a p-by-n matrix of rank \(m \geq 1\). Then there exist a p-by-m matrix 
+    \(B\) with orthonormal columns, an m-by-m diagonal matrix \(D\) with positive numbers on 
+    the diagonal, and an n-by-m matrix \(C\) with orthonormal columns such that 
+    \[A = BDC^*\]
+\end{thm}
+
+\begin{remark}
+    \(A\) is a \(p \times n\) matrix while \(BDC^*\) has a total of \(m(p+m+n)\) entries, which 
+    could be considerably smaller than \(A\).
+\end{remark}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 7E PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+\addcontentsline{toc}{subsection}{7E Problem Sets}
+
+
+\begin{problem}{1}
+    Suppose \(T \in \Lc(V, W)\). Show that \(T = 0\) if and only if all singular 
+    values of \(T\) are 0.
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) if \(T = 0\), then \(T^*T = 0\) and the singular values have to be all 0. 
+
+\(\Leftarrow\) if all singular values are 0, then \(\dim \range T = 0\) and thus \(T = 0\).
+\end{proof}
+
+\begin{problem}{2}
+    Suppose \(T \in \Lc(V, W)\) and \(s > 0\). Prove that \(s\) is a singular value of \(T\)
+    if and only if there exists nonzero vectors \(v \in V\) and \(w \in W\) such that 
+    \[Tv = sw \text{ and } T^* w = sv\]
+\end{problem}
+
+\begin{proof}
+
+\(\Rightarrow\) This means that there exists nonzero eigenvector \(v \in V\) such that 
+\[T^*T v = s^2 v\]
+let \(w = \frac{Tv}{s}\), then 
+\[Tv = s(\frac{Tv}{s}) = sw\]
+and 
+\[T^*w  = \frac{T^* Tv}{s} = sv\]
+
+\(\Leftarrow\) we have that 
+\[T^*Tv = T^*(sw) = s^2v\]
+therefore completing the proof.
+\end{proof}
+
+
+
+\begin{problem}{4}
+    Suppose that \(T \in \Lc(V, W)\), \(s_1\) is the largest singular value of \(T\), and 
+    \(s_n\) is the smallest value of \(T\). Prove that 
+    \[\{\norm{Tv} \colon v \in V \text{ and } \norm{v} = 1\} = [s_n, s_1]\]
+\end{problem}
+
+\begin{proof}
+Our proof goes two-fold. First we prove that for any \(v \in V\) s.t. \(\norm{v} = 1\), we have 
+\[s_1 \leq \norm{Tv} \leq s_n\]
+Second, we will show that the \(A \coloneqq \{\norm{Tv} \colon v \in V \text{ and } \norm{v} = 1\} \) 
+is a closed interval. 
+
+To prove the first part, let \(v\) be a unit norm vector in \(V\), we know that 
+\(v = \sum_{i=1}^{n}a_i e_i\) and \(\norm{v}^2 = \sum_{i=1}^{n} |a_i|^2\) for some orthonormal 
+basis \(e_1, \ldots, e_n\). Then we have 
+\begin{align*}
+    \norm{Tv}^2 
+    &= \langle Tv,Tv \rangle \\ 
+    &= \langle v,T^*Tv \rangle \\ 
+    &= \langle \sum_{i=1}^{n} a_i e_i, \sum_{i=1}^{n} s_i^2a_ie_i \rangle \\ 
+    &= \sum_{i=1}^{n} a_i \sum_{j=1}^{n} \overline{a_j} \overline{s_j^2} \langle e_i,e_j \rangle \\ 
+    &= \sum_{i=1}^{n} |a_i|^2 s_i^2 \\ 
+\end{align*}
+Note that the last identity is \(\leq \norm{v}^2 s_1^2\) and \(\geq \norm{v}^2 s_n^2\), which gets 
+our desired equality. For the second part, we know that the norm function \(\norm{\cdot} \colon 
+v \to Tv\) is continuous on the unit sphere \(\{v \in V \colon \norm{v}  =1\}\), which is compact. The 
+continuous image of the compact set is therefore also compact. Hence, we prove that 
+\[A = [s_n, s_1]\]
+\end{proof}
+
+
+% \begin{problem}{8}
+%     Suppose \(T \in \Lc(V, W)\). Suppose \(s_1 \geq s_2 \geq \cdots \geq s_m > 0\)
+%     and \(e_1, \ldots, e_m\) is an orthonormal list in \(V\) and \(f_1, \ldots, f_m\)
+%     is an orthonormal list in \(W\) such that 
+%     \[Tv = s_1 \langle v,e_1 \rangle f_1 + \cdots + s_m \langle v,e_m \rangle f_m\]
+%     for every \(v \in V\). 
+%     \begin{enumerate}[label=(\alph*)]
+%         \item Prove that \(f_1, \ldots, f_m\) is an orthonormal basis of \(\range T\). 
+%         \item Prove that \(e_1, \ldots, e_m\) is an orthonormal basis of \((\nul T)^\perp\). 
+%         \item Prove that \(s_1, \ldots, s_m\) are positive singular values of \(T\). 
+%         \item Prove that if \(k \in \{1, \ldots, m\}\), then \(e_k\) is an eigenvector of 
+%         \(T^*T\) with corresponding eigenvalue \(s_k^2\). 
+%         \item Prove that 
+%         \[TT^* w = s_1^2 \langle w,f_1 \rangle f_1 + \cdots + s_m^2 \langle w,f_m \rangle f_m\]
+%         for all \(w \in W\).
+%     \end{enumerate}
+% \end{problem}
+
+% \begin{proof}
+
+% \end{proof} 
+
+
+\begin{problem}{9}
+    Suppose \(T \in \Lc(V, W)\). Show that \(T\) and \(T^*\) have the same positive singular 
+    values.
+\end{problem}
+
+\begin{proof}
+We know that \(T^*T\) is self-adjoint, and that its eigenvalue equals the eigenvalue of its adjoint. 
+Therefore the squared root of the eigenvalue of \(T^*T = TT^*\), and thus \(T\) and \(T^*\) have 
+the same positive singular values.
+
+Question 10 follows similarly. 
+\end{proof}
+
+
+\begin{problem}{11}
+    Suppose that \(T \in \Lc(V, W)\) and \(v_1, \ldots, v_n\) is an orthonormal basis of \(V\). 
+    Let \(s_1, \ldots, s_n\) denote the singular values of \(T\). 
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove that \(\norm{Tv_1}^2 + \cdots + \norm{Tv_n}^2 = s_1^2 + \cdots + s_n^2\). 
+        \item Prove that if \(W = V\) and \(T\) is a positive operator, then 
+        \[\langle Tv_1,v_1 \rangle + \cdots + \langle Tv_n,v_n \rangle = s_1 + \cdots + s_n\]
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+We first know from previous problems that for any two orthonormal basis, \(e_1, \ldots, e_n\)
+in \(V\) and \(f_1, \ldots, f_m\) in \(W\), then 
+\[\sum_{i=1}^{n} \norm{Te_i}^2 = \sum_{j=1}^{m} \norm{T^* f_j}^2\]
+
+(a) In the proof of SVD, we have shown that by letting \(f_k = \frac{Te_k}{s_k}\), then we have 
+\(f_1, \ldots, f_n\) also to be an orthonormal list in \(W\). Then applying the fact above yields 
+that 
+\[\sum_{i=1}^{n} \norm{T v_i}^2 = \sum_{i=1}^{n} \norm{T^*f_i}^2 = 
+\sum_{i=1}^{n} \norm{ \frac{T^*T e_i}{s_i}}^2 = \sum_{i=1}^{n} \norm{s_i e_i}^2 = \sum_{i=1}^{n} s_i^2\]
+
+where \(e_1, \ldots, e_n\) are the orthonormal eigenbasis that diagonizes \(T^*T\). 
+
+
+(b) Note that since \(T\) is positive, the singular value is eigenvalue, as \(\lambda(T^*T) 
+= \lambda(T^2)\) and the eigenvalue is positive. Therefore for each \(i\), \(T v_i = s_i v_i\)
+and we have that 
+\[\sum_{i=1}^{n} \langle Tv_i,v_i \rangle = \sum_{i=1}^{n} s_i\]
+\end{proof}
+
+
+\begin{problem}{13}
+    Suppose \(T_1, T_2 \in \Lc(V)\). Prove that \(T_1\) and \(T_2\) have the same singular values 
+    if and only if there exist unitary operators \(S_1, S_2 \in \Lc(V)\) such that \(T_1 
+    = S_1 T_2 S_2\).
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) Let \(A\) be the matrix of \(T_2\) and \(B\) be the matrix of \(T_1\) then we know that 
+\(A = U_1 D V_1^*\) and \(B = U_2 D V_2^*\) for unitary matrix \(U_1, V_1, U_2, V_2\) and 
+diagnoal matrix \(D\). Then we have 
+\[B = \underbrace{(U_1 U_2^*)}_{S_1} \underbrace{(U_2 D V_2^*)}_A \underbrace{(V_2 V_1^*)}_{S_2} \]
+
+where we have \(S_1, S_2\) to be unitary. 
+
+\(\Leftarrow\) Let \(A\) be the matrix of \(T_2\) and let \(A = UD^*\) be the SVD of \(A\) where 
+\(U\) and \(V^*\) is unitary, then we have that (let \(B\) be the matrix of \(T_1\))
+\[B = (S_1 U)D(V^*S_2)\]
+where \(S_1 U\) and \(V^*S_2\) are both unitary, therefore \(B\) (\(T_2\)) also have the singular values 
+as in the diagnoal of \(D\). Therefore \(T_1\) and \(T_2\) shares same eigenvalues.  
+\end{proof}
+
+
+\begin{problem}{15}
+    Suppose \(T \in \Lc(V)\) and \(s_1 \geq \cdots \geq s_n\) are the singular values of \(T\). 
+    Prove that if \(\lambda\) is an eigenvalue of \(T\), then \(s_1 \geq |\lambda| \geq s_n\).
+\end{problem}
+
+\begin{proof}
+In the proof of Problem 4, we have shown that for every \(v \in V\), we have 
+\[ s_n \norm{v} \leq \norm{Tv} \leq s_1 \norm{v}\] 
+Since this holds for all vectors, substitute any eigenvector \(v\) we can get that 
+\[s_n \norm{v} \leq |\lambda| \norm{v} \leq s_1 \norm{v}\]
+which is the desired result. 
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 7F %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage 
+\section*{7F: Consequences of Singular Value Decomposition}
+\addcontentsline{toc}{section}{7F: Consequences of Singular Value Decomposition}
+
+
+\begin{thm}[upper bound for \(\norm{Tv}\)]
+    Suppose \(T \in \Lc(V, W)\). Let \(s_1\) be the largest singular value of \(T\). Then 
+    \[\norm{Tv} \leq s_1 \norm{v}\]
+    for all \(v \in V\).
+\end{thm}
+
+\begin{definition}[norm of a linear map, \(\norm{\cdot}\)]
+    Suppose \(T \in \Lc(V, W)\). Then the \textbf{norm} of \(T\), denoted by \(\norm{T}\), 
+    is defined by 
+    \[\norm{T} = \max \{\norm{Tv} \colon v \in V \text{ and } \norm{v} \leq 1\}\]
+\end{definition}
+
+\begin{remark}
+    For a linear map \(T\), \(\norm{T} = \sigma_{\max}\) (using the more common notation). Also 
+    note that \(\norm{T} \neq \sqrt{\langle T,T \rangle}\). Now we have two different uses of 
+    the word \textbf{norm} and the notation \(\norm{\cdot}\).
+\end{remark}
+
+\begin{corollary}[basic properties of norms of linear maps]
+    Suppose \(T \in \Lc(V, W)\). Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item \(\norm{T} \geq 0\); 
+        \item \(\norm{T} = 0 \Longleftrightarrow T = 0\); 
+        \item \(\norm{\lambda T} = |\lambda| \norm{T}\) for all \(\lambda \in \F\); 
+        \item \(\norm{S+T} \leq \norm{S} + \norm{T}\) for all \(S \in \Lc(V, W)\).
+    \end{enumerate}
+\end{corollary}
+
+\begin{remark}
+    For \(S, T \in \Lc(V, W)\), the quantity \(\norm{S - T}\) is often called the distance between 
+    \(S\) and \(T\). Informally, think of the condition that \(\norm{S - T}\) is a small number 
+    as meanining \(S\) and \(T\) are close together. 
+\end{remark}
+
+
+\begin{thm}[alternative formulas for \(\norm{T}\)]
+    Suppose \(T \in \Lc(V, W)\). Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item \(\norm{T}\) = the largest eigenvalue of \(T\); 
+        \item \(\norm{T} = \max \{\norm{Tv} \colon v \in V \text{ and } \norm{v} = 1\} \); 
+        \item \(\norm{T} = \text{ the smallest number } c \text{ such that } \norm{Tv} \leq c \norm{v}\) 
+        for all \(v \in V\).
+    \end{enumerate}
+\end{thm}
+
+\begin{remark}
+    An important inequality during the proof:
+    \[\norm{Tv} \leq \norm{T} \norm{v}\]
+    for all \(v \in V\) and \(v \neq 0\). 
+\end{remark}
+
+\begin{corollary}[norm of the adjoint]
+    Suppose \(T \in \Lc(V, W)\). Then \(\norm{T} = \norm{T^*}\).
+\end{corollary}
+
+\begin{thm}[best approximation by linear map whose range has dimension \(\leq k\)]
+Suppose \(T \in \Lc(V, W)\) and \(s_1 \geq \cdots \geq s_m\) are the singualr 
+values of \(T\). Suppose \(1 \leq k < m\). Then 
+\[\min \{\norm{T - S} \colon S \in \Lc(V, W) \text{ and } 
+\dim \range S \leq k\} = s_{k+1}\]
+Furthermore, if 
+\[Tv = s_1 \langle v,e_1 \rangle f_1 + \cdots + s_m \langle v,e_m \rangle f_m\]
+is a singualr value decomposition of \(T\) and \(T_k \in \Lc(V, W)\) is 
+defined by 
+\[T_k v = s_1 \langle v,e_1 \rangle f_1 + \cdots + s_k \langle v,e_k \rangle f_k\]
+for each \(v \in V\), then \(\dim \range T_k = k\) and \(\norm{T - T_k} = s_{k+1}\).
+\end{thm}
+
+\begin{thm}[polar decomposition]
+    Suppose \(T \in \Lc(V)\). Then there exists a unitary operator 
+    \(S \in \Lc(V)\) such that 
+    \[T = S \sqrt{T^* T}\]
+\end{thm}
+
+\begin{remark}
+    This holds for both \(\C\) and \(\R\). 
+\end{remark}
+
+\begin{definition}[ball, \(B\)]
+    The \textbf{ball} in \(V\) of radius \(1\) centered at 0, is defined by 
+    \[B = \{v \in V \colon \norm{v} \leq 1\}\]
+\end{definition}
+
+
+\begin{definition}[ellipsoid, \(E(s_1f_1, \ldots, s_n f_n)\), principle axes]
+    Suppose that \(f_1, \ldots, f_n\) is an orthonormal basis of \(V\) and 
+    \(s_1, \ldots, s_n\) are positive numbers. The \textbf{ellipsoid} 
+    \(E(s_1 f_1, \ldots, s_n f_n)\) with \textbf{principle axes} \(s_1 f_1, 
+    \ldots, s_n f_n\) is defined by 
+    \[E(s_1 f_1, \ldots, s_n f_n) = \{v \in V \colon 
+    \frac{|\langle v,f_1 \rangle|^2}{s_1} 
+    + \cdots + \frac{|\langle v,f_n \rangle|^2}{s_n} < 1\}\]
+\end{definition}
+
+
+\begin{remark}
+    If \(\dim V = 2\), the word ``disk'' is sometimes used to denote ball and 
+    the word ``ellipse'' is sometimes used to denote ellipsoid. 
+\end{remark}
+
+\begin{definition}[\(T(\Omega)\)]
+    For a function \(T\) defined on \(V\) and \(\Omega \subseteq V\), define 
+    \(T(\Omega)\) by 
+    \[T(\Omega) = \{Tv \colon v \in \Omega\}\] 
+\end{definition}
+
+\begin{proposition}[invertible map takes ball to ellipsoid]
+    Suppose \(T \in \Lc(V)\) is invertible. Then \(T\) maps 
+    the ball \(B\) in \(V\) onto an ellipsoid in \(V\).
+\end{proposition}
+
+\begin{proposition}[invertible map takes ellipsoid to ellipsoid]
+    Suppose \(T \in \Lc(V)\) is invertible and \(E\) is an ellipsoid in 
+    \(V\). Then \(T(E)\) is an ellipsoid in \(V\).
+\end{proposition}
+
+\begin{definition}[\(P(v_1, \ldots, v_n)\), parallelepiped]
+    Suppose \(v_1, \ldots, v_n\) is a basis of \(V\). Let 
+    \[P(v_1, \ldots, v_n) = \{a_1 v_1 + \cdots + a_n v_n \colon a_1, \ldots, a_n \in (0,1)\}\]
+    A \textbf{parallelepiped} is a set of the form \(u + P(v_1, \ldots, v_n)\)
+    for some \(u \in V\). The vectors \(v_1, \ldots, v_n\) are called 
+    the \textbf{edges} of the parallelepiped.
+\end{definition}
+
+
+\begin{proposition}[invertible operator takes parallelepiped to parallelepiped]
+    Suppose \(u \in V\) and \(v_1, \ldots, v_n \) is a basis of \(V\). Suppose 
+    \(T \in \Lc(V)\) is invertible. Then 
+    \[T(u + P(v_1, \ldots, v_n)) = Tu + P(Tv_1 \ldots, Tv_n)\]
+\end{proposition}
+
+\begin{definition}[box]
+    A \textbf{box} is of the form 
+    \[u + P(r_1 e_1, \ldots, r_n e_n)\]
+    where \(u \in V\), \(r_1, \ldots, r_n\) are positive numbers and 
+    \(e_1, \ldots, e_n\) is an orthonormal basis of \(V\). 
+\end{definition}
+
+Rest of Notes are omitted. 
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 7F PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+\addcontentsline{toc}{subsection}{7F Problem Sets}
+
+\begin{problem}{1}
+    Prove that if \(S, T \in \Lc(V, W)\), then 
+    \(|\norm{S} - \norm{T}| \leq \norm{S - T}\)
+\end{problem}
+
+\begin{proof}
+
+We have 
+\begin{align*}
+    \norm{S} &= \norm{S - T + T} \leq \norm{S - T} + \norm{T} \\ 
+    \norm{T} &= \norm{T - S + S} \leq \norm{T - S} + \norm{S}
+\end{align*}
+This means that 
+\[\norm{S - T} \geq |\norm{S} - \norm{T}|\]
+
+
+\end{proof}
+
+
+\begin{problem}{2}
+    Suppose that \(T \in \Lc(V)\) is self-adjoint and 
+    or that \(\F = \C\) and \(T \in \Lc(V)\) is normal, then 
+    \[\norm{T} = \{\max |\lambda| \colon \lambda 
+    \text{ is an eigenvalue of } T\}\]
+\end{problem}
+
+\begin{proof}
+Given by the conditions we know that the eigenvalues of 
+\(T\) are its singular values, therefore 
+\(\norm{T} = s_1 = \max(\lambda)\)
+\end{proof}
+
+\begin{problem}{3}
+    Suppose that \(T \in \Lc(V)\) and \(v \in V\). Prove that 
+    \[\norm{Tv} = \norm{T} \norm{v} \Longleftrightarrow 
+    T^* T v = \norm{T}^2 v\]
+\end{problem}
+
+\begin{proof}
+
+\(\Rightarrow\) we have that 
+\(\norm{Tv} = \norm{Tv / \norm{v}} \norm{v} = \norm{T} \norm{v}\). 
+Therefore \(\norm{Tv / \norm{v}} = \norm{T}\) which 
+gives that \(v/\norm{v}\) being the vector corresponds to the largest 
+singular value of \(T\). This gives that  
+\[T^*T v/\norm{v} = \norm{T^2}v / \norm{v}\]
+
+multiplying \(\norm{v}\) on both sides solves the problem. 
+
+\(\Leftarrow\) Given \(T^*Tv = \norm{T}^2 v\), then we know 
+that \(v\) is the eigenvector of \(T^*T\) corresponding to 
+its largest eigenvalue \(s_1^2\), (i.e. it is the vector 
+that corresponds the largest singular value of \(T\)). 
+Therefore \(\norm{Tv} =
+\norm{Tv / \norm{v}} \norm{v}= \norm{T} \norm{v}\). 
+
+\end{proof}
+
+
+\begin{problem}{4}
+    Suppose \(T \in \Lc(V, W), v \in V\), and 
+    \(\norm{Tv} = \norm{T} \norm{v}\). Prove that if 
+    \(u \in V\) and \(\langle u,v \rangle = 0\), then 
+    \(\langle Tu,Tv \rangle = 0\).  
+\end{problem}
+
+\begin{proof}
+By P3 we know that \(T^*T v = \norm{T}^2 v\), then 
+\[\langle Tu,Tv \rangle 
+= \langle T^*Tu,v \rangle = \norm{T}^2 \langle u,v \rangle = 0\]
+\end{proof}
+
+\begin{problem}{5}
+    Suppose \(U\) is a finite-dimensional inner product 
+    space, \(T \in \Lc(V, U)\), and \(S \in \Lc(U, W)\).  
+    Prove that 
+    \[\norm{ST} \leq \norm{S} \norm{T}\]
+\end{problem}
+
+\begin{proof}
+
+Take \(v \in V\) with \(\norm{v} \leq 1\) and 
+\(\norm{ST} = \norm{ST v}\), then 
+\begin{align*}
+    \norm{ST} 
+    = \norm{(ST)v} 
+    = \norm{S(Tv)} 
+    \leq \norm{S}\norm{Tv} 
+    \leq \norm{S} \norm{T} \norm{v} 
+    \leq \norm{S} \norm{T}
+\end{align*}
+\end{proof}
+
+
+\begin{problem}{7}
+    Show that defining \(d(S, T) = \norm{S - T}\) for 
+    \(S, T \in \Lc(V, W)\) makes \(d\) a metric on 
+    \(\Lc(V, W)\).  
+\end{problem}
+
+\begin{proof}
+We will examine the definitions one by one:
+\begin{itemize}
+    \item \(d(S, S) = \norm{S - S} = 0\) 
+    \item If \(S \neq T\), then \(d(S, T) 
+    = \norm{S - T} = \sigma_{\max}(S - T) \). Since 
+    \(S - T \neq 0\), its largest singular value is nonzero
+    and therefore \(d(S, T) > 0\). 
+    \item \(d(S, T) = \norm{S - T} = \norm{T - S} = 
+    d(T, S)\).  
+    \item \(d(S, G) = \norm{S - G} 
+    = \norm{(S - T) + (T - G)} 
+    \leq \norm{S - T} + \norm{T - G} 
+    = d(S, T) + d(T, G)\). 
+\end{itemize}
+\end{proof}
+
+
+\begin{problem}{8}
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove that if \(T \in \Lc(V)\) and 
+        \(\norm{I - T} < 1\), then \(T\) is invertible. 
+        \item Suppose that \(S \in \Lc(V)\) is invertible.
+        Prove that if \(T \in \Lc(V)\) and 
+        \(\norm{S - T} < 1/\norm{S^{-1}}\), then 
+        \(T\) is invertible. 
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+% (a) We know that 
+% \[1 > \norm{I - T} \geq |\norm{I} - \norm{T}| = |1 - \norm{T}|\]
+% This gives that 
+% \[0 < \norm{T} < 1\]
+(a) Let \(S = I - T\) and \(S_n = \sum_{i=1}^{n} S^{i}\).
+Then 
+\[(I - S)S_n = I - S^{n+1} \to I\]
+as \(n \to \infty\) because \(\norm{S} < 1\). Therefore the operator 
+\[S_\infty = \sum_{i=1}^{\infty} S_i\]
+is also bounded. This gives that 
+\[(I - S)S_{\infty} = S_{\infty} (I - S) = I\]
+and thus \(S\) is invertible, which leads to that \(T\) is also invertible. 
+
+(b) Equivalently, 
+\[ \norm{I - TS^{-1}}  \leq \norm{S - T} \norm{S^{-1}} < 1\]
+So \(TS^{-1}\) is invertible. Since we already know that 
+\(S\) is invertible, \(T\) is therefore also invertbile. 
+\end{proof}
+
+
+\begin{problem}{9}
+    Suppose \(T \in \Lc(V)\). Prove that for every \(\epsilon > 0\)
+    there exists an invertible operator \(S \in \Lc(V)\)
+    such that \(0 < \norm{T - S } < \epsilon\).
+\end{problem}
+
+\begin{proof}
+Define \(S = T + \delta I\) for some \(\epsilon > \delta > 0\). Then we 
+have 
+\[\norm{T - S} = \norm{\delta I} = \delta \]
+which satisifes the desired condition. Note that if \(T\) is invertible, we can 
+simply choose a sufficiently small \(\delta < 1/\norm{T^{-1}}\); if not, then any 
+\(\delta\) in \((0, 1)\) can make \(S\) invertible. 
+\end{proof}
+
+
+
+
+\begin{problem}{12}
+    Suppose \(T \in \Lc(V)\) is a positive operator. Show 
+    that \(\norm{\sqrt{T}} = \sqrt{\norm{T}}\). 
+\end{problem}
+
+\begin{proof}
+Let \(\norm{T} = \sigma_1\), then \(\norm{\sqrt{T}} 
+= \sqrt{\sigma_1} = \sqrt{\norm{T}}\). 
+\end{proof}
+
+\begin{problem}{17}
+    Prove that if \(u \in V\) and \(\varphi_u\) is the linear functional on \(V\) defined 
+    by the equation \(\varphi_u(v) = \langle v,u \rangle\), then \(\norm{\varphi_u} = \norm{u}\).
+\end{problem}
+
+\begin{proof}
+We have that 
+\[\norm{\varphi_u} = \sup_{\norm{v} = 1} |\langle v,u \rangle| = |\langle \frac{u}{\norm{u}},u \rangle| = \norm{u}\]
+\end{proof}
+
+\begin{problem}{18}
+    Suppose \(e_1, \ldots, e_n\) is an orthonormal basis of \(V\) and \(T \in \Lc(V, W)\). 
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove that \(\max\{\norm{Te_1}, \ldots, \norm{Te_n}\}\leq \norm{T} \leq (\norm{Te_1}^2 + \cdots + \norm{Te_n}^2)^{1/2}\).
+        \item Prove that \(\norm{T} = (\norm{T e_1}^2 + \cdots + \norm{Te_n}^2)^{1/2}\) if and only 
+        if \(\dim \range T \leq 1\).
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+(a) We first know that \(\norm{T e_i} \leq \norm{T}\) by definition of \(\norm{\cdot}\). In the proof 
+of equivalent characterizations, we showed that there exists some orthonormal basis (corresponding to SVD)
+such that \(\norm{T(f_n)} = s_1\) for some \(f_n\). This finishes the l.h.s. To see the r.h.s., 
+let \(v \in V\) with \(\norm{v} = 1\) to be such that \(\norm{Tv} = \norm{T}\). Then we have 
+\begin{align*}
+    \norm{T}^2 = \norm{Tv}^2 = \norm{ \sum_{i=1}^{n} a_i  Te_i}^2
+    \leq (\sum_{i=1}^{n} |a_i|^2) (\sum_{i=1}^{n} \norm{Te_i}^2) 
+    = \sum_{i=1}^{n} \norm{Te_i}^2
+\end{align*}
+
+Taking the square root solves the problem. 
+
+(b) \(\Rightarrow\) By Cauchy-Schwarz inequality, we know that this is an equality if and only if 
+\(Te_i\) must be proportional to each other. That is, there exists 
+a unit vector \(w\) such that \(Te_i = a_i w\). So \(\dim \range T \leq 1\). 
+
+
+\(\Leftarrow\) If \(\dim \range T \leq 1\), then there exists a unit vector \(w\) and 
+\(\beta_i \geq 0\) s.t. 
+\[Te_i = \beta_i w\]
+We now have that for some \(v\) with unit norm, 
+\[\norm{Tv} = \norm{\sum_{i=1}^{n} a_i T e_i} = 
+\norm{\sum_{i=1}^{n}a_i \beta_i w} \leq |\sum_{i=1}^{n} a_i \beta_i|\]
+
+We know that 
+\[|\sum_{i=1}^{n} a_i \beta_i| \leq (\sum_{i=1}^{n} a_i^2)^{1/2} (\sum_{i=1}^{n} \beta_i^2)^{1/2} 
+= (\sum_{i=1}^{n} \beta_i^2)^{1/2}\]
+with equality obtained when \(\beta_i = c a_i\) for all \(i\). That is, the sup of \(\norm{Tv}\) 
+occurs under this condition and that we have 
+\[\norm{T} = (\sum_{i=1}^{n} \beta_i^2)^{1/2} = (\sum_{i=1}^{n} \norm{Te_i}^2)^{1/2}\]
+\end{proof}
+
+
+\begin{problem}{24}
+    Suppose \(T \in \Lc(V)\) is invertible. Prove that 
+    \[\norm{T^{-1}} = \norm{T}^{-1} \Longleftrightarrow \frac{T}{\norm{T}} \text{ is a unitary operator}\]
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) Let \(U = \frac{T}{\norm{T}}\), then \(\norm{U} = 1\) and \(\norm{U^{-1}} = 1\). Then 
+\[\norm{Ux} \leq \norm{U}\norm{x} = \norm{x}\]
+and 
+\[\norm{x} = \norm{U^{-1}Ux} \leq \norm{U^{-1}}\norm{Ux} = \norm{Ux}\]
+Therefore \(\norm{Ux} = \norm{x}\) and therefire it is an invertible isometry and thus unitary. 
+
+\(\Leftarrow\) Conversely, we have \(\norm{U} = 1 = \norm{U^{-1}}\) by it being unitary. Therefore 
+\(\norm{T^{-1}} = \norm{T}^{-1}\)
+\end{proof}
+
+\end{document}
+

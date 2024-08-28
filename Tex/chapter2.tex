@@ -1,0 +1,653 @@
+\documentclass{extarticle}
+\sloppy
+\input{packages.tex}
+\input{math_commands.tex}
+\usepackage{hyperref}
+
+\title{\vspace{-2em}Chapter 2: Finite-Dimensional Vector Space}
+\author{\emph{Linear Algebra Done Right}, by Sheldon Axler}
+\date{}
+
+\begin{document}
+\maketitle 
+\tableofcontents
+\newpage
+
+
+\section*{2A: Span and Linear Independence}
+\addcontentsline{toc}{section}{2A: Span and Linear Independence}
+
+\begin{definition}[Linear Combination]
+    A \emph{linear combination} of a list \(v_1, \ldots, v_m\) of vectors in \(V\)
+    is a vector of the form 
+    \[a_1 v_1 + \cdots + a_m v_m\]
+    where \(a_1, \ldots, a_m \in \F\).
+\end{definition}
+
+\begin{definition}[Span]
+    The set of all linear combinations of list of vectors \(v_1, \ldots, v_m\) 
+    in \(V\) is called the \emph{span} of \(v_1, \ldots, v_m\), denoted by 
+    span\((v_1, \ldots, v_m)\). In other words, 
+    \[\text{span}(v_1, \ldots, v_m) = \{a_1 v_1 + \cdots a_m v_m \colon a_1, \ldots, a_m \in \F\}\]
+    The span of the empty list \(()\) is defined to be \(\{0\}\).
+\end{definition}
+
+
+\begin{thm}
+    The span of a list of vectors in \(V\) is the smallest subspace of \(V\) 
+    containing all vectors in the list.
+\end{thm}
+
+\begin{definition}[Spans]
+    If span\((v_1, \ldots, v_m)\) equals \(V\), we say the list \(v_1, \ldots, v_m\)
+    \emph{spans} \(V\). 
+\end{definition}
+
+\begin{definition}[Finite-dimensional vector space]
+    A vector space is called \emph{finite-dimensional} if some list of vectors 
+    in it spans the space.
+\end{definition}
+
+\begin{definition}[polynomial]
+    A function \(p \colon \F \to \F\) is called a \emph{polynomial} with coefficients
+    in \(\F\) if there exist \(a_0, \ldots, a_m \in \F\) s.t. 
+    \[(z) = a_0 + a_1 z + a_2 z^2 + \cdots + a_m z^m\]
+    for all \(z \in \F\).
+
+    \(\Pcal(\F)\) is the set of all polynomials with coefficients in \(\F\).
+\end{definition}
+
+\begin{definition}[Linear independence]
+    A list of vectors \(v_1, \ldots, v_m\) in \(V\) is called \emph{linearly independent}
+    if the only choice of \(a_1, \ldots, a_m \in \F\) that makes 
+    \[a_1v_1 + \cdots + a_m v_m = 0\]
+    is \(a_1 = \cdots = a_m = 0\). 
+
+    The empty list \(()\) is also declared to be linearly independent.
+\end{definition}
+
+\begin{lemma}
+    Suppose \(v_1, \ldots v_m\) is a linearly dependent list in \(V\). Then 
+    there exists \(k \in \{1, 2, \ldots, m\}\) s.t. 
+    \[v_k \in \text{span}(v_1, \ldots, v_{k-1})\]
+    Furthermore, if \(k\) satisfies the condition above and the \(k^{\text{th}}\)
+    term is removed from \(v_1, \ldots v_m\), then the span of the reamining list 
+    equals \(\text{span}(v_1, \ldots, v_m)\).
+\end{lemma}
+
+\begin{lemma}[length of linearly independent list \(\leq\) length of spanning list]
+    In a finite-dimensional vector space, the length of every linearly independent 
+    list of vectors is less than or equal to the length of every spanning 
+    list of vectors. 
+\end{lemma}
+
+\newpage 
+\addcontentsline{toc}{subsection}{2A Problem Sets}
+\begin{problem}{1}
+    Find a list of four distinct vectors in \(\F^3\) whose span equals 
+    \[\{(x, y, z) \in \F^3 \colon x + y + z =0\}\]
+\end{problem}
+
+\begin{proof}
+Example: \((1, 0, 0), (0, 1, 0), (0, 0, 1), (-1, -1, -1)\). 
+\end{proof}
+
+\begin{problem}{2}
+    Prove or give a counterexample: If \(v_1, v_2, v_3, v_4\) spans \(V\), then 
+    the list 
+    \[v_1 - v_2, v_2 - v_3, v_3 - v_4, v_4\]
+    also spans \(V\).
+\end{problem}
+
+\begin{proof}
+Take any \(v \in V\), then we have \(v = a_1 v_1 + a_2 v_2 + a_3 v_3 
++ a_4 v_4 = a_1(v_1 - v_2) + (a_1 + a_2) (v_2 - v_3) + (a_1 + a_2 + a_3)(
+    v_3 - v_4) + (a_1 + a_2 +a_3 + a_4) v_4\). Conversely, any linear combination 
+    of these vectors still belong to \(V\).
+\end{proof}
+
+
+\begin{problem}{3}
+    Suppose \(v_1, \ldots, v_m\) is a list of vectors in \(V\). 
+    For \(k \in \{1, \ldots, m\}\), let 
+    \[w_k = v_1 + \cdots + v_k\]
+    Show that span(\(v_1, \ldots, v_m\)) = span(\(w_1, \ldots, w_m\))
+\end{problem}
+
+\begin{proof}
+Take \(v = \sum_{i=1}^m a_i v_i\) from l.h.s, then we can write 
+
+\begin{align*}
+    v 
+    &= a_1 v_1 + \cdots a_m v_m \\ 
+    &= (a_1 - a_m) v_1 +\cdots (a_{m-1} - a_{m}) v_{m-1} + a_m w_m \\ 
+    &= (a_1 - a_m - a_{m-1}) v_1 + \cdots (a_{m - 2} - a_{m-1} - a_m) v_{m-2}
+    +(a_{m-1} - a_m) w_{m-1}  + a_m w_m \\ 
+    &= \sum_{i=1}^m (a_i - \sum_{j=i+1}^m a_j)w_i \in \text{r.h.s}
+\end{align*}
+
+Conversely, take \(w = \sum_{i=1}^m b_i w_i = \sum_{i=1}^m (b_i \sum_{j=1}^i c_j) v_j \in \text{l.h.s.}\).
+
+\end{proof}
+
+\begin{problem}{4}
+    (a) Show that a list of length one in a vector space is linearly independent 
+    if and only if the vector in the list is not 0. 
+    
+    (b) Show that a list of length two in a vector space is linearly independent 
+    if and only if neither of the two vectors in the list is a scalar multiple of 
+    the other.
+\end{problem}
+
+\begin{proof}
+(a) In order for the only way to write \(a v = 0\) is to ensure \(v \neq 0\). 
+
+(b) \(a v_1 + b v_2 = 0\). \(\Rightarrow\) the only solution is \(a=b=0\) so \(v_1\)
+cannot be a multiple of \(v_2\); vice versa.  \(\Leftarrow\) same reason.
+\end{proof}
+
+
+\begin{problem}{8}
+    Suppose \(v_1, v_2, v_3, v_4\) is linearly independent in \(V\). Prove that the list 
+    \[v_1 - v_2, v_2 - v_3, v_3 - v_4 , v_4\]
+    is also linearly independent. 
+\end{problem}
+
+\begin{proof}
+
+    \[a_1(v_1 - v_2) + a_2 (v_2 - v_3) + a_3 (v_3 - v_4) + a_4 v_4 = a_1v_1 
+    + (-a_1 + a_2)v_2 + (-a_2 + a_3)v_3 + (-a_3 + a_4) v_4\]
+
+    The only solution is \(a_1 = 0, -a_1 + a_2 = 0, -a_2 + a_3 = 0, -a_3 + a_4 = 0\).
+\end{proof}
+
+
+\begin{problem}{9}
+    Prove or give a counter example: If \(v_1, \ldots, v_m\) is a linearly independent 
+    list of vectors in \(V\), then 
+    \[5v_1 - 4v_2, v_2, v_3, \ldots, v_m\]
+    is also linearly independent.
+\end{problem}
+
+\begin{proof}
+
+\begin{align*}
+    &a_1 (5v_1 - 4v_2) + a_2 v_2 + \ldots a_m v_m \\ 
+    &=5a_1 v_1 + (-4a_1  + a_2)v_2 + \ldots a_m v_m
+\end{align*}
+
+The only solution is \(5a_1 = -4a_1 + a_2 = \ldots = a_m = 0\).
+
+\end{proof}
+
+
+\begin{problem}{10}
+    Prove or give a counterexample: If \(v_1, \ldots, v_m\) is a linearly 
+    independent list of vectors in \(V\)  and \(\lambda \in \F\) with 
+    \(\lambda \neq 0\), then \(\lambda v_1, \ldots, \lambda v_m\) is linearly 
+    indepedent.
+\end{problem}
+
+\begin{proof}
+\[\sum_{i}^m \lambda a_i v_i = 0\]
+
+The only solution is \(a_i = 0\) for all \(i\).
+\end{proof}
+
+\begin{problem}{12}
+    Suppose \(v_1, \ldots, v_m\) is linearly independet in \(V\) 
+    and \(w \in V\). Prove that if \(v_1 + w, \ldots, v_m + w\) is 
+    linearly dependent, then \(w \in \text{span}(v_1, \ldots, v_m)\).
+\end{problem}
+
+\begin{proof}
+We know the only solution to \(\sum_i^m a_i v_i\) is all \(a_i = 0\). Now 
+we have that non-zero \(a_i\) for solving \(\sum_i^m a_i v_i + \sum_i^m a_i w = 0\).
+Thus \(w = \frac{\sum_i^m a_i v_i}{\sum_i^m a_i}\) which completes the proof.  
+\end{proof}
+
+\begin{problem}{13}
+    Suppose \(v_1, \ldots, v_m\) is linearly independent in \(V\) and 
+    \(w \in V\). Show that 
+    \[v_1, \ldots, v_m, w \text{ is linearly independent } \Leftrightarrow 
+    w \notin \text{ span}(v_1, \ldots, v_m)\]
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) By contradiction if \(w\) in the span then it can be written 
+as linear combination for some nonzero \(a_i\) and thus they are ld. 
+
+\(\Leftarrow\) Similarly. 
+\end{proof}
+
+
+\begin{problem}{17}
+Prove that \(V\) is infinite-dimensional if and only if there is a sequence 
+\(v_1, v_2, \ldots\) of vectors in \(V\) such that \(v_1, \ldots, v_m\) is 
+linearly independent for every positive integer \(m\). 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) There doesn't exist any finite list of vectors that span the space. For 
+the sake of contradicting assumes for every sequence  \(v_1, \ldots\) of 
+vectors in \(V\) 
+\(\exists\) m such that \(v_1, \ldots, v_m\)
+is linearly dependent. Then this means we can construct the basis for the vector 
+space as follows: select \(v_i \in V\) s.t. \(v_i\) and \(v_1, \ldots, v_{i-1}\)
+are linearly independent. This means that there exits \(m\) s.t. \(v_1, \ldots, v_m\)
+that spans \(V\), forming a contradiction. 
+
+\(\Leftarrow\) Suppose for contradiction. Then there exists a span, contradicting 
+the linear independence claim for every \(m\).
+
+\end{proof}
+
+\begin{problem}{18}
+    Prove \(\F^\infty\) is infinite-dimensional. 
+\end{problem}
+
+\begin{proof}
+We apply Problem 17. Construct \(v_i\) to be the vector that has 1 on the 
+i-th coordinate and 0 elsewhere. clearly \(v_1, v_2, \ldots\) are s.t. 
+\(v_1, \ldots, v_m\) is linearly indepedent for every positive integer \(m\).
+\end{proof}
+
+
+\newpage 
+\addcontentsline{toc}{section}{2B: Bases}
+\section*{2B: Bases}
+
+\begin{definition}[basis]
+    A \emph{basis} of \(V\) is a list of vectors in \(V\) that is linearly 
+    independent and spans \(V\).
+\end{definition}
+
+\begin{thm}[criterion for basis]
+    A list \(v_1, \ldots, v_m\) of vectors in \(V\) is a basis of \(V\)
+    if and only if every \(v \in V\) can be written uniquely in the form 
+    \[v = \sum_i^m a_i v_i\]
+    where \(a_i \in \F\).
+\end{thm}
+
+\begin{lemma}[every spanning list contains a basis]
+    Every spanning list in a vector space can be reduced to a basis of the 
+    vector space.
+\end{lemma}
+
+\begin{lemma}
+    Every finite-dimensional vector space has a basis.
+\end{lemma}
+
+\begin{lemma}
+    Every linearly independent list of vectors in a finite-dimensional vector 
+    space can be extended to a basis of the vector space. 
+\end{lemma}
+
+\begin{lemma}
+    Suppose \(V\) is finite-dimensional and \(\Ucal\) is a subspce of \(V\). 
+    Then there is a subspace \(W\) of \(V\) such that \(V = \Ucal \oplus W\).
+\end{lemma}
+
+\newpage 
+\addcontentsline{toc}{subsection}{2B Problem Sets}
+
+\begin{problem}{1}
+    Find all vector spaces that have exactly one basis.
+\end{problem}
+
+\begin{proof}
+The only answer is \(\{0\}\). Otherwise, for any basis \(v\) one can get 
+\(av\) for \(a \neq 0, a \neq 1\).
+\end{proof}
+
+\begin{problem}{4}
+    \begin{enumerate}
+        \item Let \(\Ucal\) be the subspace of \(\C^5\) defined by 
+        \(\Ucal = \{(z_1, z_2, z_3, z_4, z_5) \in \C^5 \colon 6z_1 = z_2
+        , z_3 + 2z_4 + 3z_5 = 0\}\)
+        Find a basis of \(\Ucal\).
+        \item Extend the basis to a basis in \(\C^5\).
+        \item Find a subspace \(\Wcal\) of \(\C^5\) s.t. \(\C^5 = \Ucal \oplus \Wcal\).
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\begin{enumerate}
+    \item  \((z_1, 6z_1, -2z_4 - 3 z_5, z_4, z_5) \Rightarrow\)   \{(1,6,0,0,0), (0,0,-2,1,0), (0,0,-3,0,1)\}
+    \item \(\{(1,6,0,0,0), (0,0,-2,1,0), (0,0,-3,0,1), (0,1,0,0,0), (0,0,1,0,0)\}\)
+    \item \(\Wcal = \text{span}(\{(0,1,0,0,0), (0,0,1,0,0)\})\)
+\end{enumerate}
+\end{proof}
+
+\begin{problem}{5}
+Suppose \(V\) is finite-dimensional and \(\Ucal, \Wcal\) are subspaces of \(V\) such that \(V = \Ucal
++ \Wcal\). Prove that there exists a basis of \(V\) consisting of vectors in \(\Ucal \cup \Wcal\).    
+\end{problem}
+
+\begin{proof}
+Let \(\{v_i\}_{i=1}^m\) denote the basis for the vector space \(V\). By definition we have 
+\(v_i = u_i + w_i\) for some \(u_i, w_i\). Then we have the spanning set of the vector space \(V\)
+\(\sum_i^m a_i (u_i + w_i)\), which can be reduced to a basis by the lemma.
+\end{proof}
+
+
+\begin{problem}{7}
+    Suppose \(v_1, v_2, v_3, v_4\) is a basis of \(V\). Prove that 
+    \[v_1 + v_2, v_2 + v_3, v_3+v_4, v_4\]
+    is also a basis of \(V\). 
+\end{problem}
+
+\begin{proof}
+We know \(v_1, v_2, v_3, v_4\) is linearly independent and spans \(V\). 
+\[a_1(v_1 + v_2) + a_2 (v_2 + v_3) + a_3 (v_3 + v_4) + a_4 v_4 = a_1 v_1 
++ (a_1 + a_2) v_2 + (a_2 + a_3)v_3 + (a_3 + a_4)v_4\]
+which shows the linear independence. For proving spanning, let \(v \in V\) then 
+
+\[v = \sum_{i=1}^4 a_i v_i = a_1(v_1 + v_2) + (a_2 - a_1)(v_2 + v_3)
++ (a_3 - a_2)(v_3 + v_4) + (a_4 - a_3)v_4\]
+\end{proof}
+
+
+\begin{problem}{8}
+    Prove or give a counterexample: If \(v_1, v_2, v_3, v_4\) is a basis of \(V\) and 
+    \(\Ucal\) is a subspace of \(V\) such that \(v_1, v_2 \in \Ucal\) and \(v_3 \notin \Ucal\)
+    and \(v_4 \notin \Ucal\), then \(v_1, v_2\) is a basis of \(\Ucal\). 
+\end{problem}
+
+\begin{proof}
+Take \(V = \R^4\) and the standard basis. Consider \(\Ucal = \{(x_1, x_2, x_3, kx_3)\}\), then 
+we disprove the claim. 
+\end{proof}
+
+\begin{problem}{10}
+    Suppose \(\Ucal\) and \(\Wcal\) are subspaces of \(V\) s.t. \(V = \Ucal \oplus \Wcal\). Suppose 
+    also that \(u_1, \ldots u_m\) is a basis of \(\Ucal\) and \(w_1, \ldots, w_n\) is a basis of 
+    \(\Wcal\). Prove that 
+    \[u_1, \ldots, u_m, w_1, \ldots, w_n\]
+    is a basis of \(V\). 
+\end{problem}
+
+
+\begin{proof}
+We know 
+that this set is linearly independent (otherwise violating the direct sum assumption) 
+so it sufficies to prove the spanning. Let \(v \in V\),
+then \(v = u + w = \sum_{i=1}^m a_i u_i + \sum_{j=1}^n b_j w_j\). 
+
+\end{proof}
+
+
+\newpage 
+
+\section*{2C: Dimension}
+\addcontentsline{toc}{section}{2C: Dimension}
+
+\begin{lemma}[basis length does not depend on basis]
+    Any two bases of a finite-dimensional vector space have the same length. 
+\end{lemma}
+
+\begin{definition}[dimension]
+    \begin{itemize}
+        \item The \emph{dimension} of a finite-dimensional vector space is the length of 
+        any basis of the vector space. 
+        \item The dimension of a finite-dimensional vector space \(V\) is denoted by dim \(V\).
+    \end{itemize}
+\end{definition}
+
+\begin{corollary}
+    If \(V\) is finite-dimensional and \(\Ucal\) is a subspace of \(V\), then 
+    \(\dim \Ucal \leq \dim V\). 
+\end{corollary}
+
+\begin{corollary}
+    Suppose \(V\) is finite-dimensional. Then every linearly independent list of vectors 
+    in \(V\) of length \(\dim V\) is a basis of \(V\). 
+\end{corollary}
+
+\begin{corollary}
+    Suppose that \(V\) is finite-dimensional and \(\Ucal\) is a subspace of \(V\) such that 
+    \(\dim \Ucal = \dim V\). Then \(\Ucal = V\).
+\end{corollary}
+
+\begin{corollary}
+    Suppose that \(V\) is finite-dimensional. Then every spanning list of vectors in \(V\)
+    of length dim \(V\) is a basis of \(V\). 
+\end{corollary}
+
+\begin{thm}[dimension of a sum]
+    If \(V_1\) and \(V_2\) are subspaces of a finite-dimensional vector space, then 
+    \[\dim(V_1 + V_2) = \dim V_1 + \dim V_ 2 - \dim (V_1 \cap V_2)\]
+\end{thm}
+
+\newpage 
+\addcontentsline{toc}{subsection}{2C Problem Sets}
+
+
+\begin{problem}{1}
+    Show that the subspaces of \(\R^2\) are precisely \(\{0\}\), all lines in \(\R^2\)
+    containing the origin and \(\R^2\).
+\end{problem}
+
+\begin{proof}
+We know \(\dim (\R^2) = 2\) so the subspace dimension is either 0 (\(\{0\}\)) or 
+1 (then this means it has to be lines crossing the origin). 
+\end{proof}
+
+
+
+\begin{problem}{5}
+    (a) Let \(\Ucal = \{p \in \Pcal_4 (\F) \colon p(2) = p(5)\}\). Find a basis of \(\Ucal\).
+
+    (b) Extend the basis in (a) to a basis of \(\Pcal_4 (\F)\). 
+
+    (c) Find a subspace \(\Wcal\) of \(\Pcal_4 (\F)\) s.t. \(\Pcal_4(\F) = \Ucal \oplus \Wcal\).
+\end{problem}
+
+\begin{proof}
+(a)  This means that 
+\[a_0 + 2a_1 + 4a_2 + 8a_3 + 16a_4 = a_0 + 5a_1 + 25a_2 + 125 a_3 + 625a_4\]
+
+Solving this gives that \(a_1 = -7a_2 - 39a_3 - 203 a_4\). So we can write that 
+
+\begin{align*}
+    p(x)
+    &= a_0 + (-7a_2 - 39a_3 - 203 a_4)x + a_2 x^2 + a_3 x^3 + a_4 x^4 \\ 
+    &= a_0 + a_2(x^2 - 7x) + a_3(x^3 - 39x) + a_4 (x^4 - 203x)
+\end{align*}
+
+The basis now becomes \(\{1, x^2 - 7x, x^3 - 39x, x^4 - 203x\}\)
+
+(b) \(\{1, x, x^2 - 7x, x^3 - 39x, x^4 - 203x\}\)
+
+(c) \(\Wcal = \{x\}\)
+
+\end{proof}
+
+\begin{problem}{8}
+    Suppose \(v_1, \ldots, v_m\) is linearly independent in \(V\) and \(w \in V\). Prove that 
+
+    \[\dim \text{span} (v_1 + w, \ldots, v_m + w) \geq m - 1\]
+\end{problem}
+
+\begin{proof}
+We claim that 
+\[v_{i+1} - v_i \in \text{span}(v_1 + w, \ldots, v_m + w) \text{ for all } m \geq i \geq 2\]
+
+as \(v_{i+1} - v_i = (v_{i+1} + w) - (v_i + w)\). Thus \(v_2 - v_1, \ldots, v_m - v_{m-1}\) is 
+in the \(\text{span}(v_1 + w, \ldots, v_m + w)\). We've proved that \(v_2 - v_1, \ldots, v_m - v_{m-1}\)
+is linearly independent and this list has \(m - 1\) vectors and thus we've proved the claim.
+
+\end{proof}
+
+
+\begin{problem}{9}
+    Suppose \(m\) is a positive integer and \(p_0, p_1, \ldots, p_m \in \Pcal(\F)\) are 
+    such that each \(p_k\) has degree \(k\). Prove that \(p_0, p_1, \ldots, p_m\) 
+    is a basis of \(\Pcal_m (\F)\).
+\end{problem}
+
+\begin{proof}
+It's easy to see that this list is linearly independent. Take any element in \(\Pcal_m (\F)\),
+we can decompose that by degrees and get each component to be some multiple of \(p_i's\).
+\end{proof}
+
+\begin{problem}{10}
+    Suppose \(m\) is a positive integer. For \(0 \leq k \leq m\), let 
+    \[p_k(x) = x^k (1 - x)^{m - k}\]
+    Show that \(p_0, \ldots, p_m\) is a basis of \(\Pcal_m(\F)\). 
+\end{problem}
+
+\begin{proof}
+It suffices to prove that \(p_k(x)\) are linearly indepedent. We know from binomial theorem 
+that 
+\[(x+y)^m = \sum_{i=0}^{m} {m \choose i} x^i y^{m-i} \]
+
+Applying this identity here we get that 
+\[p_k(x) = x^k \sum_{i=0}^{m-k} {m-k \choose i} 1^{m-i} (-1)^{i} x^{i} = \sum_{i=0}^{m-k}
+a_i x^{k + i}\]
+
+where \(a_i = {m - k \choose i} (-1)^i\). For the polynomial to be identically 0 (\(\sum_{k=0}^{m}c_k p_k (x) = 0\)), for each 
+power \(x^i\) we need the coefficient to be 0:
+
+\[\sum_{k=0}^{\min(i, m)} c_k {m - k \choose i - k} (-1)^{i - k} = 0\]
+
+We can prove the only solution for this is all \(c_k = 0\) by induction on \(m\). 
+
+The base case is trivial. Assume the statement holds for \(k = m - 1\), then we try 
+to prove for \(p_m(x)\), where we have \(P(x) - c_m p_m (x) = \sum_{k=0}^{m-1}c_kp_k(x)=0\). 
+This means that \(c_m = 0\) and we've proved the linear independence. 
+
+\end{proof}
+
+\begin{problem}{11}
+    Suppose \(\Ucal\) and \(\Wcal\) are both four-dimensional subspaces of \(\C^6\). Prove that 
+    there exist two vectors in \(\Ucal \cap \Wcal\) such that neither of these vectors is a 
+    scalar multiple of the other. 
+\end{problem}
+
+\begin{proof}
+\(\dim (\Ucal \cap \Wcal) = \dim(\Ucal) + \dim (\Wcal) - \dim(\Ucal + \Wcal) \geq 8-6= 2\)
+
+So there must exist two linearly independent vectors in the intersection. 
+\end{proof}
+
+\begin{problem}{12}
+    Suppose that \(\Ucal\) and \(\Wcal\) are subspaces of \(\R^8\) such that 
+    \(\dim \Ucal = 3, \dim \Wcal = 5\) and \(\Ucal + \Wcal = \R^8\). Prove that 
+    \(\R^8 = \Ucal \oplus \Wcal\)
+\end{problem}
+
+\begin{proof}
+Similar to problem 11, we can get tht \(\dim (\Ucal \cap \Wcal) = 0\). 
+\end{proof}
+
+
+\begin{problem}{14}
+    Suppose \(V\) is a ten-dimensional vector space and \(V_1, V_2, V_3\) are subspaces 
+    of \(V\) with \(\dim V_1 = \dim V_2 = \dim V_3 = 7\). Prove that \(V_1 \cap V_2 
+    \cap V_3 \neq \{0\}\). 
+\end{problem}
+
+\begin{proof}
+\[\dim ((V_1 \cap V_2) + V_3) = \dim (V_1 \cap V_2) + \dim V_3 - \dim (V_1 \cap V_2 \cap V_3) \]
+and also that 
+\[\dim (V_1 + V_2) = \dim V_1 + \dim V_2 - \dim(V_1 \cap V_2)\]
+
+This gives that 
+
+\[\dim (V_1 \cap V_2 \cap V_3) = \dim V_1 + \dim V_2 + \dim V_3 - \dim (V_1 + V_2) - 
+\dim ((V_1 \cap V_2) + V_3)\]
+
+Note that from question we know \(\dim V_1 + \dim V_2 + \dim V_3 = 21 > 20 = 2\dim V\)
+
+Hence we know 
+
+\[\dim (V_1 \cap V_2 \cap V_3) > (\dim(V) - \dim(V_1 + V_2)) + (\dim(V) - \dim(
+    (V_1 \cap V_2) + V_3
+)) > 0\]
+We've thus proved the claim.
+
+\end{proof}
+
+
+
+\begin{problem}{16}
+    Suppose \(V\) is finite-dimensional and \(\Ucal\) is a subspace of \(V\)
+    with \(\Ucal \neq V\). Let \(n = \dim V\) and \(m = \dim \Ucal\). Prove that 
+    there exist \(n - m\) subspaces of \(V\), each of dimension \(n -1\), whose 
+    intersection equals \(\Ucal\). 
+\end{problem}
+
+
+\begin{proof}
+
+    To show existence, we can start with the basis for \(\Ucal: u_1, \ldots, u_m\). 
+    We extend the basis to \(V: \{ u_1, \ldots, u_m, v_1, \ldots, v_{n-m}\} \coloneqq K\). Construct 
+    the subspace \(V_i = \text{span}\{K \backslash \{v_i\}\}\). Then we know that 
+    \(\bigcap_i V_i = \text{span}\{\{u_1, \ldots, u_m\}\}\). 
+
+\end{proof}
+
+\begin{problem}{17}
+    Suppose that \(V_1, \ldots, V_m\) are finite-dimensional subspaces of \(V\). Prove that 
+    \(V_1 + \cdots + V_m\) is finite-dimensional and 
+    \[\dim(V_1 + \cdots + V_m) \leq \dim V_1 + \cdots + \dim V_m\]
+\end{problem}
+
+\begin{proof}
+We prove by induction on \(m\). The base case is trivial. Asume the statement hold for \(k\),
+then for \(k+1\), we have that (Denote \(V_1 + \ldots + V_k = M_k\))
+
+\begin{align*}
+    \dim(M_k + V_{k+1}) \leq \dim(V_1) + \cdots +\dim (V_{k+1}) 
+\end{align*}
+
+which is finite.
+
+\end{proof}
+
+\begin{problem}{18}
+    Suppose \(V\) is finite-dimensional with \(\dim V = n \geq 1\). Prove that there exist 
+    one-dimensional subspaces \(V_1, \ldots, V_n\) of \(V\) such that 
+    \[V = V_1 \oplus \cdots V_n\]
+\end{problem}
+
+\begin{proof}
+We know there are basis \(\{v_1, \ldots, v_n\}\) for \(V\). Hence we can construct 
+\[V_i = \text{span}\{v_i\}\]
+\end{proof}
+
+
+\begin{problem}{19}
+    Prove or give a counter example:
+
+    \begin{align*}
+        \dim(V_1 + V_2 + V_3) = &\dim V_1 + \dim V_2 + \dim V_3\\ 
+        &-\dim(V_1 \cap V_2) - \dim (V_1 \cap V_3) - \dim (V_2 \cap V_3) \\ 
+        &+\dim(V_1 \cap V_2 \cap V_3)
+    \end{align*}
+\end{problem}
+
+\begin{proof}
+We know that 
+
+\begin{align*}
+&\dim ((V_1 + V_2) + V_3) = \dim(V_1 + V_2) + \dim(V_3) - \dim((V_1 + V_2)\cap V_3) \\ 
+&= \dim (V_1) + \dim (V_2) + \dim (V_3) - \dim(V_1 \cap V_2) - \dim((V_1 + V_2)\cap V_3)
+\end{align*}
+
+Here we can get that 
+
+\begin{align*}
+    \dim((V_1 + V_2)\cap V_3) &= \dim((V_1 \cap V_3) + (V_2 \cap V_3)) \\ 
+    &= \dim(V_1 \cap V_3) + \dim(V_2 \cap V_3) - \dim(V_1 \cap V_2 \cap V_3)
+\end{align*}
+
+Substitute this back we can get the desired solution. 
+
+
+\end{proof}
+
+
+
+\end{document}

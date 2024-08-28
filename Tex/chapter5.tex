@@ -1,0 +1,1948 @@
+\documentclass{extarticle}
+\sloppy
+\input{packages.tex}
+\input{math_commands.tex}
+\usepackage{hyperref}
+
+
+\title{\vspace{-2em}Chapter 5: Eigenvalues and Eigenvectors}
+\author{\emph{Linear Algebra Done Right}, by Sheldon Axler}
+\date{}
+
+\begin{document}
+\maketitle 
+\tableofcontents
+
+\newpage 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5A %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{5A: Invariant Subspaces}
+\addcontentsline{toc}{section}{5A: Invariant Subspaces}
+
+\begin{definition}[operator]
+    A linear map from a vector space to itself is called an \textbf{operator}. 
+\end{definition}
+
+\begin{definition}[invariant subspace]
+    Suppose \(T \in \Lc((V))\). A subspace \(U\) of \(V\) is called \textbf{invariant}
+    under \(T\) if \(Tu \in U\) for every \(u \in U\).
+\end{definition}
+
+\begin{remark}
+    Four common invairant subspaces of \(T \in \Lc(V)\) are: \\ 
+    \(\{0\}, V, \nul T, \range T\). To discover invariant subspaces 
+    other than \(\{0\}, V\) (the simplest possible nontrivial 
+    one is the invariant subspace of dimension one) 
+    motivates the concept 
+    of eigenspaces. 
+\end{remark}
+
+
+\begin{definition}[eigenvalue]
+    Suppose \(T \in \Lc(V)\). A number \(\lambda \in \F\) is called an \textbf{eigenvalue}
+    of \(T\) if there exists \(v \in V\) such that \(v \neq 0\) and \(Tv=\lambda v\). 
+\end{definition}
+
+\begin{remark}
+    Note that here we can think of \(U = \{\lambda v \colon \lambda \in \F\} = \text{span}(v)\)
+    as the one-dimensional invariant subspace spanned by the eigenvector \(v\). 
+\end{remark}
+
+
+\begin{lemma}[equivalent conditions to be an eigenvalue]
+    Suppose \(V\) is finite-dimensional, \(T \in \Lc(V)\) and \(\lambda \in \F\). Then 
+    the following are eequivalent:
+    \begin{enumerate}[label=(\alph*)]
+        \item \(\lambda\) is an eigenvalue of \(T\).
+        \item \(T - \lambda I\) is not injective. 
+        \item \(T - \lambda I\) is not surjective. 
+        \item \(T - \lambda I\) is not invertible. 
+    \end{enumerate}
+\end{lemma}
+
+
+
+\begin{definition}[eigenvector]
+    Suppose \(T \in \Lc(V)\) and \(\lambda \in \F\) is an eigenvalue of \(T\). A vector 
+    \(v \in V\) is called an \textbf{eigenvector} of \(T\) corresponding to \(\lambda\)
+    if \(v \neq 0\) and \(Tv = \lambda v\). 
+\end{definition}
+
+\begin{remark}
+    A vector \(v \in V\) with \(v \neq 0\) is an eigenvector of \(T\) corresponding to \(\lambda\)
+    if and only if \(v \in \nul (T - \lambda I)\). 
+
+    \[Tv = \lambda v \ \ \Leftrightarrow \ \ (T - \lambda I) v = 0\]
+\end{remark}
+
+
+\begin{lemma}[linearly independent eigenvectors]
+    Suppose \(T \in \Lc(V)\). Then every list of eigenvectors of \(T\) corresponding to 
+    distinct eigenvalues of \(T\) is linearly independent.
+\end{lemma}
+
+
+\begin{thm}[operator cannot have more eigenvalues than dimension of vector space]
+    Suppose \(V\) is finite-dimensional. Then each operator on \(V\) has at most 
+    \(\dim V\) distinct eigenvalues. 
+\end{thm}
+
+
+\begin{definition}[\(T^m\)]
+    Suppose \(T \in \Lc(V)\) and \(m\) is a postive integer. 
+    \begin{itemize}
+        \item \(T^m \in \Lc(V)\) is defined by \(T^m = \underbrace{T\cdots T}_{m \text{ times}}\).
+        \item \(T^0\) is defined to be the identity operator \(I\) on \(V\). 
+        \item If \(T\) is invertible with inverse \(T^{-1}\), then \(T^{-m} \in \Lc(V)\) is defined by 
+        \[T^{-m} = (T^{-1})^m.\]
+    \end{itemize}
+\end{definition}
+
+
+
+\begin{definition}[\(p(T)\)]
+    Suppose \(T \in \Lc(V)\) and \(p \in \Pc(\F)\) is a polynomial given by 
+    \[p(z) = a_0 + a_1 z + a_2 z^2 + \cdots + a_m z^m\]
+    for all \(z \in \F\). Then \(p(T)\) is the operator on \(V\) defined by 
+    \[p(T) = a_0I + a_1 T + a_2 T^2 + \cdots + a_m T^m.\]
+\end{definition}
+
+\begin{remark}
+    If we fix an operator \(T \in \Lc(V)\), then the function from \(\Pc(\F)\) to \(\Lc(V)\)
+    given by \(p \mapsto p(T)\) is linear. 
+\end{remark}
+
+
+\begin{definition}[product of polynomials]
+    If \(p, q \in \Pc(\F)\), then \(pq \in \Pc(\F)\) is the polynomial defined by 
+    \[(pq)(z) = p(z)q(z)\]
+    for all \(z \in \F\).
+\end{definition}
+
+\begin{thm}
+    Suppose \(p, q \in \Pc(\F)\) and \(T \in \Lc(V)\). Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item \((pq)(T) = p(T) q(T)\);
+        \item \(p(T)q(T) = q(T)p(T)\).
+    \end{enumerate}
+\end{thm}
+
+\begin{definition}[null space and range of \(p(T)\) are invariant under \(T\)]
+    Suppose \(T \in \Lc(V)\) and \(p \in \Pc(\F)\). Then \(\nul p(T)\) and \(\range p(T)\)
+    are invariant under \(T\).
+\end{definition}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5A PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+\addcontentsline{toc}{subsection}{5A Problem Sets}
+
+\begin{problem}{1}
+    Suppose \(T \in \Lc(V)\) and \(U\) is a subspace of \(V\). 
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove that if \(U \subseteq \nul T\), then \(U\) is invariant under \(T\). 
+        \item Prove that if \(\range T \subseteq U\), then \(U\) is invariant under \(T\).
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item  Suppose for contradiction that \(U\) is not invariant under \(T\). Then this means 
+    that there exists \(u \in U\) such that \(T u \notin U\). We know that \(Tu = 0 \in \nul T\). 
+    As \(U \in \nul T\), this forms a contradiction. 
+    
+    \item Take \(u \in U\), then \(Tu \in \range T \subseteq U\), and thus \(Tu \in U\).
+\end{enumerate}
+\end{proof}
+
+\begin{problem}{3}
+    Suppose \(T \in \Lc(V)\). Prove that the intersection of every collection of 
+    subspaces of \(V\) invariant under \(T\) is invariant under \(T\).
+\end{problem}
+
+\begin{proof}
+Suppose \(\{V_i\}_{i=1}^m\) for positive integer \(m\) is a collection of invariant subspaces. 
+We hope to prove that \(\bigcap_{i=1}^m V_i\) is invariant. 
+
+Take any \(v \in \bigcap_{i=1}^m V_i\), then we know that \(Tv \in V_i\) for each \(i\)
+and thus \(Tv \in \bigcap_{i=1}^m V_i\).
+\end{proof}
+
+\begin{problem}{5}
+    Suppose \(T \in \Lc(\R^2)\) is defined by \(T(x, y) = (-3y, x)\). Find the eigenvalues 
+    of \(T\).
+\end{problem}
+
+\begin{proof}
+We have that 
+\[T(x, y) = (-3 y, x) = \lambda(x, y)\]
+
+Then this means that \(-3y = \lambda x, x= \lambda y\). Solving this gives that \(\lambda^2 = -3\)
+and thus \(\lambda = \pm \sqrt{3}i\). 
+\end{proof}
+
+\begin{problem}{7}
+    Define \(T \in \Lc(\F^3)\) by \(T(z_1, z_2, z_3) = (2z_2, 0, 5z_3)\). Find all eigenvalues 
+    and eigenvectors of \(T\).
+\end{problem}
+
+
+\begin{proof}
+\[T(z_1, z_2, z_3) = (2z_2, 0, 5z_3) = \lambda(z_1, z_2, z_3)\]
+
+Then \(\lambda z_1 = 2z_2, \lambda z_2 = 0, \lambda z_3 = 5 z_3\). This gives that \(\lambda=5 \text{ or } 0\).
+For \(\lambda = 0\), the eigenvector would be \(\{(z_1, 0, z_3) \colon z_1, z_3 \in \F\}\). 
+For \(\lambda = 5\), we have that \(\{(0, 0, z_3) \colon z_3 \in \F\}\). 
+
+
+\end{proof}
+
+
+\begin{problem}{9}
+    Define \(T \colon \Pc(\R) \to \Pc(\R)\) by \(Tp = p'\). Find all eigenvalues and 
+    eigenvectors of \(T\).
+\end{problem}
+
+
+\begin{proof}
+\[Tp = p' = \lambda p\]
+This means that \(\deg p' = \deg p\) so \(\deg p = 0\). In this case, the only satisifying 
+solution is \(\lambda = 0\) and correspondingly \(v = \{(c) \colon c \in \F\}\).
+\end{proof}
+
+
+\begin{problem}{11}
+    Suppose \(V\) is finite-dimensional, \(T \in \Lc(V)\), and \(\alpha \in \F\). Prove that 
+    there exists \(\delta > 0\) such that \(T - \lambda I\) is invertible for all \(\lambda \in \F\)
+    such that \(0 < |\alpha - \lambda| < \delta\).
+\end{problem}
+
+\begin{proof}
+Let \(\lambda^*\) be the eigenvalue of \(T\) which is cloest to \(\alpha\), i.e. \(\lambda^* = \min_\lambda\{
+    |\lambda - \alpha|\}\). We can take \(\delta = |\alpha - \lambda^*|/2\), then we know that 
+    under the condition \(T - \lambda I\) is injective and thus reaching the desired result. 
+\end{proof}
+
+\begin{problem}{13}
+    Suppose \(T \in \Lc(V)\). Suppose \(S \in \Lc(V)\) is invertible. 
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove that \(T\) and \(S^{-1}TS\) have the same eigenvalues. 
+        \item What is the relationship between the eigenvectors of \(T\) and the eigenvectors of \(S^{-1}TS\)?
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+\begin{enumerate}[label=(\alph*)]
+    \item Notice that \(S^{-1}v\) is an eigenvector of \(S^{-1}TS\) for \(v \in V\). For the
+    forward direction, take \(\lambda\) to be the eigenvalue of \(T\). Then we know that \(Tv = 
+    \lambda v\) for all \(v \in V\). Let's consider \(S^{-1}TS (S^{-1}u) = S^{-1}Tu = S^{-1} \lambda u 
+    = \lambda (S^{-1} u)\). Therefore, \(\lambda\) is also an eigenvalue for \(S^{-1}TS\). 
+    Conversely, take \(\lambda\) to be the eigenvalue of \(S^{-1}TS\). Then we have that 
+    \(S^{-1}TS (S^{-1}v) = S^{-1}Tv = \lambda S^{-1}v\). Multiplying \(S\) on both sides yield 
+    that \(Tv = \lambda v\). Thus \(\lambda\) is also an eigenvalue of \(T\). 
+    
+    \item  \(v\) is an eigenvector of \(S^{-1}TS\) iff \(u = Sv\) is an eigenvector of \(T\).
+\end{enumerate}
+\end{proof}
+
+\begin{problem}{15}
+    Suppose \(V\) is finite-dimensional, \(T \in \Lc(V)\), and \(\lambda \in \F\). Show that 
+    \(\lambda\) is an eigenvalue of \(T\) if and only if \(\lambda\) is an eigenvalue of 
+    the dual operator \(T' \in \Lc(V')\).
+\end{problem}
+
+
+\begin{proof}
+Forward direction, take \(\lambda\) to be an eigenvalue of \(T\), then we have that \(Tv = \lambda v\). 
+Then take any \(\varphi \in V'\), we have that \(T'(\varphi) (v)= \varphi \circ Tv 
+= \lambda \varphi (v)\). 
+
+Backward direction, take \(\lambda\) to be an eigenvalue of \(T'\), then we know there exists 
+nonzero \(\varphi \in V'\) such that 
+\(T' \varphi (v) = \varphi T(v) = \lambda \varphi (v)\) 
+This implies that 
+\[\varphi(Tv - \lambda v) = 0\]
+
+Suppose for contradiction that \(\lambda\) is not an eigenvalue of \(T\), then this means that 
+\(T - \lambda I\) is invertible and therefore its image equals the whole space \(V\). Then this 
+means that \(\varphi\) is a zero functional, forming a contradiction. Hence, \(Tv = \lambda v\)
+and thus \(\lambda\) is an eigenvalue of \(T\) as well. 
+
+% Since \(\varphi \neq 0\), we have that \(Tv - \lambda v = 0\) and thus \(\lambda\) is also an 
+% eigenvalue of \(T'\).
+
+\end{proof}
+
+
+\begin{problem}{16}
+    Supose \(v_1, \ldots, v_n\) is a basis of \(V\) and \(T \in \Lc(V)\). Prove that if 
+    \(\lambda\) is an eigenvalue of \(T\), then 
+    \[|\lambda| \leq n \max \{|\Mc(T)_{j,k}|\colon 1 \leq j,k \leq n\},\]
+    where \(\Mc(T)_{j,k}\) denotes the entry in row \(j\), column \(k\) of the matrix of 
+    \(T\) with respect to the basis \(v_1, \ldots, v_n\). 
+\end{problem}
+
+\begin{proof}
+We know that 
+\[T v_k = \sum_{j=1}^{n} \Mc(T)_{j, k} v_j = \lambda v_k\]
+and that by Triangular inequality we have 
+\[|Tv_k| \leq \sum_{j=1}^{n} |\Mc(T)_{j, k} v_j| \leq M \sum_{j=1}^{n} |v_j|\]
+where we take \(M = \max \{|\Mc(T)_{j,k}|\colon 1 \leq j,k \leq n\}\). Here we take 
+\(k\) to be the index such that maximizes the norm, i.e. \(k = \max_k |v_k|\). Then we have that 
+\[|T v_k| = |\lambda| |v_k| \leq nM |v_k|\]
+which gives us that 
+\[|\lambda| \leq nM\]
+\end{proof}
+
+
+\begin{problem}{18}
+    Suppose \(\F = \R, T \in \Lc(V)\), and \(\lambda \in \C\). Prove that \(\lambda\) is 
+    an eigenvalue of the complexification \(T_C\) if and only if \(\overline{\lambda}\) 
+    is an eigenvalue of \(T_C\), where \(T_C \colon \Lc(V_C)\) is defined by 
+    \[T_C(u + iv) = Tu + iTv\]
+    for all \(u, v \in V\).
+\end{problem}
+
+\begin{proof} Let \(v_1, \ldots, v_n\) be basis of \(V_C\).
+Suppose \(\lambda\) is an eigenvalue of \(T_C\) and \(v = \sum_{i=1}^{n}a_i v_i\) is the 
+corresponding eigenvector. Then we have that 
+\[\lambda v = Tv = \sum_{i=1}^{n}a_i T v_i\] 
+
+Taking conjugates yields that 
+
+\[\glo \vo = \overline{\sum_{i=1}^{n} a_i T v_i} = \sum_{i=1}^{n} \ao_i \overline{T v_i}\]
+Let \(M\) be the matrix of \(T\) with real entries, and then we have 
+\[\overline{Tv_i} = \overline{\sum_{j=1}^{n}M_{j, i} v_j} = \sum_{j=1}^{n}M_{j, i} \vo_j 
+= T \vo_i\]
+
+Substitue this back to previous equation gives that 
+\[\glo \vo = T(\overline{\sum_{i=1}^{n} a_i v_i}) = T \vo \]
+
+Hence \(\glo\) is also an eigenvector. 
+\end{proof}
+
+
+\begin{problem}{19}
+    Show that the forward shift operator \(T \in \Lc(\F^\infty)\) defined by 
+    \[T(z_1, z_2, \cdots) = (0, z_1, z_2, \cdots)\]
+    has no eigenvalues. 
+\end{problem}
+
+\begin{proof}
+We have that 
+\[(0, z_1, z_2, \cdots) = \lambda (z_1, z_2, \cdots)\]
+So we either have \(\lambda =0\) or \(z_1 = 0 = z_2 = \cdots\). In the first case, we have 
+that \(z_1 = 0 = z_2 = \cdots\) and thus there is no nonzero eigenvector. In the second case, 
+there is also no nonzero eigenvectors. 
+\end{proof}
+
+
+
+\begin{problem}{21}
+    Suppose \(T \in \Lc(V)\) is invertible. 
+    \begin{enumerate}[label=(\alph*)]
+        \item Suppose \(\lambda \in \F\) with \(\lambda \neq 0\). Prove that 
+        \(\lambda\) is an eigenvalue of \(T\) if and only if \(\frac{1}{\lambda}\) 
+        is an eigenvalue of \(T^{-1}\). 
+
+        \item Prove that \(T\) and \(T^{-1}\) have the same eigenvectors. 
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+%  Let \(\lambda\) be eigenvalue and \(v\) be eigenvector of \(T\). 
+\begin{align*}
+    Tv  = \lambda v  \Longleftrightarrow T^{-1} T v = T^{-1} \lambda v \Longleftrightarrow 
+    \frac{1}{\lambda} v = T^{-1} v   
+\end{align*}
+\end{proof}
+
+
+\begin{problem}{23}
+    Suppose \(V\) is finite-dimensional and \(S, T \in \Lc(V)\). Prove that \(ST\) and \(TS\)
+    have the same eigenvalues. 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) Let \(\lambda, v\) be the eigenvalue and eigenvector of \(ST\). Then take 
+\(u = Tv\), we have that 
+\[TS(u) = TS(Tv) = T(ST)(v) = T (\lambda v) = \lambda (Tv) = \lambda u\]
+Thus \(\lambda\) is also the eigenvalue of \(TS\). 
+
+Conversely, let \(\lambda, v\) be eigenvalue and eigenvector of \(TS\). Then take 
+\(u = Sv\), we have that 
+\[ST(u) = ST(Sv) = S(TS) (v) = S(\lambda v) = \lambda (SV) = \lambda u\]
+Thus \(\lambda\) is also the eigenvalue of \(ST\). 
+\end{proof}
+
+
+\begin{problem}{24}
+    Suppose \(A\) is an n-by-n matrix with entries in \(\F\). Define 
+    \(T \in \Lc(\F^n)\) by \(Tx = Ax\), where elements of \(\F^n\) are thought of 
+    as n-by-1 column vectors. 
+    \begin{enumerate}[label=(\alph*)]
+        \item Suppose the sum of the entries in each row of \(A\) equals 1. Prove that 
+        1 is an eigenvalue of \(T\).
+        \item Suppose the sum of entries in each column of \(A\) equals 1. Prove that 
+        1 is an eigenvalue of \(T\).
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+Let \(x = (1, \ldots, 1)^\top\) be the all-one vector. Then we have that 
+\[(Tx)_{i, \colon} = (Ax)_{i, \colon} = \sum_{j=1}^{n} A_{i, j} x_j = \sum_{j=1}^{n} A_{i, j} = 1\]
+Therefore, \(Tx = x\) and thus 1 is an eigenvalue of \(T\). 
+
+For the column case, we can simply take \(A = A^\top\) and we know the eigenvalues of \(A\) equal 
+\(A^\top\). 
+
+\end{proof}
+
+
+
+\begin{problem}{25}
+    Suppose \(T \in \Lc(V)\) and \(u, w\) are eigenvectors of \(T\) such that 
+    \(u + w\) is also an eigenvector of \(T\). Prove that \(u\) and \(w\) are eigenvectors 
+    of \(T\) corresponding to the same eigenvalue.  
+\end{problem}
+
+
+\begin{proof}
+Suppose not. Then there exists \(\lambda_u\) and \(\lambda_w\) such that 
+\[Tu = \lambda_u u \ \ \ Tw = \lambda_w w\]
+
+We also know that 
+\[T(u+w) = Tu + Tw = \lambda_u u + \lambda_w w = \lambda(u + w)\]
+
+for some \(\lambda\). Solving this gives that \(\lambda = \lambda_u = \lambda_w\).
+
+\end{proof}
+
+
+\begin{problem}{26}
+    Suppose \(T \in \Lc(V)\) is such that every nonzero vector in \(V\) is an eigenvector of 
+    \(T\). Prove that \(T\) is a scalar multiple of the identity operator. 
+\end{problem}
+
+\begin{proof}
+We claim that \(Tv = \lambda v\) for all nonzero \(v \in V\), i.e. \(T = \lambda I\). Let's 
+get \(v_1, v_2 \in V\). First we consider the case that they are linearly dependent, meaning 
+that \(v_1 = c v_2\) for some \(c\). We have that 
+\[\lambda_1 v_1 = Tv_1 = c Tv_2 = c \lambda_2 v_2 = \lambda_2 v_1\]
+Therefore \(\lambda_1 = \lambda_2\). Next we consider the case that they are linearly independent, 
+then we have that 
+\[ \lambda_{1+2} (v_1 + v_2) = T (v_1 + v_2) = Tv_1 + Tv_2 = \lambda_1 v_1 + \lambda_2 v_2 \]
+Therefore \(\lambda_{1+2} = \lambda_1  = \lambda_2\), completing the proof. 
+\end{proof}
+
+
+\begin{problem}{28}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Prove that \(T\) has at most 
+    \(1 + \dim \range T\) distinct eigenvalues. 
+\end{problem}
+
+
+\begin{proof}
+Suppose \(T\) has \(m\) distinct eigenvalues. For nonzero \(\lambda_k\), we have that 
+\[T(\frac{1}{\lambda_k} v_k) = v_k\]
+Thus at most \(m-1\) distinct eigenvectors are in \(\range T\), so \(m - 1 \leq \dim \range T\)
+and \(m = 1 + \dim \range T\) at most. 
+\end{proof}
+
+
+% \begin{problem}{32}
+%     Suppose \(T \in \Lc(V)\) has no eigenvalues and \(T^4 = I\). Prove that \(T^2 = -I\).
+% \end{problem}
+
+
+% \begin{proof}
+
+% \end{proof}
+
+
+\begin{problem}{33}
+    Suppose \(T \in \Lc(V)\) and \(m\) is a positive integer. 
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove that \(T\) is injective if and only if \(T^m\) is injective. 
+        \item Prove that \(T\) is surjective if and only if \(T^m\) is surjective.
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+(a) \(\Rightarrow\) Given \(T\) is injective, take \(v \in \nul T^m\). Then we know that 
+\(T^m(v) = T(T^{m-1}v) = 0\), which implies that \(T^{m-1}v = 0\). This can be recursively 
+deduced to that \(Tv = 0\) and thus \(v = 0\). Therefore \(T^m\) is injective. 
+
+\(\Leftarrow\) Conversely, take \(v \in \nul T\), then we have \(T^m(v)
+=T^{m-1}(Tv) = T^{m-1}(0) = 0\). Since \(T^m\) is injective, \(v=0\). 
+
+(b) \(\Rightarrow\) Given \(T\) is surjective, then \(\dim range T = \dim V\). We also have 
+\(\dim \range T^2 = \dim V\) as \(T\) is surjective. Therefore, \(T^m\) is surjective. 
+
+\(\Leftarrow\) Let \(w \in V\), then there exists \(v \in V\) such that \(T^m(v) = w\). Then 
+we have that let \(u = T^{m-1}(v)\), then \(Tu = w\). Thus \(T\) is also surjective.  
+\end{proof}
+
+
+
+\begin{problem}{34}
+    Suppose \(V\) is finite-dimensional and \(v_1, \ldots, v_m \in V\). Prove that 
+    the list \(v_1, \ldots, v_m\) is linearly independent if and only if there 
+    exists \(T \in \Lc(V)\) such that \(v_1, \ldots, v_m\) are eigenvectors of \(T\)
+    corresponding to distinct eigenvalues. 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) We can define \(Tv_k = k v_k\) and extend \(T\) to \(V\). 
+
+\(\Leftarrow\) This is proved by Theorem in the book.
+\end{proof}
+
+\begin{problem}{35}
+    Suppose that \(\lambda_1, \ldots, \lambda_n\) is a list of distinct real numbers. Prove that 
+    the list \(e^{\lambda_1 x}, \ldots, e^{\lambda_n x}\) is linearly independent in the vector 
+    space of real-valued functions on \(\R\).
+\end{problem}
+
+\begin{proof}
+Following the hint, let \(V = \text{span}(e^{\lambda_1 x}, \ldots e^{\lambda_n x})\). Define 
+an operator \(D \in \Lc(V)\) by \(Df = f'\). Then we have that 
+\[D e^{\lambda_k x} = \lambda_k e^{\lambda_k x}\]
+
+Here naturally \(\lambda_k\) is a distinct eigenvalue with corresponding eigenvector \(e^{\lambda_k x}\). 
+By P34, we complete the proof. 
+\end{proof}
+
+
+\begin{problem}{37}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Define \(\Ac \in \Lc(\Lc(V))\) by 
+    \[\Ac(S) = TS\]
+    for each \(S \in \Lc(V)\). Prove that the set of eigenvalues of \(T\) equals the set of 
+    eigenvalues of \(\Ac\).
+\end{problem}
+
+\begin{proof}
+    \(\Rightarrow\) Let \(\lambda\) be an eigenvalue of \(T\) and \(v\) be the corresponding 
+    eigenvector of \(T\).  Suppose \(v_1, \ldots, v_n\) is the basis of \(V\), we can define 
+    \(S \in \Lc(V)\) such that 
+    \[S v_i = v\]
+    for all \(i\). Here we have that 
+    \begin{align*}
+        \Ac(S)(v) 
+        &= TS(v) \\ 
+        &= TS \sum_{i=1}^{n} a_i v_i \\ 
+        &= T\sum_{i=1}^{n} a_i Sv_i \\ 
+        &= \sum_{i=1}^{n} a_i Tv \\ 
+        &= \lambda \sum_{i=1}^{n} a_i v  \\ 
+        &= \lambda \sum_{i=1}^{n} S (a_i v_i) \\ 
+        &= (\lambda S) (v) 
+    \end{align*}
+    Hence \(\lambda\) is also an eigenvalue of \(\Ac(S)\).
+
+
+    \(\Leftarrow\) Consider 
+    \[\Ac(S) = TS = \lambda S\] 
+    Applying \(v\) on both sides yields that 
+    \[T(Sv) = \lambda(Sv)\]
+    Therefore \(\lambda\) is also an eigenvalue of \(T\).
+\end{proof}
+
+
+\begin{problem}{38}
+    Suppose \(V\) is finite-dimensional, \(T \in \Lc(V)\), and \(U\) is a subspace 
+    of \(V\) invariant under \(T\). The \emph{quotient operator} \(T/U \in \Lc(V/U)\) 
+    is defined by 
+    \[(T/U)(v + U) = Tv + U\]
+    for each \(v \in V\). 
+    \begin{enumerate}[label=(\alph*)]
+        \item Show that the definition of \(T/U\) makes sense and show that \(T/U\) is an operator 
+        on \(V/U\).
+        \item Show that each eigenvalue of \(T/U\) is an eigenvalue of \(T\). 
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+(a) Suppose \(v - w \in U\). As \(U\) is invairant under \(T\), \(T(v - w) = Tv - Tw \in U\). 
+So we have that \(Tv + U = Tw + U\) and thus it is well-defined. To show that \(T/U\) is an operator, 
+we can just check its linearity. \((T/U)( (\lambda v_1 + U) + (v_2 + U)  ) 
+= (T/U)((\lambda v_1 + v_2) + U) = \lambda_1 Tv_1 + U + T v_2 + U = \lambda_1 T/U(v_1 + U) 
++ T/U (v_2 + U)\). 
+
+(b) Let \(\lambda\) be the eigenvalue of \(T/U\), then we have 
+\[(T/U)(v+U) = Tv + U = \lambda v + U\]
+This means that 
+\[Tv = \lambda v + u\]
+for some \(u \in U\). Now suppose we also have \(u' \in U\), then 
+\[T(v + u') = \lambda v + u + Tu'\]
+
+We hope to find \(u'\) s.t. \(u + Tu' = \lambda u'\), equivalently \((\lambda I - T)u' = u\).
+
+Since \(U\) is invariant under \(T\), it is also invariant under \(T - \lambda I\). Here 
+if \(T - \lambda I\) is not invertible on \(U\), then we are done (\(\lambda\) would be 
+an eigenvalue). If it is, we can define \(u' = -(T - \lambda I)^{-1}u\), completing the proof.
+
+\end{proof}
+
+
+\begin{problem}{39}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Prove that \(T\) has an eigenvalue 
+    if and only if there exists a subspace of \(V\) of dimension \(\dim V -1\) that is invariant 
+    under \(T\).
+\end{problem}
+
+
+\begin{proof}
+
+% We know that \(T\) has an eigenvalue if and only if the quotient operator \(T/U\) has an eigenvalue. Then 
+% we can now prove that \(T/U\) has an eigenvalue if and only if there exists a subspace of \(V\) of 
+% dimension \(\dim V - 1\) that is invariant under \(T/U\)
+
+\(\Rightarrow\) By the hypothesis, ther exists \(\lambda \in \F\), \(v \in V\) with \(v \neq 0\) s.t. 
+\(Tv = \lambda v\). We claim that 
+\[v^\perp = \{u \in V \colon v^\top u = 0\}\]
+
+is invairant under \(T\) of dimension \(n - 1\). Take any \(u \in v^\perp\), then 
+\(v^\top T(u) = (v^\top T)(u) = \lambda v^\top u = 0\). Hence \(T(u) \in v^\perp\). This set has 
+dimension \(\dim V - 1\) as it is the orthogonal complement of a dimensional 1 subspace. 
+
+\(\Leftarrow\) Let \(U\) be the the invariant subspace of \(\dim V - 1\) under \(T\). Let 
+\(\{w_1, \ldots, w_{n-1}\}\) be its basis. Then we can extend the basis to \(\{w_1, \ldots, w_{n-1}, v\}\)
+for some \(v \in V \backslash U\). Hence, we have that 
+\[T(v) = \sum_{i=1}^{n-1} a_i w_i + c v\]
+for some scalar \(c \in \F\). We claim that \(c\) is the eigenvalue of \(T\). Suppose not, then we can get that 
+\[(T - cI)(v) = \sum_{i=1}^{n-1} a_i w_i\]
+Then this means that \(v \in U\), reaching a contradiction.
+
+\end{proof}
+
+
+\begin{problem}{40}
+    Suppose \(S, T \in \Lc(V)\) and \(S\) is invertile. Suppose \(p \in \Pc(\F)\) is a polynomial. Prove that 
+    \[p(STS^{-1}) = S p(T)S^{-1}\]
+\end{problem}
+
+\begin{proof}
+We note that 
+\[(STS^{-1})^m = (STS^{-1})(STS^{-1}) \cdots (STS^{-1}) = ST^m S^{-1}\]
+
+Therefore, 
+\begin{align*}
+    p(STS^{-1})
+    &= a_0I + a_1(STS^{-1}) + \cdots + a_m(STS^{-1})^m \\ 
+    &= a_0I + a_1(STS^{_1}) + \cdots + a_m(ST^mS^{-1}) \\ 
+    &= S(a_0 I + a_1 T + \cdots + a_m T^m)S^{-1} \\ 
+    &= Sp(T)S^{-1}
+\end{align*}
+\end{proof}
+
+
+\begin{problem}{41}
+    Suppose \(T \in \Lc(V)\) and \(U\) is a subspace of \(V\) invariant under \(T\). Prove that \(U\) is invariant 
+    under \(p(T)\) for every polynomial \(p \in \Lc(\F)\).
+\end{problem}
+
+\begin{proof}
+Take \(u \in U\), then 
+\begin{align*}
+    p(T)(u) 
+    &= a_0I(u) + a_1T(u) + \cdots + a_m T^m(u)
+\end{align*}
+
+Now it suffices to prove that \(T^m(u) \in U\) for all positive integer. To see this, we can make an inductive 
+argument on \(m\) and gets the desired conclusion.
+
+\end{proof}
+
+
+% \begin{problem}{43}
+%     Suppose \(V\) is finite-dimensional, \(\dim V > 1\), and \(T \in \Lc(V)\). Prove that 
+%     \(\{p(T) \colon p \in \Pc(\F)\} \neq \Lc(V)\). 
+% \end{problem}
+
+% \begin{proof}
+
+% \end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5B %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage 
+\section*{5B: The Minimal Polynomial}
+\addcontentsline{toc}{section}{5B: The Minimal Polynomial}
+
+\begin{thm}[existence of eigenvalues]
+    Every operator on a finite-dimensional nonzero complex vector space has an eigenvalue. 
+\end{thm}
+
+
+\begin{definition}[monic polynomial]
+    A \textbf{monic polynomial} is a polynomial whose highest-degree coefficient 
+    equals \(1\). 
+\end{definition}
+
+\begin{thm}[existence, uniqueness, and degree of minimal polynomial]
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Then there is a unique 
+    monic polynomial \(p \in \Pc(\F)\) of smallest degree such that \(p(T) = 0\). 
+    Furthermore, \(\deg p \leq \dim V\). 
+\end{thm}
+
+
+\begin{definition}[minimal polynomial]
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Then the \textbf{minimal polynomial} of \(T\)
+    is the unique monic polynomial \(p \in \Pc(\F)\) of smallest degree such that \(p(T) = 0\).
+\end{definition}
+
+\begin{remark}
+    This means to find the smallest positive integer \(m\) such that 
+    \[c_0 I + c_1 T + \cdots + c_{m-1}T^{m-1} = -T^{m}\]
+    has a solution \(c_0, c_1, \ldots, c_{m-1} \in \F\). A way to solve this is to pick \(v \in V\) 
+    with \(v \neq 0\) and consider that 
+    \[c_0 v + c_1 Tv + \cdots + c_{\dim V - 1} T^{\dim V - 1} v = - T^{\dim V}v.\]
+\end{remark}
+
+
+
+
+
+
+\begin{thm}[eigenvalues are the zeros of the minimal polynomial]
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). 
+    \begin{enumerate}[label=(\alph*)]
+        \item The zeros of the minimal polynomial of \(T\) are the eigenvalues of \(T\). 
+        \item If \(V\) is a complex vector space, then the minimal polynomial of \(T\) has the 
+        form 
+        \[(z - \lambda_1) \cdots (z-\lambda_m).\]
+        where \(\lambda_1, \ldots, \lambda_m\) is a list of all eigenvalues of \(T\), possibly with repetitions.
+    \end{enumerate}
+\end{thm}
+
+
+\begin{thm}[\(q(T) = 0 \Leftrightarrow q\) is a polynomial multiple of the minimal polynomial]
+    Suppose \(V\) is finite-dimensional, \(T \in \Lc(V)\), and \(q \in \Pc(\F)\). Then 
+    \(q(T) = 0\) if and only if \(q\) is a polynomial multiple of the minimal polynomial of \(T\).
+\end{thm}
+
+
+\begin{thm}[minimal polynomial of a restriction operator]
+    Suppose \(V\) is finite-dimensional, \(T \in \Lc(V)\), and \(U\) is a subspace of \(V\) that is invariant 
+    under \(T\). Then the minimal polynomial of \(T\) is a polynomial multiple of the minimal polynomial of 
+    \(T |_U\).
+\end{thm}
+
+\begin{corollary}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Then \(T\) is not invertible if and only if the 
+    constant term of the minimal polynomial of \(T\) is 0.
+\end{corollary}
+
+\begin{thm}[even-dimensional null space]
+    Suppose \(\F = \R\) and \(V\) is finite-dimensional. Suppose also that \(T \in \Lc(V)\) and 
+    \(b, c \in \R\) with \(b^2 < 4c\). Then \(\dim \nul(T^2 + bT +cI)\) is an even number.
+\end{thm}
+
+\begin{thm}
+    Every operator on an odd-dimensional vector space has an eigenvalue. 
+\end{thm}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5B PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+\addcontentsline{toc}{subsection}{5B Problem Sets}
+
+
+\begin{problem}{1}
+    Suppose \(T \in \Lc(V)\). Prove that 9 is an eigenvalue of \(T^2\) if and only if 3 or -3 is an eigenvalue 
+    of \(T\). 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) Given 9 is an eigenvalue of \(T^2\), then this means that \((T^2 - 9I) = (T - 3I)(T+3I) = 0\). 
+So either 3 or -3 is an eigenvalue of \(T\). 
+
+\(\Leftarrow\) We know there exists nonzero \(v \in V\) s.t. \(Tv = \pm 3v\), so \(T(Tv) = T( \pm 3v) 
+= \pm 3 T(v) = (\pm 3)^2 v = 9v\).
+
+\end{proof}
+
+\begin{problem}{2}
+    Suppose \(V\) is a complex vector space and \(T \in \Lc(V)\) has no eigenvalues. Prove that every subspace 
+    of \(V\) invariant under \(T\) is either \(\{0\}\) or infinite-dimensional. 
+\end{problem}
+
+\begin{proof}
+Suppose for contradiction that there exists finite-dimensional nontrivial subpace \(U\) of \(V\) such that is invariant 
+under \(T\). So we know that by theorem 5.31 and 5.22 \(T|_U\) has eigenvalue and so does \(T\). This forms a contradiction 
+to the hypothesis.
+\end{proof}
+
+
+\begin{problem}{3}
+    Suppose \(n\) is a positive integer and \(T \in \Lc(\F^n)\) is defined by 
+    \[T(x_1, \ldots, x_n) = (x_1 + \cdots + x_n, \ldots, x_1 + \cdots + x_n)\]
+    \begin{enumerate}[label=(\alph*)]
+        \item Find all eigenvalues and eigenvectors of \(T\). 
+        \item Find the minimal polynomial of \(T\).
+    \end{enumerate}
+\end{problem}
+
+
+\begin{proof}
+(a)  Let \(v\) be such that 
+\[(x_1 + \cdots + x_n, \cdots, x_1 + \cdots + x_n) = (\lambda x_1, \ldots, \lambda x_n)\]
+This means \(\sum_{i=1}^{n} x_i = \lambda x_j = \lambda x_k\) for all \(j, k\). If \(\lambda = 0\), then 
+\(\sum_{i=1}^{n} x_i = 0\) and the eigenvector would be \(\{(x_1, \ldots, x_n) \colon \sum_{i=1}^{n}x_i = 0\}\). 
+If \(\lambda \neq 0\), then we have that \(x_i = x_j\) for all \(i, j\) and thus \(\lambda = n\), the corresponding 
+eigenvector is that \(\{(a, \ldots, a) \colon a \in \F\}\). 
+
+(b) We know the eigenvalues are \(0; n\), so it must be of the form 
+\[p(\lambda) = \lambda (\lambda - n)\]
+
+
+\end{proof}
+
+
+\begin{problem}{4}
+    Suppose \(\F = \C, T \in \Lc(V), p \in \Pc(\C)\), and \(\alpha \in \C\). Prove that \(\alpha\) is an 
+    eigenvalue of \(p(T)\) if and only if \(\alpha = p(\lambda)\) for some eigenvalue \(\lambda\) of \(T\).
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) Given \(\alpha\) is an eigenvalue of \(p(T)\), then we know that  
+\[p(z)  - \alpha = c(z - \lambda_1) \cdots (z - \lambda_m)\]
+for some \(\lambda_i\)'s.  Note that since \(p\) is nonconstant \(c \neq 0\). Then this means that 
+one of \(z - \lambda_i = 0 \Leftrightarrow T - \lambda_i I = 0\). Then this means \(p(\lambda_i) - \alpha = 0\)
+so \(p(\lambda_i) = \alpha\). 
+
+\(\Leftarrow\) Conversely, we have that for some nonzero \(v\) to be the eigenvector of \(T\)
+\begin{align*}
+    p(T)(v) 
+    &= (a_0 I + a_1 T + \cdots + a_m T^m)(v) \\ 
+    &= (a_0I + a_1 \lambda + \cdots + a_m \lambda^m)(v) \\ 
+    &= \alpha(v)
+\end{align*}
+\end{proof}
+
+
+\begin{problem}{6}
+    Suppose \(T \in \Lc(\F^2)\) is defined by \(T(w, z) = (-z, w)\). Find the minimal polynomial of \(T\).
+\end{problem}
+
+\begin{proof}
+Pick \(v = e_1\) then \(Tv = (0, 1)\) and \(T^2(v) = (-1, 0)\). We have that  
+\[(1 + T^2)(v) = 0\]
+\end{proof}
+
+
+\begin{problem}{8}
+    Suppose \(T \in \Lc(\R^2)\) is the operator of counterclockwise rotation by \(1^o\). Find the minimal 
+    polynomial of \(T\). 
+\end{problem}
+
+
+\begin{proof}
+We know that the matrix represented by the operator is that 
+\[T = \begin{bmatrix}
+    \cos(1^\circ)    &  -\sin(1^\circ) \\ 
+    \sin(1^\circ)    &  \cos(1^\circ)
+\end{bmatrix}\]
+
+Let \(v = e_1, Tv = (\cos1^\circ, \sin 1^\circ)\) and 
+\(T^2v = (\cos^2 1^\circ - \sin^21^\circ, 2\cos 1^\circ \sin 1^\circ)\). Hence we have that 
+
+\begin{align*}
+    (-1)1 + (2 \cos 1^\circ)\cos 1^\circ &= \cos^2 1^\circ - \sin^2 1^\circ  \\ 
+    (-1)0 + (2 \cos 1^\circ)\sin 1^\circ &= 2 \cos 1^\circ \sin 1^\circ 
+\end{align*}
+
+Then the minimal polynomial is 
+\[p(T) = T^2 - 2 \cos 1^\circ T - I\]
+
+
+\end{proof}
+
+
+
+
+\begin{problem}{9}
+    Suppose \(T \in \Lc(V)\) is such that with respect to some basis of \(V\), all entries of the matrix 
+    of \(T\) are rational numbers. Explain why all coefficients of the minimal polynomial of 
+    \(T\) are rational numbers. 
+\end{problem}
+
+\begin{proof}
+Let \(M\) be the matrix of \(T\) and \(d\) be the degree of its minimal polynomial. Consider 
+\[\Ab = \begin{pmatrix}
+    \text{vec}(I), \text{vec}(M), \ldots, \text{vec}(M^d)
+\end{pmatrix}\]
+
+Then we know that \(\Ab\) is rational and we can partition \(\Ab\) into first \(d\) column and last \(1\) 
+column where the last column is a linear combination of the first \(d\) linearly independent ones. This further 
+implies that we can find a solution using Gaussian elimination, where its entries are therefore all rational 
+as well, and it is indeed the coefficients of the minimal polynomial. 
+\end{proof}
+
+\begin{problem}{10}
+    Suppose \(V\) is finite-dimensional, \(T \in \Lc(V)\), and \(v \in V\). Prove that 
+    \[\text{span}(v, Tv, \ldots, T^m v) = \text{span}(v, Tv, \ldots, T^{\dim V - 1}v)\]
+    for all integers \(m \geq \dim V - 1\).
+\end{problem}
+
+
+\begin{proof}
+    Denote \(A = \text{span}(v, Tv, \ldots, T^m v)\) and \(B = \text{span}(v, Tv, \ldots, T^{\dim V - 1}v)\).
+
+\(\Rightarrow\) Since the list \(A\) has length greater than \(\dim V\), the elements after \(T^{\dim V - 1}v\)
+can be written as linear combination of the previous terms (aka terms in \(B\)). Therefore any element in \(A\) 
+can be written as linear combination of elements in \(B\) so \(A \subseteq B\).
+
+\(\Leftarrow\) This direction is trivial. 
+\end{proof}
+
+
+\begin{problem}{12}
+    Define \(T \in \Lc(\F^n)\) by \(T(x_1, x_2, x_3, \ldots, x_n) = (x_1, 2x_2, 3x_3, \ldots, n x_n)\). 
+    Find the minimal polynomial of \(T\).
+\end{problem}
+
+\begin{proof}
+Let \(v = (1, 0, 0, \ldots, 0)\). Then \(T^k v = e_1\) for all \(1 \leq k \leq n\). Thus we have that 
+\[p(T) = T^n - I\]
+\end{proof}
+
+\begin{problem}{13}
+    Suppose \(T \in \Lc(V)\) and \(p \in \Pc(\F)\). Prove that there exists a unique \(r \in \Pc(\F)\)
+    such that \(p(T) = r(T)\) and \(\deg r\) is less than the degree of the minimal polynomial 
+    of \(T\). 
+\end{problem}
+
+
+\begin{proof}
+Let \(m_T(x)\) be the minimal polynomial of \(T\). By the division algorithm, there exists polynomial 
+\(q(x)\) and \(r(x)\) with \(\deg r < \deg m_T\) such that 
+\[p(x) = q(x)m_T(x) + r(x)\]
+
+Evaluating at \(T\) then yields that 
+\[p(T) = r(T)\]
+
+Here we prove the uniqueness of \(r\). Suppose for contradiction that there exists another \(r'(x)\) such 
+that 
+\[p(T) = r(T) = r'(T)\]
+If we now define \(r''(x) = r(x) - r'(x) = 0 = r''(T)\), then it must be a multiple of \(m_T(x)\) by the definition 
+of the minimal polynomial. However, as its degree is less than \(m_T\), this forms a contradiction, 
+completing the proof. 
+
+\end{proof}
+
+
+\begin{problem}{15}
+    Suppose \(V\) is a finite-dimensional complex vector space with \(\dim V > 0\) and \(T \in \Lc(V)\). 
+    Define \(f \colon \C \to \R\) by 
+    \[f(\lambda) = \dim \range(T - \lambda I).\]
+    Prove that \(f\) is not a continuous function. 
+\end{problem}
+
+\begin{proof}
+Suppose \(\lambda\) is an eigenvalue of \(T\) and consider a sequence \(\{\lambda_k\}\) converging to \(\lambda\), 
+where \(\lambda_k\)'s are not eigenvalues of \(T\) (you may verify such a sequence exists). For \(\lambda_k\) near \(\lambda\), we have that 
+\(f(\lambda_k) = \dim V - \dim \nul (T - \lambda_k I) = \dim V\), where \(f(\lambda) < \dim V\). Hence, \(f\) 
+is discontinuous at \(\lambda\) and therefore not a continuous function. 
+\end{proof}
+
+
+\begin{problem}{17}
+    Suppose \(V\) is finite-dimensional, \(T \in \Lc(V)\), and \(p\) is the minimal polynomial of \(T\). 
+    Suppose \(\lambda \in \F\). Show that the minimal polynomial of \(T - \lambda I\) is the polynomial 
+    \(q\) defined by \(q(z) = p(z + \lambda)\). 
+\end{problem}
+
+\begin{proof}
+First we can see that \(q(T - \lambda I) = p(T) = 0\). Now it suffices to prove the minimality condition. 
+Suppose there exists another monic polynomial \(r(z)\) of lesser degree than \(q(z)\) such that 
+\(r(T - \lambda I) = 0\). We can now define \(s(x) = r(x - \lambda)\) and then 
+\(s(T) = r(T - \lambda I) = 0\) with \(\deg s < \deg p\), contradicting the minimal polynomial assumption 
+of \(p\). Therefore we complete the proof. 
+\end{proof}
+
+\begin{problem}{19}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Let \(\Ec\) be the subspace of 
+    \(\Lc(V)\) defined by 
+    \[\Ec = \{q(T) \colon q \in \Pc(\F)\}.\]
+    Prove that \(\dim \Ec\) equals the degree of the minimal polynomial of \(T\).
+\end{problem}
+
+\begin{proof}
+Note that \(\{a_0 I, a_1 T, a_2 T^2, a_3 T^3, \ldots, a_{n-1} T^{n-1}\} \coloneqq A\) is a basis of \(\Ec\) with dimension \(n\). 
+Suppose \(\deg m_t = m\) for notational purposes. We have that 
+\begin{align*}
+    A \text{ is linearly independent } &\Leftrightarrow \text{Express } T^n \text{ as linear combination of terms in } A \\ 
+    &\Leftrightarrow \text{Minimal degree of } m_T \text{ is } n 
+\end{align*}
+
+
+
+% Suppose for contradiction that the statement does not hold, so either \(\dim \Ec < \deg m_T\) or 
+% \(\dim \Ec > \deg m_T\). Suppose \(\deg m_t = m\) for notational purposes. In the first case, we have 
+% \(n < m\), so we know that \(a_0I, a_1 T, \ldots, a_{n-1} T^{n-1}\) is linearly independent, then we can express 
+% \(a_{n}T^{n}\) as a linear combination of the previous terms, then 
+\end{proof}
+
+
+\begin{problem}{21}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Prove that the minimal polynomial has 
+    degree at most \(1 + \dim \range T\).
+\end{problem}
+
+\begin{proof}
+
+Let \(k = \dim \range T, n = \dim V\). We note that \(T(\range T) \subseteq \range T\), so \(T\)
+naturally induces a well-defined linear operator \(S \in \Lc(\range T)\) by restriction (\(Sv=Tv \forall  v 
+\in \range T\)). Consider the minimal polynomial \(m_S(x)\) of \(S\). We know that \(\deg m_S \leq \dim 
+\range T = k\). Under the construction, we also have \(T^2 = TS\), which implies that \(T\) behaves like 
+\(S\) on \(\range T\). Note for any \(v \in \nul T, T(v) = 0\). 
+
+Now we can construct a polynomial that annihilates \(T\) on \(V\). Define \(q(x) = x \cdot m_S(x)\). We 
+claim that \(q(T) = 0\). This is true since for \(v \in \nul T, q(T)(v) = T \cdot m_S(T)(v) = T(0) = 0\). 
+For \(v \in \range T\), we have \(m_S(T)(v) = m_S(S)(v) = 0\) and therefore \(q(T)(v) = 0\). Note that 
+under this construction we have \(\deg q \leq k + 1\). Since the minimal polynomial divides \(p\), its 
+degree is also upper bounded by \(1 + \dim \range T\). 
+
+
+% We first knnow that there exists a minimal polynomial \(p\) for \(T\) such that \(\deg p \leq \dim V\). 
+% We know that there exists \(S \in \Lc(\range T)\) such that \(T^2 = TS\) (from exericise in ch3), so 
+% the minimal polynomial of \(S \)
+
+
+% Suppose \(\dim \range T = n\) and for contradiction that the minimal polynomial of \(T\) has degree 
+% more than \(1 + n\). This means that for \(m \geq n+2\).
+% \[p(z) = (z - \lambda_1)\cdots(z - \lambda_{m} ).\]
+
+
+
+
+\end{proof}
+
+
+
+\begin{problem}{22}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Prove that \(T\) is invertible if and only 
+    if \(I \in \text{span}(T, T^2, \ldots, T^{\dim V})\). 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) This means that 
+\[I = a_0 T + a_1 T^2 + \cdots + a_n T^n\]
+with \(n = \dim V\). Rewriting the equation gives that (for the largest nonzero degree), we have 
+\[-I + \frac{a_0}{a_m}T + \frac{a_1}{a_m}T^2 + \cdots + T^m = 0\]
+Therefore the constant term of minimal polynomial of \(T\) is not 0 and thus \(T\) is invertible. 
+
+
+
+% Given \(T\) is invertible, then consider the list 
+% \[\{T, T^2, \ldots, T^{n-1}, T^n\}\]
+% We claim that this list is linearly independent and thus \(I\) is in the span of 
+% the list. To prove the claim, suppose that it does not hold. Then there exists some 
+% polynomial such that \(p(T) = 0\), contradicting that \(T\) is invertible. 
+
+\(\Leftarrow\) We know that 
+\[I = a_0 T + a_1 T^2 + \ldots + a_n T^n = T(a_0 I + a_1 T + \ldots + a_nT^{n-1})\]
+Define \(S = (a_0 I + a_1 T + \ldots + a_nT^{n-1})\) so \(TS = I\). At the same time,
+\[ST = (a_0 I + a_1 T + \ldots + a_n T^{n-1})T = a_0 T + a_1 T^2 + \ldots + a_n T^n 
+= I\]
+So \(T\) is invertible. 
+\end{proof}
+
+\begin{problem}{23}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Let \(n = \dim V\). Prove that 
+    if \(v \in V\), then \(\text{span}(v, Tv, \ldots, T^{n-1}v)\) is invariant under \(T\).
+\end{problem}
+
+\begin{proof}
+We know that \(Tv, \ldots, T^{n-1}v \in \text{span}(v, Tv, \ldots, T^{n-1}v)\), so it suffices 
+to prove that \(T^n v \in \text{span}(v, Tv, \ldots, T^{n-1}v)\). To see this, notice that the list 
+\[v, Tv, \ldots, T^{n-1}v, T^n v\]
+has length more than \(n\) and can be reduced to at least \(n\) terms. Therefore, we complete the proof.
+\end{proof}
+
+
+\begin{problem}{28}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Prove that the minimal polynomial of 
+    \(T' \in \Lc(V')\) equals the minimal polynomial of \(T\).
+\end{problem}
+
+Let \(p'\) and \(p\) be the minimal polynomial of \(T'\) and \(T\) respectively. We know that \(T'(\varphi)
+= \varphi \circ T\). We have that  
+\[p'(\varphi) = (c_0 I + c_1 T' + \cdots c_k(T')^k)(\varphi) 
+= \varphi \circ (c_0 I + c_1 T + \cdots + c_k T^k) = \varphi \circ p = 0\]
+
+which essentially shows that the minimality condition is iff for \(p'\) and \(p\), otherwise it would reach 
+a contradiction that one is the minimal polynomial.
+
+
+
+\begin{problem}{29}
+    Show that every operator on a finite-dimensional vector space of dimension at least two has an 
+    invairant subspace of dimension two. 
+\end{problem}
+
+\begin{proof}
+We prove this claim through the induction on \(n = \dim V\). For base case, we have \(\dim V = 2\), then as 
+\(V\) is invariant, the claim is satified. 
+
+For inductive case, suppose the statement holds for \(V\) with dimension \(n-1\). Then consider \(V\) with 
+dimension \(n\). Take any nonzero \(v \in V\) and consider \(V \backslash \text{span}(v)\), which is a space of 
+dimension \(n - 1\), so it has an invariant subspace of dimension two, which is still a subspace of \(V\), 
+completing the proof.
+\end{proof}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5C %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+\section*{5C: Upper-Triangular Matrices}
+\addcontentsline{toc}{section}{5C: Upper-Triangular Matrices}
+
+\begin{definition}[matrix of an operator, \(\Mc(T)\)]
+    Suppose \(T \in \Lc(V)\). The \textbf{matrix of} \(T\) with respect to a basis 
+    \(v_1, \ldots, v_n\) of \(V\) is the n-by-n matrix 
+    \[\Mc(T) = \begin{bmatrix}
+        A_{1,1} & \cdots & A_{1, n} \\ 
+        \vdots &  & \vdots  \\ 
+        A_{n, 1} & \cdots & A_{n,n}
+    \end{bmatrix}\]
+
+    whose entries \(A_{j, k}\) are defined by 
+    \[Tv_k = A_{1, k}v_1 + \cdots + A_{n, k} v_n .\]
+    The notation \(\Mc(T, (v_1, \ldots, v_n))\) is used if the basis is not clear from the context. 
+\end{definition}
+
+\begin{remark}
+    Operators have square matrices.
+\end{remark}
+
+\begin{definition}[diagnoal of a matrix]
+    The \textbf{diagonal} of a square matrix consists of the entries on the line from the upper left 
+    corner to the bottom right corner. 
+\end{definition}
+
+\begin{definition}[upper-triangular matrix]
+    A square matrix is called \textbf{upper triangular} if all entries below the diagnoal are 0.
+\end{definition}
+
+\begin{thm}[conditions for upper-triangular matrix]
+    Suppose \(T \in \Lc(V)\) and \(v_1, \ldots, v_n\) is a basis of \(V\). Then the following are 
+    equivalent. 
+    \begin{enumerate}[label=(\alph*)]
+        \item The matrix of \(T\) with respect to \(v_1, \ldots, v_n\) is upper triangular. 
+        \item \(\text{span}(v_1, \ldots, v_k)\) is invariant under \(T\) for each \(k = 1, \ldots, n\). 
+        \item \(Tv_k \in \text{span}(v_1, \ldots, v_k)\) for each \(k = 1, \ldots, n\). 
+    \end{enumerate}
+\end{thm}
+
+\begin{lemma}
+    Suppose \(T \in \Lc(V)\) and \(V\) has a basis with respect to which \(T\) has an upper-triangular matrix 
+    with diagnoal matrix with diagnoal entries \(\lambda_1, \ldots, \lambda_n\). Then 
+    \[(T - \lambda_1 I) \cdots (T - \lambda_n I) = 0\]
+\end{lemma}
+
+\begin{thm}[determination of eigenvalues from upper-triangular matrix]
+    Suppose \(T \in \Lc(V)\) has an upper-triangular matrix with respect to some 
+    basis of \(V\). Then the eigenvalues of \(T\) are precisely the entries on the diagonal 
+    of that upper-triangular matrix. 
+\end{thm}
+
+\begin{remark}
+    Main proof technique: \((T - \lambda_k)I v_k \in \text{span}(v_1, \ldots, v_{k-1})\) for the matrix 
+    of \(T\) to be upper-triangular. 
+\end{remark}
+
+
+\begin{lemma}[necessary and sufficient condition to have an upper-triangular matrix]
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Then \(T\) has an upper-triangular matrix 
+    with respect to some basis of \(V\) if and only if the minimal polynomial equals 
+    \((z - \lambda_1)\cdots(z - \lambda_m)\) for some \(\lambda_1, \ldots, \lambda_m \in \F\).
+\end{lemma}
+
+\begin{thm}[if \(\F = \C\), then every operator on \(V\) has an upper-triangular matrix]
+    Suppose \(V\) is a finite-dimensional complex vector space and \(T \in \Lc(V)\). Then \(T\) 
+    has an upper-triangular matrix with respect to some basis of \(V\).
+\end{thm}
+
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5C PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+\addcontentsline{toc}{subsection}{5C Problem Sets}
+
+\begin{problem}{1}
+    Prove or give a counter example: If \(T \in \Lc(V)\) and \(T^2\) has an upper-triangular matrix with 
+    respect to some basis of \(V\), then \(T\) has an upper-triangular matrix with respect to some basis 
+    of \(V\).
+\end{problem}
+
+\begin{proof}
+
+Since \(T^2\) has an upper triangular matrix wrt some basis of \(V\), its minimal polynomial 
+equals \(p_{T^2}(x) = (z - \lambda_1)\cdots(z - \lambda_m)\) for some \(\lambda_1, \ldots, \lambda_m \in \F\). 
+This means that \(p_{T^2}(T^2) = (T^2 - \lambda_1 I) \cdots (T^2 - \lambda_m I) = (T - \sqrt{\lambda_1}I) 
+(T + \sqrt{\lambda_1}I)\cdots(T - \sqrt{\lambda_m}I)(T + \sqrt{\lambda_m}I) = 0\). This means that the minimal polynomial 
+of \(T\) can also be in the form of an upper-triangular matrix.  
+
+% We can try to prove the contrapositive: suppose \(T\) does not have upper-triangular matrix with respect 
+% to any basis, then \(T^2\) does not as well. We can prove this from the perspective of matrix multiplication.
+% Let \(\Ab\) be the matrix of \(T\), then we know that there exists nonzero entry \((i, j)\) with 
+% \(i > j\). 
+
+    % By theorem 5.44, this means that the minimal polynomial of \(T^2\) equals \((z^2 - \lambda_1)\cdots(z^2 - \lambda_m)\)
+% for some \(\lambda_1, \ldots, \lambda_m \in \F\). Naturally for \(T\) we have that 
+% \((z - \sqrt{\lambda_1})(z - (- \sqrt{\lambda_1})) \cdots (z - \sqrt{\lambda_m})(z-(-\sqrt{\lambda_m}))\). 
+
+% We prove this statement through induction on the dimension of \(V\), denoted by \(n\). 
+
+% For the base case where \(n = 1\), this statement naturally holds. 
+
+% For the inductive case suppose it holds for \(n < k\), so we know that there exists 
+% \(v_1, \ldots, v_{k-1}\) basis of \(V\) such that if the matrix of \(T^2\) wrt to them is upper-triangular. 
+% When \(n = k\), extend the basis to \(v_1, \ldots, v_{k-1}, v_k\). We know that \(Tv_j \in \text{span}(v_1, \ldots, v_{j})\)
+% for \(j = 1, \ldots, k-1\). Now we consider \(Tv_k\), it naturally holds that \(Tv_k \in \text{span} 
+% (v_1, \ldots, v_k)\) since \(Tv_k \in V\). Therefore, \(T\) 
+\end{proof}
+
+
+\begin{problem}{3}
+    Suppose \(T \in \Lc(V)\) is invertile and \(v_1, \ldots, v_n\) is a basis of \(V\) with respect 
+    to which the matrix of \(T\) is upper triangular, with \(\lambda_1, \ldots, \lambda_n\) on the 
+    diagnoal. Show that the matrix of \(T^{-1}\) is also upper triangular with respect to the basis 
+    \(v_1, \ldots, v_n\), with 
+    \[\frac{1}{\lambda_1}, \ldots, \frac{1}{\lambda_n}\]
+    on the diagonal. 
+\end{problem}
+
+\begin{proof}
+We first show that \(T^{-1}\) is also upper triangular wrt to the same basis. To see this, we know 
+that \(T v_k \in \text{span}(v_1, \ldots, v_k)\) for each \(k\), or equivalently, 
+\[T(v_k) = \lambda_k v_k + \sum_{j=1}^{k-1}A_{j,k}v_j\]
+Let \(w_k = T^{-1}v_k\), then we know that \(T w_k = v_k \in \text{span}(v_1, \ldots, v_k)\). So this 
+implies that \(w_k \in \text{span}(v_1, \ldots, v_k)\) by property of \(T\). Thus this completes the 
+first part of the proof. For the second part, notice that \(TT^{-1} = I\) and since the two matrices 
+are both upper-triangular, by rule of matrix multiplication, \(T_{ii} T^{-1}_{ii} = 1\) and thus 
+the entries on the diagonal of \(T^{-1}\) is the inverse of \(T\)'s, completing the proof.  
+
+\end{proof}
+
+\begin{problem}{6}
+    Suppose \(\F = \C\), \(V\) is finite-dimensional, and \(T \in \Lc(V)\). Prove that if 
+    \(k \in \{1, \ldots, \dim V\}\), then \(V\) has a \(k-\)dimensional subspace 
+    invariant under \(T\).
+\end{problem}
+
+\begin{proof}
+We have proved in the book that \(T\) has an upper-triangular matrix with respect to some basis 
+of \(V\). Then by equivalent conditions of upper-triangular matrix, we know that for some basis 
+\(v_1, \ldots, v_n\), the \(\text{span}(v_1, \ldots, v_k)\) is invariant under \(T\) for each 
+\(k = 1, \ldots, n\), completing the proof. 
+\end{proof}
+
+
+\begin{problem}{7}
+    Suppose \(V\) is finite-dimensional, \(T \in \Lc(V)\), and \(v \in V\). 
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove that there exists a unique monic polynomial \(p_v\) of smallest degree such that 
+        \(p_v(T)v = 0\).
+        \item Prove that the minimal polynomial of \(T\) is a polynomial multiple of \(p_v\).
+    \end{enumerate}
+\end{problem}
+
+\begin{proof}
+(a) First we prove the existence. Consider the list 
+\[v, Tv, \ldots, T^n v\] 
+which is a linearly dependent list in \(\dim V = n\) space. Therefore we can always reduce this list 
+to a smallest degree such that 
+\[T^m v = \sum_{k=0}^{m-1}\frac{a_k}{a_m}T^m v\]
+Next we prove uniqueness. Suppose there exists another monic polynomial of minimal degree 
+\(s\) such that \(s(T)(v) = 0\). Then we can consider 
+\[0 = p(T)(v) - s(T)(v) = (p - s)(T)(v)\]
+So this polynomial \((p - s)\) also satifies the required condition and it has smaller degree 
+than \(p\) or \(s\), reaching a contradiction. 
+
+
+(b) Let \(m\) be the minimal polynomial of \(T\). By the division algorithm, we have 
+\[m(z) = q(z)p(z) + r(z)\]
+for some polynomial \(q\) and \(r\) with \(\deg r < \deg p\). We claim that \(r = 0\). This is true as 
+\[0 = m(T)(v) = qp(T)(v) + r(T)(v) = r(T)(v)\]
+Thus \(r(T)(v) = 0\). If \(r\) is non-zero map, then this means there exists a monic polynomial of even 
+lesser degree than \(p\) that also maps \(v\) to 0, 
+contradicting that \(p\) is the unique smallest monic polynomial. Therefore we complete the proof.
+\end{proof}
+
+
+
+\begin{problem}{9}
+    Suppose \(B\) is a square matrix with complex entries. Prove that there exists an invertible square 
+    matrix \(A\) with complex entries such that \(A^{-1}BA\) is an upper-triangular matrix.
+\end{problem}
+
+\begin{proof}
+Consider the linear map \(T\) represented by the matrix \(B\). Since the field is taken over \(\C\), we know 
+that \(T\) has an upper-triangular matrix with respect to some basis of \(V\). Then let \(A\) be such 
+change-of-basis matrix we can indeed find the desired matrix. 
+\end{proof}
+
+
+\begin{problem}{10}
+    Suppose \(T \in \Lc(V)\) and \(v_1, \ldots, v_n\) is a basis of \(V\). Show that the following are 
+    equivalent. 
+
+    \begin{enumerate}[label=(\alph*)]
+        \item The matrix of \(T\) with respect to \(v_1, \ldots, v_n\) is lower triangular. 
+        \item \(\text{span}(v_k, \ldots, v_n)\) is invairant under \(T\) for each \(k = 1, \ldots, n\). 
+        \item \(Tv_k \in \text{span}(v_k, \ldots, v_n)\) for each \(k = 1, \ldots, n\).
+    \end{enumerate}
+\end{problem}
+
+
+\begin{proof}
+\((a) \Rightarrow (b)\) This means that \(Tv_j \in \text{span}(v_j, \ldots, v_n)\). If \(j \geq k\), then 
+we have that 
+\[T v_j \in \text{span}(v_k, \ldots, v_n)\]
+
+\((b) \Rightarrow (c)\) This holds by definition. 
+
+\((c) \Rightarrow (a)\) This means when writing each \(Tv_k\) as a linear combination of the basis vectors 
+\(v_1, \ldots, v_n\), we need to use only the vectors \(v_k, \ldots, v_n\). Hence all entries above the 
+diagnoal of \(\Mc(T)\) are 0 and thus it is an lower-triangular matrix.
+\end{proof}
+
+
+\begin{problem}{12}
+    Suppose \(V\) is finite-dimensional, \(T \in \Lc(V)\) has an upper-triangular matrix with respect 
+    to some basis of \(V\), and \(U\) is a subspace of \(V\) that is invariant under \(T\). 
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove that \(T|_U\) has an upper-triangular matrix with respect to some basis of \(U\). 
+        \item Prove that the quotient operator \(T/U\) has an upper-triangular matrix with respect 
+        to some basis of \(V/U\).
+    \end{enumerate}
+\end{problem}
+
+\begin{proof} We know that there exists a basis \(v_1, \ldots, v_n\) 
+    such that \(T v_k \in \text{span}(v_1, \ldots, v_k)\) for each \(k\). 
+
+(a) We can always find a subset of the basis such that \(v_1, \ldots, v_m\) is the basis of 
+\(U\) (WLOG we make the numbering easy). Then for the list we always have that \(T v_k \in 
+\text{span}(v_1, \ldots, v_k)\) for each \(k\) and thus \(T|_U\) has an upper-triangular matrix. 
+
+(b) Consider \(\{v_{m+1} + U, \ldots, v_n + U\}\), which is the basis of \(V/U\). Note that 
+we still have \(T(v_k + U) \in \text{span}(v_{m+1} + U, \ldots, v_{k} +U)\), hence \(T/U\) 
+also has an upper-triangular matrix. 
+\end{proof}
+
+
+\begin{problem}{14}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Prove that \(T\) has an upper-triangular 
+    matrix with respect to some basis of \(V\) if and only if the dual operator \(T'\) has an upper-triangular 
+    matrix with respect to some basis of the dual space. 
+\end{problem}
+
+\begin{proof}
+From 5B problem 28 we know that the minimal polynomial of \(T'\) equals the minimal polynomial of \(T\). 
+Then this means that they have the same roots and therefore the same form of \((z - \lambda_1) 
+\cdots (z - \lambda_m)\) if they having upper-triangular matrix. The iff is directly deduced from the iff 
+of the relation between each one's minimal polynomial.
+\end{proof}
+
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5D %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage 
+\section*{5D: Diagonalizable Operators}
+\addcontentsline{toc}{section}{5D: Diagonalizable Operators}
+
+
+\begin{definition}[diagonal matrix]
+    A \textbf{diagonal matrix} is a square matrix that is 0 everywhere except possibly on the 
+    diagonal.    
+\end{definition}
+
+
+\begin{remark}
+    The entris on the diagonal are precisely the eigenvalue of the operator.
+\end{remark}
+
+\begin{definition}[diagonalizable]
+    An oeprator on \(V\) is called \textbf{diagonalizable} if the operator has a diagonal matrix 
+    with respect to some basis of \(V\).
+\end{definition}
+
+
+\begin{remark}
+    Diagonalization may require a different basis.
+\end{remark}
+
+\begin{definition}[eigenspace, \(E(\lambda, T)\)]
+    Suppose \(T \in \Lc(V)\) and \(\lambda \in \F\). The \textbf{eigenspace} of \(T\) corresponding to 
+    \(\lambda\) is the subspace \(E (\lambda, T)\) of \(V\) defined by 
+    \[E(\lambda, T) = \nul (T - \lambda I) = \{v \in V \colon Tv = \lambda v\}.\]
+    Hence \(E(\lambda, T)\) is the set of all eigenvectors of \(T\) corresponding to \(\lambda\), along 
+    with the 0 vector. 
+\end{definition}
+
+\begin{remark}
+    \(\lambda\) is an eigenvalue of \(T\) if and only if \(E(\lambda, T) \neq \{0\}\).
+\end{remark}
+
+\begin{thm}
+    Suppose \(T \in \Lc(V)\) and \(\lambda_1, \ldots, \lambda_m\) are distinct eigenvalues of \(T\). Then 
+    \[E(\lambda_1, T) + \cdots + E(\lambda_m, T)\]
+    is a direct sum. Furthermore, if \(V\) is finite-dimensional, then 
+    \[\dim E(\lambda_1, T) + \cdots + \dim (\lambda_m, T) \leq \dim V\]
+\end{thm}
+
+
+\begin{thm}[conditions equivalent to diagonalizability]
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Let \(\lambda_1, \ldots, \lambda_m\) denote 
+    the distinct eigenvalues of \(T\). Then the following are equivalent.
+    \begin{enumerate}[label=(\alph*)]
+        \item \(T\) is diagonalizable. 
+        \item \(V\) has a basis consisting of eigenvectors of \(T\). 
+        \item \(V = E(\lambda_1, T) \oplus \cdots \oplus E(\lambda_m, T)\). 
+        \item \(\dim V = \dim E(\lambda_1, T) + \cdots + \dim E(\lambda_m, T)\).
+    \end{enumerate}
+\end{thm}
+
+\begin{corollary}[enough eigenvalues implies diagonalizability]
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\) has \(\dim V\) distinct eigenvalues. 
+    Then \(T\) is diagonalizable.
+\end{corollary}
+
+
+\begin{thm}[necessary and sufficient condition for diagonalizability]
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Then \(T\) is diagonalizable if and only if 
+    the minimal polynomial of \(T\) equals \((z - \lambda_1)\cdots(z - \lambda_m)\) for some 
+    list of \textbf{distinct} numbers \(\lambda_1, \ldots, \lambda_m \in \F\).
+\end{thm}
+
+\begin{corollary}
+    Suppose \(T \in \Lc(V)\) is diagonalizable and \(U\) is a subspace of \(V\) that is invariant 
+    under \(T\). Then \(T |_U\) is a diagonalizable operator on \(U\). 
+\end{corollary}
+
+
+\begin{definition}[Gershgorin disks]
+    Suppose \(T \in \Lc(V)\) and \(v_1, \ldots, v_n\) is a basis of \(V\). Let \(A\) denote the matrix 
+    of \(T\) with respect to this basis. A \textbf{Gershgorin disk} of \(T\) with respect to the basis 
+    \(v_1, \ldots, v_n\) is a set of the form 
+    \[\{z \in \F \colon |z - A_{j,j}| \leq \sum_{k=1 k \neq j}^{n} |A_{j,k}| \},\]
+    where \(j \in \{1, \ldots, n\}.\)
+\end{definition}
+
+\begin{remark}
+    Intuition: if the nondiagonal entries of \(A\) are small, then each eigenvalue of \(T\) is near 
+    a diagonal entry of \(A\).
+\end{remark}
+
+\begin{thm}[Gershgorin disk theorem]
+    Suppose \(T \in \Lc(V)\) and \(v_1, \ldots, v_n\) is a basis of \(V\). Then each eigenvalue of \(T\)
+    is contained in some Gershgorin disk of \(T\) with respect to the basis \(v_1, \ldots, v_n\).
+\end{thm}
+
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5D PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+\addcontentsline{toc}{subsection}{5D Problem Sets}
+
+
+\begin{problem}{1}
+    Suppose \(V\) is a finite-dimensional complex vetor space and \(T \in \Lc(V)\). 
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove that if \(T^4 = I\), then \(T\) is diagonalizable. 
+        \item Prove that if \(T^4 = T\), then \(T\) is diagonalizable. 
+        \item Give an example of an operator \(T \in \Lc(\C^2)\) such that \(T^4 = T^2\) and \(T\) is not 
+        diagnoalizable.
+    \end{enumerate} 
+\end{problem}
+
+\begin{proof}
+(a) The polynomial \(p(x) = x^4 - 1\) annihilates \(T\) (\(p(T) = 0\)) has four distinct roots. The minimal 
+polynomial of \(T\) divides \(p\) and therefore \(T\) is diagnoalizable. 
+
+(b) The polynomial \(p(x) = x^4 - x = x(x-1)(x^2 +1)\) annihilates \(T\) has four distinct roots. The mininmal 
+polynomial of \(T\) divides \(p\) and therefore \(T\) is diagnoalizable. 
+
+(c) Consider 
+\[T = \begin{bmatrix}
+    0 & 1 \\ 
+    0 & 0
+\end{bmatrix}\]
+Then we have that 
+\[T^2 = \begin{bmatrix}
+    0 & 0 \\ 
+    0 & 0
+\end{bmatrix} =  T^4 \]
+\end{proof}
+
+\begin{problem}{3}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Prove that if the operator \(T\) is 
+    diagnoalizable, then \(V = \nul T \oplus \range T\).
+\end{problem}
+
+\begin{proof}
+By equivalent characterizations, there exists \(v_1, \ldots, v_n\) to be the eigenbasis of \(V\). Let 
+\(\lambda_1, \ldots, \lambda_n\) be the corresponding eigenvalues. We can partition these vectors into corresponding 
+basis for \(\nul T\) and \(\range T\). Naturally, we can partition these eigenbasis into two parts: let 
+\(\lambda_1, \ldots, \lambda_m\) denotes the eigenbasis with 0 eigenvalues and \(\lambda_{m+1}, \ldots, 
+\lambda_n\) denotes the eigenbasis with nonzero eigenvalues. We relabel the eigenvectors accordingly. 
+We claim that \(\nul T = \text{span}(v_1, 
+\ldots, v_m)\) and \(\range T = \text{span}(v_{m+1}, \ldots, v_n)\). The proof is complete once 
+we complete proving our claim. 
+
+For proving the null space, \(\Rightarrow\) take \(v \in \nul T\), then we have that 
+\begin{align*}
+    Tv 
+    &= T \sum_{i=1}^{m}a_i v_i + T \sum_{i=m+1}^{n} a_i v_i \\ 
+    &= \sum_{i=m+1}^{n} (a_i \lambda_i) v_i = 0 
+\end{align*}
+
+By linear independence of eigenbasis (as \(\lambda_i \neq 0 \) for \(m+1 \leq i \leq n\)), we have that 
+\(a_i = 0\) for all \(m+1 \leq i \leq n\). Thus \(v \in \text{span}(v_1, \ldots, v_m)\). \(\Leftarrow\) 
+for the other direction, it follows naturally by construction. 
+
+For proving the range space, \(\Rightarrow\) take \(v \in \range T\), then there exists \(u \in V\) 
+s.t. 
+\[v = Tu  = \sum_{i=m+1}^{n} (a_i \lambda_i)v_i\]
+Therefore \(v \in \text{span}(v_{m+1}, \ldots, v_n)\). \(\Leftarrow\) for the other direction, it follows 
+by construction. 
+
+\end{proof}
+
+\begin{problem}{4}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Prove that the following are equivalent.
+    \begin{enumerate}[label=(\alph*)]
+        \item \(V = \nul T \oplus \range T\). 
+        \item \(V = \nul T + \range T\). 
+        \item \(\nul T \cap \range T = \{0\}\).
+    \end{enumerate}
+\end{problem}
+
+
+\begin{proof}
+\((a) \Rightarrow (b)\) Trivial. 
+
+\((b) \Rightarrow (c)\) We know that 
+\[\dim V = \dim (\nul T  + \range T) = \dim \nul T + \dim \range T - \dim \nul T \cap \range T\]
+At the same time, \(\dim V = \dim \nul T + \dim \range T\), hence 
+\[\dim \nul T \cap \range T = 0\]
+
+\((c) \Rightarrow (a)\) This can be proved similarily as above. 
+\end{proof}
+
+
+\begin{problem}{5}
+    Suppose \(V\) is a finite-dimensional complex vector space and \(T \in \Lc(V)\). Prove that 
+    \(T\) is diagonalizable if and only if 
+    \[V= \nul (T - \lambda I) \oplus \range (T - \lambda I)\]
+    for every \(\lambda \in \C\).
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) Given \(T\) is diagnoalizable, then we know that \(T - \lambda I\) is also 
+diagnoalizable (the matrix of that is diagonal). Hence by P3 we get the desired result. 
+
+\(\Leftarrow\) The minimal polynomial of \(T\) can be written as 
+\((z - \lambda_1)^{n_1}\ldots(z - \lambda_m)^{n_m}\) for some distinct distinct \(\lambda_1, \ldots, 
+\lambda_m \in \C\). If \(n_1 = \cdots = n_m = 1\), then we are done. WLOG suppose \(n_1 > 1\). Then take 
+arbitrary \(v \in V\), we have 
+\[\prod_{k=1}^m (T - \lambda_k I)^{n_k} (v) = (T - \lambda_1 I)(T - \lambda_1 I)^{n_1 - 1} 
+\prod_{k=2}^m (T - \lambda_k I)^{n_k}(v) = 0\]
+
+This implies that \((T - \lambda_1 I)^{n_1 - 1} \prod_{k=2}^m (T - \lambda_k I)^{n_k} \in \nul (T - \lambda_1 I) 
+\cap \range (T - \lambda_1 I) = \{0\}\). Therefore, this reach a contradiction to the minimal polynomial we 
+previously get.
+
+\end{proof}
+
+
+\begin{problem}{6}
+    Suppose \(T \in \Lc(\F^5)\) and \(\dim E(8, T) = 4\). Prove that \(T - 2 I\) or \(T - 6I\) is invertible. 
+\end{problem}
+
+\begin{proof}
+We know that 
+\[\dim E(8, T) + \dim E(2, T) + \dim E(6, T) \leq 5\]
+Since \(\dim (8, T) = 4\), then we have that 
+\[\dim E(2,T) = 0 \ \text{or} \ \dim E(6, T) = 0\]
+In other words, \(T - 2I\) or \(T - 6I\) is invertible. 
+
+\end{proof}
+
+
+\begin{problem}{7}
+    Suppose \(T \in \Lc(V)\) is invertible. Prove that 
+    \[E(\lambda, T) = E(\frac{1}{\lambda}, T^{-1})\]
+    for every \(\lambda \in \F\) with \(\lambda \neq 0\). 
+\end{problem}
+
+\begin{proof}
+We know that 
+\begin{align*}
+    Tv = \lambda v \Leftrightarrow v = T^{-1} \lambda v  
+    \Leftrightarrow \frac{1}{\lambda}v = T^{-1} v
+\end{align*}
+\end{proof}
+
+\begin{problem}{8}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Let \(\lambda_1, \ldots, \lambda_m\) denote 
+    the distinct nonzero eigenvalues of \(T\). Prove that 
+    \[\dim E(\lambda_1, T) + \cdots + \dim E(\lambda_m, T) \leq \dim \range T.\]
+\end{problem}
+
+\begin{proof}
+It suffices to show that 
+\[E' = E(\lambda_1, T) + \cdots + E(\lambda_m, T) = E(\lambda_1, T) \oplus \cdots \oplus E(\lambda_m, T) 
+\subseteq \range (T)\]
+To see this, let \(v \in E(\lambda_k, T)\), then we know that \(Tv = \lambda_k v\) and that 
+\(v = T \frac{1}{\lambda_k}v  \in \range T\). Hence we complete the proof. 
+\end{proof}
+
+
+
+\begin{problem}{9}
+    Suppose \(R, T \in \Lc(\F^3)\) each have 2,6,7 as eigenvalues. Prove that there exists an invertible 
+    operator \(S \in \Lc(\F^3)\) such that \(R = S^{-1}TS\).
+\end{problem}
+
+\begin{proof}
+This means that \(R, T\) are both diagnoalizable and thus invertible. Thus we can define a change-of-basis 
+operator \(S\) that is invertible (one may provide more details here).
+\end{proof}
+
+\begin{problem}{12}
+    Suppose \(T \in \Lc(\C^3)\) is such that 6 and 7 are eigenvalues of \(T\). Furthermore, suppose \(T\) 
+    does not have a diagonal matrix with respect to any basis of \(\C^3\). Prove that there exists 
+    \((z_1, z_2, z_3) \in \C^3\) such that 
+    \[T(z_1, z_2, z_3) = (6 + 8 z_1, 7 + 8z_2, 13 + 8 z_3).\]
+\end{problem}
+
+\begin{proof}
+This means that \(T\) only has 6, 7 as the eigenvalues and so 8 is not an eigenvalue of \(T\). Equivalently, 
+\(T - 8I\) is invertible and thus there exists \((z_1, z_2, z_3) \in \C^3\) such that \((T - 8I) 
+(z_1, z_2, z_3) = (6, 7, 13)\). Rewriting the equation gives the desired result. 
+\end{proof}
+
+\begin{problem}{13}
+    Suppose \(A\) is a diagonal matrix with distinct entries on the diagonal and \(B\) is a matrix of the same 
+    size as \(A\). Show that \(AB = BA\) if and only if \(B\) is a diagonal matrix. 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) We can simply examine each entry of \(AB\) and \(BA\), note that 
+\[(AB)_{ij} = \sum_{k=1}^{n}A_{i, k}B_{k, j} = A_{i, i} B_{i, j}\]
+and 
+\[(BA)_{ij} = \sum_{k=1}^{n}B_{i, k}A_{k, j} = A_{j, j} B_{i, j}\]
+Since \(A_{i, i} \neq A_{j, j}\), \(B_{i, j} = 0\) for \(i \neq j\). Hence we have \(B\) is diagonal. 
+
+\(\Leftarrow\) This naturally holds by matrix multiplication. 
+\end{proof}
+
+\begin{problem}{14}
+    \begin{enumerate}[label=(\alph*)]
+        \item Give an example of a finite-dimensional complex vector space and an operato \(T\) on 
+        that vector space such that \(T^2\) is diagnoalizable but \(T\) is not diagnoalizable. 
+        \item Suppose \(\F = \C\), \(k\) is a positive integer, and \(T \in \Lc(V)\) is invertible. 
+        Prove that \(T\) is diagnoalizable if and only if \(T^k\) is diagnoalizable.
+    \end{enumerate}
+\end{problem}
+
+
+\begin{proof}
+(a) Consider the matrix of \(T\) to be 
+\[\begin{bmatrix}
+    0 & 1 \\ 
+    0 & 0
+\end{bmatrix}\]
+and let \(\F = \R\). Then \(T^2 = 0\) which is diagnoalizable.
+
+(b) \(\Rightarrow\) By P13, we know that since \(T\) is diagonal, \(T^2\) is diagonal, and 
+\(T(T^2)\) is diagnoal. Recursively applying the argument yields that \(T^m\) is diagonal and therefore 
+diagonalizable. 
+
+\(\Leftarrow\) We know that \(p(x) = (x^n - \lambda_1)\cdots(x^n - \lambda_k)\) annihilates \(T\) where 
+\(\lambda_1, \ldots, \lambda_k\) are distinct eigenvalues of \(T^m\). Since all \(\lambda_i\) are distinct, 
+\(x^n - \lambda_i\) and \(x^n - \lambda_j\) do not share any common root for \(i \neq j\). Then since the 
+minimal polynomial of \(T\) divides \(p(x)\), it also does not have any repeated roots and therefore \(T\) 
+is also diagonalizable. 
+\end{proof}
+
+
+\begin{problem}{16}
+    Suppose \(T \in \Lc(V)\) is diagnoalizable. Let \(\lambda_1, \ldots, \lambda_m\) denote the distinct 
+    eigenvalues of \(T\). Prove that a subspace \(U\) of \(V\) is invariant under \(T\) if and only if 
+    there exist subspaces \(U_1, \ldots, U_m\) of \(V\) such that \(U_k \subseteq E(\lambda_k, T)\) for 
+    each \(k\) and \(U = U_1 \oplus \cdots \oplus U_m\). 
+\end{problem}
+
+\begin{proof}
+\(\Leftarrow\) Take any \(u = u_1 + \cdots + u_m \in U\), then \(Tu = Tu_1 + \cdots + Tu_m 
+= \lambda_1 u_1 + \cdots + \lambda_m u_m \in U\). 
+
+\(\Rightarrow\) Define \(U_k = E(\lambda_k, T) \cap U\). Clearly \(U_k \subseteq E(\lambda_k, T)\). 
+Since \(U\) is invariant under \(T\), \({U_k}\) is also invariant. By 5.65 we know that 
+\(T |_{U_k}\) is also diagnoalizable. Since we know that \(E(\lambda_i, T) \cap E(\lambda_j, T) = \{0\}\) for \(i \neq j\), 
+\(U_j \cap U_i = \{0\}\) for \(i \neq j\) as well. Now it suffices to show that 
+\(U \subseteq U_1 \oplus \cdots \oplus U_m\). Take \(u \in U \subset V\), since we know that 
+\(V = E(\lambda_1, T) \oplus \cdots \oplus E(\lambda_m, T)\), \(u \in E_k\) for some \(k\), therefore 
+completing the proof. 
+\end{proof}
+
+
+\begin{problem}{18}
+    Suppose that \(T \in \Lc(V)\) is diagonalizable and \(U\) is a subspace of \(V\) that is invariant under 
+    \(T\). Prove that the quotient operator \(T/U\) is a diagonalizable operator on \(V/U\). 
+\end{problem}
+
+\begin{proof}
+First we know that there exists eigenbasis \(v_1, \ldots, v_n\). We can first partition these basis into 
+\(v_1, \ldots, v_m\) for \(U\) and then \(v_{m+1} + U, \ldots, v_n + U\) would be the basis for 
+\(V/U\). Notice that here we have \((T/U)(v_j + U) = T(v_j) + U + \lambda_j v_j + U\), with the same eigenbasis 
+so preserving the diagonalizability.
+\end{proof}
+
+
+\begin{problem}{20}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Prove that \(T\) is diagnoalizable if 
+    and only if the dual operator \(T'\) is diagnoalizable. 
+\end{problem}
+
+\begin{proof}
+WLOG we go from the forward direction \(\Rightarrow\). Let \(v_1, \ldots, v_n\) be the eigenbasis and 
+\(\varphi_1, \ldots, \varphi_n\) be the corresponding dual basis. Then we have that 
+\[(T' \varphi_i)(v_j) = \varphi_i \circ Tv_j = \lambda_j \varphi_i(v_j) = \lambda_i \delta_{ij}\]
+
+Hence we have that \(T' \varphi_i = \lambda_i \varphi_i\) for each \(i\) and thus \(T'\) is diagnoalizable.
+
+\end{proof}
+
+
+\begin{problem}{22}
+    Suppose \(T \in \Lc(V)\) and \(A\) is an n-by-n matrix that is the matrix of \(T\) with respect to some 
+    basis of \(V\). Prove that if 
+    \[|A_{j,j}| > \sum_{k=1, k\neq j}^{n} |A_{j,k}|\] 
+    for each \(j \in \{1, \ldots, n\}\), then \(T\) is invertible. 
+
+    In other words, the implication is that if the diagonal entries of the matrix of \(T\) are large enough 
+    compred to non-diagonal ones, then \(T\) is invertible. 
+\end{problem}
+
+\begin{proof}
+Equivalently, we aim to prove that 0 is not an eigenvalue of \(A\). From the Gershgorin disk theorem, we know 
+that every eigenvalue of \(A\) lies within at least one of the Gersshgorin disk 
+\[\{z \in \F \colon |z - A_{j,j}| \leq \sum_{k=1 k \neq j }^{n} |A_{j,k}|\}\]
+for \(j \in \{1, \ldots, n\}\). From the question we can see that none of the eigenvalues are 0 and therefore 
+\(A\) is strictly diagonally dominant and hence invertible. 
+
+\end{proof}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5E %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage 
+\section*{5E: Commuting Operators}
+\addcontentsline{toc}{section}{5E: Commuting Operators}
+
+
+\begin{definition}[commute]
+    \begin{itemize}
+        \item Two operators \(S\) and \(T\) on the same vector space \textbf{commute} if \(ST = TS\).
+        \item Two square matrices \(A\) and \(B\) of the same size \textbf{commute} if \(AB = BA\).
+    \end{itemize}
+\end{definition}
+
+\begin{lemma}[commuting operators correspond to commuting matrices]
+    Suppose \(S, T \in \Lc(V)\) and \(v_1, \ldots, v_n\) is a basis of \(V\). Then \(S\) and \(T\)
+    commute if and only if \(\Mc(S, (v_1, \ldots, v_n))\) and \(\Mc(T, (v_1, \ldots, v_n))\) commute.
+\end{lemma}
+
+
+\begin{lemma}[eigenspace is invariant under commuting operator]
+    Suppose \(S, T \in \Lc(V)\) commute and \(\lambda \in \F\). Then 
+    \(E(\lambda, S)\) is invariant under \(T\).
+\end{lemma}
+
+\begin{thm}[simultaenous diagonalizablity \(\Longleftrightarrow\) commutativity]
+    Two diagonalizable operators on the same vector space have diagonal matrices with 
+    respect to the same basis if and only if the two operators commute.
+\end{thm}
+
+
+\begin{lemma}[common eigenvector for commuting operators]
+    Every pairs of commuting operators on a finite-dimensional nonzero complex vector space has 
+    a common eigenvector.
+\end{lemma}
+
+
+\begin{lemma}[commuting operators are simultaenously upper triangular]
+    Suppose \(V\) is a finite-dimensional complex vector space and \(S, T\) are commuting operators on 
+    \(V\). Then there is a basis of \(V\) with respect to which both 
+    \(S\) and \(T\) have upper-triangular matrices. 
+\end{lemma}
+
+
+\begin{thm}[eigenvalues of sum and product of commuting operators]
+    Suppose \(V\) is a finite-dimensional complex vector space and \(S, T\) are commuting operators 
+    on \(V\). Then 
+    \begin{itemize}
+        \item Every eigenvalue of \(S + T\) is an eigenvalue of \(S\) plus an eigenvalue of \(T\), 
+        \item Every eigenvalue of \(ST\) is an eigenvalue of \(S\) times an eigenvalue of \(T\).
+    \end{itemize}
+\end{thm}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 5E PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+\addcontentsline{toc}{subsection}{5E Problem Sets}
+
+
+\begin{problem}{2}
+    Suppose \(\Ec\) is a subset of \(\Lc(V)\) and every element of \(\Ec\) is diagonalizable. Prove that 
+    there exists a basis of \(V\) with respect to which every element of \(\Ec\) has a diagonal matrix 
+    if and only if every pair of element of \(\Ec\) commutes.
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) This follows by products of diagonal matrices.
+
+\(\Leftarrow\) We are given that every pair of element of \(\Ec\) commutes. Pick any \(A \in \Ec\) and 
+let \(E(\lambda) = \{v \in V \colon Av = \lambda v\}\) be the \(\lambda\)-eigenspace of \(A\). We know 
+that as \(A\) is diagonalizable, 
+\[V = \bigoplus_{\lambda \in \F} E(\lambda)\] 
+
+Take another element \(B \in \Ec\), then we know that \(E(\lambda)\) is invairant under \(B\) and thus 
+\(B|_{E(\lambda)}\) is diagnoalizable by 5.75. This means that we can further get that \(E(\lambda, \mu) 
+= \{v \in E(\lambda) \colon Bv = \mu v\} = \{v \in V \colon Av=\lambda v, Bv = \mu v\}\), and we have that 
+\[V = \bigoplus_{\lambda, \mu \in \F} E(\lambda, \mu)\]
+Applying the argument recursively yields that 
+\[V = \bigoplus_{\{\lambda_i\}_{i=1}^\infty \colon \lambda_i \in \F} E(\{\lambda_i\}_{i=1}^\infty) \]
+where \(E(\{\lambda_i\}_{i=1}^\infty)\) consits of all vectors \(v\) such that 
+\(T_i v = \lambda_i v\) for commuting operators \(T_i \in \Ec\). Note that even notionally we make 
+\(\infty\) this is still a finite set since the collection of finite(ly nonzero eigenvalues) is still 
+finite. Hence we derive a common eigenbasis and finish the proof.
+\end{proof}
+
+
+\begin{problem}{3}
+    Suppose \(S, T \in \Lc(V)\) are such that \(ST = TS\). Suppose \(p \in \Pc(\F)\). 
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove that \(\nul p(S)\) is invariant under \(T\). 
+        \item Prove that \(\range p(S)\) is invairant under \(T\).
+    \end{enumerate}
+\end{problem}
+
+
+\begin{proof}
+(a) Let \(p(S) = a_0I + a_1 S + a_2 S^2 + \cdots + a_m S^m\). Take \(v \in \nul p(S)\), then this means that 
+\(p(S)(v) = 0\). We have that 
+\begin{align*}
+    p(S)(Tv) = T(p(S)(v)) = T(0) = 0 
+\end{align*}
+Hence \(Tv \in \nul p(S)\). 
+
+(b) Take \(v \in \range p(S)\), then this means there exists \(u \in V\) such that \(p(S)(u) = v\). Consider that 
+\[p(S)(Tu) = T(p(S)u) = Tv\]
+Therefore \(Tv \in \range p(S)\).
+\end{proof}
+
+
+
+\begin{problem}{5}
+    Prove that a pair of operators on a finite-dimensional vector space commute if and only if 
+    their dual operators commute.
+\end{problem}
+
+\begin{proof}
+Take \(\phi \in V'\) and \(v \in V\). Then \(\Rightarrow\) assume \(TS = ST\), we have that 
+\[(T^* S^* \phi)(v) = S^* \phi(Tv) = \phi (STv)\]
+At the same time 
+\[(S^*T^* \phi)(v) = T^* \phi (SV) = \phi (TSv)\]
+Hence we have that \[T^*S^* = S^*T^*\]. 
+
+\(\Leftarrow\) Assume \(T^* S^* = S^* T^*\), then 
+\[(T^* S^* \phi)(v) = \phi(STv) = \phi (TSv) = (S^*T^* \phi)(v)\]
+Since this holds for all \(\phi \in V', v \in V\), \(ST = TS\).
+\end{proof}
+
+
+\begin{problem}{6}
+    Supose \(V\) is a complex vector space, \(S,T \in \Lc(V)\) commute. Prove that there exist 
+    \(\alpha, \lambda \in \C\) such that 
+    \[\range (S - \alpha I) + \range (T - \lambda I) \neq V.\]
+\end{problem}
+
+\begin{proof}
+Let \(v_1, \ldots, v_n\) be the same basis such that \(\Mc(S), \Mc(T)\) are diagnoal. Then we let 
+\(\alpha = \Mc(S)_{1,1}\) and \(\lambda = \Mc(T)_{1, 1}\). Then this means that 
+\[\range (S - \lambda I) + \range (T - \lambda I) = V \backslash\text{span}(v_1) \neq V.\]
+\end{proof}
+
+
+
+
+
+
+
+
+\end{document}
+

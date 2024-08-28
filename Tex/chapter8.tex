@@ -1,0 +1,785 @@
+\documentclass{extarticle}
+\sloppy
+\input{packages.tex}
+\input{math_commands.tex}
+\usepackage{hyperref}
+
+
+\title{\vspace{-2em}Chapter 8: Operators on Complex Vector Spaces}
+\author{\emph{Linear Algebra Done Right}, by Sheldon Axler}
+\date{}
+
+\begin{document}
+\maketitle 
+\tableofcontents
+
+\newpage 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 8A %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage 
+\section*{8A: Generalized Eigenvectors and Nilpotent Operators}
+\addcontentsline{toc}{section}{8A: Generalized Eigenvectors and Nilpotent Operators}
+
+
+\begin{lemma}[sequence of increasing null spaces]
+    Suppose \(T \in \Lc(V)\). Then 
+    \[\{0\} = \nul T^0 \subseteq \nul T^1 
+    \subseteq \nul T^2 \cdots \subseteq \nul T^k 
+    \subseteq \nul T^{k+1} \cdots\]
+\end{lemma}
+
+\begin{lemma}[equality in the sequence of null spaces]
+    Suppose \(T \in \Lc(V)\) and \(m\) is a nonnegative 
+    integer such that 
+    \[\nul T^m = \nul T^{m+1}\]
+    Then 
+    \[\nul T^{m} = \nul T^{m+1} = \nul T^{m+2} = \cdots\]
+\end{lemma}
+
+\begin{lemma}[null space stop growing]
+    Suppose \(T \in \Lc(V)\). Then 
+    \[\nul T^{\dim V} = \nul T^{\dim V + 1} = \nul T^{\dim V + 2} = \cdots\]
+\end{lemma}
+
+\begin{thm}[\(V\) is the direct sum of \(\nul T^{\dim V}\) and \(\range T^{\dim V}\)]
+    Suppose \(T \in \Lc(V)\). Then 
+    \[V = \nul T^{\dim V} \oplus \range T^{\dim V}\]
+\end{thm}
+
+\begin{definition}[generalized eigenvector]
+    Suppose \(T \in \Lc(V)\) and \(\lambda\) is an eigenvalue 
+    of \(T\). A vector \(v \in T\) is called a 
+    \textbf{generalized eigenvector} of \(T\) corresponding
+    to \(\lambda\) if \(v \neq 0\) and 
+    \[(T - \lambda I)^k v = 0\]
+    for some positive integer \(k\).
+\end{definition}
+
+\begin{remark}
+    There is no notion of ``generalized eigenvalues'' since 
+    we do not create new eigenvalues. 
+\end{remark}
+
+\begin{remark}
+    A nonzero vector \(v \in V\) is a generalized eigenvector 
+    of \(T\) if and only if \((T - \lambda I)^{\dim V} v = 0\)
+\end{remark}
+
+\begin{thm}[a basis of generalized eigenvectors]
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\). Then 
+    there is a basis of \(V\) consisting of generalized 
+    eigenvectors of \(T\).    
+\end{thm}
+
+\begin{proposition}
+    Suppose \(T \in \Lc(V)\). Then each generalized 
+    eigenvector of \(T\) only corresponds to one eigenvalue 
+    of \(T\).
+\end{proposition}
+
+\begin{proposition}
+    Suppose that \(T \in \Lc(V)\). Then every list of 
+    generalized eigenvectors of \(T\) corresponding to 
+    distinct eigenvalues are linearly independent.
+\end{proposition}
+
+\begin{definition}[nilpotent]
+    An operator is called \textbf{nilpotent} if some powers
+    of it equals 0.    
+\end{definition}
+
+\begin{remark}
+    An operator is nilpotent if every nonzero vector in 
+    \(V\) is a generalized eigenvector of \(T\) corresponding 
+    to eigenvalue 0. 
+\end{remark}
+
+\begin{corollary}
+    Suppose \(T \in \Lc(V)\) is nilpotent. Then \(T^{\dim V} = 0\).
+\end{corollary}
+
+\begin{thm}[eigenvalues of nilpotent operator]
+    Suppose \(T \in \Lc(V)\). 
+    \begin{enumerate}[label=(\alph*)]
+        \item If \(T\) is nilpotent, then \(0\) is an eigenvalue of \(T\) and \(T\) has no other 
+        eigenvalues. 
+        \item If \(\F = \C\) and \(0\) is the only eigenvalue of \(T\), then \(T\) is nilpotent.
+    \end{enumerate}
+\end{thm}
+
+\begin{thm}[minimal polynomial and upper-triangular matrix of nilpotent operator]
+    Suppose \( T \in \mathcal{L}(V) \). Then the following are equivalent.
+    \begin{itemize}
+        \item[(a)] \( T \) is nilpotent.
+        \item[(b)] The minimal polynomial of \( T \) is \( z^m \) for some positive integer \( m \).
+        \item[(c)] There is a basis of \( V \) with respect to which the matrix of \( T \) has the form
+        \[
+        \begin{pmatrix}
+        0 & * & \cdots & * \\
+        0 & 0 & \ddots & \vdots \\
+        \vdots & \vdots & \ddots & * \\
+        0 & 0 & \cdots & 0
+        \end{pmatrix},
+        \]
+        where all entries on and below the diagonal equal 0.
+    \end{itemize}
+\end{thm}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 8A PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+\addcontentsline{toc}{subsection}{8A Problem Sets}
+
+\begin{problem}{1}
+    SUppose \(T \in \Lc(V)\). Prove that if \(\dim \nul T^4 = 8\) and \(\dim 
+    \nul T^6 = 9\), then \(\dim \nul T^m = 9\) for all  integers \(m \geq 5\).
+\end{problem}
+
+\begin{proof}
+Suppose not, then \(\dim \nul T^5 = 8 = \dim \nul T^6\), forming a contradiction. Therefore, 
+the statement holds. 
+\end{proof}
+
+
+\begin{problem}{2}
+    Suppose \(T \in \Lc(V)\), \(m\) is a positive integer, \(v \in V\), and \(T^{m-1}v  \neq 0\) 
+    but \(T^m v = 0\). Prove that \(v, Tv, T^2v, \ldots, T^{m-1}v\) is linearly independent. 
+\end{problem}
+
+\begin{proof}
+Consider 
+\[a_0 v + a_1 Tv + \cdots + a_{m-1}T^{m-1}v = 0\]
+Apply \(T^{m-1}\) on both sides yields that 
+\[a_0 T^{m-1} v = 0\]
+and therefore \(a_0 = 0\). Note that \(v \neq \nul T^{m-1}\) and therefore 
+\(v \neq \nul T^j\) for \(j \leq m-1\). Hence continuing apply the argument above will 
+gets that all \(a_i = 0\).
+\end{proof}
+
+\begin{problem}{3}
+    Suppose \(T \in \Lc(V)\). Prove that 
+    \[V = \nul T \oplus \range T \Longleftrightarrow \nul T^2 = \nul T\]
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) We know that \(\nul T \subseteq \nul T^2\). Take \(v \in \nul T^2\), then 
+\[T^2 v = 0 = T(Tv)\]
+Therefore \(Tv \in \nul T\), but \(Tv \in \range T\) so \(Tv = 0\), which gives that 
+\(v \in \nul T\).
+
+\(\Leftarrow\) Let \(v \in (\nul T) \cap (\range T)\). Then there exists \(u\) s.t. 
+\(Tu = v\) and \(Tv = 0\). Therefore \(T^2u = Tv = 0\) and thus \(u \in \nul T^2 
+=\nul T\). So \(v = T0  = 0\). We've proved the claim.
+\end{proof}
+
+
+\begin{problem}{6}
+    Suppose \(T \in \Lc(V)\). Show that 
+    \[V = \range T^0 \supseteq \range T^1 \supseteq \cdots \supseteq \range T^k \supseteq T^{k+1} \supseteq \cdots\]
+\end{problem}
+
+\begin{proof}
+Take \(v \in \range T^{k+1}\), then we know that ther exists \(u \in V\) s.t. 
+\(v = T^{k+1} u = T^{k}(Tu)\), therefore \(v \in \range T^k\). 
+\end{proof}
+
+\begin{problem}{9}
+    Suppose \(T \in \Lc(V)\) and \(m\) is a nonnegative integer. Prove that 
+    \[\nul T^m = \nul T^{m+1} \Longleftrightarrow \range T^m = \range T^{m+1}\]
+\end{problem}
+
+\begin{proof}
+We know that 
+\[\dim V = \dim \nul T^m + \dim \range T^m = \dim \nul T^{m+1} + \dim \range T^{m+1}\]
+Therefore 
+\[\nul T^m = \nul T^{m+1} \Longleftrightarrow \range T^m = \range T^{m+1}\]
+\end{proof}
+
+\begin{problem}{12}
+    Suppose \(T \in \Lc(V)\) is such that every vector in \(V\) is a generalized eigenvector of \(T\). 
+    Prove that there exists \(\lambda \in \F\) such that \(T - \lambda I\) is nilpotent.
+\end{problem}
+
+\begin{proof}
+If \(T\) has only one eigenvalue, then it is easy to tell that \(T - \lambda I\) is nilpotent 
+for the only eigenvalue \(\lambda\). Suppose for the contradiction that it has multiple 
+distinct eigenvalues. Then we know that for \(v_1 \in G(\lambda_1, T)\) and \(v_2 \in G(\lambda_2, T)\)
+are both invariant under \(T\), but \(v = v_1 + v_2 \in G(\lambda, T)\) is also invariant under 
+\(T\). If \(\lambda = \lambda_1\) or 
+\(\lambda_2\), then this contradicts that \(\lambda_1 \neq \lambda_2\). If \(\lambda \neq \lambda_1\)
+and \(\lambda \neq \lambda_2\), then this contradicts that \(G(\lambda_1, T) \cap G(\lambda, T) = \{0\}\).
+Therefore there is only one eigenvalue and thus \(T - \lambda I\) is nilpotent for the only 
+eigenvaue \(\lambda\). 
+
+\end{proof}
+
+
+\begin{problem}{13}
+    Suppose \(S, T \in \Lc(V)\) and \(ST\) is nilpotent. Prove that \(TS\) is nilpotent. 
+\end{problem}
+
+\begin{proof}
+We know \((ST)^k = 0\) for some \(k\). Then 
+\[(TS)^{k+1} = T(ST)^kS = 0\]
+\end{proof}
+
+\begin{problem}{14}
+    Suppose \(T \in \Lc(V)\) is nilpotent and \(T \neq 0\). Prove that \(T\) is not 
+    diagonalizable.
+\end{problem}
+
+\begin{proof}
+\(0\) is the only eigenvalue of \(T\) and any nonzero \(v \in V\) cannot be represented by an eigenbasis.
+\end{proof}
+
+
+
+\begin{problem}{22}
+    Suppose \(T \in \Lc(\C^5)\) is such that \(\range T^4 \neq \range T^5\). Prove that 
+    \(T\) is nilpotent. 
+\end{problem}
+
+\begin{proof}
+By Problem 9 we have that \(\nul T^4 \neq \nul T^5 \) and therefore \(\dim \nul T^4 < 
+\dim \nul T^5 = 5\) where \(\dim \C^5 =5 \). Hence \(T\) is nilpotent. 
+\end{proof}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 8B %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage 
+\section*{8B: Generalized Eigenspace Decomposition}
+\addcontentsline{toc}{section}{8B: Generalized Eigenspace Decomposition}
+
+
+\begin{definition}[generalized eigenspace, \(G(\lambda, T)\)]
+    Suppose \(T \in \Lc(V)\) and \(\lambda \in \F\). The \textbf{generalized eigenspace} of 
+    \(T\) corresponding to \(\lambda\), denoted by \(G(\lambda, T)\), is defined bby 
+    \[G(\lambda, T) = \{v \in V \colon (T - \lambda I)^k v = 0 \text{ for some positive integer }k\}.\]
+    Thus \(G(\lambda, T)\) is the set of generalized eigenvectors of \(T\) corresponding to \(\lambda\), 
+    along with the 0 vector. 
+\end{definition}
+
+\begin{remark}
+    \(E(\lambda, T) \subseteq G(\lambda, T)\) as each eigenvector is a generalized eigenvector.
+\end{remark}
+
+
+\begin{corollary}[description of generalized eigenspaces]
+    Suppose \(T \in \Lc(V)\) and \(\lambda \in \F\). Then \(G(\lambda, T) = \nul (T - \lambda I)^{\dim V}\).
+\end{corollary}
+
+
+\begin{thm}[generalized eigenspace decomposition]
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\). Let \(\lambda_1, \ldots, \lambda_m\) be the distinct 
+    eigenvalues of \(T\). Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item \(G(\lambda_k, T)\) is invariant under \(T\) for each \(k = 1, \ldots, m\); 
+        \item \((T - \lambda_k I)|_{G(\lambda_k, T)}\) is nilpotent for each \(k = 1, \ldots, m\); 
+        \item \(V = G(\lambda_1, T) \oplus \cdots \oplus G(\lambda_m, T)\).
+    \end{enumerate}
+\end{thm}
+
+\begin{definition}[multiplicity]
+    Suppose \(T \in \Lc(V)\). The \textbf{multiplicity} of an eigenvalue \(\lambda\) of 
+    \(T\) is defined to be the dimension of the corresponding generalized eigenspace 
+    \(G(\lambda, T)\). In other words, the multiplicity of an eigenvalue \(\lambda\) of \(T\)
+    equals 
+    \[\dim \nul (T -\lambda I)^{\dim V}\]
+\end{definition}
+
+
+\begin{corollary}
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\). Then the sum of the multiplicities of all 
+    eigenvalue of \(T\) equals \(\dim V\).
+\end{corollary}
+
+\begin{remark}
+    We may know the term \textbf{algebraic multiplicity} and \textbf{geometric multiplicity} 
+    in some books. We have 
+    \begin{align*}
+        \text{algebraic multiplicity of } \lambda = \dim \nul (T - \lambda I)^{\dim V} = \dim G(\lambda, T). \\ 
+        \text{geometric multiplicity of } \lambda = \dim \nul (T - \lambda I) = \dim E(\lambda, T).
+    \end{align*}
+\end{remark}
+
+\begin{remark}
+    If \(V\) is an inner product space, \(T \in \Lc(V)\) is normal, and \(\lambda\) is an eigenvalue 
+    of \(T\), then the algebraic multiplicity of \(\lambda\) equals the geometric multiplicity of 
+    \(\lambda\) (i.e. every eigenvector is a generalized eigenvector).
+\end{remark}
+
+\begin{definition}[\textcolor{red}{characteristic polynomial}]
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\). Let \(\lambda_1, \ldots, \lambda_m\) denote the 
+    distinct eigenvalues of \(T\), with multiplicities \(d_1, \ldots, d_m\). The polynomial 
+    \[(z - \lambda_1)^{d_1} \cdots (z - \lambda_m)^{d_m}\]
+    is called the \textbf{characteristic polynomial} of \(T\).
+\end{definition}
+
+\begin{corollary}
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\). Then 
+    \begin{enumerate}[label=(\alph*)]
+        \item the characteristic polynomial of \(T\) has degree \(\dim V\); 
+        \item the zeros of the characteristic polynomial of \(T\) are the eigenvalues of \(T\).
+    \end{enumerate}
+\end{corollary}
+
+\begin{thm}[Cayley-Hamilton theorem]
+    Suppose \(\F = \C, T \in \Lc(V)\), and \(q\) is the characteristic polynomial of \(T\). 
+    Then \(q(T) = 0\).
+\end{thm}
+
+
+\begin{corollary}
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\). Then the characteristic polynomial of \(T\) is 
+    a polynomial multiple of the minimal polynomial of \(T\).
+\end{corollary}
+
+
+\begin{thm}
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\). Suppose \(v_1, \ldots, v_n\) is a basis of 
+    \(V\) such that \(\Mc(T, (v_1, \ldots, v_n))\) is upper triangular. Then the number 
+    of times each eigenvalue \(\lambda\) of \(T\) appears on the diagonal of 
+    \(\Mc(T, (v_1, \ldots, v_n))\) equals the multiplicity of \(\lambda\) as an eigenvalue 
+    of \(T\).
+\end{thm}
+
+\begin{definition}[block diagonal matrix]
+    A \textbf{block diagonal matrix} is a square matrix of the form 
+    \[\begin{pmatrix}
+        A_1 & & 0 \\ 
+        & \ddots &  \\ 
+        0 & & A_m 
+    \end{pmatrix}\]
+    where \(A_1, \ldots, A_m\) are square matrices lying along the diagonal and all other 
+    entries of the matrix equal 0.
+\end{definition}
+
+\begin{remark}
+    wrt. an appropriate basis, every operator on a finite-dimensional complex vector space 
+    has a matrix of the form. 
+\end{remark}
+
+\begin{thm}[block diagonal matrix with upper-triangular blocks]
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\). Let \(\lambda_1, \ldots, \lambda_m\) be the 
+    distinct eigenvalues of \(T\), with multiplicities \(d_1, \ldots, d_m\). Then there is a basis 
+    of \(V\) with respect to which \(T\) has a block diagonal matrix of the form
+    \[\begin{pmatrix}
+        A_1 & & 0 \\ 
+        & \ddots & \\ 
+        0 & & A_m 
+    \end{pmatrix},\]
+    where each \(A_k\) is a \(d_k\)-by-\(d_k\) upper-triangular matrix of the form 
+    \[ 
+        A_k = \begin{pmatrix}
+            \lambda_k & & * \\ 
+            & \ddots & \\ 
+            0 & & \lambda_k
+        \end{pmatrix}  \]
+\end{thm}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 8B PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+\addcontentsline{toc}{subsection}{8B Problem Sets}
+
+
+\begin{problem}{1}
+    Define \(T \in \Lc(\C^2)\) by \(T(w, z) = (-z, w)\). Find the generalized eigenspaces 
+    corresponding to the distinct eigenvalues of \(T\).
+\end{problem}
+
+\begin{proof}
+We have the matrix of \(T\) to be 
+\[\begin{pmatrix}
+    0 & -1 \\ 
+    1 & 0
+\end{pmatrix}\]
+The eigenvalues for \(T\) are \(\pm i\). For \(\lambda_1 = i\), we have \(v_1 = (i, 1)\); for 
+\(\lambda_2 = - i\), we have \(v_2 = (-i, 1)\). There eigenspace is therefore:
+\[E_{i} = \Span\{(i, 1)\} \ \ \ E_{-i} = \Span\{(-i, 1)\}\]
+\end{proof}
+
+\begin{problem}{2}
+    Suppose \(T \in \Lc(V)\). Prove that \(G(\lambda, T) = G(\frac{1}{\lambda}, T^{-1})\) for 
+    every \(\lambda \in \F\) with \(\lambda \neq 0\). 
+\end{problem}
+
+\begin{proof}
+WLOG let \(v \in G(\lambda, T)\). Then we have that for some \(k\)
+\[0 = (T - \lambda I)^k\]
+We have 
+\[(\lambda^{-1})^k (T^{-1})^k (T - \lambda I)^k 
+= (\lambda^{-1}T^{-1}(T - \lambda I))^k = (\lambda^{-1} I - T^{-1})^k = 0\]
+which shows that \( v \in G(\frac{1}{\lambda}, T)\). The other direction follows accordingly. 
+\end{proof}
+
+
+\begin{problem}{3}
+    Suppose \(T \in \Lc(V)\). Suppose \(S \in \Lc(V)\) is invertible. Prove that \(T\)
+    and \(S^{-1}TS\) have the same eigenvalues with the same multiplicities.
+\end{problem}
+
+\begin{proof}
+Let \(\lambda\) be an eigenvalue of \(T\) with multiplicity \(d\). Then we know 
+\[(T - \lambda I)^d = 0\]
+Therefore 
+\[(S^{-1})^d (T - \lambda I)^d S^d = (S^{-1}(T - \lambda I) S)^d = (S^{-1}TS - \lambda I)^d = 0\]
+The converse is proved identically. 
+\end{proof}
+
+
+\begin{problem}{5}
+    Suppose \(T \in \Lc(V)\) and 3 and 8 are eigenvalues of \(T\). Let \(n = \dim V\). Prove that 
+    \(V = (\nul T^{n-2}) \oplus (\range T^{n-2})\). 
+\end{problem}
+
+
+\begin{proof}
+This means that the minimal polynomial of \(T\) can be written as 
+\[m_T(x) = (x-3)(x-8)q(x)\]
+with \(\max \deg q(x) \leq n-2\). Hence we have that \(\nul T^{n} = \nul T^{n-1} = \nul T^{n-2}\) and 
+\(\range T^{n} = \range T^{n-1} = \range T^{n-2}\). Applying P3 from section 8A solves the problem. 
+\end{proof}
+
+\begin{problem}{10}
+    Suppose \(V\) is a complex inner product space, \(e_1, \ldots, e_n\) is an orthonormal basis of \(T\), 
+    and \(T \in \Lc(V)\). Let \(\lambda_1, \ldots, \lambda_n\) be the eigenvalues of \(T\), each included 
+    as many times as its multiplicity. Prove that 
+    \[|\lambda_1|^2 + \cdots + |\lambda_n|^2 \leq \norm{T e_1}^2 + \cdots + \norm{T e_n}^2\]
+\end{problem}
+
+\begin{proof}
+
+\begin{align*}
+    \sum_{i=1}^{n}\norm{T e_i}^2 
+    &= \sum_{i=1}^{n}\norm{U \Sigma V^* e_i}^2  \\ 
+    &= \sum_{i=1}^{n}\norm{U \Sigma f_i}^2 \\ 
+    &= \sum_{i=1}^{n}\norm{\Sigma f_i}^2 \\  
+    &= \sum_{i=1}^{n} \norm{\lambda_i f_i}^2 \\ 
+    &\geq \sum_{i=1}^{n} |\lambda_i|^2
+\end{align*}
+by Bessel's inequality at last step. 
+\end{proof}
+
+
+\begin{problem}{14}
+    Give an example of an operator on \(\C^4\) whose characteristic polynomial equals 
+    \(z(z-1)^2 (z-3)\) and whose minimal polynomial equals \(z(z - 1) (z-3)\).
+\end{problem}
+
+\begin{proof}
+Consider 
+\[
+J = \begin{pmatrix}
+0 & 0 & 0 & 0 \\
+0 & 1 & 1 & 0 \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 0 & 3
+\end{pmatrix}
+\]
+\end{proof}
+
+
+\begin{problem}{17}
+    Suppose \(\F = \C\) and \(P \in \Lc(V)\) is such that \(P^2 = P\). Prove that the characteristic 
+    polynomial of \(P\) is \(z^m (z-1)^n\), where \(m = \dim \nul P\) and \(n = \dim \range P\).
+\end{problem}
+
+\begin{proof}
+We know that the projection operator \(P\) has eigenvalue \(0\) and \(1\) (from definition). By many of 
+our prior exericises, we know that the (generalized eigenspace of) eigenvalue 0 partitions the null space 
+and nonzero ones partitions the range space. You may verify it by yourselves.
+\end{proof}
+
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 8C %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage 
+\section*{8C: Consequences of Generalized Eigenspace Decomposition}
+\addcontentsline{toc}{section}{8C: Consequences of Generalized Eigenspace Decomposition}
+
+
+\begin{lemma}
+    Suppose \(T \in \Lc(V)\) is nilpotent. Then \(I + T\) has a square root.
+\end{lemma}
+
+\begin{remark}
+    This lemma holds on both real and complex vector spaces. 
+\end{remark}
+
+\begin{lemma}
+    Suppose \(V\) is a complex vector space and \(T \in \Lc(V)\) is invertible. Then \(T\) has a square root.
+\end{lemma}
+
+\begin{definition}[Jordan basis]
+    Suppose \(T \in \Lc(V)\). A basis of \(V\) is called a \emph{Jordan basis} for \(T\) if with respect 
+    to this basis \(T\) has a block diagonal matrix 
+    \[\begin{pmatrix}
+        A_1 & & 0 \\ 
+        & \ddots & \\ 
+        0 & & A_p
+    \end{pmatrix}\]
+    in which each \(A_k\) is an upper-triangular matrix of the form 
+    \[A_k = \begin{pmatrix}
+        \lambda_k & 1 & & 0 \\ 
+        & \ddots & \ddots & \\ 
+        & & \ddots & 1  \\ 
+        0 & & & \lambda_k 
+    \end{pmatrix}\]
+\end{definition}
+
+\begin{thm}[every nilpotent operator has a Jordan basis]
+    Suppose \(T \in \Lc(V)\) is nilpotent. Then there is a basis of \(V\) that is a Jordan basis for \(T\).
+\end{thm}
+
+
+\begin{corollary}[Jordan form]
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\). Then there is a basis of \(V\) that is a Jordan basis for 
+    \(T\). 
+\end{corollary}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 8C PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+\addcontentsline{toc}{subsection}{8C Problem Sets}
+
+
+\begin{problem}{1}
+    Suppose \(T \in \Lc(\C^3)\) is the oprator defined by \(T(z_1, z_2, z_3) = (z_2, z_3, 0)\). Prove that 
+    \(T\) does not have a square root. 
+\end{problem}
+
+\begin{proof}
+Note that for eigenvalue 
+\[(z_2, z_3, 0) = \lambda(z_1, z_2, z_3)\]
+the only solution is \(\lambda = 0\) with multiplicity 3. Suppose for contradiction that \(S^2 = T\). So 
+any eigenvalue \(\lambda\) of \(S\), \(\lambda^2\) will be the eigenvalue of \(T\), so \(S\) also only 
+has \(\lambda=0\) as its only eigenvalue, indicating that \(S\) is nilpotent and \(S^3 = 0\). This gives 
+that \(T^2 = SS^3 = 0\). However, we in fact have that 
+\[T^2 (z_1, z_2, z_3) = (z_3, 0, 0) \neq 0\]
+reaching a contradiction.
+\end{proof}
+
+\begin{problem}{6}
+    Find a basis of \(\mathcal{P}_4 (\R)\) that is a Jordan basis for the differentiation operator 
+    \(D\) on \(\mathcal{P}_4(\R)\) defined by \(D p = p'\).
+\end{problem}
+
+\begin{proof}
+Note that the goal here is to find linearly independent \(v_1, \ldots, v_5\) s.t. \(D(v_1) = 0\) and 
+\(D(v_{i}) = v_{i-1}\). This gives that 
+\[\{1, x, \frac{1}{2}x^2, \frac{1}{6}x^3, \frac{1}{24}x^4\}\]
+\end{proof}
+
+
+Skip the rest of questions.
+% \begin{problem}{8}
+%     Suppose \(T \in \Lc(V)\) and \(v_1, \ldots, v_n\) is a basis of \(V\) that is a Jordan basis for \(T\). 
+%     Describe the matrix of \(T^2\) wrt. this basis.
+% \end{problem}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 8D %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newpage 
+\section*{8D: Trace: A Connection Between Matrices and Operators}
+\addcontentsline{toc}{section}{8D: Trace: A Connection Between Matrices and Operators}
+
+\begin{definition}[trace of a matrix]
+    Suppose \(A\) is a square matrix with entires in \(\F\). The \textbf{trace} of \(A\), denoted by 
+    \(\tr A\), is defined to be the diagonal entries of \(A\).
+\end{definition}
+
+\begin{proposition}[trace of \(AB\) equals trace of \(BA\)]
+    Suppose \(A\) is an m-by-n matrix and \(B\) is an n-by-m matrix. Then 
+    \[\tr (AB) = \tr (BA)\]
+\end{proposition}
+
+\begin{lemma}
+    Suppose \(T \in \Lc(V)\). Suppose \(u_1, \ldots, u_n\) and \(v_1, \ldots, v_n\) are bases of \(V\). Then 
+    \[\tr \Mc \left( T, \left( u_1, \ldots, u_n \right) \right) 
+    = \tr \Mc \left( T, \left( v_1, \ldots, v_n \right) \right)\]
+\end{lemma}
+
+
+\begin{definition}[trace of an operator]
+    Suppose \(T \in \Lc(V)\). The \textbf{trace} of \(T\), denoted by \(\tr T\), is defined by 
+    \[\tr \ T = \tr \ \Mc \left( T, \left( v_1, \ldots, v_n \right) \right)\]
+    where \(v_1, \ldots, v_n\) is any basis of \(V\).
+\end{definition}
+
+
+\begin{corollary}
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\). Then \(\tr \ T\) equals the sum of the eigenvalues of \(T\), with 
+    each eigenvalue included as many times as its multiplicity. 
+\end{corollary}
+
+\begin{corollary}
+    Suppose \(\F = \C\) and \(T \in \Lc(V)\). Let \(n = \dim V\). Then \(\tr \ T\) equals the negative 
+    of the coefficient of \(z^{n-1}\) in the characteristic polynomial of \(T\).
+\end{corollary}
+
+\begin{corollary}
+    Suppose \(V\) is an inner product space, \(T \in \Lc(V)\), and \(e_1, \ldots, e_n\) is an orthonormal 
+    basis of \(V\). Then 
+    \[\tr \ T = \langle Te_1,e_1 \rangle + \cdots + \langle Te_n,e_n \rangle\]
+\end{corollary}
+
+\begin{thm}[trace is linear]
+    The function \(\tr \ \colon \Lc(V) \to \F\) is a linear functional on \(\Lc(V)\) such that 
+    \[\tr \ (ST) = \tr \ (TS)\]
+    for all \(S, T \in \Lc(V)\).
+\end{thm}
+
+
+\begin{corollary}
+    There do not exist operators \(S, T \in \Lc(V)\) such that \(ST - TS = I\).
+\end{corollary}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%% 8D PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newpage 
+\addcontentsline{toc}{subsection}{8D Problem Sets}
+
+\begin{problem}{1}
+    Suppose \(V\) is an inner product space and \(v, w \in V\). Define an operator \(T \in \Lc(V)\)
+    by \(Tu = \langle u,v \rangle w\). Find a formula for \(\tr \ T\).
+\end{problem}
+
+\begin{proof}
+Let \(e_1, \ldots, e_n\) be the standard orthonormal basis of \(V\). Then we have that 
+\begin{align*}
+    \tr \ T 
+    &= \sum_{i=1}^{n} \langle T e_i, e_i \rangle \\ 
+    &= \sum_{i=1}^{n} \langle \langle e_i,v \rangle w, e_i \rangle \\ 
+    &= \sum_{i=1}^{n} \langle e_i,v \rangle \langle w,e_i \rangle \\ 
+    &= \sum_{i=1}^{n} v_i w_i \\ 
+    &=  v \cdot w
+\end{align*}
+\end{proof}
+
+
+\begin{problem}{2}
+    Suppose \(P \in \Lc(V)\) satisfies \(P^2 = P\). Prove that 
+    \[\tr \ P = \dim \range P\]
+\end{problem}
+
+\begin{proof}
+Note that \(\tr P = \sum_{i=1}^{n} \lambda_i\) where \(\lambda_i = 1 \) or \(0\). The multiplicity of 
+\(\lambda_i = 1\) determines the \(\dim \range P\) and thus gives the desired conclusion.  
+\end{proof}
+
+
+\begin{problem}{5}
+    Suppose \(V\) is an inner product space. Suppose \(T \in \Lc(V)\) is a positive operator and 
+    \(\tr \ T = 0\). Prove that \(T = 0\).
+\end{problem}
+
+\begin{proof}
+We know that \(\lambda_i \geq 0\) for all \(i\) for positive \(T\). Since \(\tr = 0\), all eigenvalues 
+are 0 and thus \(T = 0\) (as it's self-adjoint by positvitiy).
+\end{proof}
+
+\begin{problem}{9}
+    Suppose \(T \in \Lc(V)\) is such that \(\tr \ (ST) = 0\) for all \(S \in \Lc(V)\) Prove that \(T = 0\).
+\end{problem}
+
+\begin{proof}
+Consider orthonormal basis \(e_1, \ldots, e_n\) and define \(S_{ij}\) to be such that 
+maps \(e_j\) to \(e_i\) while keep all other zero. Therefore \(\tr \ (S_{ij}T) = T_{ij} = 0\) 
+for all \(i, j\). Hence \(T = 0\).
+\end{proof}
+
+
+\begin{problem}{11}
+    Suppose \(V\) and \(W\) are inner product spaces and \(T \in \Lc(V, W)\). Prove that if \(e_1, \ldots, e_n\)
+    is an orthonormal basis of \(V\) and \(f_1, \ldots, f_m\) is an orthonormal basis of \(W\), then 
+    \[\tr \ (T^* T) = \sum_{k=1}^{n} \sum_{j=1}^m |\langle T e_k,f_j \rangle|^2\]
+\end{problem}
+
+\begin{proof}
+We have that 
+\begin{align*}
+    \tr \ (T^* T) 
+    &= \sum_{k=1}^{n} \langle T^* T e_k,e_k \rangle \\ 
+    &= \sum_{k=1}^{n} \langle T e_k, T e_k \rangle \\ 
+    &= \sum_{k=1}^{n} \langle T e_k, \sum_{j=1}^{m} \langle Te_k,f_j \rangle f_j \rangle \\ 
+    &= \sum_{k=1}^{n} \sum_{j=1}^{m} |\langle T e_k,f_j \rangle|^2
+\end{align*}
+\end{proof}
+
+
+\begin{problem}{12}
+    Suppose \(V\) and \(W\) are finite-dimensional inner product spaces. 
+    \begin{enumerate}[label=(\alph*)]
+        \item Prove that \(\langle S,T \rangle = \tr \ (T^* S)\) defines an inner product on \(\Lc(V, W)\). 
+        \item Suppose \(e_1, \ldots, e_n\) is an orthonormal basis of \(V\) and \(f_1, \ldots, f_m\) 
+        is an orthonormal basis of \(W\). Show that the inner product on \(\Lc(V, W)\) from (a) is the same 
+        as the standard inner product on \(\F^{mn}\), where we identify each element of \(\Lc(V, W)\) with 
+        its matrix (with repsect to the bases just mentioned) and then with an element of \(\F^{mn}\). 
+    \end{enumerate}
+\end{problem}
+
+\begin{remark}
+    The norm from (a) is called the Frbenius norm or the Hilbert-Schmidt norm.
+\end{remark}
+
+\begin{proof}
+(a) We check each condition manually:
+\begin{itemize}
+    \item Positivity: \(\langle S,S \rangle = \tr (S^*S) = \sum_{i=1}^{n} (A^*A)_{ii} 
+    = \sum_{i=1}^{n} \sum_{j=1}^{m} A^*_{ij} A_{ji} 
+    = \sum_{i=1}^{n} \sum_{j=1}^{m} |A_{ij}|^2 \geq 0\) with equality 
+    iff \(S = 0\). 
+    \item Linearity in first slot: \(\langle \lambda S_1 + S_2, T \rangle 
+    = \tr (T^* (\lambda S_1 + S_2)) 
+    = \lambda\tr (T^* S_1) + \tr (T^* S_2) =\lambda \langle S_1,T \rangle + \langle S_2,T \rangle\)
+    \item Conjugate symmetry: \( \overline{ \langle S,T \rangle } =\overline{\tr (T^* S)}  
+    = \tr (\overline{T^* S}) = \tr (S^* T) = \langle T,S \rangle\) 
+
+
+    (b) The standard inner product on \(\F^{mn}\) for the two matrices \(A, B\) is 
+    \[\langle A,B \rangle = \sum_{i=1}^{n} \sum_{j=1}^{m} A_{ij} \overline{B}_{ij}\] 
+    which is exactly how we define in (a).
+\end{itemize}
+\end{proof}
+
+
+\end{document}
+

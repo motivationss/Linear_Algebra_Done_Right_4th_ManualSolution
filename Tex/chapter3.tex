@@ -1,0 +1,2623 @@
+\documentclass{extarticle}
+\sloppy
+\input{packages.tex}
+\input{math_commands.tex}
+\usepackage{hyperref}
+
+
+\title{\vspace{-2em}Chapter 3: Linear Maps}
+\author{\emph{Linear Algebra Done Right}, by Sheldon Axler}
+\date{}
+
+\begin{document}
+\maketitle 
+\tableofcontents
+
+\newpage 
+\section*{3A: Vector Space of Linear Maps}
+\addcontentsline{toc}{section}{3A: Vector Space of Linear Maps}
+
+\begin{definition}[Linear Map]
+    A \emph{linear map} from \(V\) to \(W\) is a function \(T \colon V \to W\) with the following 
+    properties:
+    \begin{itemize}
+        \item \textbf{Additivity}: \(T(u + v) = Tu + Tv\) for all \(u, v \in V\).
+        \item \textbf{Homogeneity}: \(T(\lambda v) = \lambda T(v)\) for all \(\lambda \in \F\) and \(v \in V\).
+    \end{itemize}
+\end{definition}
+
+Notation: \(\Lcal(V, W), \Lcal(V)\)
+
+\begin{itemize}
+    \item The set of linear maps from \(V\) to \(W\) is denoted by \(\Lcal (V, W)\).
+    \item The set of linear maps from \(V\) to \(V\) is denoted by \(\Lcal (V)\). 
+\end{itemize}
+
+
+\begin{lemma}[linear map basis lemma]
+    Suppose \(v_1, \ldots, v_n\) is a basis of \(V\) and \(w_1, \ldots, w_n \in W\). Then 
+    there exists a unique linear map \(T \colon V \to W\) such that 
+    \[T v_k = w_k\]
+    for each \(k = 1, \ldots, n\).
+\end{lemma}
+
+\begin{definition}[additional and scalar multiplication on \(\Lcal(V, W)\)]
+    Suppose \(S, T \in \Lcal(V, W)\) and \(\lambda \in \F\). The sum \(S+ T\) and the 
+    product \(\lambda T\) are the linear maps from \(V\) to \(W\) defined by 
+    \[(S+T)(v) = Sv + Tv \text{  and  } (\lambda T)(v) = \lambda (Tv)\]
+    for all \(v \in V\).
+\end{definition}
+
+\begin{remark}
+    \(\Lcal(V, W)\) is a vector space.
+\end{remark}
+
+\begin{definition}[product of linear maps]
+    If \(T \in \Lcal(U, V) \text{ and } S \in \Lcal(V, W) \), then the \emph{product} \(ST \in \Lcal(U, W)\)
+    is defined by 
+    \[(ST)(u) = S(Tu)\]
+    for all \(u \in U\).
+\end{definition}
+
+\begin{remark}[algebraic properties of product of linear maps]
+We have associativity, identity and distributive properties whenever such properties are defined. 
+\end{remark}
+
+\begin{thm}[linear maps take 0 to 0]
+    Suppose \(T\) is a linear map from \(V\) to \(W\). Then \(T(0) = 0\). 
+\end{thm}
+
+\newpage 
+\addcontentsline{toc}{subsection}{3A Problem Sets}
+\begin{problem}{1}
+    Suppose \(b, c \in \R\). Define \(T \colon \R^3 \to \R^2\) by 
+    \[T(x,y,z) = (2x - 4y + 3z + b, 6x + cxyz)\]
+    Show that \(T\) is linear if and only if \(b = c = 0\). 
+\end{problem}
+
+\begin{proof}
+\(T\) is linear \(\Leftrightarrow\) \(T(x, y, z = 0)\)
+\(\Leftrightarrow\) \(b = 0\)
+
+In addition, let's only consider the second coordinate, then we have 
+
+\[T(x_1 + x_2, y_1 + y_2, z_1 + z_2)_2 = 6(x_1 + x_2) + c(x_1 + x_2)(y_1 + y_2)(z_1 + z_2)\]
+which only equals \(T(x_1, y_1, z_1) + T(x_2, y_2, z_2)\) if \(c = 0\). 
+\end{proof}
+
+\begin{problem}{3}
+    Suppose that \(T \in \Lcal(\F^n, \F^m)\). Show that there exist scalars 
+    \(A_{j,k} \in \F\) for \(j = 1, \ldots, m\) and \(k=1, \ldots,n\) such that 
+    \[T(x_1, \ldots, x_n) = (A_{1,1}x_1 + \cdots+A_{1,n} x_n, \ldots, A_{m, 1} x_1 + \cdots + A_{m,n}x_n)\]
+    for every \((x_1, \ldots, x_n) \in \F^n\). 
+\end{problem}
+
+\begin{proof}
+Let \(\{u_1, \ldots, u_n\}\) denote the standard basis of \(\F^n\). We have that 
+\[T u_i = (A_{1,i}, \ldots, A_{m, i})\]
+
+Take arbitrary \((x_1, \ldots, x_n) \in \F^n\), we have that 
+\[T x_i u_i = x_i (A_{1,i}, \ldots, A_{m, i})\]
+
+thus we have that 
+
+\[T(x_1, \cdots, x_n) = (A_{1,1} x_1 + \cdots + A_{1,n} x_n, \cdots, A_{m, 1}x_1 + \cdots + A_{m, n} x_n)\]
+
+\end{proof}
+
+\begin{problem}{4}
+    Suppose \(T \in \Lcal(V, W)\) and \(v_1, \ldots, v_m\) is a list of vectors in \(V\) such that 
+    \(T v_1, \ldots, T v_m\) is a linearly independent list in \(W\). Prove that \(v_1, \ldots, v_m\)
+    is linearly independent. 
+\end{problem}
+
+\begin{proof}
+This means that the only solution to \(\sum_{i=1}^{m} a_i T(v_i) = \sum_{i=1}^{m} T(a_i v_i) = 0\)
+is all \(a_i = 0\). However, as we know \(T(0) = 0\) so \(a_i v_i = 0\) and thus we've proved the claim. 
+\end{proof}
+
+
+\begin{problem}{7}
+    Show that every linear map from a one-dimensional vector space to itself is multiplication 
+    by some scalar. More precisely, prove that if \(\dim V = 1\) and \(T \in \Lcal(V)\), then 
+    there exists \(\lambda \in \F\) such that \(T v = \lambda v\) for all \(v \in V\). 
+\end{problem}
+
+\begin{proof}
+Since \(\dim V = 1\), every \(v \in V\) can be expressed as \(\lambda v'\) for some other \(v' \in V\). 
+As \(Tv \in V\), we have \(Tv = \beta v\). Then \(T v = T \lambda v' = \beta \lambda v' = \beta v\)
+\end{proof}
+
+\begin{problem}{8}
+    Give an example of a function \(\phi \colon \R^2 \to \R\) such that 
+    \[\phi(av) = a\phi(v)\]
+    for all \(a \in \R\) and all \(v \in \R^2\) but \(\phi\) is not linear. 
+\end{problem}
+
+\begin{proof}
+Consider \(f(x_1, x_2) = x_1^2 / x_2\) if \(x_2 \neq 0\) o.w. 0, then \(f(a(x_1, x_2)) = a x_1^2 = a f(x_1, x_2)\). 
+However, \(f((x_1 + y_1 , x_2 + y_2)) = (x_1 + y_1)^2 / (x_2 + y_2) \neq f(x_1, x_2) + f(y_1, y_2)\). 
+\end{proof}
+
+\begin{problem}{11}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lcal(V)\). Prove that \(T\) is a scalar multiple 
+    of the identity if and only if \(S T = TS\) for all \(S \in \Lcal(V)\). 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) We can express \(T = \lambda I\). Then \(S (\lambda I) = \lambda S = \lambda I S = TS\).
+
+\(\Leftarrow\) Let \(v_1, \ldots, v_m\) be a basis of \(V\). Pick \(S_i\) such that \(S_i (\sum_{i=1}^{m}a_i v_i)
+= a_i v_i\), which is clearly a linear operator. Then we have that 
+
+\begin{align*}
+    S_i T(v) &= T S_i (v) \\ 
+    S_i \sum_{j=1}^{m} b_j v_j & = T(a_i v_i) \\ 
+    b_i v_i &= a_i T(v_i)
+\end{align*}
+
+This shows that for all \(v_i\), there exists \(\lambda_i\) such that \(T(v_i) = \lambda_i v_i\). Next 
+we show that such \(\lambda_i\) does not depend on \(i\). Construct \(S_{ij}\) subtly such that 
+\(S_{ij}\sum_{k=1}^{n} a_k v_k = a_j v_i + a_i v_j\). 
+
+Then we have that 
+
+\begin{align*}
+    S_{ij} T v &= T S_{ij} v \\ 
+    S_{ij} (\sum_{k=1}^{n}\lambda_k a_k v_k) &= T(a_j v_i + a_i v_j) \\ 
+    \lambda_j a_j v_i + \lambda_i a_i v_j &= \lambda_i a_j v_i + \lambda_j a_i v_j 
+\end{align*}
+
+This shows that \(\lambda_i = \lambda_j\) for all \(i,j\) and thus we've shown that \(T = \lambda I\)
+for some \(\lambda\). 
+
+\begin{problem}{12}
+    Suppose \(U\) is a subspace of \(V\) with \(U \neq V\). Suppose \(S \in \Lcal(U, W)\)
+and \(S \neq 0\). Define \(T \colon V \to W\) by 
+
+\[Tv = \begin{cases}
+    Sv & \text{if } v \in U \\ 
+    0 & \text{if } v \in V \text{ and } v \notin U 
+\end{cases}\]
+
+Prove that \(T\) is not a linear map on \(V\). 
+\end{problem}
+
+
+\begin{proof}
+Take \(u \in U\) such that \(u \notin \text{Null}(S)\). Take \(v \in V \backslash U\), then 
+\(u + v \in V \backslash U\). This means that 
+\[T(u + v) = S(u + v) = 0 \neq T(u) + T(v) = Su\]
+\end{proof}
+
+\begin{problem}{13}
+    Suppose \(V\) is finite-dimensional. Prove that every linear map on a subspace of \(V\) can 
+    be extended to a linear map on \(V\). In other words, show that if \(U\) is a subspace of 
+    \(V\) and \(S \in \Lcal(U, W)\), then there exists \(T \in \Lcal(V, W)\) such that 
+    \(Tu = Su\) for all \(u \in U\).
+\end{problem}
+
+\begin{proof}
+
+Note that there exists subspace \(P\) s.t. \(V = P \oplus U\). For all \(v \in V\),
+\(v = p + u\) for some \(p, u\). Then define \(T(v) = Su + p\). Clearly we have that 
+\(T(u) = Su \) for all \(u \in U\). It now only suffices to prove \(T\) is a linear map.
+Homogeneity is trivial to show. For addivity, \(T(v_1 + v_2) = T(u_1 + u_2 + p_1 + p_2)
+= S(u_1 + u_2) + p_1 + p_2 = (S u_1 + p_1) + (S u_2 + p_2) = Tv_1 + T v_2\).
+
+\end{proof}
+
+
+\begin{problem}{14}
+    Suppose \(V\)  is finite-dimensional with \(\dim V > 0\), and suppose \(W\)
+    is infinite-dimensional. Prove that \(\Lcal (V, W)\) is infinite-dimensional. 
+\end{problem}
+
+\begin{proof}
+Recall the definition of infinite-dimension from ch2 P17:
+
+\begin{center}
+    \(V\) is infinite-dimensional if and only if there is a sequence 
+    \(v_1, v_2, \ldots\) of vectors in \(V\) such that \(v_1, \ldots, v_m\)
+    is linearly independent for every positive integer \(m\). 
+\end{center}
+
+\(W\) being infinite-dimensional implies this. Denote the sequence by \(w_1, w_2, \ldots\)
+ Let \(v_1, \ldots, v_m\) be the basis for \(V\). 
+Define a sequence of linear operators as follows: \(T_k \in \Lcal(V, W)\) such that \(T_k (v) = v_k\). 
+Then we have that for every positive integer \(m\), the solution for the following equation 
+is all \(a_i = 0\). 
+\[a_1T_1(v) + \cdots + a_m T_m(v) = a_1 v_1 + \cdots + a_m v_m = 0\]
+
+This shows that \(\Lcal(V, W)\) is infinite-diemsnional.
+
+
+\end{proof}
+
+\begin{problem}{15}
+    Suppose \(v_1, \ldots, v_m\) is a linearly dependent list of vectors in \(V\). Suppose also that 
+    \(W \neq \{0\}\). Prove that there exist \(w_1, \ldots, w_m \in W\) such that no 
+    \(T \in \Lcal(V, W)\) satifies \(Tv_k = w_k\) for each \(k = 1, \ldots, m\). 
+\end{problem}
+
+\begin{proof}
+Take \(w_1, \ldots, w_m\) to be linearly independent list of vectors in \(W\). Then we have that 
+
+\(Ta_1 v_1 + \cdots T a_m v_m = a_1 w_1 + \cdots a_m w_m = 0\)
+
+The only solution is that \(a_i = 0\) for all \(i\), but this contradicts that \(v_1, \ldots, v_m\)
+is linearly dependent. 
+
+\end{proof}
+
+
+
+\begin{problem}{16}
+    Suppose \(V\) is finite-dimensional with \(\dim V > 1\). Prove that there exist \(S, T \in \Lcal(V)\)
+    such that \(ST \neq TS\). 
+\end{problem}
+
+\begin{proof}
+Let \(v_1, \ldots, v_m\) be the basis of \(V\). Define \(S (v) = S(\sum_{i=1}^{m}a_i v_i)
+= \sum_{i=1}^{m} a_{m - i} v_i\) and \(T(v) = a_1 v_1\). Then we have that 
+\[ST v = S a_1v_1 = a_1 v_1\]
+
+but 
+\[T S v = T \sum_{i=1}^{m} a_{m - i} v_i = a_m v_1\]
+\end{proof}
+
+\begin{problem}{17}
+    Suppose \(V\) is finite-dimensional. Show that the only two-sided ideas of \(\Lcal(V)\)
+    are \(\{0\}\) and \(\Lcal(V)\), where we define that a subspace \(\Ecal\) of \(\Lcal(V)\)
+    is called two-sided ideal if \(T E \in \Ecal\) and \(ET \in \Ecal\) for all \(E \in \Ecal\)
+    and all \(T \in \Lcal(V)\). 
+\end{problem}
+
+\begin{proof}
+It's easy to verify that \(\{0\}\) and \(\Lcal(V)\) are two-sided ideal of \(\Lcal(V)\). Suppose for 
+the sake of contradiction that such \(\Ecal\) exists. Let \(e_1, \ldots, e_m\) be its basis and let 
+\(e_1, \ldots e_m, e_{m+1}, \ldots, e_n\) be the basis for \(V\). Define \(T(v) = 
+T(\sum_{i=1}^{n}a_i e_i) = \sum_{i=1}^{n}a_i e_{n-i}\) to be a linear map in \(V\) (ez to verify), and 
+\(E_j (u) = E_j(\sum_{k=1}^{m}b_k e_k) = b_j e_j\). We have reached the contradicting example such 
+that \(TE_j (v) = a_j e_{n - j} \in V \backslash \Ecal\). 
+
+\end{proof}
+
+\end{proof}
+
+\newpage 
+
+
+\section*{3B: Null Spaces and Ranges}
+\addcontentsline{toc}{section}{3B: Null Spaces and Ranges}
+
+\begin{definition}[null space]
+    For \(T \in \Lcal(V, W)\), the \emph{null space} of \(T\), denoted by \(\text{null } T\), is the subset of 
+    \(V\) consisting of those vectors that \(T\) maps to 0:
+    \[\text{null } T = \{v \in V \colon Tv = 0\}\]
+\end{definition}
+
+\begin{corollary}
+    Suppose \(T \in \Lcal(V, W)\), then \(\text{null } T\) is a subspace of \(V\). 
+\end{corollary}
+
+\begin{definition}[injective]
+    A function \(T \colon V \to W\) is called \textbf{injective} if \(Tu = Tv\) implies \(u = v\). 
+\end{definition}
+
+\begin{thm}
+    Let \(T \in \Lcal(V, W)\). Then \(T\) is injecive if and only if \(\text{null } T = \{0\}\). 
+\end{thm}
+
+\begin{definition}[range]
+    For \(T \in \Lcal(V, W)\), the \textbf{range} of \(T\) is the subset of \(W\) consisting of those 
+    vectors that are equal to \(T v\) for some \(v \in V\):
+    \[\text{range} T = \{Tv \colon v \in V\}\]
+\end{definition}
+
+\begin{corollary}
+    Suppose \(T \in \Lcal(V, W)\), then \(\text{range} T\) is a subspace of \(W\). 
+\end{corollary}
+
+\begin{definition}[surjective]
+    A function \(T \colon V \to W\) is called \textbf{surjective} if its range equals \(W\). 
+\end{definition}
+
+
+\begin{thm}[fundamental theorem of linear map]
+    Suppose \(V\) is finite-dimensional and \(T \in \Lcal(V, W)\). Then range \(T\) is finite-dimensional 
+    and 
+    \[\dim V = \dim \text{null } T + \dim \text{range } T\]
+\end{thm}
+
+\begin{proof}
+Let \(u_1, \ldots, u_m\) be a basis of null \(T\) and let \(u_1, \ldots, u_m, v_1, \ldots, v_n\)
+be a basis of \(V\). It now suffices to prove \(\dim\) range \(T = n\). Let \(v \in T\), then 
+\[v = \sum_{i=1}^{m}a_i u_i + \sum_{j=1}^{n}b_j v_j\]
+We apply \(T\) on both sides to get that 
+\[Tv = \sum_{j=1}^{n}b_j T v_j \]
+
+which shows that \(Tv_1, \ldots, T v_n\) spans range \(T\) and thus it's finite-dimensional. To show 
+they are linearly independent, we have 
+\[\sum_{j=1}^{n} b_j T v_j =  T \sum_{j=1}^{n} b_j v_j = 0\]
+
+The only solution is that all \(b_j = 0\). 
+
+\end{proof}
+
+\begin{corollary}[linear map to a lower-dimen space is not injective]
+    Suppose \(V\) and \(W\) are finite-dimensional vector spaces such that 
+    \(\dim V > \dim W\). Then no linear map from \(V\) to \(W\) is injective. 
+\end{corollary}
+
+\begin{corollary}[linear map to a higher-dimen space is not surjective]
+    Suppose \(V\) and \(W\) are finite-dimensional vector spaces such that 
+    \(\dim V < \dim W\). Then no linear map from \(V\) to \(W\) is surjective. 
+\end{corollary}
+
+\noindent
+\paragraph{Application} Consider the system of linear equation defined by the map \(T \colon \F^n \to \F^m\):
+\[T(x_1, \ldots, x_n) = (\sum_{k=1}^{n}A_{1, k}x_k, \ldots, \sum_{k=1}^{n}A_{m, k}x_k)\]
+
+\begin{corollary}[homogeneous systems of linear equations]
+    A homogeneous system of linear equations with more variables than equations has nonzero solutions.
+\end{corollary}
+
+\begin{corollary}[inhomogeneous system fo linear equations]
+    An inhomogeneous system of linear equations with more equations than variables has no 
+    solution for some choice of the constant terms. 
+\end{corollary}
+
+\addcontentsline{toc}{subsection}{3B Problem Sets}
+\begin{problem}{1}
+    Give an example of a linear map \(T\) with dim null \(T\) = 3 and dim range \(T = 2\). 
+\end{problem}
+
+\begin{proof}
+Consider \(T(x_1, x_2, x_3, x_4, x_5) = (0,0,0,x_4,x_5)\). 
+
+It's easy to verify that \(\dim\) null \(T = 3\) and applying the theorem of linear map solves the problem.
+\end{proof}
+
+
+\begin{problem}{2}
+    Suppose \(S, T \in \Lcal(V)\) are such that range \(S \subseteq \) null \(T\). Prove that 
+    \((ST)^2 = 0\).
+\end{problem}
+
+\begin{proof}
+This means that take \(x \in V\), \(T (S(x)) = 0 \). We have \((ST)^2 = STST = 0\). 
+\end{proof}
+
+\begin{problem}{3}
+    Suppose \(v_1, \ldots, v_m\) is a list of vectors in \(V\). Define 
+    \(T \in \Lcal (\F^m, V)\) by 
+    \[T(z_1, \ldots, z_m) = z_1 v_1 + \cdots + z_m v_m\]
+    (a) what property of \(T\) corresponds to \(v_1, \ldots, v_m\) spanning 
+    \(V\)?
+
+    (b) what property of \(T\) corresponds to \(v_1, \ldots, v_m\) being linearly 
+    independent?
+\end{problem}
+
+
+\begin{proof}
+(a) surjective (range = \(V\)) 
+
+(b) injective (\(z_1, \ldots, z_m \) is identically zero if and only if 
+\(z_1 v_1 + \cdots + z_m v_m = 0\))
+\end{proof}
+
+
+\begin{problem}{4}
+    Show that \(\{T \in \Lcal(\R^5, \R^4) \colon \dim \text{null } T > 2\}\)
+    is not a subspace of \(\Lcal(\R^5, \R^4)\).
+\end{problem}
+
+
+\begin{proof}
+% dim range (\(T\)) = 5 - dim null (\(T\)) \(< 3\).
+Try to come up with a counterexample. Consider \(f(e_1, e_2, e_3, e_4, e_5)
+= (e_1, 0,0, e_4)\) and \(g(e_1, e_2, e_3, e_4, e_5) = (0, e_2, e_3, 0)\). Then 
+we have that null \(f = \{0,e_2,e_3,0,e_5\}\) and null \(g = \{e_1, 0, 0, e_4, e_5\}\)
+so both in \(\{T \in \Lcal(\R^5, \R^4) \colon \text{dim null } T > 2\}\). However,
+\(f + g (e_1, e_2, e_3, e_4, e_5) = \{(e_1,e_2,e_3,e_4)\}\) and this means 
+their dim null = 5 - 4 = 1 < 3. 
+
+\end{proof}
+
+
+\begin{problem}{7}
+    Suppose \(V\) and \(W\) are finite-dimensional and \(2 \leq \dim V 
+    \leq \dim W\). Show that \(\{T \in \Lcal(V, W) \colon T \text{ is 
+    not injective}\}\) is not a subspace of \(\Lcal(V, W)\). 
+\end{problem}
+
+
+\begin{proof}
+\(T\) iss not injective means that \(\dim V > \dim W \), which contradicts the 
+assumption in the question. 
+\end{proof}
+
+
+\begin{problem}{9}
+    Suppose \(T \in \Lcal(V, W)\) is injective and \(v_1, \ldots, v_n\) is 
+    linearly independent in \(V\). Prove that \(Tv_1, \ldots, Tv_n\) is 
+    linearly independent in \(W\).
+\end{problem}
+
+\begin{proof}
+\[\sum_{i=1}^{n}z_iv_i = 0 \Leftrightarrow \sum_{i=1}^{n} z_iT(v_i) = 0\]
+\end{proof}
+
+\begin{problem}{10}
+    Suppose \(v_1, \ldots, v_n\) spans \(V\) and \(T \in \Lcal(V, W)\). Show 
+    that \(Tv_1, \ldots, T v_n\) spans range \(T\). 
+\end{problem}
+
+\begin{proof}
+Take \(v\) in \(V\), then we know \(v = \sum_{i=1}^{n} a_i v_i\). Take \(w in\) range \(T\).
+Then we know there exists \(v \in V\) such that \(w = T(v)\) and 
+thus \(w = T(\sum_{i=1}^{n} a_i v_i) = \sum_{i=1}^{n}a_i T(v_i)\). 
+\end{proof}
+
+
+\begin{problem}{11}
+    Suppose that \(V\) is finite-dimensional and that \(T \in \Lcal(V, W)\). Prove 
+    that there exists a subspace \(\Ucal\) of \(V\) such that 
+    \[\Ucal \cap \text{null } T = \{0\} \text{   and   } \text{range } T 
+    = \{T u \colon u \in \Ucal\}\]
+\end{problem}
+
+
+\begin{proof}
+Since we know null \(T\) is a subspace of \(V\), then there exists \(\Ucal\) 
+such that \(\Ucal \oplus \text{null }T = V\). We can define \(\Ucal\) to be such 
+case. To finish the proof, let \(v = u + t, u \in \Ucal, t \in null T\), then \(range T 
+= \{T(u + t) = T u \colon u \in \Ucal\}\). 
+\end{proof}
+
+
+\begin{problem}{16}
+    Suppose \(V\) and \(W\) are both finite-dimensional. Prove that there exists an injective 
+    linear map from \(V\) to \(W\) if and only if \(\dim V \leq \dim W\).
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) \(T \in \Lcal(V, W)\) is injective. Then this means that \(\dim V = \dim \text{range } T
+\leq \dim W\). 
+
+\(\Leftarrow\) By assumption, we can define a linear map \(T\) such that 
+\(T v_i = w_i\) where \(v_i, w_i\) are the respective basis of \(V\) and \(W\). 
+Then we have that 
+\[\sum_{i=1}^{n} a_i T v_i = \sum_{i=1}^{n} a_i w_i = 0 \Leftrightarrow a_i \text{ are identically zero} \]
+
+This means that null \(T\) is \(\{0\}\) and thus it is injective. 
+\end{proof}
+
+
+\begin{problem}{17}
+    Suppose \(V\) and \(W\) are both finite-dimensional. Prove that there exists 
+    a surjective linear map from \(V\) onto \(W\) if and only if \(\dim V \geq \dim W\).
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) \(\dim V \geq \text{range } T = \dim W\). 
+
+\(\Leftarrow\) By assumption we can define a linear map \(T\) such that 
+\(T v_i = w_i\) for \( 1 \leq i \leq \dim W\) and \(T v_i = 0\) for \(\dim W \leq i \dim V\). 
+This mean that take \(w \in W\), then \(w = \sum_{i=1}^{\dim W}a_i w_i\). At the 
+same time, we know that for all \(w_i\), there exists \(v_i\) s.t. \(T v_i = w_i\), 
+therefore we have \(w = \sum_{i=1}^{\dim W} a_i Tv_i\) and thus \(T\) is surjective.   
+\end{proof}
+
+
+\begin{problem}{18}
+    Suppose \(V\) and \(W\) are finite-dimensional and that \(\Ucal\) is a 
+    subspace of \(V\). Prove that there exists \(T \in \Lcal(V, W)\) such 
+    that null \(T = \Uc\) if and only if \(\dim \Uc \geq \dim V - \dim W\). 
+\end{problem}
+
+\begin{proof}
+We know \(\dim V = \text{null } T + \text{range } T\) and range \(T \leq \dim W\).
+Therefore, \(\dim \Uc = \dim \text{null } T \geq \dim V - \dim W\).  
+
+\end{proof}
+
+
+\begin{problem}{19}
+    Suppose \(W\) is finite-dimensional and \(T \in \Lc(V, W)\). Prove that 
+    \(T\) is injective if and only if there exists \(S \in \Lc(W, V)\) such that 
+    \(ST\) is the identity operator on \(V\).
+\end{problem}
+
+\begin{proof}
+\(T\) is injective \(\Leftrightarrow\) \(T(v)\) is unique for \(v \in V\). 
+\(\Leftrightarrow\) We can define \(S \colon S Tv = v\). 
+\end{proof}
+
+\begin{problem}{21}
+    Suppose \(V\) is finite-dimensional, \(T \in \Lc(V, W)\), and \(\Uc\) is 
+    a subspace of \(W\). Prove that \(\Tc =  \{ v \in V \colon Tv \in \Uc \}\) is a subspace 
+    of \(V\) and 
+    \[\dim \Tc = \dim \text{null } T + \dim (\Uc \cap \text{range } T)\]
+\end{problem}
+
+\begin{proof}
+To prove subspace, we can simply follow by definition. We can define 
+\(S \in \Lc(\Tc, \Ucal)\) such that \(S v = T v\) for all \(v \in \Tc\). Then 
+we have that range(S) \(\in \Uc  \cap\) range(\(T\)) and that null \(T\) = 
+null \(S\). Hence we have proved the claim. 
+\end{proof}
+
+
+\begin{problem}{22}
+    Suppose \(\Uc\) and \(V\) are finite-dimensional vector spaces and \(S 
+    \in \Lc(V, W)\) and \(T \in \Lc(\Uc, V)\). Prove that 
+    \[\dim \nul ST \leq \dim \nul S + \dim \nul T\]. 
+\end{problem}
+
+\begin{proof}
+We can write that 
+\[\nul ST = \{u \in \Uc \colon T(u) \in \nul (S)\}\]
+
+By the previous question we know that 
+\[\dim \nul ST = \dim \nul T + \dim \nul S \cap \range T \leq \dim \nul T + \dim \nul S\]
+\end{proof}
+
+\begin{problem}{23}
+    Suppose \(\Uc\) and \(V\) are finite-dimensional vector spaces and \(S \in \Lc(V, W)\)
+    and \(T \in \Lc(\Uc, V)\). Prove that 
+    \[\dim \range ST \leq \min \{\dim \range S, \dim \range T\}\].
+\end{problem}
+
+\begin{proof}
+First note that \(\dim \range ST \leq \dim \range S\). This because \(\range ST \subseteq \range S\). 
+
+To prove \(\dim \range ST \leq \dim \range T\). We have that \(\dim \Uc = \dim \nul T 
++ \dim \range T = \dim \nul ST + \dim \range ST\). Since we know \(\dim \nul T \geq \dim \nul 
+ST\), \(\dim \range ST \leq \dim \range T\). 
+\end{proof}
+
+
+\begin{problem}{24}
+    (a) Suppose \(\dim V = 5\) and \(S, T \in \Lc(V)\) are such 
+    that \(ST = 0\). Prove that \(\dim \range TS \leq 2\). 
+
+    (b) Give an example of \(S, T \in \Lc(\F^5)\) with \(ST=0\) and \(\dim \range TS = 2\).
+    
+\end{problem}
+
+
+\begin{proof}
+(a) \(\dim \nul ST = 5 \leq \dim \nul T + \dim \nul S\)
+
+We also know that  \(5 = \dim \nul T + \dim \range T = \dim \range S + \dim \nul S\) 
+and thus we have that \(\dim \range T + \dim \range S \leq 5\). This implies that \(\min 
+\{\dim \range T, \dim \range S\} \leq 2\). Hence by applying P23 we finish the proof. 
+
+(b) Consider \(T(x_1, x_2, x_3, x_4, x_5) = (x_3, x_4, 0, 0, 0), S(x_1, x_2, x_3, 
+x_4, x_5) = (0,0,x_3,x_4, x_5)\). Then we have that \(ST(x_1, x_2, x_3,x_4,x_5)
+= S(x_3, x_4, 0,0,0) = (0,0,0,0,0)\) while \(TS(x_1, x_2, x_3, x_4, x_5)
+= T(0,0,x_3,x_4, x_5) = (x_3, x_4, 0,0,0)\).
+
+\end{proof}
+
+\begin{problem}{25}
+    Suppose that \(W\) is finite-dimensional and \(S, T \in \Lc(V, W)\). Prove that 
+    \(\nul S \subseteq \nul T\) if and only if there exists \(E \in \Lc(W)\)
+    such that \(T = ES\).
+\end{problem}
+
+\begin{proof}
+\(\nul S \subseteq \nul T \Rightarrow \dim \range T \leq \dim \range S \Rightarrow\)
+let \(s_1, \ldots, s_n\) be basis of \(\range S\) and \(t_1, \ldots, t_m\) be basis of \(\range T\)
+where \(m \leq n\). We can always define \(E \in \Lc (W)\) such that \(E(s_i) = t_i\) for all 
+\(1 \leq i \leq m\) and 0 otherwise. 
+
+The other direction is trivial. 
+\end{proof}
+
+\begin{problem}{26}
+    Suppose that \(V\) is finite-dimensional and \(S, T \in \Lc(V, W)\). Prove that 
+    \(\range S \subseteq \range T\) if and only if there exists \(E \in \Lc(V)\) 
+    such that \(S = TE\). 
+\end{problem}
+
+\begin{proof}
+
+    \(\range S \subseteq \range T \Rightarrow\) Take \(v_1, \ldots, v_m\) to be the basis 
+    of \(V\), define the linear map \(S v_i = s_i\) for \(s_i \in \range S \subseteq \range T\).
+    Then there exists \(u_1, \ldots, u_m\) such that \(T u_i = s_i\) for all \(i\). Then we 
+    can define the linear map \(E v_i = u_i\) for all \(i\) such that \(S = TE\).  
+
+    The other direction is trivial. 
+\end{proof}
+
+
+\begin{problem}{27}
+Suppose \(P \in \Lc(V)\) and \(P^2 = P\). Prove that \(V = \nul P \oplus \range P\).
+\end{problem}
+
+\begin{proof}
+Take \(v \in \nul (P) \cap \range (P)\). Then this means that \(P(v) = 0\) and there exists 
+\(u\) s.t. \(v = P(u)\). At the same time, \(P(v) = P(P(u)) = P(u) = 0 =v\). So we have 
+that \(\nul P \cap \range P = \{0\}\). Since \(P\) is defined on \(\Lc(P)\), we have that 
+\(V = \nul P \oplus \range P\). 
+\end{proof}
+
+% \begin{problem}{30}
+%     Suppose \(\varphi \in \Lc(V, \F)\) and \( \varphi \neq 0\). Suppose \(u \in V\) is not in \(\nul \varphi\). 
+%     Prove that 
+%     \[V = \nul \varphi \oplus \{a u \colon a \in \F\}\]
+% \end{problem}
+
+
+% \begin{proof}
+
+% \end{proof}
+
+
+% \begin{problem}{31}
+%     Suppose \(V\) is finite-dimensional, \(X\) is a 
+% \end{problem}
+
+
+\newpage
+
+\section*{3C: Matrices}
+\addcontentsline{toc}{section}{3C: Matrices}
+
+\begin{definition}[matrix, \(\Ab_{j,k}\)]
+    Suppose \(m\) and \(n\) are nonnegative integers. An  m-by-n matrix \emph{matrix}
+    \(\Ab\) is a rectangular array of elements of \(\F\) with \(m\) rows and \(n\) columns:
+    \[\Ab = \begin{pmatrix}
+        \Ab_{1, 1} & \cdots & \Ab_{1, n} \\ 
+        \vdots & & \vdots \\ 
+        \Ab_{m, 1} & \cdots & \Ab_{m, n}
+    \end{pmatrix}\]
+where the notation \(\Ab_{j, k}\) denotes the entry in row \(j\) and column \(k\). 
+\end{definition}
+
+
+\begin{definition}[matrix of a linear map, \(\Mc(T)\)]
+    Suppose \(T \in \Lc(V, W)\) and \(v_1, \ldots, v_n\) is a basis of \(V\) and \(w_1, \ldots, 
+    w_m\) is a basis of \(W\). The \emph{matrix of} \(T\) with respect to these bases is the 
+    m-by-n matrix \(\Mc(T)\) whose entries \(\Ab_{j,k}\) are defined by 
+    \[T v_k = \Ab_{1, k} w_1 + \cdots + \Ab_{m, k} w_m\]. 
+
+    If the bases \(v_1, \ldots, v_n\) and \(w_1, \ldots, w_m\) are not clear from the context, then 
+    the notation \(\Mc(T, (v_1, \ldots, v_n), (w_1, \ldots, w_m))\) is used. 
+\end{definition}
+
+\begin{remark}
+    The \(k\)-th column of \(\Mc(T)\) consists of the scalars needed to write \(T v_k\) 
+    as a linear combination of \(w_1, \ldots, w_m\): 
+    \[T v_k = \sum_{j=1}^{m} \Ab_{j, k} w_j\]
+\end{remark}
+
+\begin{remark}
+    If \(T\) is a linear map from \(n\)-dimensional vector space to an \(m\)-dimensional vector 
+    space, then \(\Mc(T)\) is an m-by-n matrix. 
+\end{remark}
+
+\begin{corollary}[Matrix addition and scalar multiplication]
+    Suppose \(S, T \in \Lc(V, W)\) and \(\lambda \in \F\). Then \(\Mc(\lambda S + T) =\lambda \Mc(S) + \Mc(T)\). 
+\end{corollary}
+
+For \(m\) and \(n\) positive integers, the set of all m-by-n matrices with entries in \(F\)
+is denoted by \(\F^{m,n}\). 
+
+\begin{thm}
+    Suppose \(m\) and \(n\) are positive integers. \(\F^{m, n}\) is a vector space of dimension 
+    \(mn\). 
+\end{thm}
+
+\begin{definition}[matrix multiplication]
+    Suppose \(\Ab\) is an m-by-n matrix and \(\Bb\) is an n-by-p matrix. Then \(AB\) is defined 
+    to be the m-by-p matrix whose entry in row \(j\), column \(k\), is given by the equation
+    \[(\Ab \Bb)_{j,k} = \sum_{r=1}^{n} \Ab_{j, r} \Bb_{r, k}\]
+    In words, the entry in row \(j\), column \(k\) of \(\Ab \Bb\) is computed by taking row \(j\)
+    of \(\Ab\) and column \(k\) of \(\Bb\).  
+\end{definition}
+
+\textbf{Motivations}. Let \(v_1, \ldots, v_n\) to be the basis of \(V\), \(w_1, \ldots, w_m\)
+to be the basis of \(W\), and \(u_1, \ldots, u_p\) to be the basis of \(U\). Consider linear 
+maps \(T \colon U \to V\) and \(S \colon V \to W\). Suppose \(\Mc(T) = \Ab\) and \(\Mc(S) = \Bb\). 
+For \(1 \leq k \leq p\), we have 
+
+\begin{align*}
+    (ST) u_k 
+    &= S(\sum_{r=1}^{n}\Bb_{r, k} v_r) \\ 
+    &=\sum_{r=1}^{n} \Bb_{r, k} (S v_r) \\ 
+    &= \sum_{r=1}^{n} \Bb_{r,k} \sum_{j=1}^{m} \Ab_{j, r} w_j \\ 
+    &= \sum_{j=1}^{m} (\sum_{r=1}^{n} \Ab_{j, r} \Bb_{r, k}) w_j
+\end{align*}
+
+\begin{thm}[matrix of product of linear maps]
+    If \(T \in \Lc(U, V)\) and \(S \in \Lc(V, W)\), then \(\Mc(ST) = \Mc(S)\Mc(T)\).
+\end{thm}
+
+
+\begin{definition}[\(\Ab_{j, \cdot}, \Ab_{\cdot, k}\)]
+    Suppose \(\Ab\) is an m-by-n matrix 
+    \begin{itemize}
+        \item If \(1 \leq j \leq m\), then \(\Ab_{j, \cdot}\) denotes the 1-by-n matrix 
+        consisting of row \(j\) of \(\Ab\). 
+        \item If \(1 \leq k \leq n\), then \(\Ab_{\cdot, k}\) denotes the m-by-1 matrix consisting 
+        of column \(k\) of \(\Ab\). 
+    \end{itemize}
+\end{definition}
+
+\begin{corollary}[entry of matrix product equals row times column]
+    Suppose \(\Ab\) is an m-by-n matrix and \(\Bb\) is an n-by-p matrix. Then 
+    \[(\Ab \Bb)_{j, k} = \Ab_{j, \cdot} \Bb_{\cdot, k}\]
+    if \(1 \leq j \leq m\) and \(1 \leq k \leq p\). In other words, the entry in row \(j\), 
+    column \(k\), of \(\Ab \Bb\) equals (row \(j\) of \(\Ab\)) times (column \(k\) of \(\Bb\)). 
+\end{corollary}
+
+\begin{corollary}[column of matrix product equals matrix times column]
+Suppose \(\Ab\) is an m-by-n matrix and \(\Bb\) is an n-by-p matrix. Then 
+\[(\Ab \Bb)_{\cdot, k} = \Ab \Bb_{\cdot, k}\]
+if \(1 \leq k \leq p\). In other words, column \(k\) of \(\Ab \Bb\) equals \(\Ab\) times 
+column \(k\) of \(\Bb\). 
+\end{corollary}
+
+\begin{corollary}[linear combination of columns]
+    Suppose \(\Ab\) is an m-by-n matrix and \(\bb = \begin{pmatrix}
+        b_1 \\ 
+        \vdots \\ 
+        b_n
+    \end{pmatrix}\) is an n-by-1 matrix. Then 
+    \[\Ab \bb = \bb_1 \Ab_{\cdot, 1} + \cdots + \bb_n \Ab_{\cdot, n}.\]
+    In other words, \(\Ab \bb\) is a linear combination of the columns of \(\Ab\), with the scalars 
+    that multiply the columns coming from \(\bb\). 
+\end{corollary}
+
+\begin{thm}[matrix multiplication as linear combination of columns]
+    Suppose \(C\) is an m-by-c matrix and \(R\) is a c-by-n matrix. 
+
+    \begin{itemize}
+        \item If \(k \in \{1, \ldots, n\}\), then column \(k\) of \(CR\) is a linear combination 
+        of the columns of \(C\), with the coefficients of this linear combination coming from 
+        columns \(k\) of \(R\). 
+        \item If \(j \in \{1, \ldots, m\}\), then row \(j\) of \(CR\) is a linear combination of 
+        the rows of \(R\), with the coefficients of this linear combination coming from row 
+        \(j\) of \(C\). 
+    \end{itemize}
+\end{thm}
+
+
+\begin{definition}[column rank, row rank]
+    Suppose \(\Ab\) is an m-by-n matrix with entries in \(\F\). 
+    \begin{itemize}
+        \item The column rank of \(\Ab\) is the dimension of the span of the columns of \(\Ab\)
+        in \(\F^{m, 1}\). 
+        \item The row rank of \(\Ab\) is the dimension of the span of the rows of \(\Ab\) in \(\F^{1, n}\). 
+    \end{itemize}
+\end{definition}
+
+\begin{definition}[transpose, \(\Ab^\top\)]
+    The transpose of a matrix \(\Ab\), denoted by \(\Ab^\top\), is the matrix obtained from \(\Ab\)
+    by interchanging rows and columns. Specificially, if \(\Ab\) is an m-by-n matrix, then 
+    \(\Ab^\top\) is the n-by-m matrix whose entries are given by the equation 
+    \[(\Ab^\top)_{k, j} = \Ab_{j, k}\]
+\end{definition}
+
+\begin{lemma}[column-row factorization]
+    Suppose \(\Ab\) is an m-by-n matrix with entries in \(\F\) and column rank \(c \geq 1\). Then 
+    there exists an m-by-c matrix \(\Cb\) and a c-by-n matrix \(\Rb\), both with entries in \(\F\), 
+    such that \(\Ab = \Cb \Rb\). 
+\end{lemma}
+
+\begin{proof}
+Each column of \(\Ab\) is an m-by-1 matrix. The list \(\Ab_{\cdot, 1}, \ldots, \Ab_{\cdot, n}\)
+of columns of \(\Ab\) can be reduced to a basis of the span of the columns of \(\Ab\). This 
+basis has length \(c\). The \(c\) columns in this basis can be put together to form an m-by-c 
+matrix \(\Cb\). 
+
+If \(k \in \{1, \ldots, n\}\), then column \(k\) of \(\Ab\) is a linear combination 
+of the columns of \(\Cb\). Make the coefficients of this linear combination into column 
+\(k\) of a c-by-n matrix that we call \(\Rb\). Then \(\Ab = \Cb \Rb\). 
+\end{proof}
+
+\begin{thm}[column rank equals row rank]
+    Suppose \(\Ab \in \F^{m, n}\). Then the column rank of \(\Ab\) equals the row rank of \(\Ab\). 
+\end{thm}
+
+\begin{proof}
+Let \(c\) denote the column rank of \(\Ab\). Let \(\Ab = \Cb \Rb\) be the column-row factorization 
+of \(\Ab\) given by the proof before, where \(\Cb\) is m-by-c and \(\Rb\) is c-by-n. Then the 
+column-row factorization lemma tells us that every row of \(\Ab\) is a linear combination of 
+the rows of \(\Rb\). Because \(\Rb\) has \(c\) rows, this implies that the row of \(\Ab\) is 
+less than or equal to the column rank \(c\) of \(\Ab\).
+
+To prove the other direction, we can do the same thing to \(\Ab^\top\) and then we can get that 
+column rank of \(\Ab\) = row rank of \(\Ab^\top \leq \) column rank of \(\Ab^\top\) = row 
+rank of \(\Ab\) which we proved above. 
+\end{proof}
+
+\newpage 
+\addcontentsline{toc}{subsection}{3C Problem Sets}
+\begin{problem}{1}
+    Suppose \(T \in \Lc (V, W)\). Show that with respect to each choice of bases of \(V\) and 
+    \(W\), the matrix of \(T\) has at least \(\dim \range T\) nonzero entries. 
+\end{problem}
+
+\begin{proof}
+Let \(v_1, \ldots, v_n\) be the basis of \(V\) and \(w_1, \ldots, w_m\) be the basis of \(W\). 
+Suppose there exists a matrix \(\Ab = \Mc(T)\) of \(T\) has less than \(\dim \range T\) nonzero 
+entries.  This means that \(\Ab\) has at most \(\dim \range T - 1\) nonzero columns so this implies 
+that \(\dim \range T < \dim \range - 1\) which forms a contradiction. 
+\end{proof}
+
+\begin{problem}{2}
+    Suppose \(V\) and \(W\) are finite-dimensional and \(T \in \Lc(V, W)\). Prove that 
+    \(\dim \range T = 1\) if and only if there exists a basis of \(V\) and a basis of \(W\)
+    such that with respect to these bases, all entries of \(\Mc(T)\) equal 1. 
+\end{problem}
+
+\begin{proof}
+
+
+\(\Rightarrow\) We solve this problem through careful construction of the basis. That is, 
+we will construct basis \(v_1, \ldots, v_n\) of \(V\) and \(w_1, \ldots, w_m\) of \(W\)
+such that \(T v_i = w_1 + \cdots + w_m\) for all \(i\). We can achieve this again mainly 
+because \(\dim \range T  = 1\). let \(u_1, \ldots, u_m\) be a set of arbitrary basis of 
+\(W\). Take \(w \in \range T\) so we have \(w = \sum_{i=1}^{m} a_i u_i\). We consider all 
+the coefficients \(a_i\) as follows: take an index set \(I\) such that for all \(i \in I, 
+a_i \neq 0\) and we have \(|I| = c\). Take arbitrary \(j \in I\) and we construct the 
+basis as follows: let \(w_j = (a_j - (m - r))u_j, w_k = a_k u_k \) for all \(k \in I, k \neq j\), 
+and \(w_k = u_k + u_j\) for all \(k \notin I\). Then we have that \(w = \sum_{l=1}^{m}w_l\). 
+Since we know \(w \in \range T\), then there exists \(v_1 \in V\) s.t. \(T(v_1) = w\). Let 
+\(v_2, \ldots, v_n\) be the basis of \(\nul T\). Since we know \(\dim V = \nul T + 1\) so 
+\(v_1, v_2, \ldots, v_n\) consistutes a basis of \(V\). In this way, we successfully constructs
+the basis such that all entries of \(\Mc(T)\) equal 1. 
+
+
+\(\Leftarrow\) There exists basis \(v_1, \ldots, v_n\) of \(V\) and 
+\(w_1, \ldots, w_m\) of \(W\) such that 
+all entries of \(\Mc(T)\) equal 1. This means that \(T v_1 = \cdots = T v_n = w_1 + \cdots + w_m\). 
+So we first have that \(\dim \range T \neq 0\). To prove \(\dim \range T = 1\), take arbitrary 
+\(u_1, u_2 \in \range T\). Then we know that \(u_1 = T(\sum_{i=1}^{n} a_i v_i) = \sum_{i=1}^{n}a_i (w_1 + \cdots + w_n)\)
+and similarly \(u_2 = \sum_{i=1}^{n}b_i (w_1 + \cdots + w_n)\). Here we have that 
+\[u_1 =(\sum_i^n a_i) / (\sum_i^n b_i) u_2 \]
+and thus \(\dim \range T\) has to be 1-dimensional since every two arbitrary vector is simply a 
+scalar multiple of each other. 
+\end{proof}
+
+\begin{problem}{3}
+    Suppose \(v_1, \ldots, v_n\) is a basis of \(V\) and \(w_1, \ldots, w_m\) is a basis of \(W\). 
+
+    Show that if \(S, T \in \Lc(V, W)\) and \(\lambda \in \F\), then \(\Mc(\lambda S +T)
+    = \lambda \Mc(S) + \Mc(T)\). 
+\end{problem}
+
+\begin{proof}
+\begin{align*}
+    (\lambda S + T) v_k 
+    &= \lambda S(v_k) + T(v_k) \\ 
+    &= \lambda \sum_{i=1}^{m} \Ab_{i, k} w_i + \sum_{i=1}^{m} \Bb_{i, k} w_i 
+\end{align*}
+\end{proof}
+
+
+\begin{problem}{5}
+    Suppose \(V\) and \(W\) are finite-dimensional and \(T \in \Lc(V, W)\). Prove that 
+    there exists a basis of \(V\) and a basis of \(W\) such that with respect to these bases, 
+    all entries of \(\Mc(T)\) are 0 except that the entries in row \(k\), column \(k\) equal 1 
+    if \(1 \leq k \leq \dim \range T\). 
+\end{problem}
+
+\begin{proof}
+Let \(\dim V = n, \dim W = m, \dim \range T = k\). The main idea of the proof is to construct 
+basis \(v_1, \ldots, v_n\) and \(w_1, \ldots, w_m\) such that \(Tv_i = w_i\) for all \(1 \leq i \leq k\)
+and zero otherwise. (So the constructed \(T\) satisfies the requirement). 
+
+We proceed with obtaining the basis \(w_1, \ldots, w_k\) of \(\range T\) and extend this 
+\(w_1, \ldots, w_k, \ldots, w_m\) to the basis of \(W\). We know for all \(1 \leq i \leq k\),
+there exists \(v_i \in V\) s.t. \(T v_i = w_i\). We claim that \(v_1, \ldots, v_k\) are linearly 
+independent. To prove this, see \(\sum_{j=1}^{k}a_j v_j = 0 \Rightarrow \sum_{j=1}^{k}a_jT(v_j)
+= \sum_{j=1}^{k}a_j w_j = 0\). Similar to the proof in the fundamental theorem of linear map, 
+we extend the basis to \(V\) through considering the null space. We further claim that 
+(let \(K = \text{span }(v_1, \ldots, v_k)\)) \(V = K \oplus \nul T\) (which is easy to prove). Hence, 
+extending the basis from \(K\) with the basis from \(\nul T\) completes the proof.  
+\end{proof}
+
+
+
+\begin{problem}{6}
+    Suppose \(v_1, \ldots, v_m\) is a basis of \(V\) and \(W\) is finite-dimensional. Suppose 
+    \(T \in \Lc(V, W)\). Prove that there exists a basis \(w_1, \ldots, w_n\) of \(W\) such 
+    that all entries in the first column of \(\Mc(T)\) [with respect to these bases] are 0 
+    except for possibly a 1 in the first row, first column. 
+\end{problem}
+
+
+\begin{proof}
+Let \(w_1 = T v_1\) and extend \(w_1\) to basis of \(W\). Then we automatically obtains \(T\) 
+that gets the desired property. 
+\end{proof}
+
+
+\begin{problem}{7}
+    Suppose \(w_1, \ldots, w_n\) is a basis of \(W\) and \(V\) is finite-dimensional. Suppose 
+    \(T \in \Lc(V, W)\). Prove that there exists a basis \(v_1, \ldots, v_m\) of \(V\) such 
+    that all entries in the first of \(\Mc(T)\) [wrt. these bases] are 0 except for possibly 
+    a 1 in the first row, first column. 
+\end{problem}
+
+\begin{proof}
+
+Take arbitrary \(u_1 \in V\) and we have that \(T u_1 = \sum_{i=1}^{n} a_{i, 1} w_i\). Take 
+\(v_1 = u_1 / a_{1, 1}\), then \(T v_1 = w_1 + \sum_{j=2}^{n} b_{j, 1} w_j\). We can extend 
+\(v_1, u_2, \ldots, u_m\) to be the basis of \(V\). Then consider 
+\[T u_j = \sum_{k=1}^{n}b_{k, j} w_k\]
+
+Consider to let \(b_{1, j} = 0\) for all \( 2 \leq j \leq n\). To do this, let \(v_j = u_j 
+- b_{1, j} v_1\), then we have that \(T(v_j) = T(u_j - b_{1, j} v_1) = \sum_{k=2}^{n} c_{k, j} w_k\). 
+It now left to verify that \(v_1, v_2, \ldots, v_m\) is the basis. 
+\begin{align*}
+    q_1 v_1 + \cdots + q_m v_m &= 0 \\ 
+    q_1 v_1 + q_2(u_2 - b_{1, 2} v_1) + \cdots + q_m (u_m - b_{1, m} v_1) &= 0 \\ 
+    (q_1 - (q_2 b_{1, 2} + \cdots + q_m b_{1, m})) v_1 + q_2 u_2 + \cdots + q_m u_m &= 0 
+\end{align*}
+
+The only solution is that \(q_1 - (q_2 b_{1,2} + \cdots + q_m b_{1, m}) = q_2 = \cdots = q_m = 0\)
+and thus we have completed the proof. 
+\end{proof}
+
+
+
+\begin{problem}{8}
+    Suppose \(\Ab\) is an m-by-n matrix and \(\Bb\) is an n-by-p matrix. Prove that 
+    \[(\Ab \Bb)_{j, \cdot} = \Ab_{j, \cdot} \Bb\]
+    for each \(1 \leq j \leq m \). In other words, show that row \(j\) of \(\Ab \Bb\) equals 
+    (row \(j\) of \(\Ab\)) times \(\Bb\). 
+\end{problem}
+
+\begin{proof}
+We know that 
+\[(\Ab \Bb)_{j, k} = \sum_{i=1}^{n}\Ab_{j, i} \Bb_{i, k}\]
+
+For instance \((\Ab \Bb)_{j, 1} = \sum_{i=1}^{n}\Ab_{j, i} \Bb_{i, 1} = \Ab_{j, \cdot} \Bb_{\cdot, 1}\). 
+Similarly, \((\Ab \Bb)_{j, k} = \Ab_{j, \cdot} \Bb_{\cdot, k}\) and thus by treating this we have 
+\[(\Ab \Bb)_{j, \cdot} = \Ab_{j, \cdot} \Bb\] 
+\end{proof}
+
+\begin{problem}{9}
+    Suppose \(\ab = (a_1, \cdots, a_n)\) is a 1-by-n matrix and \(\Bb\) is an n-by-p matrix. 
+    Prove that 
+    \[\ab \Bb = a_1 \Bb_{1, \cdot} + \cdots + a_n \Bb_{n, \cdot}\]
+    In other words, show that \(\ab \Bb\) is a linear combination of the rows of \(\Bb\), 
+    with the scalars that multiply the rows coming from \(\ab\).
+\end{problem}
+
+
+\begin{proof}
+By definiion of matrix multiplicaion, the entry in the column \(k\) of the l.h.s. equals 
+\[(\ab \Bb)_{1, k} = a_1 \Bb_{1, k} + \cdots + a_n \Bb_{n, k}\]
+which equals the right side. 
+\end{proof}
+
+
+\begin{problem}{11}
+    Prove that the distributive property holds for matrix addition and multiplication. In 
+    other words, suppose \(\Ab, \Bb, \Cb, \Db, \Eb, \Fb\) aare matrices whose sizes are such that 
+    \(\Ab(\Bb + \Cb)\) and \((\Db + \Eb)\Fb\) make sense. Explain this and prove that 
+    \[\Ab(\Bb + \Cb) = \Ab \Bb + \Ab \Cb \ \ \ \ (\Db + \Eb)\Fb = \Db \Fb + \Eb \Fb\]
+\end{problem}
+
+\begin{proof}
+We let \(\Ab, \Db, \Eb\) to be m-by-n matrix and \(\Bb, \Cb, \Fb\) to be n-by-p matrix. Then 
+all the matrix multiplication make sense. We proceed to prove the equality:
+
+\begin{align*}
+    (\Ab (\Bb + \Cb))_{j, k} 
+    &= \sum_{i=1}^{n} \Ab_{j, i} (\Bb + \Cb)_{i, k} \\ 
+    &= \sum_{i=1}^{n} \Ab_{j, i} (\Bb_{i, k} + \Cb_{i, k}) \\ 
+    &= \sum_{i=1}^{n} (\Ab_{j, i} \Bb_{i, k}) + (\Ab_{j, i} \Cb_{i, k}) \\ 
+    &= \Ab \Bb + \Ab \Cb 
+\end{align*}
+
+
+For the other one, we have that 
+
+\begin{align*}
+    ((\Db + \Eb)\Fb)_{j, k} 
+    &= \sum_{i=1}^{n} (\Db + \Eb)_{j, i} \Fb_{i, k} \\ 
+    &= \sum_i^n (\Db_{j, i} \Fb_{i, k}) + (\Eb_{j, i} \Fb_{i, k}) \\ 
+    &= \Db \Fb + \Eb \Fb 
+\end{align*}
+
+\end{proof}
+
+
+\begin{problem}{13}
+    Suppose \(\Ab\) is an n-by-n matrix and \(1 \leq j, k \leq n\). Show that the entry 
+    in row \(j\), column \(k\) of \(\Ab^3\) (which is defined to mean \(\Ab \Ab \Ab\)) is 
+    \[\sum_{p=1}^{n} \sum_{r=1}^{n} \Ab_{j, p} \Ab_{p, r} \Ab_{r, k}\]
+\end{problem}
+
+
+\begin{proof}
+
+\begin{align*}
+    (\Ab (\Ab \Ab))_{j, k }
+    &= \sum_p^n \Ab_{j, p} (\Ab \Ab)_{p, k} \\ 
+    &= \sum_p^n \Ab_{j, p} \sum_{r=1}^{n} \Ab_{p, r} \Ab_{r, k} \\ 
+    &= \sum_{p}^{n} \sum_r^n \Ab_{j, p} \Ab_{p, r} \Ab{r, k}
+\end{align*}
+
+\end{proof}
+
+
+\begin{problem}{14}
+    Suppose \(m\) and \(n\) are postiive integers. Prove that the function \(\Ab \mapsto \Ab^\top\)
+    is a linear map from \(\Fb^{m, n}\) to \(\Fb^{n, m}\).  
+\end{problem}
+
+\begin{proof}
+Let \(T\) denote the linear map such that \(T(\Ab) = \Ab^\top\). Then we have that 
+\[T(\lambda \Ab + \Bb) = (\lambda \Ab + \Bb)^\top = \lambda \Ab^\top + \Bb^\top = \lambda T(\Ab) + T(\Bb)\]
+\end{proof}
+
+\begin{problem}{15}
+    Prove that if \(\Ab\) is an m-by-n matrix and \(\Cb\) is an n-by-p matrix, then 
+    \[(\Ab \Cb)^\top = \Cb^\top \Ab^\top\] 
+\end{problem}
+
+\begin{proof}
+\begin{align*}
+    ((\Ab \Cb)^\top)_{j, k}
+    &= (\Ab \Cb)_{k, j} \\ 
+    &= \sum_{i=1}^{n} \Ab_{k, i} \Cb_{i, j}
+\end{align*}
+
+On the other hand, 
+\begin{align*}
+    (\Cb^\top \Ab^\top)_{j, k}
+    &= \sum_{i=1}^{n} \Cb^\top_{j, i} \Ab_{i, k}^\top \\ 
+    &= \sum_{i=1}^{n} \Ab_{k, i} \Cb_{i, j}
+\end{align*}
+\end{proof}
+
+
+\begin{problem}{16}
+    Suppose \(\Ab\) is an m-by-n matrix with \(\Ab \neq 0\). Prove that the rank of \(\Ab\)
+    is 1 if and only if there exist \((c_1, \ldots, c_m) \in \F^m\) and 
+    \((d_1, \ldots, d_n) \in \F^n\) such that \(\Ab_{j, k} = c_j d_k\)
+    for every \(j = 1, \ldots, m\) and every \(k = 1, \ldots, n\). 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) If rank of \(\Ab\) is 1, then this means that the span of 
+the columns of \(\Ab\) is 1-dimensional, take \(\Ab_{\cdot, 1} \in \F^m\) from the span. 
+(Note that here we assume \(\Ab_{\cdot, 1} \neq 0\) ow. take the first nonzero one)
+Then we can let \((c_1, \ldots, c_m) = \text{vec}(\Ab_{\cdot, 1})\). and let 
+For every other columns, they are the scalar multiple of the the first one, so 
+there exists \(d_2, \ldots, d_n\) s.t. \(\Ab_{j, k}  = c_j d_k\) (we take 
+\(d_1 = 1\)). 
+
+
+\(\Leftarrow\) If we denote \( \vecc = (c_1, \ldots, c_m)\), then 
+\[\Ab =  \begin{pmatrix}
+    d_1 \vecc & \cdots & d_n \vecc
+\end{pmatrix}\]
+so each column is a scalar multiple of the other and thus \(\Ab\) has rank 1. 
+\end{proof}
+
+\begin{problem}{17}
+    Suppose \(T \in \Lc(V)\), and \(u_1, \ldots, u_n\) and \(v_1, \ldots, v_n\) are bases of \(V\). 
+    Prove that the following are equivalent:
+
+    (a) \(T\) is injective. \\ 
+    (b) The column of \(\Mc(T)\) are linearly independent in \(\F^{n, 1}\) \\ 
+    (c) The columns of \(\Mc(T)\) span \(\F^{n, 1}\). \\ 
+    (d) The rows of \(\Mc(T)\) span \(\F^{1 , n}\). \\ 
+    (e) The rows of \(\Mc(T)\) are linearly independent in \(\F^{1, n}\). \\ 
+    Here \(\Mc(T)\) means \(\Mc(T, (u_1, \ldots, u_n), (v_1, \ldots, v_n))\). 
+\end{problem}
+
+\begin{proof}
+
+    Let \(\Ab\) represents the matrix of \(\Mc(T)\). 
+
+\((a) \Rightarrow (b) \colon\) \(a_1 \Ab_{\cdot, 1} + \cdots + a_n \Ab_{\cdot, n} = 0 \). We also 
+know that \(T v_i = \sum_{j=1}^{n}\Ab_{j, i} u_j\). Then we have that 
+\[T(a_1 v_1 + \cdots + a_n v_n) = \sum_{i=1}^{n} a_i T(v_i) = \sum_{i=1}^{n}a_i \sum_{j=1}^{n}\Ab_{j, i} u_j 
+= \sum_{j=1}^{n} (\sum_{i=1}^n a_i \Ab_{j, i}) u_j = 0 \]
+
+To prove all \(a_i\) is zero 
+we note that \(a_1 v_1 + \cdots + a_n v_n \in \nul T\) and since \(T\) is injective, the only possible case 
+is that all \(a_i = 0\) and thus wee prove the claim. 
+
+
+\((b) \Rightarrow (c)\) The columns of \(\Mc(T)\) forms a basis and thus span the space. 
+
+\((c) \Rightarrow (d)\) Column rank of \(\Mc(T)\) is \(n\) and thus row rank is also \(n\) and thus the rows 
+span \(\F^{1, n}\). 
+
+\((d) \Rightarrow (e)\) Same as above. 
+
+\((e) \Rightarrow (a)\) The only solution to \(a_1 \Ab_{1, \cdot} + \cdots + a_n \Ab_{n, \cdot} = 0\) is all 
+\(a_i = 0\). Suppose for the sake of contradiction that \(T\) is not injective so there exists nonzero 
+\( v \in \nul T\). We know that \(v = \sum_{i=1}^{n} a_i v_i\) and that \(T v_i = \sum_{j=1}^{n} \Ab_{j, i} u_j\). Then 
+\[T v = \sum_{i=1}^{n} a_i T(v_i) = \sum_{i=1}^{n} a_i \sum_{j=1}^{n} \Ab_{j, i} u_j = \sum_{i=1}^{n}
+(\sum_{j=1}^{n} a_i \Ab_{j, i})u_j = 0 \]
+
+and thus \(\sum_{j=1}^{n} a_i \Ab_{j, i} = 0\) for all \(j\). We know not all \(a_i = 0\) since \(v\) is 
+non-trivial and thus the solution contraidicts that the rows are all linearly independent. Proof completed.
+
+\end{proof}
+
+
+
+
+\newpage 
+
+\section*{3D: Invertibility and Isomorphisms}
+\addcontentsline{toc}{section}{3D: Invertibility and Isomorphisms}
+
+\begin{definition}[invertible, inverse]
+    \begin{itemize}
+        \item A linear map \(T \in \Lc(V, W)\) is called \emph{invertible} if there exists a linear map 
+        \(S \in \Lc(W, V)\) such that \(ST\) equals the identity operator on \(V\) and \(TS\) equals 
+        the identity operator on \(W\). 
+        \item A linear map \(S \in \Lc(W, V)\) satisfying \(ST = I\) and \(TS = I\) is called an 
+        \emph{inverse} of \(T\). 
+    \end{itemize}
+\end{definition}
+
+\begin{thm}
+    An invertible linear map has a unique inverse. 
+\end{thm}
+
+If \(T\) is invertible, then its inverse is denoted by \(T^{-1}\). 
+
+
+\begin{thm}
+    A linear map is invertible if and only if it is injective and surjective. 
+\end{thm}
+
+\begin{proof}
+\(\Rightarrow\) We have an invertible linear map \(T\) that \(T u = T v\). Then we have 
+\[u = T^{-1} Tu = T^{-1} Tv = v\]
+
+To show \(T\) is surjective, we have that for any \(w \in W, w = T(T^{-1}w)\). 
+
+\(\Leftarrow\) Define \(S\) such that for each \(w \in W\), \(S(w)\) is the unique element 
+s.t. \(T(S(w)) = w\). (we can do this due to injectivity and surjectivity). Then we have that 
+\(T(ST)v = (TS)Tv = Tv\) and thus \(ST v = v\) and thus \(ST = I\). So we suffices the identity 
+operator condition. It's easy to show that \(S\) is a linear map.
+
+\end{proof}
+
+
+\begin{thm}
+    Suppose that \(V\) and \(W\) are finite-dimensional vector spaces, \(\dim V = \dim W\), 
+    and \(T \in \Lc(V, W)\). Then 
+
+    \[T \text{ is invertible } \Leftrightarrow T \text{ is injective } \Leftrightarrow T \text{ is surjective.}\]
+\end{thm}
+
+\begin{corollary}
+    Suppose \(V\) and \(W\) are finite-dimensional vector spaces of the same dimension, \(S \in 
+    \Lc(W, V)\), and \(T \in \Lc(V, W)\). Then \(ST = I\) if and only if \(TS = I\). 
+\end{corollary}
+
+
+\begin{definition}[Isomorphism]
+    An \textbf{Isomorphism} is an invertible linear map. \\ 
+    Two vector spaces are called \textbf{isomorphic} if there is an isomorphism from one vector space 
+    onto the other one. 
+\end{definition}
+
+
+\begin{thm}[dimension shows whether vector spaces are isomorphic]
+    Two finite-dimensional vector spaces over \(\F\) are isomorphic if and only if they have 
+    the same dimension. 
+\end{thm}
+
+
+\begin{thm}
+    Suppose \(v_1, \ldots, v_n\) is a basis of \(V\) and \(w_1, \ldots, w_m\) is abasis of \(W\). 
+    Then \(\Mc\) is an isomorphism between \(\Lc(V, W)\) and \(\F^{m, n}\). 
+\end{thm}
+
+
+\begin{corollary}
+    Suppose \(V\) and \(W\) are finite-dimensional. Then \(\Lc(V, W)\) is finite-dimensional and 
+    \[\dim \Lc(V, W) = (\dim V) (\dim W)\]
+\end{corollary}
+
+\begin{definition}[matrix of a vector, \(\Mc(v)\)]
+    Suppose \(v \in V\) and \(v_1, \ldots, v_n\) is a basis of \(V\). Then \textbf{matrix of \(v\)} 
+    with respect to the basis is the n-by-1 matrix 
+    \[\Mc(v) = \begin{pmatrix}
+        b_1 \\ 
+        \vdots \\ 
+        b_n
+    \end{pmatrix},\]
+    where \(b_1, \ldots, b_n\) are the scalars such that 
+    \[v = b_1 v_1 + \cdots + b_n v_n\] 
+\end{definition}
+
+
+\begin{remark}
+    The matrix \(\Mc(v)\) of a vector \(v \in V\) depends on the basis \(v_1, \ldots, v_n\) and \(v\). We 
+    can think of elements of \(V\) as relabeled to be n-by-1 matrices, i.e. \(V \mapsto \F^{n , 1}\).
+\end{remark}
+
+\begin{corollary}
+    Suppose \(T \in \Lc(V, W)\) and \(v_1, \ldots, v_n\) is a basis of \(V\) and \(w_1, \ldots, w_m\)
+    is a basis of \(W\). Let \(1 \leq k \leq n\). Then \(k\)th column of \(\Mc(T)\), which is denoted 
+    by \(\Mc(T)_{\cdot, k}\), equals \(\Mc(T v_k)\)
+\end{corollary}
+
+
+\begin{thm}[linear maps act like matrix multiplication]
+    Suppose \(T \in \Lc(V, W)\) and \(v \in V\). Suppose \(v_1, \ldots, v_n\) is a basis of \(V\)
+    and \(w_1, \ldots, w_m\) is a basis of \(W\). Then 
+    \[\Mc(Tv) = \Mc(T) \Mc(v)\]
+\end{thm}
+
+\begin{proof}
+\begin{align*}
+    \Mc(Tv)
+    &= b_1 \Mc(T v_1) + \cdots + b_n \Mc(T v_n) \\ 
+    &= b_1 \Mc(T)_{\cdot, 1} + \cdots + b_n \Mc(T)_{\cdot, n} \\ 
+    &= \Mc(T) \Mc(v)
+\end{align*}
+\end{proof}
+
+\begin{remark}
+    Each m-by-n matrix \(\Ab\) induces a linear map from \(\F^{n, 1}\) to \(\F^{m, 1}\), namely the matrix 
+    multiplication function that takes \(x \in \F^{n, 1}\) to \(\Ab x \in \F^{m, 1}\). We can think of 
+    every linear map (from a finite vector space to another) as a matrix multiplication map 
+    after suitable relabeling via the isomorphisms given by \(\Mc\). Specifically, if \(T \in \Lc(V, W)\)
+    and we identify \(v \in V\) with \(\Mc(v) \in \F^{n, 1}\), then the result above says that we 
+    can identify \(Tv\) with \(\Mc(T) \Mc(v)\). 
+\end{remark}
+
+\begin{thm}[dimension of \(\range T\) equals column rank of \(\Mc(T)\)]
+    Suppose \(V\) and \(W\) are finite-dimensional and \(T \in \Lc(V, W)\). Then \(\dim \range T\)
+    equals the column rank of \(\Mc(T)\). 
+\end{thm}
+
+
+
+\begin{thm}[change-of-basis-formula]
+    Suppose \(T \in \Lc(V)\). Suppose \(u_1, \ldots, u_n\) and \(v_1, \ldots, v_n\) are bases of 
+    \(V\). Let 
+    \[\Ab = \Mc(T, (u_1, \ldots, u_n)) \text{  and  } \Bb = \Mc(T, (v_1, \ldots, v_n))\]
+    and \(\Cb = \Mc(I, (u_1, \ldots, u_n), (v_1, \ldots, v_n))\). Then 
+    \[\Ab = \Cb^{-1} \Bb \Cb.\]
+\end{thm}
+
+\begin{proof}
+
+\end{proof}
+\addcontentsline{toc}{subsection}{3D Problem Sets}
+\begin{problem}{1}
+    Suppose \(T \in \Lc(V, W)\) is invertible. Show that \(T^{-1}\) is invertible and 
+    \[(T^{-1})^{-1} = T.\]
+\end{problem}
+
+\begin{proof}
+
+    \(T^{-1}\) is invertible because there exists \(T\) such that \(T T^{-1} = T^{-1} T  = I\). 
+
+\[T^{-1} T = TT^{-1} = I\]
+
+so \((T^{-1})^{-1} = T\).
+\end{proof}
+
+
+\begin{problem}{2}
+    Suppose \(T \in \mathcal{L}(U, V)\) and \(S \in \Lc(V, W)\) are both invertible linear maps. 
+    Prove that \(ST \in \Lc(U, W)\) is invertible and that \((ST)^{-1} = T^{-1}S^{-1}\).
+\end{problem}
+
+\begin{proof}
+\((ST)(T^{-1}S^{-1}) = S(T T^{-1})S^{-1} = I = T^{-1}S^{-1}S T\).
+\end{proof}
+
+\begin{problem}{3}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Prove that the following are equivalent.
+
+    (a) \(T\) is invertible. \\ 
+    (b) \(T v_1, \ldots, T v_n\) is a basis of \(V\) for every basis \(v_1, \ldots, v_n\) of \(V\). \\ 
+    (c) \(T v_1, \ldots, T v_n\) is a basis of \(V\) for some basis \(v_1, \ldots, v_n\) of \(V\). 
+\end{problem}
+
+\begin{proof}
+\((a) \Rightarrow (b)\) It only suffice to prove linear independence. We can show this 
+\[a_1 Tv_1 + \cdots + a_n T v_n = 0 \Longleftrightarrow a_1 v_1 + \cdots + a_n v_n = 0\]
+
+since \(T\) is injective and thus the only solution is all \(a_i\) are identically zero. 
+
+\((b) \Rightarrow (c)\) Trivial. 
+
+\((c) \Rightarrow (a)\) By the linear map lemma, there exists \(S \in \Lc(V)\) such that 
+\(S(T v_i) = v_i\) for all \(i\). Such \(S\) is the inverse of \(T\) (one can verify) and thus 
+\(T\) is invertible. 
+\end{proof}
+
+
+\begin{problem}{5}
+    Suppose \(V\) is finite-dimensional, \(U\) is a subspace of \(V\), and \(S \in \Lc(U, V)\). Prove 
+    that there exists an invertible linear map \(T\) from \(V\) to itself such that 
+    \(T u = Su\) for every \(u \in U\) if and only if \(S\) is injective. 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) Since \(T\) is invertible, we can define \(T^{-1}\) restricted to \(U\), where 
+\(S^{-1} u = T^{-1}u \) for all \(u \in U\). Then \(S\) has an inverse and thus is injective. 
+
+\(\Leftarrow\) Let \(v_1, \ldots v_m\) be the basis of \(U\) and \(v_1, \ldots, v_m, x_1 \ldots, v_n\) 
+be the extended basis of \(V\). Define \(T v_i = S v_i\) and \(T x_i = x_i\). Then \(T\) is injective 
+and thus invertible. 
+\end{proof}
+
+\begin{problem}{6}
+    Suppose that \(W\) is finite-dimensional and \(S, T \in \Lc(V, W)\). Prove that 
+    \(\nul S = \nul T\) if and only if there exists an invertible \(E \in \Lc(W)\) such that 
+    \(S = ET\).  
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) Suppose \(V\) is finite-dimensional for simplicity (one can do more work for 
+relaxing this assumption). 
+ Let \(V = \nul S \oplus C = \nul T \oplus C\) for some \(C\). Then we know that 
+\(T|_C \colon C \to \range (T(C))\) and \(S|_C \colon C \to \range(S(C))\) is invertible.  Then 
+there exists an invertible map \(\Eh \colon \range(T(C)) \to \range(S(C))\) as \(\dim \range T(C) 
+= \range (S(C)) = \dim V\). Extending this map to \(W\) solves the problem (take bases from \(\range T(C)\)
+and extend to \(W\) with ``identity'' map).
+
+\(\Leftarrow\) Take \(v \in \nul T\), then \(S(v) = E(Tv) = E(0)  = 0\) and thus \(v \in \nul S\). Conversely,
+take \(v \in \nul S\), then \(T(v) = E^{-1}S(v) = 0\) so \(v \in \nul T\). Thus \(\nul S = \nul T\). 
+\end{proof}
+
+\begin{problem}{7}
+    Suppose that \(V\) is finite-dimensional and \(S, T \in \Lc(V, W)\). Prove that \(\range S = \range T\)
+    if and only if there exists an invertible \(E \in \Lc(V)\) such that \(S = TE\). 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) By 3B P26, we know that there exists \(\ET \in \Lc(V)\) s.t. \(S = T \ET\) as 
+\(\range S \subseteq \range T\). \(\range S = \range T\) implies that \(\dim \nul S = \dim \range T\). 
+Then we can define an invertible map \(\Ebar\) from \(\nul S\) to \(\nul T\). We can define the map \(E\) as follows:
+Denote \(V = \nul S \oplus P\), then \(E(v) = \ET(v_1) + \Ebar(v_2)\) for \(v = v_1 + v_2\), where 
+\(v_1 \in P, v_2 \in \nul S\) and now \(\ET = \ET |_P\). Then we have that \(TE(v) = T(\ET(v_1) + \Ebar(v_2)) = S(v_1)
++ S(v_2) = S(v)\). Now it left to verify that our proposed \(E\) is invertible. 
+
+To show this, we mainly aim at proving \(\range \Et \cap \range \Ebar = \{0\}\), as if we have this, we 
+know that \(E(v) = \ET(v_1) + \Ebar(v_2) = 0 \Rightarrow \ET(v_1) = \Ebar(v_2) = 0\). We know \(\Ebar\) is 
+invertible so \(v_2 = 0\). To see \(\ET\) is injective, we can see that for any \(v_1 \in \nul \ET\), we 
+have \(S v_1 = T \ET v_1 = T 0 = 0\) and thus \(v_1 \in \nul S \cap P = 0\), so \(v_1 = 0\) and thus 
+\(nul (E) = \{0\}\), \(E\) is injective and therefore invertible. 
+
+To complete the proof, let \(u \in \range \ET \cap \range \Ebar\), then we know there exists 
+\(v_1 \in P, v_2 \in \nul S\) s.t. \(u = \ET(v_1) = \Ebar(v_2)\). We also know that \(u \in \nul T\)
+as \(\range \Ebar = \nul T\). Now we have that \(S (v_1) = T \ET(v_1) = T \Ebar(v_2) = 0\) and thus 
+\(v_1 \in \nul S\). So \(v_1 \in  P \cap \nul S = \{0\}\) and thus we have that \(u = \{0\}\), finishing 
+the proof.
+
+% then we know \(u \in \nul T\) as 
+% \(\range \Ebar = \nul T\). So we have that there is \(x \in \nul S, Sx = T \ET x = T \Ebar x = T u = 0.\)
+% So we know that \(x \in \nul T\)
+
+% This means that \(\dim \nul S = \dim \nul T\) and thus we can define an invertible map 
+% \(\Eh\) from \(\nul S\) to \(\nul T\). 
+
+
+\(\Leftarrow\) Take any \(s \in \range S\), then there exists \(E(s)\) s.t. \(T(E(s)) = s\). Conversely, 
+take any \(t \in \range T\), then there exists \(v \in V\) s.t. \(t = Tu = TE E^{-1}v = S (E^{-1}v)\). 
+Thus \(\range S = \range T\). 
+
+\end{proof}
+
+
+\begin{problem}{8}
+    Suppose \(V\) and \(W\) are finite-dimensional and \(S, T \in \Lc(V, W)\). Prove that 
+    there exist invertible \(E_1 \in \Lc(V)\) and \(E_2 \in \Lc(W)\) such that 
+    \(S = E_2 T E_1\) if and only if \(\dim \nul S = \dim \nul T\). 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) We know from 3B exercises that \(\dim \range ST \leq \min (\dim \range S, \dim \range T)\). 
+Applying  here gets that \(\dim \range S \leq \dim \range T\). Consider that \(T = E^{-1}_2 S E_1^{-1}\), 
+then we can also derive \(\dim \range T \leq \dim \range S\) and thus \(\dim \range S = \dim \range T\). 
+By the fundamental theorem of linear map, we can get that \(\dim \nul S = \dim \nul T\). 
+
+\(\Leftarrow\) We know \(\dim \nul S = \dim \nul T\), so there exists an isomorphism \(\ET_1 \colon 
+\nul S \mapsto \nul T\). Extending \(\ET_1 \colon \nul S \mapsto V\) stil preserves its injectivity. Therefore 
+by P5 we have an invertible \(E_1 \colon V \mapsto V\) such that \(E_1 u = \ET_1 u\) for all \(u \in \nul S\). 
+Now we intend to show that \(\nul S = \nul T E_1\), as proving so would imply there exists an invertible 
+\(E_2 \in \Lc(W)\) such that \(S=E_2 T E_1\) by P6. To see this, take \(s \in \nul S\), then 
+\(TE_1(s) = T(\ET_1 s) = 0\) and thus \(s \in \nul TE_1\). To see the other direction, take 
+\(t \in \nul T E_1\), then we know \(E_1 t \in \nul T = \range \ET_1\). Thus there exists \(v \in \nul S\)
+s.t. \(E_1 t = \ET_1 v = E_1 v\). As \(E_1\) is invertible, \(t = v \in \nul S\) and thus we have shown 
+\(\nul S = \nul TE_1\), completing the proof.   
+\end{proof}
+
+
+\begin{problem}{9}
+    Suppose \(V\) is finite-dimensional and \(T \colon V \to W\) is a surjective linear map of \(V\)
+    onto \(W\). Prove that there is a subspace \(U\) of \(V\) such that \(T |_U\) is an isomorphism 
+    of \(U\) onto \(W\).
+\end{problem}
+
+\begin{proof}
+\(T\) being surjective means that \(\dim V \geq \dim W\). Take any subspace of \(V\) that has 
+\(\dim W\), then there is an isomorphism between this subspace and \(W\). 
+\end{proof}
+
+\begin{problem}{10}
+    Suppose \(V\) and \(W\) are finite-dimensional and \(U\) is a subspace of \(V\). Let 
+    \[\Ec = \{T \in \Lc(V, W) \colon U \subseteq \nul T\}.\]
+
+    (a) Show that \(\Ec\) is a subspace of \(\Lc(V, W)\). \\ 
+    (b) Find a formula for \(\dim \Ec\) in terms of \(\dim V, \dim W,\) and \(\dim U\). 
+\end{problem}
+
+\begin{proof}
+(a) Take \(T_1, T_2 \in \Ec\) and \(\lambda \in \F\), then consider \(\nul(\lambda T_1 + T_2)\). Let 
+\(u \in U\), then \(\lambda T_1 + T_2 (u) = \lambda T_1 (u) + T_2 (u) = 0 + 0 = 0\) and thus we have 
+\(\lambda T_1 + T_2  \in \Ec\) and thus \(\Ec\) is a subspace of \(\Lc(V, W)\). 
+
+(b) Following the hint, define \(\Phi \colon \Lc(V, W) \to \Lc(U, W)\) by \(\Phi(T) = T |_U\). Then 
+\(\Phi \in \Lc(\Lc(V, W), \Lc(U, W))\). We try to show the range and null space of \(\Phi\). 
+
+We first 
+claim \(\nul \Phi = \Ec\). To see this, take \(T \in \nul \Phi\), then we know \(\Phi(T) 
+= T |_U = 0 \in \Lc(U, W)\), meaning that \(U\) is the subset of \(\nul T\), so \(\nul \Phi \subseteq \Ec \). 
+Conversely, take \(T \in \Ec\), then we have that for all \(u \in U\), \(Tu = 0\), then we have that 
+\(T |_U = 0\). This shows that \(\Ec \subseteq \nul \Phi\). 
+
+Next we claim \(\range \Phi = \Lc(U, W)\). Take any \(S \in \Lc(U, W)\), then we can naturally always extend 
+\(S\) to \(T \in \Lc(V, W)\) by setting \(T u = S u\) for all \(u \in U\). The converse direction is trivial. 
+
+Thus we have that \(\dim \Ec = \dim \nul \Phi\) and \(\dim \range \Phi = \dim \Lc(U, W) = \dim U \dim W\)
+and \(\dim \Lc(V, W) = \dim V \dim W = \dim \nul \Phi + \dim \range \Phi\), thus we derive that 
+\[\dim V \dim W = \dim \Ec + \dim U \dim W.\]
+
+\end{proof}
+
+
+
+\begin{problem}{14}
+    Prove or give a counterexample: If \(V\) is finite-dimensional and \(R, S, T \in \Lc(V)\) are such 
+    that \(RST\) is surjective, then \(S\) is injective. 
+\end{problem}
+
+
+\begin{proof}
+We know that \[\dim \range RST = \dim \range V \leq \min \{\dim \range R, \dim \range S, \dim \range T\} \]
+This means that \(\dim RST \leq \dim \range S\).
+If \(\dim \nul S > 0\), then \(\dim \range S < \dim V\) and thus 
+contradicts the assumption that \(RST\) is surjective. 
+\end{proof}
+
+\begin{problem}{15}
+    Suppose \(T \in \Lc(V)\) and \(v_1, \ldots, v_m\) is a list in \(V\) such that \(T v_1, \ldots, T v_m\)
+    spans \(V\). Prove that \(v_1, \ldots, v_m\) spans \(V\). 
+\end{problem}
+
+\begin{proof}
+We can reduce the list to basis and use previous conclusions. Since \(T v_1, \ldots, T v_m\) spans \(V\), 
+we can reduce the list to \(T v_1, \ldots, T v_n\) such that the list is the basis of \(V\). By previous 
+results, \(v_1, \ldots, v_n\) is also linearly independent and its dimension equals the \(\dim V\) and thus 
+is the basis of \(V\). It thus spans \(V\). Extending the list to \(v_1, \ldots, v_m\) also spans \(V\). 
+
+\end{proof}
+
+
+\begin{problem}{16}
+    Prove that every linear map from \(\F^{n, 1}\) to \(\F^{m, 1}\) is given by a matrix multiplication. 
+    In other words, prove that if \(T \in \Lc(\F^{n, 1}, \F^{m, 1})\), then there exists an m-by-n matrix 
+    \(\Ab\) such that \(Tx =\Ab x\) for every \(x \in \F^{n, 1}\).
+\end{problem}
+
+\begin{proof}
+We can simply consider the standard basis of \(\F^{n, 1}\) and \(\F^{m, 1}\). Then Let \(\Ab\) be the matrix 
+of \(T\) wrt these bases. Then we have that by definition, 
+\[T x = \Mc(Tx) = \Mc(T) \Mc(x) = \Ab x\]
+\end{proof}
+
+\begin{problem}{17}
+    Suppose \(V\) is finite-dimensional and \(S \in \Lc(V)\). Define \(\Ac \in \Lc(\Lc(V))\) by 
+    \[\Ac(T) = ST\] 
+    for \(T \in \Lc(V)\). 
+
+    (a) Show that \(\dim \nul \Ac = \dim V \dim \nul S\). \\ 
+    (b) Show that \(\dim \range \Ac = \dim V \dim \range S\). 
+\end{problem}
+
+\begin{proof}
+(a) We prove this by showing \(\nul \Ac = \Lc(V,\nul S)\). Take \(A \in \nul \Ac\), then we know that 
+\(\Ac (A) = SA = 0\) and thus \(Av \in \nul S\) for all \(v \in V\). For the other direction, take 
+\(A \in \Lc(V, \nul S)\), then \(SA(v) = \Ac(v) = 0\) and thus \(A \in \nul \Ac\). 
+
+(b) We know \(\dim (\Lc(V)) = \dim \nul \Ac + \dim \range \Ac\). Hence 
+\[\dim \range \Ac = \dim V (\dim V - \dim \nul S) = \dim V \dim \range S.\]
+\end{proof}
+
+
+\begin{problem}{18}
+    Show that \(V\) and \(\Lc(\F, V)\) are isomorphic vector spaces. 
+\end{problem}
+
+\begin{proof}
+For simplicity, assume \(V\) is finite-dimensional, then \(\dim V = \dim \F \dim V = \dim \Lc(\F, V)\) and 
+thus they are isomorpic. One might do a more careful construction for infinite-dimensional \(V\). 
+\end{proof}
+
+
+\begin{problem}{19}
+    Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Prove that \(T\) has the same matrix with 
+    respect to every basis of \(V\) if and only if \(T\) is a scalar multiple of the identity operator.
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) We know \(T v_k = \sum_{j=1}^{n} A_{j, k} v_k = \sum_{j=1}^{n} 2 A_{j, k} v_k
+= T (2v_k)\). This means that \(A_{j, k} = 0\) for \(j \neq k\). When \(j = k\), we have that 
+\(T v_k = A_{k, k} v_i\) for some arbitrary ordering of the same basis. Then this means that 
+\(A_{i, i} = A_{j, j}\) for all \(i, j\). Thus, \(T\) is a scalar multiple of the identity operator. 
+
+\(\Leftarrow\) This follows by the definition of the identity operator. 
+\end{proof}
+
+\newpage 
+
+\section*{3E: Products and Quotients of Vector Spaces}
+\addcontentsline{toc}{section}{3E: Products and Quotients of Vector Spaces}
+
+\begin{definition}[product of vector spaces]
+    Suppose \(V_1, \ldots, V_m\) are vector spaces over \(\F\). 
+    \begin{itemize}
+        \item The \textbf{product} \(V_1 \times \cdots \times V_m\) is defined by 
+        \[V_1 \times \cdots \times V_m = \{(v_1, \ldots, v_m) \colon 
+        v_1 \in V_1, \ldots, v_m \in V_m\}.\]
+        \item Addition on \(V_1 \times \cdots \times V_m\) is defined by 
+        \[(u_1, \ldots, u_m) + (v_1, \ldots, v_m) = (u_1 + v_1, \ldots, u_m + v_m).\]
+        \item Scalar multiplication on \(V_1 \times \cdots \times V_m\) is defined by 
+        \[\lambda(v_1, \ldots, v_m) = (\lambda v_1, \ldots, \lambda v_m).\]
+    \end{itemize}
+\end{definition}
+
+\begin{thm}[product of vector spaces is a vector space]
+    Suppose \(V_1, \ldots, V_m\) are vector spaces over \(\F\). Then \(V_1 \times \cdots \times V_m\)
+    is a vector space over \(\F\). 
+\end{thm}
+
+
+\begin{thm}[dimension of a product is the sum of dimensions]
+    Suppose \(V_1, \ldots, V_m\) are finite-dimensional vector spaces. Then \(V_1 \times \cdots \times 
+    V_m\) is finite-dimensional and 
+    \[\dim (V_1 \times \cdots \times V_m) = \dim V_1 + \cdots + \dim V_m.\]
+\end{thm}
+
+
+\begin{lemma}[products and direct sums]
+    Suppose that \(V_1, \ldots, V_m\) are subspaces of \(V\). Define a linear map \(\Gamma \colon 
+    V_1 \times \cdots \times V_m \to V_1 + \cdots + V_m \) by
+    \[\Gamma (v_1, \ldots, v_m) = v_1 + \cdots + v_m.\]
+    Then \(V_1 + \cdots + V_m\) is a direct sum if and only if \(\Gamma\) is injective. 
+\end{lemma}
+
+\begin{thm}[a sum is a direct sum if and only if dimensions add up]
+    Suppose \(V\) is finite-dimensional and \(V_1, \ldots, V_m\) are subspaces of \(V\). Then 
+    \(V_1 + \cdots + V_m\) is a direct sum if and only if 
+    \[\dim(V_1 + \cdots + V_m) = \dim V_1 + \cdots + \dim V_m.\]
+\end{thm}
+
+
+\begin{definition}[\(v + U\), translation]
+    Suppose \(v \in V\) and \(U \subset V\). Then \(v + U\) is the subset of \(V\) defined by 
+    \[v + U = \{v + u \colon  u \in U\}.\]
+
+    The set \(v + U\) is said to be a \textbf{translate} of \(U\).
+\end{definition}
+
+
+\begin{definition}[\textbf{quotient space}, \(V/U\)]
+    Suppose \(U\) is a subspace of \(V\). Then the \textbf{quotient space} \(V / U\) is the set of 
+    all translates of \(U\). Thus 
+    \[V / U = \{v + U \colon v \in V\}.\]
+\end{definition}
+
+\begin{remark}
+    If \(U = \{(x, 2x) \in \R^2 \colon x \in R\}\), then \(\R^2 / U\) is the set of all lines in 
+    \(\R^2\) that have slope 2. 
+\end{remark}
+
+
+\begin{lemma}[two translates of a subspace are equal or disjoint]
+    Suppose \(U\) is a subspace of \(V\) and \(v, w \in V\). Then 
+
+    \[v - w \in U \Leftrightarrow v + U = w + U \Leftrightarrow (v + U) \cap (w + U) = \emptyset\]
+\end{lemma}
+
+\begin{definition}[addition and scalar multiplication on \(V / U\)]
+    Suppose \(U\) is a subspace of \(V\). Then \textbf{addition} and \textbf{scalar multiplication} 
+    are defined on \(V / U\) by 
+    \begin{align*}
+        (v + U) + (w + U) &= (v+w) + U \\ 
+        \lambda (v+U) = (\lambda v) + U 
+    \end{align*}
+    for all \(v, w \in V\) and all \(\lambda \in \F\). 
+\end{definition}
+
+
+\begin{thm}[quotient space is a vector space]
+    Suppose \(U\) is a subspace of \(V\). Then \(V / U\), with the operations of addition and 
+    scalar multiplication as defined above, is a vector space. 
+\end{thm}
+
+\begin{definition}[quotient map]
+    Suppose \(U\) is a subspace of \(V\). The \textbf{quotient map} \(\pi \colon 
+    V \to V / U\) is the linear map defined by 
+    \[\pi(v) = v + U\]
+    for each \(v \in V\). 
+\end{definition}
+
+
+\begin{thm}[dimension of quotient space]
+    Suppose \(V\) is finite-dimensional and \(U\) is a subspace of \(V\). Then 
+    \[\dim V/U = \dim V - \dim U\]
+\end{thm}
+
+
+\begin{definition}
+    Suppose \(T \in \Lc(V, W)\). Define \(\TT \colon V / (\nul T) \to W\) by 
+    \[\TT (v + \nul T) = Tv.\]
+\end{definition}
+
+
+Another interpretation of quotient space is on \textbf{congruence of subspaces}. The definition goes 
+as follows:
+
+If \(Y\) is a subspace of \(X\), then two vectors \(x_1, x_2 \in X\) are \textbf{congrugent modulo} \(Y\),
+denoted \(x_1 \cong x_2 (\mod Y)\) if \(x_1 - x_2 \in Y\).
+
+The quotient space \(X / Y\) denotes the set of equivalence classes in \(X\), modulo \(Y\) by defining that 
+\[\{x\} + \{z\} \coloneqq \{x+ z\} \ \ \ a\{x\} \coloneqq \{ax\}\]
+
+So here one can think of the zero vector of \(v + U\) defined as the equivalence class that contains that 
+zero vector \(0 \in V\): 
+\[0 + U = \{0 + u \colon u \in U\} = U.\]
+This means that the zero element in the quotient space \(V / U\) is simply the subspace \(U\), and this 
+equivalence class contains all vectors differ from 0 by an element of \(U\), meaning it is precisely 
+\(U\) itself, so \(\pi(v) = 0\) if and only if \(v \in U\). 
+
+\begin{remark}
+    The output of \(\pi(v)\) is the equivalence class \(v + U\), which is the set of all vectors in \(V\)
+    that are equivalent to \(v\) under the subspace \(U\).
+\end{remark}
+
+For \(\TT\), the input to it is an equivalent class \(v + \nul (T)\) in the quotient space \(V / \nul T\). 
+It represents all vectors in \(V\) that differ from \(v\) by a vector in \(\nul T\). Its output is 
+\(T v\), which is an element in \(W\). 
+
+The null space is 
+\[\nul (\Tt) = \{v + \nul(T) \colon \Tt(v + \nul (T)) = 0\}. \]
+Since we know that \(\Tt(v + \nul T) = Tv\), we have that 
+\[\Tt(v + \nul T) = 0 \ \Leftrightarrow \ Tv = 0.\]
+
+so \(v \in \nul T\) and thus \(\nul \Tt = \{\nul T\}\). We have that \(\range \Tt = \range T\).
+
+\begin{thm}
+    Suppose \(T \in \Lc(V, W)\). Then \\ 
+    (a) \(\Tt \circ \pi = T\), where \(\pi\) is the quotient map of \(V\) onto \(V / \nul T\); \\ 
+    (b) \(\Tt\) is injectve;\\ 
+    (c) \(\range \Tt = \range T\);\\ 
+    (d) \(V / \nul T\) and \(\range T\) are isomorphic vector spaces. 
+\end{thm}
+
+\begin{remark}
+    One might think of the domain of \(\Tt\) as the non-trivial domain of \(T\) and the range as the normal 
+    image of \(T\). 
+\end{remark}
+
+\newpage 
+\addcontentsline{toc}{subsection}{3E Problem Sets}
+
+\begin{problem}{1}
+    Suppose \(T\) is function from \(V\) to \(W\). The \emph{graph} of \(T\) is the subset of \(V \times W\)
+    defined by 
+    \[\text{graph of } T = \{(v, Tv) \in V \times W \colon v \in V\}.\]
+    Prove that \(T\) is a linear map if and only if the graph of \(T\) is a subspace of \(V \times W\). 
+\end{problem}
+
+\begin{proof}
+The two properties closely relate to each other:
+\[(v_1, Tv_1) + (v_2, Tv_2) \in V \times W \colon v \in V \Leftrightarrow Tv_1 + Tv_2 = T(v_1 + v_2)\]
+and 
+\[(\lambda v, T \lambda v) \in V \times W \colon v \in V \Leftrightarrow T \lambda v = \lambda T v\]
+\end{proof}
+
+\begin{problem}{2}
+    Suppose that \(V_1, \ldots, V_m\) are vector spaces such that \(V_1 \times \cdots \times V_m\) 
+    is finite-dimensional. Prove that \(V_k\) is finite-dimensional for each \(k = 1,\ldots,m\).
+\end{problem}
+
+\begin{proof}
+    Recall the definition of infinite-dimension from ch2 P17:
+
+    \begin{center}
+        \(V\) is infinite-dimensional if and only if there is a sequence 
+        \(v_1, v_2, \ldots\) of vectors in \(V\) such that \(v_1, \ldots, v_m\)
+        is linearly independent for every positive integer \(m\). 
+    \end{center}
+
+    Suppose for the sake of contradiction that there exists \(V_k\) to be infinite-dimensional. Then 
+    this means that there is a sequence \(v_{k, 1}, v_{k, 2}, \ldots\) of vectors in \(V_k\) such 
+    that \(v_{k, 1}, \ldots, v_{k, m}\) is linearly independent for every positive integer \(m\). 
+    We can build such sequence for the product space as well. More specifically, consider the sequence 
+    \(0, \ldots, v_{k, j}, \ldots, 0\) where we fill 0 for each of other \(V_j\)'s and only leave the 
+    sequence from \(V_k\). In this case, we can see that the product space is infinite-dimensional, 
+    contradicting the claim. 
+\end{proof}
+
+\begin{problem}{3}
+    Suppose \(V_1, \ldots, V_m\) are vector spaces. Prove that \(\Lc(V_1 \times \cdots \times V_m, W)\)
+    and \(\Lc(V_1, W) \times \cdots \times \Lc(V_m, W)\) are isomorphic vector spaces. 
+\end{problem}
+
+\begin{proof}
+
+We define a permutation invariant set function \(S \colon \Lc(V_1, W) \times \cdots \times \Lc(V_m, W)
+\to \Lc(V_1 \times \cdots \times V_m, W)\) such that 
+\[S(T_1, \ldots, T_m) = T_1 + \cdots + T_m\]
+
+We will show that \(S\) is an isomorphism (it's linear). For injectivity, \(\nul S\) means that 
+for any arbitrary input \(T_1 + \cdots + T_m = 0\), which implies that \(T_i = 0\) for all \(i\). 
+For surjectivity, take \(\phi \in \Lc(V_1 \times \cdots \times V_m, W)\), we can define 
+\(T_i(v_i) = \phi((0, \ldots, v_i, \ldots, 0))\) where \(i\) means for the space \(V_i\). Then we can 
+naturally get that \(\phi((v_1, \ldots, v_m))= \phi(\sum_{i=1}^{m}e_i^\top v_i) = \sum_{i=1}^{m} T_i (v_i) \)
+and thus we finish the proof.
+
+\end{proof}
+
+\begin{problem}{4}
+    Suppose \(W_1, \ldots, W_m\) are vector spaces. Prove that \(\Lc(V, W_1 \times \cdots \times W_m)\)
+    and \(\Lc(V, W_1) \times \cdots \times \Lc(V, W_m)\) are isomorphic vector spaces. 
+\end{problem}
+
+We can simply define a concatenate operator \(S \colon \Lc(V, W_1) \times \cdots \times 
+\Lc(V, W_m) \to \Lc(V, W_1 \times \cdots \times W_m)\) such that 
+\[S(T_1, \ldots, T_m) = (T_1, \ldots, T_m)\]
+We prove this linear map is an isomorphism. The injective property can be proved using the same logic as 
+above. For surjectivity, take \(\phi \in Lc(V, W_1 \times \cdots \times W_m)\), then we can naturally 
+obtain \(T_k = \pi_k \phi\) where \(\pi_k\) means projecting the \(k\)-th component of the input. Note that 
+\(T_k \in \Lc(V, W_k)\) and therefore we finish the proof. 
+
+
+\begin{problem}{5}
+    For \(m\) a positive integer, define \(V^m\) by 
+    \[V^m = \underbrace{V \times \cdots \times V}_{m \text{ times}}.\]
+    Prove that \(V^m\) and \(\Lc(\F^m, V)\) are isomorphic vector spaces. 
+\end{problem}
+
+\begin{proof}
+\[\dim (V^m) = m \dim V = \dim(\Lc(\F^m, V)).\]
+\end{proof}
+
+\begin{problem}{6}
+    Suppose that \(v, x\) are vectors in \(V\) and that \(U, W\) are subspaces of \(V\)
+    such that \(v + U = x + W\). Prove that \(U = W\).  
+\end{problem}
+
+\begin{proof}
+Note that \(v = x + w\) for some \(w \in W\) if we take \(u = 0 \in U\) and similarly 
+\(x = v + u\) for some \(u \in U\). Hence \(v - x \in W\) and \(x - v \in U\). Then we 
+have that take \(u \in U, u = (x + w) - v = (x - v) + w \in W\). Similarly, take 
+\(w \in W, w = (v + u) - x = (v - x) + u \in U\). Hence \(W = U\). 
+\end{proof}
+
+\begin{problem}{9}
+    Prove that a nonempty subset \(A\) of \(V\) is a translate of some subspace of \(V\) if and only 
+    if \(\lambda v + (1 - \lambda) w \in A\) for all \(v, w \in A\) and all \(\lambda \in \F\). 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) Suppose \(A = x + U\) for some subspace \(U \subseteq V\). Then take 
+\(a_1 = x + u_1 \in A\) and \(a_2 = x + u_2 \in A\). We have that 
+\[\lambda a_1 + (1 - \lambda) a_2 = \lambda x + \lambda u_1 + (1 - \lambda)x + (1 - \lambda)u_2 
+= x + (\lambda u_1 + (1 - \lambda)u_2) \in A\]
+
+\(\Leftarrow\) take any \(x \in A\) and define the subspace such that 
+\[U \coloneq (-x) + A\]
+first \(0 = -x + x \in U\). Next, take \(v_1 - x\) and \(v_2 - x \in U\). We have that 
+\(v_1 - x + v_2 - x = (-x) + (2v_1 - x)/2 + (2v_2 - x)/2 \in A\) as \(2v_i - x \in A\)
+by taking \(\lambda = 2\). Finally, \(\lambda (-x + v) = (-x) + (\lambda v + (1 - \lambda) x) \in A\). 
+
+\end{proof}
+
+\begin{problem}{10}
+    Suppose \(A_1 = v + U_1\) and \(A_2 = w + U_2\) for some \(v, w \in V\) and some subspaces 
+    \(U_1, U_2\) of \(V\). Prove that the intersection \(A_1 \cap A_2\) is either a translate of 
+    some subspace of \(V\) or is the empty set. 
+\end{problem}
+
+\begin{proof}
+If \(A_1 \cap A_2\) is not empty, then \(S = A_1 \cap A_2\) is a subspace such that \(v + U_1|_S = w + U_2|_S\),
+so we know that \(U_1 |_S = U_2 |_S\) by Problem 6. Hence it is a translate of some subspace of \(V\). Otherwise,
+it is the empty set. 
+\end{proof}
+
+\begin{problem}{11}
+    Suppose \(U = \{(x_1, x_2, \ldots) \in \F^\infty \colon x_k \neq 0 \text{ for only finitely many }k\}.\).\\ 
+    (a) Show that \(U\) is a subspace of \(\F^\infty\). \\ 
+    (b) Prove that \(\F^\infty / U\) is infinite-dimensional. 
+\end{problem}
+
+\begin{proof}
+(a) all zero, where \(x_k \neq 0\) for zero \(k\)'s (finitely many) is an element of \(U\). Next, take \((x_1, x_2, \ldots)\)
+and \((y_1, y_2, \ldots) \in U\). Then \((x_1 + y_1, x_2 + y_2, \ldots)\) will have finitely many nonzero
+since each of them has only finitely many nonzero entries. Same holds for \(\lambda(x_1, x_2, \ldots)\). 
+
+(b) Let's consider a ``standard basis'' \(\{v_i\}_{i=1}^\infty\) that only has 0 on \(i\)-th spot and all 1 otherwise. 
+We can see that for all \(m\), \(v_1, \ldots, v_m\) is linearly independent. And so does \(v_1 + U, \ldots, 
+v_m + U\) since each \(v_i \notin U\), 
+
+\end{proof}
+
+\begin{problem}{12}
+    Suppose \(v_1, \ldots, v_m \in V\). Let 
+    \[A = \{\lambda_1 v_1 + \cdots + \lambda_m v_m \colon \lambda_1, \ldots, \lambda_m \in F \text{ and }
+    \lambda_1 + \cdots + \lambda_m = 1\}.\]
+    (a) Prove that \(A\) is a translate of some subspace of \(V\). \\ 
+    (b) Prove that if \(B\) is a translate of some subspace of \(V\) and \(\{v_1, \ldots, v_m\} \subseteq B\), 
+    then \(A \subseteq B\). \\ 
+    (c) Prove that \(A\) is a translate of some subspace of \(V\) of dimension less than \(m\). 
+\end{problem}
+
+\begin{proof}
+(a) We try to show this through using the conclusion from Problem 9. Let \(a_1 = \sum_{i=1}^{m}\alpha_i v_i\)
+and \(a_2 = \sum_{i=1}^{m} \gamma_i v_i\) s.t. \(\sum_{i=1}^{m} \alpha_i = \sum_{i=1}^m \gamma_i = 1\). We have that 
+\begin{align*}
+    \lambda a_1 + (1 - \lambda) a_2 
+    &= \sum_{i=1}^{m} (\lambda \alpha_i + (1 - \lambda) \gamma_i ) v_i 
+\end{align*}
+We can show that 
+\[\sum_{i=1}^{m} (\lambda \alpha_i + (1 - \lambda) \gamma_i ) 
+= \lambda \sum_{i=1}^{m} \alpha_i + (1 - \lambda) \sum_{i=1}^{m}\gamma_i = 1\]
+
+Thus \(\lambda a_1 + (1 - \lambda) a_2 \in A\) and thus \(A\) is a translate of some subspace of \(V\). 
+
+(b) Let \(B = w + Y\) for some subspace \(Y \subseteq V\). Then we have 
+that \(v_k = w + y_k\). Take \(x \in A\), then we know that 
+\[x = \sum_{i=1}^{m} \lambda_i v_i = \sum_{i=1}^{m} 
+\lambda_i (w + y_i) = w + \sum_{i=1}^{m} \lambda_i y_i \in B\]
+
+(c) Write \(A = w + U\). Denote \(B = \text{span} \{v_1, \ldots, v_m\}\). 
+Then by (b) we know that \(A \subseteq B\). We will show that \(\dim U 
+< m\). The statement is trivial if \(v_1, \ldots, v_m\) is not linearly 
+independent. Let's consider the case that it's indeed linearly independent. 
+Here we claim that \(w \notin U\) and thus \(\dim U < m\). To see this, 
+the only way to write \(\sum_{i=1}^{m} \lambda_i v_i = 0\) is to let all 
+\(\lambda_i = 0\), but in this case the vectors will not be in \(A\), so 
+\(0 \notin A\). Suppose for the sake 
+of contradiction that \(w \in U\). 
+This implies that \(0 = w + (-w) \in w + U = A\), forming a contradiction. 
+Hence we finish the proof. 
+
+\end{proof}
+
+
+\begin{problem}{13}
+    Suppose \(U\) is a subspace of \(V\) such that \(V / U\) is finite-dimensional. 
+    Prove that \(V\) is isomorphic to \(U \times (V / U)\). 
+\end{problem}
+
+\begin{proof}
+\[\dim V = \dim U + (\dim V - \dim U) = \dim U + \dim (V / U).\]
+\end{proof}
+
+\begin{problem}{14}
+    Suppose \(U\) and \(W\) are two subspaces of \(V\) and \(V = U 
+    \oplus W\). Suppose \(w_1, \ldots, w_m\) is a basis of \(W\). 
+    Prove that \(w_1 + U, \ldots, w_m + U\) is a basis of 
+    \(V / U\).  
+\end{problem}
+
+\begin{proof}
+First we show that the list is linearly independent.  We consider the following system:
+
+\[0 + U = \lambda_1(w_1 + U) + \cdots + \lambda_m (w_m + U) = (\lambda_1 w_1 
++ \cdots + \lambda_m w_m) + U\]
+
+This means that \( \lambda_1 w_1 
++ \cdots + \lambda_m w_m \in U\) and since we know that \(w_1, \ldots, w_m \notin U\), we have 
+that the only solution is \(\lambda_i = 0\) for all \(i\). 
+
+Next we show that the list spans \(V / U\). Take arbitrary \(v + U \in V / U\), then we have that 
+\(v = u + w\) for some \(w = \sum_{i=1}^{m} \lambda_i w_i\). Then we have that 
+\[v + U = \sum_{i=1}^{m} \lambda_i w_i + U = \sum_{i=1}^{m} \lambda_i (w_i + U).\]
+
+Thus the list spans the quotient space. 
+
+\end{proof}
+
+
+\begin{problem}{15}
+    Suppose \(U\) is a subspace of \(V\) and \(v_1 + U, \ldots, v_m + U\) is a basis of 
+    \(V /U\) and \(u_1, \ldots, u_n\) is a basis of \(U\). Prove that 
+    \(v_1, \ldots, v_m, u_1, \ldots, u_n\) is a basis of \(V\). 
+\end{problem}
+
+\begin{proof}
+We first know that 
+\[\dim V = \dim V / U + \dim U.\]
+
+So it only suffices to prove the list either spans \(V\) or is linearly independent. Take 
+any \(v \in V\). Then we have that 
+\[v + U = \lambda_1 v_1 + \cdots + \lambda_m v_m + U.\]
+
+Thus \(v - \sum_{i=1}^{m}\lambda_i v_i \in U\). So 
+\[v = \sum_{i=1}^{m} \lambda_i v_i + \sum_{j=1}^{n} \alpha_j u_i.\]
+
+Hence we finish the proof. 
+\end{proof}
+
+
+\begin{problem}{16}
+    Suppose \(\varphi \in \Lc(V, \F)\) and  \(\varphi \neq 0\). Prove that 
+    \(\dim V / (\nul \varphi) = 1\). 
+\end{problem}
+
+\begin{proof}
+% We know that 
+% \[V / \nul \varphi = \{v + u \colon v \in V, u \in \nul \varphi\}.\]
+
+We know that \(\dim \range \varphi  = 1 \) and thus 
+\[\dim V / \nul \varphi = \dim V  - \dim \nul \varphi = \dim \range \varphi = 1.\]
+
+\end{proof}
+
+
+\begin{problem}{17}
+    Suppose that \(U\) is a subspace of \(V\) such that \(\dim V / U = 1\). Prove that there exists 
+    \(\varphi \in \Lc(V, \F)\) such that \(\nul \varphi = U\).
+\end{problem}
+
+\begin{proof}
+We make construction as follows: (1) there exists a natural isomorphism \(T \colon V / U \to 
+\F\). We further define \(S \colon V \to V / U\) by \(S(v) = v + U\). Then we show the map 
+\[\varphi = TS\]
+satifies the requirement. 
+
+First take \(u \in U\). Then we have that 
+\[\varphi(u) = TS(u) = T(u + U) = T(0) = 0\]
+
+and thus \(u \in \nul \varphi\). 
+
+Conversely take \(u \in \nul \varphi\), then 
+\[0 = \varphi(u) = T(S(u)) = T^{-1} T(S(u)) = S(u).\]
+Thus \(u \in \nul S = U\). We've finished the proof. 
+\end{proof}
+
+
+\begin{problem}{18}
+    Suppose \(U\) is a subspace of \(V\) such that \(V / U\) is finite-dimensional. 
+
+    (a) Show that if \(W\) is a finite-dimensional subspace of \(V\) and \(V = U + W\), 
+    then \(\dim W \geq \dim V / U\). 
+
+    (b) Prove that there exists a finite-dimensional subspace \(W\) of \(V\) such that 
+    \(\dim W = \dim V / U\) and \(V = U \oplus W\).
+\end{problem}
+
+\begin{proof}
+(a) We know that 
+\[\dim W = \dim V + \dim (U \cap V) - \dim U \geq \dim V - \dim U = \dim V / U.\]
+
+(b) We will construct the space \(W\) through some manipulation with the basis. Since we 
+are given \(V/ U\), we start with the basis \(w_1 + U, \ldots, w_m + U\) of that. Note that 
+\(\{w_1, \ldots, w_m\}\) is linearly independent as the only solution is all-zero. We can now 
+define 
+\[W = \text{span}\{w_1, \ldots, w_m\}.\]
+
+Then we have that \(\dim W = \dim V / U\) and now it suffices to verify \(V = U \oplus W\). To 
+see this, one only needs to show \(W \cap U = \{0\}\) as we've proved that \(V = W + U\) in 
+previous questions (of similar construction). Take arbitrary \(v \in W \cap U\). Then we have that 
+\[v = \sum_{i=1}^{m} \lambda_i w_i \]
+
+and that 
+\[v + U = \sum_{i=1}^{m} \lambda_i w_i + U = 0 + U\]
+
+The only solution is all \(\lambda_i = 0\). 
+\end{proof}
+
+\begin{problem}{19}
+    Suppose \(T \in \Lc(V, W)\) and \(U\) is a subspace of \(V\). Let \(\pi\) denote the quotient 
+    map from \(V\) onto \(V / U\). Prove that there exists \(S \in \Lc(V/U, W)\) such that 
+    \(T = S \circ \pi\) if and only if \(U \subseteq \nul T.\)
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) Take \(u \in U\), then we have that 
+\[T(u) = S \pi(u) = S(u + U) = S(0) = 0\]
+and thus \(u \in \nul T\). 
+
+\(\Leftarrow\) We define \(S \colon V / U \to W\) by 
+\[S(v + U) = T(v)\]
+It now only suffices to show that this map is valid for the equivalence mapping. Take 
+\(v_1 + U = v_2 + U\). Then we have that \(v_1 - v_2 \in U \subseteq \nul T\) and thus \(T(v_1 - v_2)
+= 0 = T v_1 - T v_2\) and thus \(S(v_1 + U) = T v_1 = Tv_2 = S(v_2 + U)\). This map is clearly 
+linear and thus we have \(T = S \circ \pi\).  
+\end{proof}
+
+
+\newpage 
+
+\section*{3F: Duality}
+\addcontentsline{toc}{section}{3F: Duality}
+
+\begin{definition}[linear functional]
+    A \textbf{linear functional} on \(V\) is a linear map from \(V\) to \(\F\). In other words, 
+    a linear functional is an element of \(\Lc(V, \F)\). 
+\end{definition}
+
+\begin{definition}[dual space, \(V'\)]
+    The \textbf{dual space} of \(V\), denoted by \(V'\), is the vector space of all linear 
+    functionals on \(V\). In other words, \(V' = \Lc(V, \F)\). 
+\end{definition}
+
+\begin{lemma}
+    Suppose \(V\) is finite-dimensional. Then \(V'\) is also finite-dimensional and 
+    \[\dim V' = \dim V.\]
+\end{lemma}
+
+\begin{definition}[dual basis]
+    If \(v_1, \ldots, v_n\) is a basis of \(V\), then the \textbf{dual basis} of 
+    \(v_1, \ldots, v_n\) is the list \(\varphi_1, \ldots, \varphi_n\) of elements 
+    of \(V'\), where each \(\varphi_j\) is the linear functional on \(V\) such that 
+    \[\varphi_j(v_k) = \begin{cases}
+        1 &\text{if } k = j, \\ 
+        0 &\text{if } k \neq j.
+    \end{cases}\]
+\end{definition}
+
+\begin{thm}[dual basis gives coefficients for linear combination]
+    Suppose \(v_1, \ldots, v_n\) is a basis of \(V\) and \(\varphi_1, \ldots, \varphi_n\)
+    is the dual basis. Then 
+    \[v = \varphi_1(v) v_1 + \cdots + \varphi_n(v) v_n\]
+    for each \(v \in V\). 
+\end{thm}
+
+\begin{thm}[dual basis is a basis of the dual space]
+    Suppose \(V\) is finite-dimensional. Then the dual basis of a basis of \(V\) is a basis 
+    of \(V'\). 
+\end{thm}
+
+\begin{definition}[dual map, \(T'\)]
+    Suppose \(T \in \Lc(V, W)\). The \textbf{dual map} of \(T\) is the linear map 
+    \(T' \in \Lc(W', V')\) defined for each \(\varphi \in W'\) by 
+    \[T'(\varphi) = \varphi \circ T.\]
+\end{definition}
+
+\begin{corollary}[algebraic properties of dual map]
+    Suppose \(T \in \Lc(V, W)\). Then \\ 
+    (a) \((S + T)' = S' + T'\) for all \(S \in \Lc(V, W)\); \\ 
+    (b) \((\lambda T)' = \lambda T'\) for all \(\lambda \in \F\); \\ 
+    (c) \((ST)' = T'S'\) for all \(S \in \Lc(W, U)\). 
+\end{corollary}
+
+The goal of this section is to describe \(\nul T'\) and \(\range T'\) in terms of 
+\(\range T\) and \(\nul T\). 
+
+\begin{definition}[annihilator, \(U^0\)]
+    For \(U \subseteq V\), the \textbf{annihilator} of \(U\), denoted by \(U^0\), is 
+    defined by 
+    \[U^0 = \{\varphi \in V' \colon \varphi(u) = 0 \text{ for all } u \in U\}.\]
+\end{definition}
+
+\begin{remark}
+    \(U^0\) is a subspace of \(V'\). 
+\end{remark}
+
+\begin{thm}[dimension of the annihilator]
+    Suppose \(V\) is finite-dimensional and \(U\) is a subspace of \(V\). Then 
+    \[\dim U^0 = \dim V - \dim U.\]
+\end{thm}
+
+
+\begin{lemma}
+    Suppose \(V\) is finite-dimensional and \(U\) is a subspace of \(V\). Then \\ 
+    (a) \(U^0 = 0 \Leftrightarrow U = V\); \\ 
+    (b) \(U^0 = V' \Leftrightarrow U = \{0\}\). 
+\end{lemma}
+
+\begin{lemma}[the null space of \(T'\)]
+    Suppose \(V\) and \(W\) are finite-dimensional and \(T \in \Lc(V, W)\). Then \\ 
+    (a) \(\nul T' = (\range T)^0\); \\ 
+    (b) \(\dim \nul T' = \dim \nul T + \dim W - \dim V\).
+\end{lemma}
+
+\begin{thm}[\(T\) surjective is equivalent to \(T'\) injective]
+    Suppose \(V\) and \(W\) are finite-dimensional and \(T \in \Lc(V, W)\). Then 
+    \[T \text{ is surjective } \Leftrightarrow T' \text{ is injective}.\]
+\end{thm}
+
+\begin{lemma}[the range of \(T'\)]
+    Suppose \(V\) and \(W\) are finite-dimensional and \(T \in \Lc(V, W)\). Then \\ 
+    (a) \(\dim \range T' = \dim \range T\); \\ 
+    (b) \(\range T' = (\nul T)^0\).
+\end{lemma}
+
+\begin{thm}[\(T\) surjective is equivalent to \(T'\) injective]
+    Suppose \(V\) and \(W\) are finite-dimensional and \(T \in \Lc(V, W)\). Then 
+    \[T \text{ is surjective } \Leftrightarrow T' \text{ is injective}.\]
+\end{thm}
+
+
+\begin{thm}[matrix of \(T'\) is transpose of matrix of \(T\)]
+    Suppose \(V\) and \(W\) are finite-dimensional and \(T \in \Lc(V, W)\). Then 
+    \[\Mc(T') = (\Mc(T))^\top\]
+\end{thm}
+
+\begin{proof}
+Let \(v_1, \ldots, v_n\) be basis of \(V\) and \(w_1, \ldots, w_m\) be basis of \(W\). Let 
+\(\varphi_1, \ldots, \varphi_n\) be the dual basis of \(V'\) and \(\psi_1, \ldots, \psi_m\) 
+be the dual basis of \(W'\). 
+
+Let \(A = \Mc(T)\) and \(C = \Mc(T')\). Suppose \(1 \leq j \leq m\) and \(1 \leq k \leq n\). From 
+the definition of \(\Mc(T')\) we have 
+\[T'(\psi_j) = \sum_{r=1}^{n} C_{r, j} \varphi_r\]
+
+Then applying both sides of the equation above to \(v_k\) gives that 
+\begin{align*}
+    (\psi_j \circ T) (v_k) 
+    & = \sum_{r=1}^{n} C_{r, j} \varphi_r (v_k) \\ 
+    & = C_{k, j}
+\end{align*}
+At the same time, we have that 
+
+\begin{align*}
+    (\psi_j \circ T) (v_k)
+    &= \psi_j (T v_k) \\ 
+    &= \psi_j(\sum_{r=1}^{m}A_{r, k} w_r) \\ 
+    &= \sum_{r=1}^{m} A_{r, k} \psi_j (w_r) \\ 
+    &= A_{j, k}
+\end{align*}
+
+Here we have that \(C_{k, j} = A_{j, k}\) and thus \(C = A^\top\). Hence, \(\Mc(T') = (\Mc(T))^\top\), 
+as desired. 
+
+\end{proof}
+
+
+We can use duality to provide an alternative proof for the rank of matrix:
+
+\begin{thm}[column rank equals row rank]
+    Suppose \(\Ab \in \F^{m, n}\). Then the column rank of \(\Ab\) equals the row 
+    rank of \(\Ab\). 
+\end{thm}
+
+
+\newpage 
+\addcontentsline{toc}{subsection}{3F Problem Sets}
+\begin{problem}{3}
+    Suppose \(V\) is finite-dimensional and \(v \in V\) with \(v \neq 0\). Prove that 
+    there exists \(\varphi \in V'\) such that \(\varphi(v) = 1\). 
+\end{problem}
+
+\begin{proof}
+The main requirement is to ensure that the constructed \(\varphi\) is valid. Note that 
+there exists  subspace \(W \subseteq V\) such that \(V = W \oplus \text{span}\{v\}\). Thus 
+we can define \(\varphi(u) = i\) where \(u = w + iv\) for \(u \in V, w \in W, i \in \F\). Here 
+\(\varphi\) is a valid linear map and \(\varphi(v) = 1\). 
+\end{proof}
+
+\begin{problem}{6}
+    Suppose \(\varphi, \beta \in V'\). Prove that \(\nul \varphi \subseteq \nul \beta\) 
+    if and only if there exists \(c \in \F\) such that \(\beta = c \varphi\). 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) If \(\varphi = 0\), then it trivially holds. If \(\varphi \neq 0 \), then 
+we can first take \(v_0 \in V\) s.t. \(\psi(v_0) \neq 0 \), then define \(c = \beta(v_0) / \varphi(v_0)\), 
+then we have that \(\beta(v) = \beta(v_0 + u) = \beta(v_0) = c \varphi(v_0)\) for some \(u \in \nul \beta\). 
+
+\(\Leftarrow\) Take \(v \in \nul \varphi\), then \(\beta(v) = c \varphi(v) = 0\). Thus 
+\(\nul \varphi \subseteq \nul \beta\). 
+\end{proof}
+
+
+\begin{problem}{8}
+    Suppose \(v_1, \ldots, v_n\) is a basis of \(V\) and \(\varphi_1, \ldots, \varphi_n\) is 
+    the dual basis of \(V'\). Define \(\Gamma \colon V \to \F^n\) and \(\Lambda \colon 
+    \F^n \to V\) by 
+    \[\Gamma (v) = ( \varphi_1(v), \ldots, \varphi_n(v) ) \text{  and  } \Lambda(a_1, 
+    \ldots, a_n) = a_1 v_1 + \cdots + a_n v_n.\]
+
+    Explain why \(\Gamma\) and \(\Lambda\) are inverses of each other. 
+\end{problem}
+
+\begin{proof}
+Take \(a_1, \ldots, a_n \in \F^n\), then 
+
+\begin{align*}
+    \Gamma(\Lambda(a_1, \ldots, a_n)) 
+    &= \Gamma(a_1 v_1 + \cdots + a_n v_n)    \\ 
+    &= (\varphi_1(a_1 v_1), \ldots, \varphi_n(a_n v_n)) \\ 
+    &= (a_1, \ldots, a_n)
+\end{align*}
+
+Similarly, take \(v = a_1 v_1 + \cdots + a_n v_n\), we can get that 
+\[\Lambda(\Gamma(v)) = v\]
+
+\end{proof}
+
+\begin{problem}{9}
+    Suppose \(m\) is a positive integer. Show that the dual basis of the basis 
+    \(1, x, \ldots, x^m\) of \(\Pc_m(\R)\) is \(\varphi_0, \varphi_1, \ldots, \varphi_m\), where 
+    \[\varphi_k(p) = \frac{p^{(k)}(0)}{k!}.\]
+\end{problem}
+
+\begin{proof}
+We consider different cases. If \(j = k\), then 
+\[\varphi_k(x^j) = \frac{(x^j)^{(k)}}{k!} = \frac{k!}{k!} = 1\]
+
+If \(j < k\), then 
+\[\varphi_k(x^j) = \frac{(x^j)^{(k)}}{k!} = \frac{0^{j-k}   j!/(j-k)!}{k!} = 0\]
+
+If \(j > k\), then 
+\[\varphi_k(x^j) = \frac{(x^j)^{(k)}}{k!} = \frac{0}{k!} = 0\]
+
+Hence, we have that 
+\[\varphi_k(x_j) = \begin{cases}
+    1 & \text{if } j=k \\ 
+    0 & \text{o.w.}
+\end{cases}\]
+\end{proof}
+
+
+\begin{problem}{11} 
+    Suppose \(v_1, \ldots, v_n\) is a basis of \(V\) and \(\varphi_1, \ldots, \varphi_n\) is 
+    the corresponding dual basis of \(V'\). Prove that 
+    \[\psi = \psi(v_1) \varphi_1 + \cdots + \psi(v_n) \varphi_n .\]
+\end{problem}
+
+\begin{proof}
+By property of dual basis, we have that 
+\[\psi = a_1 \varphi_1 + \cdots + a_n \varphi_n\]
+
+Apply \(v_k\) on both sides give that 
+\begin{align*}
+    \psi(v_k) 
+    & = a_1 \varphi_1 (v_k) + \cdots + a_n \varphi_n (v_k) \\ 
+    & = a_k
+\end{align*}
+Substitue this back gives the desired equality. 
+\end{proof}
+
+
+\begin{problem}{13}
+    Show that the dual map of the identity operator on \(V\) is the identity operator on \(V'\). 
+\end{problem}
+
+\begin{proof}
+Take arbitrary \(f \in V'\), then we have that 
+\[I'(f)(v) = f \circ I(v) = f(v)\]
+for all \(v \in V\). 
+\end{proof}
+
+\begin{problem}{16}
+    Suppose \(W\) is finite-dimensional and \(T \in \Lc(V, W)\). Prove that 
+    \[T' = 0 \Leftrightarrow T = 0.\]
+\end{problem}
+
+\begin{proof}
+This is obvious from \(\dim \range T' = \dim \range T\). 
+\end{proof}
+
+\begin{problem}{19}
+    Suppose \(U \subseteq V\). Explain why 
+    \[U^0 = \{\varphi \in V' \colon U \subseteq \nul \varphi\}\]
+\end{problem}
+
+\begin{proof}
+This follows from definition. 
+\end{proof}
+
+\begin{problem}{20}
+    Suppose \(V\) is finite-dimensional and \(U\) is a subspace of \(V\). Show that 
+    \[U = \{v \in V \colon \varphi(v) = 0 \text{ for every } \varphi \in U^0\}.\]
+\end{problem}
+
+\begin{proof}
+
+    Denote \(K = \{v \in V \colon \varphi(v) = 0 \text{ for every } \varphi \in U^0\}\).
+
+Take \(u \in U\) and \(\varphi \in U^0\), then by definition \(\varphi(u) = 0\), and thus 
+\(u \in K\). 
+
+Conversely, take \(\varphi \in U^0\). Suppose for the sake of contradiction 
+that there exist \(v \notin U\) but \(v \in K\), then \(\varphi(v) \neq 0\), contradicting that 
+\(v \in K\), thus completing the proof. 
+
+\end{proof}
+
+\begin{problem}{21}
+    Suppose \(V\) is finite-dimensional and \(U\) and \(W\) are subspaces of \(V\). \\ 
+    (a) Prove that \(W^0 \subseteq U^0\) if and only if \(U \subseteq W\). \\ 
+    (b) Prove that \(W^0 = U^0\) if and only if \(U = W\).  
+\end{problem}
+
+
+\begin{proof}
+(a) \(\Rightarrow\) We know that there exists \(\psi \in V'\) such that \(\nul \psi = W\). Then 
+\(\psi \in W^0\) and thus \(\psi \in U^0\). This means that \(U \subseteq W = \nul \psi \).
+
+\(\Leftarrow\) Take \(\psi \in W^0\). So we know \(\psi(w) = 0\) for all \(w \in W\). Suppose 
+for the sake of contradiction that \(\psi \notin U^0\), then there exists \(u \in U\) s.t. 
+\(\psi(u) \neq 0\). However, as \(u \in W\), we have reached a contradiction. 
+
+
+(b) \(W^0 = U^0 \Leftrightarrow W_0 \subseteq U_0 \text{ and } U_0 \subseteq W_0 
+\Leftrightarrow U \subseteq W \text{ and } W \subseteq W \Leftrightarrow U = W\).
+\end{proof}
+
+
+
+\begin{problem}{22}
+    Suppose \(V\) is finite-dimensional and \(U\) and \(W\) are subspaces of \(V\). 
+
+    (a) Show that \((U + W)^0 = U^0 \cap W^0\). \\ 
+    (b) Show that \((U \cap W)^0 = U^0 + W^0.\)
+\end{problem}
+
+\begin{proof}
+Note that we have 
+\begin{align*}
+    (U + W)^0&= \{\varphi \in V' \colon \varphi(v) = 0 \text{ for every } v \in U+W\} \\ 
+    (U \cap W)^0 &= \{\varphi \in V' \colon \varphi(v) = 0 \text{ for every } v \in U \cap W\}
+\end{align*}
+
+(a) Take \(\varphi \in (U+W)^0\), then we know that \(\varphi(u) = 0\) and \(\varphi(w) = 0\)
+for all \(u \in U, w \in W\). Thus \((U+W)^0 \subseteq U^0 \cap W^0\). Conversely, take 
+\(\varphi \in U^0 \cap W^0\), then we know that for every \(v = u + w, \varphi(v)
+= \varphi(u) + \varphi(w) = 0\), therefore \(U^0 \cap W^0 \subseteq (U+W)^0\). 
+
+(b) Take \(\varphi_1 \in U^0, \varphi_2 \in W^0\), then we have that 
+\(\varphi_1 + \varphi_2 (v) = \varphi_1(v) + \varphi_2(v) = 0\) for \(v \in U \cap W\), therefore 
+\(U^0 + W^0 \subseteq (U \cap W)^0\). It suffices now to show that the dimension equal each other.
+
+\begin{align*}
+    \dim ((U\cap W)^0) = \dim (V) - \dim (U \cap W)
+\end{align*}
+
+Note that 
+\begin{align*}
+    \dim (U^0 + W^0)
+    &=\dim(U^0) + \dim (W^0) - \dim (U^0 \cap W^0) \\ 
+    &= (\dim(V) - \dim(U)) + (\dim(V) - \dim(W)) - \dim ((U+W)^0) \\ 
+    &= 2 \dim(V) - (\dim(U) + \dim(W)) - (\dim(V) - \dim(U+W)) \\ 
+    &= \dim(V) - (\dim(U) + \dim(W) - \dim(U+W)) \\ 
+    &=\dim(V) - \dim(U \cap W)
+\end{align*}
+
+Thus we have completed the proof. 
+\end{proof}
+
+
+\begin{problem}{23}
+    Suppose \(V\) is finite-dimensional and \(\varphi_1, \ldots, \varphi_m \in V'\). Prove 
+    that the following three sets are equal to each other.
+
+    (a) span(\(\varphi_1, \ldots, \varphi_m\)). \\ 
+    (b) \(((\nul \varphi_1) \cap \cdots \cap (\nul \varphi_m))^0 \coloneq A\) \\ 
+    (c) \(\{\varphi \in V' \colon (\nul \varphi_1) \cap \cdots \cap (\nul \varphi_m) \subseteq \nul \varphi\}
+    \coloneq B\) 
+\end{problem}
+
+\begin{proof}
+\((a) \Rightarrow (b)\) take \(\varphi = \sum_{i=1}^{m}a_i \varphi_i \in \text{span}(\varphi_1, \ldots, \varphi_m)\). 
+Then we know that for every \(v \in (\nul \varphi_1) \cap \cdots \cap (\nul \varphi_m)\), 
+\(\varphi(v) = \sum_{i=1}^{m}a_i \varphi_i(v) = 0\). 
+
+\((b) \Rightarrow (c)\)  Take \(\varphi \in A\), then by P19 this holds. 
+
+\((c) \Rightarrow (a)\) Take \(\varphi \in B\), then we know by P3 there exists \(c \in \F\)
+such that \(\varphi = c \varphi_i\) for all \(1 \leq i \leq m\). This means that 
+\(\varphi \in \text{span}(\varphi_1, \ldots, \varphi_m)\).
+\end{proof}
+
+\begin{problem}{24}
+    Suppose \(V\) is finite-dimensional and \(v_1, \ldots, v_m \in V\). Define a linear map 
+    \(\Gamma \colon V' \to \F^m\) by \(\Gamma(\varphi) = (\varphi(v_1), \ldots, 
+    \varphi(v_m))\). 
+
+    (a) Prove that \(v_1, \ldots, v_m\) spans \(V\) if and only if \(\Gamma\) is injective. \\ 
+    (b) Prove that \(v_1, \ldots, v_m\) is linearly independent if and only if \(\Gamma\) is 
+    surjective. 
+\end{problem}
+
+\begin{proof}
+(a) \(\Rightarrow\) Take \(v = \sum_{i=1}^{m} a_i v_i\) and \(\varphi \in \nul \Gamma\). We 
+aim to prove that \(\varphi = 0\). We have that \(\Gamma(\varphi) 
+= (\varphi(v_1), \ldots, \varphi(v_m)) = 0\) so \(\varphi(v_1) = \cdots = \varphi(v_m) = 0\). 
+So for all \(v \in V\), \(\varphi(v) = \sum_{i=1}^{m} a_i \varphi(v_i) = 0\). Thus \(\varphi\)
+is the zero map and thus \(\Gamma\) is injective. 
+
+\(\Leftarrow\) Suppose for the sake of contradiction that \(v_1, \ldots, v_m\) does not 
+span \(V\), then this means there exists some subspace \(W\) such that \(\text{span}(v_1, \ldots, v_m)
+\oplus W = V\). Then there exists nonzero \(\varphi \in V'\) such that \(\varphi(v_k) = 0\) for all  
+\(k\) (one can set the basis in \(W\) to be nonzero mapping). Then this means that \(\varphi \in 
+\nul \Gamma \neq 0\), contradicting that \(\Gamma\) is injective.  
+
+% Suppose \(v_1, \ldots, v_m\) does not span \(V\). Then there exists 
+% \(v_{m+1} \neq 0\) and \(a_{m+1} \neq 0\) and \(v \in V\) such that \(v = \sum_{i=1}^{m+1}a_i v_i\). Since 
+% \(\Gamma\) is injective, \(\nul \Gamma = \{0\}\). Let \(\varphi(v) = \sum_{i=1}^{m+1}a_i \varphi(v_i)
+% = 0\). We also know that \(\Gamma(\varphi) = (\varphi(v_1), \ldots, \varphi(v_m)) = 0\) and thus 
+% combining this two terms give that \(a_{m+1} v_{m+1} = 0\). This means that \(v = \sum_{i=1}^{m}a_i v_i \in 
+% \text{span}(v_1, \ldots, v_m)\), contradicting the assumption. 
+
+(b) \(\Rightarrow\)  Let \(K\) be the subspace spanned by the linearly independent list of vectors 
+\(v_1, \ldots, v_m\). Then by the linear map lemma, for all \((a_1, \ldots, a_m) \in \F^m\), there 
+exists a unique mapping \(T' \colon K \to \F\) such that \(T' v_i = a_i\). Extending \(T'\) to \(V\)
+ensures that \(\Gamma\) is surjective. 
+
+\(\Leftarrow\) Suppose for the sake of contradiction that \(v_1, \ldots, v_m\) are not linearly 
+independent, then we know there exists nonzero \(a_i's\) such that \(a_1 v_1 + \cdots + a_m 
+v_m = 0\). Applying any linear function \(\varphi \in V'\) to this linear combination yields that 
+\[\varphi(\sum_{i=1}^{m}a_iv_i) = \varphi(0) = 0\]
+
+This equals that 
+\[\sum_{i=1}^{m}a_i \varphi(v_i) = \sum_{i=1}^{m}a_i \Gamma(\varphi)_i = 0\]
+
+Since there is nonzero \(a_i\)'s, this means that the image of \(\Gamma\) is a strict subspace 
+of \(\F^m\), therefore contradicting the hypothesis that it's surjective.
+
+\end{proof}
+
+\begin{problem}{25}
+    Suppose \(V\) is finite-dimensional and \(\varphi_1, \ldots, \varphi_m \in V'\). Define 
+    a linear map \(\Gamma \colon V \to \F^m\) by \(\Gamma(v)=(\varphi_1(v), \ldots, \varphi_m(v))\). 
+
+    (a) Prove that \(\varphi_1, \ldots, \varphi_m\) spans \(V'\) if and only if \(\Gamma\) is injective. \\ 
+    (b) Prove that \(\varphi_1, \ldots, \varphi_m\) is linearly independent 
+    if and only if \(\Gamma\) is surjective. 
+\end{problem}
+
+\begin{proof}
+(a) \(\Rightarrow\) Take any \(\varphi \in V'\), then \(\varphi = \sum_{i=1}^{m} a_i \varphi_i\). Take any 
+\(v \in V\) and let \(\Gamma(v) = 0\). Then this means that 
+\[\Gamma(v) = (\varphi_1(v), \ldots, \varphi_m(v)) = 0\]
+So we have that \(\varphi_i (v) = 0\) for all \(i\). By the spanning assumption, we have that 
+for any \(\varphi \in V', \varphi(v) = \sum_{i=1}^{m} a_i \varphi_i(v) = 0\). Thus \(v = 0\) 
+and then \(\nul (\Gamma) = \{0\}\). 
+
+\(\Leftarrow\) Suppose \(\varphi_1, \ldots, \varphi_m\) does not span \(V'\), then this means there 
+exists some subspace \(W\) such that \(\text{span}(\varphi_1, \ldots, \varphi_m)\oplus W = V'\). Let 
+\(\varphi_1, \ldots, \varphi_n\) be the basis of \(\text{span}(\varphi_1, \ldots, \varphi_m)\), 
+\(\varphi_{n+1}, \ldots, \varphi_{l}\) to be the basis of \(W\). Let \(v_1, \ldots, v_n, 
+v_{n+1}, \ldots, v_{l}\) be the corresponding basis for \(V\). Then there exists nonzero \(v \in V\)
+such that \(\varphi_k(v) = 0\) for all \(k\) as \(v = \sum_{i=1}^{n} \varphi_i(v) v_i + 
+\sum_{j=n+1}^{l} \varphi_j(v) v_j\), where one can obtain nonzero \(\varphi_j(v)\) for some 
+\(n+1 \leq j \leq l\) but zero \(\varphi_i(v)\) for all \(1 \leq i \leq n\). Such \(v \in 
+\nul \Gamma\), contradicting the hypothesis that \(\Gamma\) is injective.
+
+% Suppose \(\varphi_1, \ldots, \varphi_m\) does not span \(V'\), then there exists 
+% nonzero \(v_{m+1}, a_{m+1}\) such that \(v = \sum_{i=1}^{m} a_i v_i\). Since \(\Gamma\) is injective,
+% we know \(\nul \Gamma = \{0\}\), and thus \(\Gamma(v)\)
+
+(b) \(\Rightarrow\) Let \(K\) be the subspace spanned by the linearly independent list of vectors 
+\(\varphi_1, \ldots, \varphi_m\). Then for all \((a_1, \ldots, a_m) \in \F^m\), take 
+\(v = \sum_{i=1}^{m}a_i v_i\) for the corresponding basis \(v_1, \ldots, v_m\). Then  we have that 
+\(\varphi_i(v) = a_i\) so \(\Gamma\) is surjective. 
+
+\(\Leftarrow\) Suppose for the sake of contradiction that \(\varphi_1, \ldots, \varphi_m\) are not linearly 
+independent, then we know there exists nonzero \(a_i's\) such that \(a_1 \varphi_1 + \cdots + a_m 
+\varphi_m = 0\). Applying any vector \(v \in V\) to this linear functional yields that 
+\[\sum_{i=1}^{m}a_i \varphi_i (v) = 0(v) = 0\]
+
+This equals that 
+\[\sum_{i=1}^{m}a_i \varphi_i (v) = \sum_{i=1}^{m}a_i \Gamma(v)_i = 0\]
+
+Since there is nonzero \(a_i\)'s, this means that the image of \(\Gamma\) is a strict subspace 
+of \(\F^m\), therefore contradicting the hypothesis that it's surjective.
+
+
+\end{proof}
+
+\begin{problem}{26}
+    Suppose \(V\) is finite-dimensional and \(\Omega\) is a subspace of \(V'\). Prove that 
+    \[\Omega = \{v \in V \colon \varphi(v) = 0 \text{ for every } \varphi \in \Omega\}^0\]
+\end{problem}
+
+\begin{proof}
+Denote \(U = \{v \in V \colon \varphi(v) = 0 \text{ for every } \varphi \in \Omega\}\). 
+So we have that 
+
+\[U^0 = \{\psi\in V' \colon \psi(v) = 0 \text{ for every } v \in U\}\]
+
+
+\(\Rightarrow\) Take \(\varphi \in \Omega\) and \(v \in U\), then by definition \(\varphi(v) = 0\)
+and thus \(\varphi \in U^0\). 
+
+\(\Leftarrow\) Take \(\psi \in U^0\), suppose \(\psi\notin \Omega\). Take \(v \in U\), then we know 
+that for every \(\varphi \in \Omega, \varphi(v) = 0\). Since \(\psi \notin \Omega\), there 
+exists \(v, \text{ s.t. }\psi(v) \neq 0\). However, this contradicts that \(\psi(v) = 0\) for all 
+\(v \in U\), the proof is completed.  
+\end{proof}
+
+\begin{problem}{28}
+    Suppose \(V\) is finite-dimensional and \(\varphi_1, \ldots, \varphi_m\) is a linearly independent 
+    list in \(V'\). Prove that 
+    \[\dim((\nul \varphi_i) \cap \cdots \cap (\nul \varphi_m)) = (\dim V) - m\]
+\end{problem}
+
+\begin{proof}
+Note that \((\bigcap_{i=1}^m \nul \varphi_i)^0 = \text{span}(\varphi_1, \ldots, \varphi_m)\) by P23. Then 
+we have that \(\dim \bigcap_{i=1}^m \nul \varphi_i = \dim V - \text{span}(\varphi_1, \ldots, \varphi_m)  
+= \dim V - m\). 
+\end{proof}
+
+\begin{problem}{30}
+    Suppose \(V\) is finite-dimensional and \(\varphi_1, \ldots, \varphi_n\) is a basis of \(V'\). 
+    Show that there exists a basis of \(V\) whose dual basis is \(\varphi_1, \ldots, \varphi_n\).
+\end{problem}
+
+\begin{proof}
+We know that \(\dim V' = n\) and that \(\dim \nul \varphi_i + 1 (\dim \range \varphi_i) = n\). Thus 
+we can construct that \(V = \nul \varphi_i \oplus U_i\) for all \(1 \leq i \leq n\). Here 
+\(\dim U_i = 1\). Here we extract all \(v_i's\) from those \(U_i\). By linear map lemma, there exists 
+\(v_i \in U_i\) such that \(\varphi_i (v_i)= 1\). We claim that \(v_1, \ldots, v_n\) is the 
+corresponding basis of \(V\). 
+
+We first verify that it is the ``corresponding basis''. Consider \(\varphi_j(v_i)\) for \(j \neq i\). 
+Suppose for contradiction that there exists nonzero \(w \in U_i \cap U_k\). Since we know all 
+\(U_i\) are 1-d, \(U_i = U_k\). Here we have that \(\nul \varphi_i = \nul \varphi_k\), then this 
+means that \(\varphi_i = c \varphi_k\) for some \(c \in \F\), but this contradicts the assumption 
+that \(\varphi_1, \ldots, \varphi_n\) is the basis of \(V'\). 
+
+Next we verify it is basis. It only suffices to verify that the list is linearly independent. To 
+see this, \(0 = \sum_{i=1}^{m} a_i v_i\). Apply \(\varphi_i\) on both side yield that 
+\(0 = \varphi_i(0) = \varphi(\sum_{i=1}^{m} a_i v_i) = a_i\). Thus all coefficients are zero.
+\end{proof}
+
+
+\begin{problem}{32}
+    The \emph{double dual} space of \(V\), denoted by \(V''\), is defined to be the dual space of 
+    \(V'\). In other words, \(V'' = (V')'\). Define \(\Lambda \colon V \to V''\) by 
+    \[(\Lambda v)(\varphi) = \varphi(v)\]
+    for each \(v \in V\) and \(\varphi \in V'\).
+
+    (a) Show that \(\Lambda\) is a linear map from \(V\) to \(V''\). \\ 
+    (b) Show that if \(T \in \Lc(V)\), then \(T'' \circ \Lambda = \Lambda \circ T\), where 
+    \(T'' = (T')'\). \\ 
+    (c) Show that if \(V\) is finite-dimensional, then \(\Lambda\) is an isomorphism from \(V\)
+    onto \(V''\). 
+\end{problem}
+
+
+\begin{proof}
+(a) First, \(\Lambda(0)(\varphi) = \varphi(0) = 0\). Next, take \(v_1, v_2 \in V\), then 
+\(\Lambda(\lambda v_1 + v_2) (\varphi) = \lambda\varphi(v_1) + \varphi(v_2) = 
+\lambda\Lambda(v_1) + \Lambda(v_2)\).
+
+(b) By definition, the double dual map \(T'' \colon V'' \to W''\) is defined as 
+\(T''(\psi) = \psi(T'(\varphi))\) for \(\psi \in V''\) and for all \(\varphi \in W'\). This 
+further equals that \(T''(\psi) = \psi \varphi \circ T(v)\) for \(v \in V\). 
+
+\begin{align*}
+    T'' \circ (\Lambda v)(\varphi)
+    &= (\Lambda v) \circ T' (\varphi) \\ 
+    &= (\Lambda v) \varphi \circ T  \\ 
+    &= \Lambda \circ T 
+\end{align*}
+
+
+(c) First we have that \(\dim V = \dim V' = \dim V''\). Note that if we take \(v \in \nul \Lambda\), 
+then this means for all linear functional \(\varphi \in V'\), we have that \(\Lambda v (\varphi)
+= \varphi(v) = 0\). So \(v = 0\) and thus \(\Lambda\) is injective and therefore an isomorphism.
+\end{proof}
+
+\end{document}
+

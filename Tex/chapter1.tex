@@ -1,0 +1,560 @@
+\documentclass{extarticle}
+\sloppy
+\input{packages.tex}
+\input{math_commands.tex}
+
+% \newcommand{\sb}{\mathbf{s}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% DOCUMENT START              																			           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{\vspace{-2em}Chapter 1: Vector Spaces}
+\author{\emph{Linear Algebra Done Right}, by Sheldon Axler}
+\date{}
+
+\begin{document}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SECTION A            																			           
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \section{$\R$ and}
+
+\section*{1A: $\R^n$ and $\C^n$}
+
+\begin{problem}{1}
+    Show that \(\alpha + \beta = \beta + \alpha\) for all \(\alpha, 
+    \beta \in \C\). 
+\end{problem}
+
+
+\begin{proof}
+    Let \(\alpha = a + bi, \beta = c + di\). Then we have that 
+    \begin{align*}
+        \alpha + \beta 
+        &= (a + bi) + (c + di) \\ 
+        &= (c + di) + (a + bi) \\ 
+        &= \beta + \alpha
+    \end{align*}
+\end{proof}
+
+\begin{problem}{3}
+    Show that \((\alpha \beta) \gamma = \alpha(\beta \gamma)\) for all \(\alpha,
+    \beta, \gamma \in \C\). 
+\end{problem}
+
+
+\begin{proof}
+Choose arbitrary \(\alpha, \beta, \gamma \in \C\). Denote \(\alpha = a + bi,
+\beta=c + di, \gamma = e + fi\). Then we have that 
+
+\begin{align*}
+    (\alpha \beta) \gamma 
+    &= ((ac - bd) + (ad + bc)i ) (e + fi) \\ 
+    &=( ace - bde - adf - bcf ) + (ade + bce + acf - bdf)i
+\end{align*}
+
+At the same time we have 
+
+\begin{align*}
+    \alpha (\beta \gamma) 
+    &= (a + bi)((ce - df) + (cf + de)i) \\ 
+    &= (ace - adf - bcf - bde) + (ade + acf + bce - bdf)i
+\end{align*}
+
+Hence \((\alpha \beta)\gamma = \alpha (\beta \gamma)\). 
+
+\end{proof}
+
+
+\begin{problem}{5}
+    Show that for any \(\alpha \in \C\), there exists a unique \(\beta \in \C\) such
+    that \(\alpha + \beta = 0\). 
+\end{problem}
+
+\begin{proof}
+Denote \(\alpha = a + bi\). By property of filed, we know there exists unique 
+\(c = -a\) and \(d = -b\) such that \(\beta = c + di\) and \(\alpha + \beta=0\). Suppose
+for the sake of contradiction that \(\beta\) is not unique, then there exists 
+\(c' + d'i\) such that \((a + c') + (b + d')i = 0\) while \(c' \neq a\) or \(d' \neq d\),
+contradicting the uniqueness of additive inverse property.
+\end{proof}
+
+
+\begin{problem}{8}
+    Find two distinct squared roots of \(i\). 
+\end{problem}
+
+\begin{proof}
+Suppose \(\alpha = a + bi\)'s square equals one. 
+
+\begin{equation*}
+    (a + bi)^2 = a^2 - b^2 + 2abi = 1
+\end{equation*}
+
+Then \(|a| = |b|, 2ab = 1 \). So we get the solution to be 
+\[\frac{1}{\sqrt{2}} + \frac{1}{\sqrt{2}}, -\frac{1}{\sqrt{2}} - \frac{1}{\sqrt{2}}i\] 
+\end{proof}
+
+
+\begin{problem}{10}
+    Show that \((\xb + \yb) + \zb = \xb + (\yb + \zb) \ \forall  \xb, \yb, \zb \in \F^n\). 
+\end{problem}
+
+\begin{proof}
+\begin{align*}
+    (\xb + \yb) + \zb 
+    &= (x_1 + y_1, \ldots, x_n + y_n) + (z_1 , \ldots, z_n) \\ 
+    &= (x_1, \ldots, x_n) + (y_1 + z_1, \ldots, y_n + z_n) \\ 
+    &= \xb + (\yb + \zb)
+\end{align*}
+\end{proof}
+
+
+\begin{problem}{14}
+    Show that \(\gamma(\xb + \yb) = \gamma \xb + \gamma \yb \ \forall \gamma \in \F, \xb, \yb \in \F^n\).
+\end{problem}
+
+\begin{proof}
+\begin{align*}
+    \gamma(\xb + \yb)
+    &= \gamma (x_1 + y_1, \ldots, x_n + y_n) \\ 
+    &= (\gamma(x_1 + y_1), \ldots, \gamma(x_n + y_n)) \\ 
+    &= (\gamma x_1 + \gamma y_1, \ldots, \gamma x_n + \gamma y_n) \\ 
+    &= \gamma (x_1, \ldots, x_n) + \gamma(y_1, \ldots, y_n) \\ 
+    &= \gamma \xb + \gamma \yb 
+\end{align*}
+\end{proof}
+
+
+\newpage 
+
+\section*{1B: Definition of the Vector Space}
+
+
+\begin{thm}
+    A vector space is a set that is closed under \emph{vector addition} and \emph{scalar multiplication}. 
+    It also has the following properties:
+    \begin{itemize}
+        \item commutativity 
+        \item associativity 
+        \item additive identity 
+        \item additive inverse 
+        \item multiplicative identity
+        \item (scalar) distributive 
+    \end{itemize}
+\end{thm}
+
+Notation: \(\F^S\). 
+
+Explanation: If \(S\) is a set, then \(\F^S\) denotes the set of functions from \(S\) to \(\F\) (scalar
+function). e.g. \(f \in \F^S\). 
+
+Comment: \(\F^S\) is a vector space; One can think of \(f \in \F^n\) as \(f:
+\{1, 2,\ldots, n\} \to \F\). 
+
+
+\begin{problem}{1}
+    Prove that \(-(-\vb) = \vb\) for all \(\vb \in V\). 
+\end{problem}
+
+\begin{proof}
+We know \(- (-\vb)\) is the unique additive inverse of \(-\vb\). At same time by definition,
+\(\vb + (-\vb) = 0\) and thus by commutativity \((-\vb) + \vb = 0\). This shows that \(\vb\)
+is the unique additive inverse of \((-\vb)\), and such that \(-(-\vb) = \vb\). 
+\end{proof}
+
+\begin{problem}{2}
+    Suppose \(a \in \F, \vb \in V\), and \(a \vb = 0\). Prove that \(a = 0\)
+    or \(\vb = 0\). 
+\end{problem}
+
+\begin{proof}
+Suppose for the sake of contradiction that \(a \neq 0\) and \(\vb \neq 0\) but 
+\(a \vb = 0\).  
+\begin{align*}
+   \vb &= 1 \vb \\ 
+   \vb &= \frac{1}{a} \cdot a \vb \\ 
+   \vb &= \frac{1}{a} 0  
+\end{align*}
+This forms a contradiction. 
+\end{proof}
+
+\begin{problem}{3}
+    Suppose \(\vb, \wb \in V\). Explain why there exists a unique \(\xb \in V\) such 
+    that \(\vb + 3\xb = \wb\). 
+\end{problem}
+
+\begin{proof}
+Suppose there exists \(\xb'\) which also satisfies the condition. Then we have
+\begin{equation}
+    \vb + 3\xb = \wb \ \  \ \ \vb + 3 \xb' = \wb 
+\end{equation}
+
+This gives that \(\xb = (\wb - \vb) / 3 = \xb'\) which shows \(\xb\) is unique. 
+\end{proof}
+
+\begin{problem}{4}
+    The empty set is not a vector space, why? 
+\end{problem}
+
+\begin{proof}
+There is no additive identity in the empty set. 
+\end{proof}
+
+\begin{problem}{7}
+    Suppose \(S\) is a nonempty set. Let \(V^S\) denotes the set of functions from \(S\)
+    to \(V\). Define a natural addition and scalar multiplication on \(V^S\), and show 
+    that \(V^S\) is a vector space with these definitions. 
+\end{problem}
+
+\begin{proof}
+Let \(f, g \in V^S \colon S \to V\). Define the addition and multiplication to be that 
+\[f + g (x) = f(x) + g(x)\]
+
+We have that 
+\begin{itemize}
+    \item commutativity: \(f + g(x) = f(x) + g(x) = g(x) + f(x) = g+f (x)\)
+    \item associativity: \((f + g)+h (x) = f(x) + g(x) + h(x) = f + (g + h)(x)\)
+    \item additive identity: Define \(0\colon S \to 0 \in V\), then \(f+0(x) = 0 + f(x) = f(x)\)
+    \item additive inverse: for every \(f \in V^S\), define \(g(x) = -f(x)\) which exists
+    by the property of vector space and thus we have that \(g + f = 0\) for every \(x\)
+    and thus that it exists. 
+    \item multiplicative identity: same as above 
+    \item (scalar) distributive: \(a(f+g)(x) = a(f(x) + g(x)) = af(x)+g(x)\)
+\end{itemize}
+\end{proof}
+
+\newpage 
+\section*{1C: Subspaces}
+
+\begin{definition}[subspace]
+    A subset \(\Ucal\) of \(V\) is called \emph{subspace} of \(V\) if \(\Ucal\)
+    is also a vector space with the same additive identity, addition, and 
+    scalar multiplication as on \(V\). 
+\end{definition}
+
+\begin{remark}
+    The set \(\{0\}\) is the smallest subspace of \(V\), and \(V\) itself 
+    is the largest subspace of \(V\). 
+\end{remark}
+
+\begin{remark}
+    The subspace of \(\R^2\) are precisely \(\{0\}\), all lines in \(\R^2\)
+    containing the origin, \(\R^2\). 
+\end{remark}
+
+
+\begin{definition}[Sum of subspace] 
+    Suppose \(V_1, \cdots, V_m\) are subspaces. The \emph{sum} of them, denoted
+    by \(V_1 + \cdots + V_m\), is the set of all possible sums of element 
+    of \(V_1, \cdots, V_m\). Specifically,
+
+    \[V_1 + \cdots + V_m = \{v_1 + \cdots + v_m \colon v_1 \in V_1, \cdots, v_m \in V_m\}\]
+\end{definition}
+
+\begin{lemma}
+    Suppose \(V_1, \cdots, V_m\) are subspaces of \(V\). Then \(V_1 + \cdots +V_m\)
+    is the smallest subspace of \(V\) containing \(V_1, \cdots, V_m\).
+\end{lemma}
+
+\begin{definition}[Direct Sum]
+    Suppose \(V_1, \cdots, V_m\) are subspaces of \(V\). 
+    \begin{itemize}
+        \item The sum \(V_1 + \cdots + V_m\) is called a \emph{direct sum} if 
+        each element of \(V_1 + \cdots + V_m\) can be written only as a sum 
+        of \(v_1, \cdots, v_m\), where each \(v_k \in V_k\). 
+        \item If \(V_1 + \cdots + V_m\) is a direct sum, then \(V_1 \oplus \cdots \oplus V_m\)
+        denotes \(V_1 + \cdots + V_m\), with \(\oplus\) serving as the 
+        indication that this is a direct sum. 
+    \end{itemize}
+\end{definition}
+
+\begin{example}
+    Suppose \(V_k\) is a subspace of \(\F^n\) of those vectors whose coordinates
+are all zero but \(k\)-th coordinate. Then we have 
+\[\F^n = V_1 \oplus \cdots + V_m\]
+\end{example}
+
+\begin{example}[Sum that is not a direct sum]
+    Suppose 
+    \begin{align*}
+        & V_1 = \{(x, y, 0) \in \F^3 \colon  x, y \in \F\} \\ 
+        & V_2 = \{(0, 0, z) \in \F^3 \colon z \in \F\} \\ 
+        & V_3 = \{(0, y, y) \in \F^3 \colon y \in \F\}
+    \end{align*}
+
+    Then \(F^3 = V_1 + V_2 + V_3\) because for every \((x, y, z) \in \F^3\), 
+
+    \[(x, y, z) = (x, y, 0) + (0, 0, z) + (0, 0, 0)\]
+
+    However, \(F^3 \neq V_1 \oplus V_2 \oplus V_3\) since 
+    \begin{align*}
+        (0, 0, 0) &= (0, -1, 0) + (0, 0, -1) + (0, 1, 1) \\ 
+        &= (0, 0, 0) + (0, 0, 0) + (0, 0, 0)
+    \end{align*}
+\end{example}
+
+
+\begin{thm}
+    Suppose \(V_1, \ldots, V_m\) are subspaces of \(V\). Then \(V_1 + \cdots + V_m\) 
+    is a direct sum if and only if the only way to write 0 as a sum of \(v_1 + \cdots + v_m\),
+    where \(v_k \in V_k\), is by taking each \(v_k\) to equal 0. 
+\end{thm}
+
+\begin{thm}
+    Suppose that \(\Ucal\) and \(\Wcal\) are subspaces of \(V\). Then 
+    \[\Ucal + \Wcal \text{ is a direct sum} \Leftrightarrow \Ucal \cap \Wcal = \{0\}\]
+\end{thm}
+
+
+\begin{problem}{1}
+Verify the following examples to be valid subspaces:
+\begin{enumerate}
+    \item If \(b \in \F\), then 
+    \[\{(x_1, x_2, x_3, x_4) \in \F^4 \colon x_3 = 5x_4 + b\} \]
+    is a subspace of \(\F^4\) if and only if \(b = 0\).
+    \item The set of continuous real-valued functions on the interval \([0, 1]\) is 
+    a subspace of \(\R^{[0,1]}\). 
+    \item The set of differential real-valued functions on \(\R\) is a subspace of \(\R^\R\).
+    \item The set of differentiable real-valued functions \(f\) on the interval \((0,3)\)
+    such that \(f'(2) = b\) is a subspace of \(\R^{(0,3)}\) if and only if \(b=0\).
+    \item The set of all sequences of complex numbers with limit 0 is a subspace of \(\C^\infty\).
+\end{enumerate}
+\end{problem}
+
+
+
+\begin{proof}
+\begin{enumerate}
+    \item \(\Rightarrow\) \((0, 0, 0, 0)\) is an element and thus \(0 = 0 + b\), b = 0 
+    \(\Leftarrow\) Easy to verify. 
+    \item 0 function is cts; cts functions are closed under addition and scalar multiplication.
+    \item 0 function is differentiable; differentiable functions are closed under addition and 
+    scalar multiplication. 
+    \item For this to be closed under addition, one needs to restrict that \(f'(2) + g'(2) = b + b = b\) and thus 
+    \(b = 0\).
+    \item \(\limn a(S_1 + S_2) = \limn a S_1 + \limn aS_2 = 0 + 0 = 0\). At the same time, 
+    the 0 sequence has limit 0.
+\end{enumerate}
+\end{proof}
+
+\begin{problem}{4}
+    Suppose \(b \in \R\). Show that the set of continuous real-valued functions \(f\)
+    on the interval \([0, 1]\) such that \(\int_0^1 f = b\) is a subspace of \(\R^{[0,1]}\)
+    if and only if \(b = 0\). 
+\end{problem}
+
+\begin{proof}
+\(\Rightarrow\) \(\int_0^1 f + g = \int_0^1 f + \int_0^1 g = 2b = b\) so \(b =0\). 
+
+\(\Leftarrow\) 0 is in the set; closed under addition/multiplication.
+\end{proof}
+
+\begin{problem}{5}
+    Prove that \(\R^2\) is not a subspace of \(\C^2\) over the field \(\C\). 
+\end{problem}
+
+\begin{proof}
+
+This does not hold for scalar multiplication since we've defined scalar to be complex 
+numbers. To see this, Let \(a = (x + yi) \in \C\) and \(\zb = (z_1, z_2) \in \R^2\). We 
+have that \(a\zb = (z_1(x+yi), z_2 (x+yi)) \notin \R^2\). 
+
+\end{proof}
+
+\begin{problem}{7}
+    Prove or disprove: If \(\Ucal\) is a nonempty subset of \(\R^2\) such that \(\Ucal\) is closed 
+    under addition and under taking additive inverse (\(-u \in \Ucal\)), then 
+    \(\Ucal\) is a subspace in \(\R^2\).
+\end{problem}
+
+\begin{proof}
+No. \(\Ucal = \{(x_1, x_2) \colon x_1, x_2 \in \Z\}\). Then \(\frac{1}{2}(1, 1) \notin \Ucal\).
+\end{proof}
+
+
+\begin{problem}{9}
+    A function \(f\colon \R \to \R\) is called \emph{periodic} if there exists a 
+    positive number \(p\) s.t. \(f(x) = f(x + p)\) for all \(x \in \R\). Is the 
+    set of periodic functions from \(\R\) to \(\R\) a subspace of \(\R^\R\)?
+\end{problem}
+
+\begin{proof}
+No, problem occurs with the addition. Suppose we have \(f(x) = f(x + p)\) and 
+\(g(x) = g(x + q)\). Then \((f + g)(x) = f(x) + g(x) = f(x + p) + g(x + q) \neq 
+(f + g)(x + l)\) for some fixed \(l\) for all \(p,q\). 
+
+
+\end{proof}
+
+\begin{problem}{11}
+    Prove that the intersection of every collection of subspaces of \(V\) is a subspace 
+    of \(V\). 
+\end{problem}
+
+\begin{proof}
+Let \(\bigcap_i V_i\) denote the collection of subspaces of \(V\). Then we know 
+\(0 \in bigcup_i V_i\). Let \(a \in \F, \xb, \yb \in \bigcap_i V_i\). We have that
+\(a(\xb + \yb) \in \bigcap_i V_i\) and thus finish the proof.
+\end{proof}
+
+\begin{problem}{12}
+    Prove that the union of two subspaces of \(V\) is a subspace of \(V\) if 
+    and only if one of the subspaces is contained in the other. 
+\end{problem}
+
+\begin{proof}
+Let \(V_1, V_2\) be two subspaces of \(V\).
+
+\(\Rightarrow\) Suppose for the sake of contradiction that 
+there exists \(v_1 \in V_1\) s.t. \(v_1 \notin V_2\) and \(v_2 \in V_2\) s.t. 
+\(v_2 \notin V_1\). Then by assumption we have that \(v_1 + v_2 \in V_1 \cup V_2\).
+Here we can also show that \(v_1 + v_2 \notin V_1\) because if it does, \(v_1 +
+v_2 + (-v_1) = v_2 \in V_1\). Similarily, \(v_1 + v_2 \notin V_2\). Thus we've reached
+a contradiction. 
+
+\(\Leftarrow\) This direction is trivial. 
+\end{proof}
+
+% \begin{problem}{13}
+%     Prove that the union of three subspaces of \(V\) if and only if one of 
+%     the subspaces contains the other two. 
+% \end{problem}
+
+% \begin{proof}
+% Let \(V_1, V_2, V_3\) be three subspaces of \(V\). 
+
+% \(\Rightarrow\) Suppose for the sake of contradiction that none of the subspace 
+% contains the other two. Then there exists \(v_1 \in V_1\) s.t. 
+% \(v_1 \notin V_2 \), \(v_2 \in V_2\) s.t. \(v_2 \notin V_1 \), and
+% \(v_3 \in V_3\) s.t. \(v_3 \notin V_1\) (or it recovers the ). This means that \(av_1 + v_2 \notin V_1 \cup V_2\)
+% and \((a-1)v_1 + v_2 \notin V_1 \cup V_2\) for some \(a \in \F\). Then \(av_1 + v_2 \in V_3\) and 
+% \((a - 1) v_1 + v_2 \in V_3\) and thus \(v_1 \in V_3\)
+
+% % This means that \(v_1 + v_2 + v_3 \notin V_1 \cup V_2 \cup V_3\) because if it does, then 
+% % assume \(v_1 + v_2 + v_3 \in V_1\), \(v_2\)
+
+% \(\Leftarrow\) This direction is trivial. 
+% \end{proof}
+
+\begin{problem}{14}
+
+    Suppose 
+    \[\Ucal = \{(x, -x, 2x)\in \F^3 \colon x \in \F\} \text{ and } \Wcal =\{(x, x, 2x) \in \F^3 \colon x \in \F\}\]
+
+Describe \(\Ucal + \Wcal\).
+    
+\end{problem}
+
+\begin{proof}
+\[(x, -x, 2x) + (y, y, 2y) = (x + y, -x + y, 2(x + y))\]
+
+One can think of this as \(\Ucal + \Wcal = \{(a, b, 2a) \colon a,b \in \F\}\). 
+\end{proof}
+
+\begin{problem}{15}
+    Suppose \(\Ucal\) is a subspace of \(V\), what is \(\Ucal + \Ucal\)?
+\end{problem}
+
+\begin{proof}
+\(\Ucal + \Ucal = \Ucal\). 
+
+Take \(\ub_1 + \ub_2 \in \Ucal + \Ucal\), then \(\ub_1 + \ub_2 \in \Ucal\). Conversely,
+take \(\ub \in \Ucal\), then \(\ub = \ub + 0 \in \Ucal + \Ucal\).
+\end{proof}
+
+
+\begin{problem}{16}
+    Is the operation of addition on the subspaces of \(V\) commutative (\(\Ucal +
+    \Wcal = \Wcal + \Ucal\))? 
+\end{problem}
+
+\begin{proof}
+Take \(u \in \Ucal, w \in \Wcal\), then \(u + w = w + u\), implying the conclusion. 
+\end{proof}
+
+\begin{problem}{18}
+    Does the operation of addition on the subspaces of \(V\) have an additive 
+    identity? Which subspaces have additive inverses?
+\end{problem}
+
+\begin{proof}
+Yes, the zero subspace \emph{i.e.} \(\{0\}\) is the additive identity. The subspace
+that have additive inverses is only \(\{0\}\). 
+\end{proof}
+
+
+\begin{problem}{19}
+    Prove or disprove: If \(V_1, V_2, \Ucal\) are subspaces of \(V\) such that 
+    \[V_1 + \Ucal = V_2 + \Ucal\]
+    then \(V_1 = V_2\).
+\end{problem}
+
+\begin{proof}
+Counterexample: Consider when \(\Ucal = V_1 \bigsqcup V_2\), then the relation holds 
+while \(V_1 \neq V_2\).
+\end{proof}
+
+\begin{problem}{20}
+    Suppose 
+    \[\Ucal = \{(x,x,y,y) \in \F^4 \colon x, y \in \F\}\]
+    Find a subspace \(\Wcal \in\) \(\F^4\) st. \(\F^4  =\Ucal \oplus \Wcal\).
+\end{problem}
+
+\begin{proof}
+Define \(\Wcal = \{(0, a, b, 0) \in \F^4 \colon a,b \in \F\}\) to be a subspace 
+of \(\F^4\).
+
+Then first \(\Wcal + \Ucal \subseteq \F^4\). Take \((q,w,e,r) \in \F^4\), we 
+can have \((q,w,e,r) = (q,q,r,r) + (0,w-q,e-r,r) \in \Ucal + \Wcal\). We have 
+\(\F^4 = \Ucal + \Wcal\). Furthermore, take \((x,x,y,y) \in \Ucal, (0,a,b,0) \in 
+\Wcal\). For the element to be in the intersection, we need to have 
+\((x,x,y,y)=(0,a,b,0)\) which implies that \(x=y=a=b=0\) and thus \(\Wcal 
+\cap \Ucal = \{0\}\). 
+\end{proof}
+
+\begin{problem}{21}
+    Suppose 
+    \[\Ucal = \{x, y, x+y, x-y, 2x\} \in \F^5 \colon x,y \in \F\]
+    Find a subspace \(\Wcal \in \F^5\) s.t. \(\F^5 = \Ucal \oplus \Wcal\). 
+\end{problem}
+
+\begin{proof}
+Define 
+\[\Wcal = \{(0,0,m,n,z) \colon m,n,z \in \F\}\]
+
+Then \((a,b,c,d,e) = (a, b, a+b, a-b, 2a) + (0,0, c-(a+b), d-(a - b), e-2a)\). The 
+rest follows exactly as in P20.
+\end{proof}
+
+\begin{problem}{23}
+    Porve or disprove: If \(V_1, V_2, \Ucal\) are subspaces of \(V\) s.t. 
+    \[V = V_1 \oplus \Ucal \text{ and } V = V_2 \oplus \Ucal\], 
+
+    then \(V_1 = V_2\)
+\end{problem}
+
+\begin{proof}
+Counterexample: Let \(\Ucal = \{(x,x) \colon x \in \F\}, V_1 = \{(x,0)\colon x \in \F\},
+V_2 = \{(0, x) \colon x \in \F\}\). 
+\end{proof}
+
+
+\begin{problem}{24}
+    A function \(f \colon \R \to \R\) is called \emph{even} if \(f(-x)=f(x)\) and 
+    \emph{odd} if \(f(-x) = -f(x)\) for all \(x \in \R\). Let \(V_e\) denote the 
+    set of real-valued even functions on \(\R\) and let \(V_o\) denote the 
+    set of real-valued odd functions on \(\R\). Show that \(\R^\R = V_e \oplus V_o\).
+\end{problem}
+
+
+\begin{proof}
+\(\Leftarrow\) Trivial direction. 
+
+\(\Rightarrow\) \(f(x) = \frac{f(x) + f(-x)}{2} + \frac{f(x) - f(-x)}{2}\)
+\end{proof}
+
+
+\end{document}
