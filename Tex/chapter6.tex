@@ -2,26 +2,20 @@
 \sloppy
 \input{packages.tex}
 \input{math_commands.tex}
-\usepackage{hyperref}
-
 
 \title{\vspace{-2em}Chapter 6: Inner Product Spaces}
-\author{\emph{Linear Algebra Done Right}, by Sheldon Axler}
-\date{}
+\author{\emph{Linear Algebra Done Right (4th Edition)}, by Sheldon Axler}
+\date{Last updated: \today}
 
 \begin{document}
 \maketitle 
 \tableofcontents
-
-\newpage 
-
+\newpage
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 6A %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-\newpage 
 \section*{6A: Inner Products and Norms}
 \addcontentsline{toc}{section}{6A: Inner Products and Norms}
 
@@ -31,7 +25,6 @@
     \[x \cdot y = x_1 y_1 + \cdots + x_n y_n,\]
     where \(x = (x_1, \ldots, x_n)\) and \(y = (y_1, \ldots, y_n)\).
 \end{definition}
-
 
 \begin{definition}[inner product]
     An \textbf{inner product} on \(V\) is a function that takes each ordered pair \((u, v)\) of elements of 
@@ -48,12 +41,9 @@
     \end{enumerate}
 \end{definition}
 
-
 \begin{definition}[inner product space]
     An \textbf{inner product space} is a vector space \(V\) along with an inner product on \(V\).
 \end{definition}
-
-
 
 \begin{corollary}[basic properties of an inner product]
     \begin{enumerate}[label=(\alph*)]
@@ -69,10 +59,9 @@
 \end{corollary}
 
 \begin{definition}[norm, \(\norm{v}\)]
-    For \(v \in V\), the \textbf{norm} of \(v\), denoted by \(\norm{v}\), is defiend by 
+    For \(v \in V\), the \textbf{norm} of \(v\), denoted by \(\norm{v}\), is defined by 
     \[\norm{v} = \sqrt{\langle v,v \rangle}\]
 \end{definition}
-
 
 \begin{corollary}[basic properties of the norm]
     Suppose \(v \in V\). 
@@ -81,7 +70,6 @@
         \item \(\norm{\lambda v} = |\lambda| \norm{v}\) for all \(\lambda \in \F\).
     \end{enumerate}
 \end{corollary}
-
 
 \begin{remark}
     Working with norms squared is usually easier than working directly with norms. 
@@ -98,7 +86,7 @@
     \end{enumerate}
 \end{corollary}
 
-\begin{thm}[Pythagorean Theorm]
+\begin{thm}[Pythagorean Theorem]
     Suppose \(u, v \in V\). If \(u\) and \(v\) are orthogonal, then 
     \[\norm{u + v}^2 = \norm{u}^2 + \norm{v}^2\]
 \end{thm}
@@ -115,19 +103,16 @@
     This inequality is an equality if and only if one of \(u, v\) is a scalar multiple of the other.
 \end{thm}
 
-
 \begin{thm}[triangle inequality]
     Suppose \(u, v \in V\). Then 
     \[\norm{ u+v }\leq \norm{ u } + \norm{ v }.\] 
-    This inequality is an equaliy if and only if one of \(u, v\) is a nonnegative real multiple of the other.
+    This inequality is an equality if and only if one of \(u, v\) is a nonnegative real multiple of the other.
 \end{thm}
-
 
 \begin{thm}[parallelogram equality]
     Suppose \(u, v \in V\). Then 
     \[\norm{ u +v }^2 + \norm{ u-v }^2 = 2(\norm{u}^2 + \norm{v}^2).\]
 \end{thm}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 6A PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -144,7 +129,7 @@
 \begin{proof}
 By linearity of inner products, 
 \[\sum_{j=1}^{m}\sum_{k=1}^{m} \langle v_j,v_k \rangle 
-= \langle \sum_{j=1}^{m} v_j, \sum_{k=1}^{m} v_k \rangle \geq 0\]
+= \left\langle \sum_{j=1}^{m} v_j, \sum_{k=1}^{m} v_k \right\rangle \geq 0\]
 
 since the two terms equal other and the conclusion follows by positivity of inner products.
 \end{proof}
@@ -157,11 +142,10 @@ since the two terms equal other and the conclusion follows by positivity of inne
 \end{problem}
 
 \begin{proof}
-    \(\langle \cdot,\cdot \rangle_1\) is inner product \(\Leftrightarrow\) 
-    \(\langle v,v \rangle_1 = \langle Sv,Sv \rangle = 0\) if and only if \(v = 0\) \(\Leftrightarrow\) 
-    S is injective. (Other properties are ommitted for checking)
+    \(\langle \cdot,\cdot \rangle_1\) is inner product \(\Longleftrightarrow\) 
+    \(\langle v,v \rangle_1 = \langle Sv,Sv \rangle = 0\) if and only if \(v = 0\) \(\Longleftrightarrow\) 
+    \(S\) is injective. (Other properties are omitted for checking)
 \end{proof}
-
 
 \begin{problem}{3}
     \begin{enumerate}[label=(\alph*)]
@@ -179,19 +163,17 @@ since the two terms equal other and the conclusion follows by positivity of inne
 (b) We have \(\langle (0, 1, 0),(0, 1, 0) \rangle = 0\) but the element is nonzero.
 \end{proof}
 
-
 \begin{problem}{4}
     Suppose \(T \in \Lc(V)\) is such that \(\norm{Tv} \leq \norm{v}\) for every \(v \in V\). Prove that 
     \(T - \sqrt{2}I\) is injective.
 \end{problem}
 
 \begin{proof}
-Suppsoe for contraidction that \( T - \sqrt{2} I \) is not injective and therefore \(\sqrt{2}\) is an eigenvalue 
+Suppose for contradiction that \( T - \sqrt{2} I \) is not injective and therefore \(\sqrt{2}\) is an eigenvalue 
 of \(T\), so \(Tv = \sqrt{2}v\) for some nonzero \(v\). Taking the norm yields that  
 \[\norm{Tv} = \sqrt{2} \norm{v}\]
 which violates the assumption that \(\norm{Tv} \leq \norm{v}\).
 \end{proof}
-
 
 \begin{problem}{5}
     Suppose \(V\) is a real inner product space. 
@@ -201,7 +183,6 @@ which violates the assumption that \(\norm{Tv} \leq \norm{v}\).
         \item Use (b) to show that the diagonals of a rhombus are perpendicular to each other.
     \end{enumerate}
 \end{problem}
-
 
 \begin{proof}
 (a) We have that 
@@ -218,17 +199,15 @@ which violates the assumption that \(\norm{Tv} \leq \norm{v}\).
 \end{align*}
 which shows that they are orthogonal. 
 
-(c) ommitted.
+(c) omitted.
 \end{proof}
 
-
 \begin{problem}{6}
-    Suppose \(u, v \in V\). Prove that \(\langle u,v \rangle = 0 \Leftrightarrow \norm{u} \leq \norm{u 
+    Suppose \(u, v \in V\). Prove that \(\langle u,v \rangle = 0 \Longleftrightarrow \norm{u} \leq \norm{u 
     + av}\) for all \(a \in \F\).
 \end{problem}
 
 \begin{proof}
-
 \(\Rightarrow\) Given \(\langle u,v \rangle = 0\), then 
 \begin{align*}
     \norm{u + av}^2 
@@ -238,14 +217,14 @@ which shows that they are orthogonal.
     &\geq \norm{u}^2
 \end{align*}
 
-\(\Leftarrow\) If \(v = 0\) then it's trivial. Consider \(v \neq 0\). Let \(a = \frac{\langle u,v \rangle}{\norm{v}^2}\). 
+\(\Leftarrow\) If \(v = 0\), then it's trivial. Consider \(v \neq 0\). Let \(a = \frac{\langle u,v \rangle}{\norm{v}^2}\). 
 Then we have that 
 \begin{align*}
     \norm{u - \frac{\langle u,v \rangle}{\norm{v}^2}v}^2 
-    &= \langle u - \frac{\langle u,v \rangle}{\norm{v}^2}v, u - \frac{\langle u,v \rangle}{\norm{v}^2}v \rangle \\ 
+    &= \left\langle u - \frac{\langle u,v \rangle}{\norm{v}^2}v, u - \frac{\langle u,v \rangle}{\norm{v}^2}v \right\rangle \\ 
     &= \norm{u}^2 - \overline{\frac{\langle u,v \rangle}{\norm{v}^2}} \langle u, v \rangle 
     - \frac{\langle u,v \rangle}{\norm{v}^2} \langle v,u \rangle + 
-    \lvert \frac{\langle u,v \rangle}{\norm{v}^2}\rvert^2 \norm{v}^2 \\ 
+    \left\lvert \frac{\langle u,v \rangle}{\norm{v}^2} \right\rvert^2 \norm{v}^2 \\ 
     &= \norm{u}^2 - 2\frac{|\langle u,v \rangle|^2}{\norm{v}^2} + \frac{|\langle u,v \rangle|^2}{\norm{v}^2} \\ 
     &= \norm{u}^2 - \frac{|\langle u,v \rangle|^2}{\norm{v}^2} \geq \norm{u}^2
 \end{align*}
@@ -253,9 +232,7 @@ Then we have that
 This implies that 
 \[\frac{|\langle u,v \rangle|^2}{\norm{v}^2} = 0\]
 Since \(v \neq 0\), \(\langle u,v \rangle = 0\).
-
 \end{proof}
-
 
 \begin{problem}{7}
     Suppose \(u, v \in V\). Prove that \(\norm{au + bv} = \norm{bu + av}\) for all  
@@ -272,7 +249,6 @@ Notice that
     &=|a|^2 \norm{u}^2 + |b|^2 \norm{v}^2 + ab(\langle u,v \rangle + \langle v,u \rangle)
 \end{align*}
 
-
 At the same time we have 
 \[\norm{bu + av}^2 = |b|^2 \norm{u}^2 + |a|^2 \norm{v}^2 + ab(\langle u,v \rangle + \langle v,u \rangle)\]
 Then this means \(\norm{au + bv} = \norm{bu + av}\) for all  
@@ -288,14 +264,13 @@ for all \(a, b \in \R\) iff \(\norm{u} = \norm{v}\).
 \begin{proof}
 Let 
 \[u = (a, b, c, x, y) \ \ \ v = (1, 1, 1, 4, 9)\]
-and consider the standard real euclidean inner product. Then we can apply the Cauchy Schwarz:
-\[|\langle u,v \rangle|^2 = (\sum_{i=1}^{5}u_iv_i)^2 \leq (\sum_{i=1}^{5} u_i)^2 (\sum_{i=1}^{5}v_i)^2 = \norm{u}^2 \norm{v}^2\]
+and consider the standard real euclidean inner product. Then we can apply the Cauchy-Schwarz:
+\[|\langle u,v \rangle|^2 = \left(\sum_{i=1}^{5}u_i v_i \right)^2 \leq \left(\sum_{i=1}^{5} u_i\right)^2 \left(\sum_{i=1}^{5}v_i\right)^2 = \norm{u}^2 \norm{v}^2\]
 
 Expanding this gives that 
 \[(a + b + c + 4x + 9y)^2 \leq (a^2+b^2+c^2+x^2+y^2)(1+1+1+16+81) \leq 100\] 
-Therefore we have that 
+Therefore, we have that 
 \[a + b + c + x + y \leq 10\]
-
 \end{proof}
 
 \begin{problem}{9}
@@ -310,21 +285,18 @@ Suppose for contradiction that \(u \neq v\), then \(u - v \neq 0\). Then
 forming a contradiction. Therefore, \(u = v\).
 \end{proof}
 
-
-
 \begin{problem}{10}
     Suppose \(u, v \in V\) and \(\norm{u} \leq 1\) and \(\norm{v} \leq 1\). Prove that 
     \[\sqrt{1 - \norm{u}^2} \sqrt{1 - \norm{v}^2} \leq 1 - |\langle u,v \rangle|.\]
 \end{problem}
 
 \begin{proof}
-Notice that by Cauchy-Schwarz \( |\langle u,v \rangle| \leq \norm{u}\norm{v} = 1\). Hence we have that 
+Notice that by the Cauchy-Schwarz \( |\langle u,v \rangle| \leq \norm{u}\norm{v} = 1\). Hence, we have that 
 \[1 - \norm{u} \norm{v} \leq 1 - |\langle u,v \rangle|\]
 So now it suffices to show that 
 \[(1 - \norm{u}^2)(1 - \norm{v}^2) \leq (1 - \norm{u}^2 \norm{v}^2)\]
 This is not hard to see, as r.h.s - l.h.s = \((\norm{u} - \norm{v})^2 \geq 0\).
 \end{proof}
-
 
 \begin{problem}{12}
     Suppose \(a,b,c,d\) are positive numbers. 
@@ -336,18 +308,16 @@ This is not hard to see, as r.h.s - l.h.s = \((\norm{u} - \norm{v})^2 \geq 0\).
 
 \begin{proof}
 (a) Let \(u = (\sqrt{a},\sqrt{b},\sqrt{c},\sqrt{d})\) and \(v = 
-(\frac{1}{\sqrt{a}}, \frac{1}{\sqrt{b}}, \frac{1}{\sqrt{c}}, \frac{1}{\sqrt{d}})\). Then applying 
-cauchy Schwarz yields that 
+(\frac{1}{\sqrt{a}}, \frac{1}{\sqrt{b}}, \frac{1}{\sqrt{c}}, \frac{1}{\sqrt{d}})\). Then applying the 
+Cauchy-Schwarz yields that 
 \begin{align*}
     \langle u,v \rangle^2 = 16 \leq = (a+b+c+d)(\frac{1}{a}+\frac{1}{b}+\frac{1}{c}+\frac{1}{d})= \norm{u}^2 \norm{v}^2
 \end{align*}
 
-(b) By Cauchy-Schwarz, this is an equality iff \(u = cv\), i.e. \((\sqrt{a}, \sqrt{b}, \sqrt{c}, \sqrt{d}) 
+(b) By the Cauchy-Schwarz, this is an equality iff \(u = cv\), i.e. \((\sqrt{a}, \sqrt{b}, \sqrt{c}, \sqrt{d}) 
 = c (\frac{1}{\sqrt{a}}, \frac{1}{\sqrt{b}}, \frac{1}{\sqrt{c}}, \frac{1}{\sqrt{d}})\), which holds 
 if \(a=b=c=d\).
-
 \end{proof}
-
 
 \begin{problem}{13}
     Show that the square of an average is less than or equal to the average of the squares. More 
@@ -357,47 +327,44 @@ if \(a=b=c=d\).
 
 \begin{proof}
 We try to prove 
-\[(\frac{1}{n} \sum_{i=1}^{n} a_i)^2 \leq \frac{1}{n} \sum_{i=1}^{n}a_i^2\]
+\[\left(\frac{1}{n} \sum_{i=1}^{n} a_i \right)^2 \leq \frac{1}{n} \sum_{i=1}^{n}a_i^2\]
 
-Take \(u = (a_1, \ldots, a_n)\) and \(v = (\frac{1}{n}, \ldots, \frac{1}{n})\). Then applying Cauchy Schwarz yields
+Take \(u = (a_1, \ldots, a_n)\) and \(v = (\frac{1}{n}, \ldots, \frac{1}{n})\). Then applying the Cauchy-Schwarz yields
 that 
 \begin{align*}
     \langle u,v \rangle^2 
-    = (\frac{1}{n} \sum_{i=1}^{n} a-i)^2 
-    \leq (\sum_{i=1}^{n} a_i^2)\frac{1}{n} = \norm{u}^2 \norm{v}^2 
+    = \left(\frac{1}{n} \sum_{i=1}^{n} a-i \right)^2 
+    \leq \left(\sum_{i=1}^{n} a_i^2 \right)\frac{1}{n} = \norm{u}^2 \norm{v}^2 
 \end{align*}
 \end{proof}
 
-
 \begin{problem}{15}
-    SUppose \(u, v\) are nonzero vectors in \(\R^2\). Prove that 
+    Suppose \(u, v\) are nonzero vectors in \(\R^2\). Prove that 
     \[\langle u,v \rangle = \norm{u} \norm{v} \cos \theta ,\]
-    where \(\theta\) is thte angle between \(u\) and \(v\).
+    where \(\theta\) is the angle between \(u\) and \(v\).
 \end{problem}
 
 \begin{proof}
-By law of cosines we have that 
+By law of cosines, we have that 
 \[\norm{u - v}^2 = \norm{u}^2 + \norm{v}^2 - 2 \norm{u}\norm{v}\cos \theta\]
 This means that 
 \begin{align*}
     2 \norm{u} \norm{v}\cos \theta 
     &= \norm{u}^2 + \norm{v}^2 - \norm{u - v}^2 \\ 
-    &= \norm{u}^2 + \norm{v}^2 + 2 \langle u,v \rangle - norm{u}^2 - \norm{v}^2 \\ 
+    &= \norm{u}^2 + \norm{v}^2 + 2 \langle u,v \rangle - \norm{u}^2 - \norm{v}^2 \\ 
     &= 2 \langle u,v \rangle
 \end{align*}
 \end{proof}
 
-
 \begin{problem}{17}
     Prove that 
-    \[(\sum_{k=1}^{n} a_k b_k)^2 \leq (\sum_{k=1}^{n} k a_k^2) (\sum_{k=1}^{n} \frac{b_k^2}{k})\]
+    \[\left(\sum_{k=1}^{n} a_k b_k \right)^2 \leq \left(\sum_{k=1}^{n} k a_k^2\right) \left(\sum_{k=1}^{n} \frac{b_k^2}{k}\right)\]
 \end{problem}
 
 \begin{proof}
 Consider \(u = (a_1, \sqrt{2}a_2, \ldots, \sqrt{n}a_n)\) and 
-\(v = (b_1, \frac{b_2}{\sqrt{2}}, \ldots, \frac{b_n}{\sqrt{n}})\). Applying Cauchy-Schwarz solves the problem.
+\(v = \left(b_1, \frac{b_2}{\sqrt{2}}, \ldots, \frac{b_n}{\sqrt{n}}\right)\). Applying the Cauchy-Schwarz solves the problem.
 \end{proof}
-
 
 % \begin{problem}{18}
 %     \begin{enumerate}[label=(\alph*)]
@@ -410,17 +377,16 @@ Consider \(u = (a_1, \sqrt{2}a_2, \ldots, \sqrt{n}a_n)\) and
 % \end{problem}
 
 % \begin{proof}
-% % (a) Consider \(g(x) = f(x) , h(x) = 1\), then applying Cauchy Schwarz gives the desired result. 
+% % (a) Consider \(g(x) = f(x) , h(x) = 1\), then applying the Cauchy-Schwarz gives the desired result. 
 % % (b) \(f(x)\) is a constant function.
 % \end{proof}
-
 
 \begin{problem}{19}
     Suppose \(v_1, \ldots, v_n\) is a basis of \(V\) and \(T \in \Lc(V)\). Prove that 
     if \(\lambda\) is an eigenvalue of \(T\), then 
     \[|\lambda|^2 \leq \sum_{j=1}^{n} \sum_{k=1}^{n} |\Mc(T)_{j,k}|^2,\]
     where \(\Mc(T)_{j,k}\) denotes the entry in row \(j\), column \(k\) of the matrix of \(T\) 
-    wrt the basis \(v_1, \ldots, v_n\).
+    wrt. the basis \(v_1, \ldots, v_n\).
 \end{problem}
 
 \begin{proof}
@@ -437,11 +403,8 @@ Consider \(u = (a_1, \sqrt{2}a_2, \ldots, \sqrt{n}a_n)\) and
     |\lambda|^2 \norm{v}^2 = || \Mc(T) v ||^2 \leq || \Mc(T) ||_F^2 \norm{v}^2 
 \end{align*}
 
-for nonzero eigenvector \(v\). Then expanding the frobienous norm of \(\Mc(T)\) gets the desired inequality.
-
+for nonzero eigenvector \(v\). Then expanding the Frobenius norm of \(\Mc(T)\) gets the desired inequality.
 \end{proof}
-
-
 
 \begin{problem}{20}
     Prove the \textbf{reverse triangular inequality}: if \(u, v \in V\), then \(| \norm{u} - \norm{v}| 
@@ -474,7 +437,6 @@ We know that
 So \(\norm{v} = \sqrt{17}\).
 \end{proof}
 
-
 \begin{problem}{22}
     Show that if \(u, v \in V\), then 
     \[\norm{u +v} \norm{u - v} \leq \norm{u}^2 + \norm{v}^2.\]
@@ -494,7 +456,6 @@ equivalently,
 \[\norm{u}^2 + \norm{v}^2 \geq \norm{u+v} \norm{u - v}\]
 \end{proof}
 
-
 \begin{problem}{23}
     Suppose \(v_1, \ldots, v_m \in V\) are such that \(\norm{v_k} \leq 1\) for each 
     \(k = 1, \ldots, m\). Show that there exists \(a_1, \ldots, a_m \in \{1, -1\}\) 
@@ -508,18 +469,16 @@ such with \(a_i = 1\) w.p. \(1/2\) and \(a_i = 0\) w.p. \(1/2\). Then we can def
 vector 
 \[X = \sum_{i=1}^{m}a_i v_i\] 
 and we can compute the expected value  
-\[\E [\norm{X}^2] 
-= \E[ \norm{\sum_{i=1}^{m} a_i v_i} ^2  ] 
-= \E [   (\sum_{i=1}^{m} a_i v_i \sum_{j=1}^{m}a_j v_j)   ] 
+\[\E \left[\norm{X}^2 \right] 
+= \E \left[ \norm{\sum_{i=1}^{m} a_i v_i} ^2 \right] 
+= \E \left[ \left(\sum_{i=1}^{m} a_i v_i \sum_{j=1}^{m}a_j v_j \right) \right] 
 =  \sum_{i=1}^{m} \sum_{j=1}^{m} (v_i \cdot v_j) \E [a_i a_j]\]
 Note that here \(\E[a_i a_j] = \delta_{ij}\) and that 
-\[\E [\norm{X}^2] = \sum_{k=1}^{m} \E[a_k^2](v_k \cdot v_k) = \sum_{k=1}^{m} \norm{v_k}^2 \leq m\]
+\[\E \left[\norm{X}^2 \right]  = \sum_{k=1}^{m} \E[a_k^2](v_k \cdot v_k) = \sum_{k=1}^{m} \norm{v_k}^2 \leq m\]
 which gives that 
-\[\E[\norm{X}] \leq \sqrt{m}\]
+\[\E \left[\norm{X} \right]  \leq \sqrt{m}\]
 and shows the existence proof.
 \end{proof}
-
-
 
 \begin{problem}{25}
     Suppose \(p > 0\). Prove that there is an inner product on \(\R^2\) such that the associated norm 
@@ -527,7 +486,6 @@ and shows the existence proof.
     \[\norm{(x, y)} = (|x|^p + |y|^{p})^{1/p}\]
     for all \((x,y) \in \R^2\) if and only if \(p = 2\). 
 \end{problem}
-
 
 \begin{proof}
 \(\Leftarrow\) Given \(p = 2\), the natural euclidean dot product induces a well-defined norm, e.g. 
@@ -543,7 +501,6 @@ They only equal each other when
 which holds only if \(p = 2\).
 \end{proof}
 
-
 \begin{problem}{26}
     Suppose \(V\) is a real inner product space. Prove that 
     \[\langle u,v \rangle = \frac{\norm{u + v}^2 - \norm{u - v}^2}{4}\]
@@ -551,7 +508,6 @@ which holds only if \(p = 2\).
 \end{problem}
 
 \begin{proof}
-
 \begin{align*}
     \norm{u + v}^2 - \norm{u - v}^2 
     &= \langle u+v,u+v \rangle - \langle u-v,u-v \rangle \\ 
@@ -584,13 +540,10 @@ element \(\geq 0\), the only solution is \(v = 0\). Conversely, if \(v = 0\), th
 + (\langle v_1,w_1 \rangle + \cdots + \langle v_m,w_m \rangle) 
 = \langle u,w \rangle + \langle v,w \rangle\) 
 
-\textbf{homogeneity in in first slot}: folllows similarly as above. 
+\textbf{homogeneity in first slot}: follows similarly as above. 
 
 \textbf{conjugate symmetry}: follows similarly as above. 
 \end{proof}
-
-
-
 
 \begin{problem}{31}
     Suppose \(u, v, w \in V\). Prove that 
@@ -607,7 +560,6 @@ Let \(w - u = a\) and \(w - v = b\), then we have
 \end{align*}
 Substituting \(a\) and \(b\) gets the desired result. 
 \end{proof}
-
 
 \begin{problem}{32}
     SUppose that \(E\) is a subset of \(V\) with the property that \(u, v \in E\) implies 
@@ -628,19 +580,13 @@ by problem 31. Notice that
 for all \(x \in E\), reaching a contradiction (\(u = v\)). 
 \end{proof}
 
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 6B %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \newpage 
 \section*{6B: Orthonormal Bases}
 \addcontentsline{toc}{section}{6B: Orthonormal Bases}
-
 
 \begin{definition}[orthonormal]
     A list of vectors is called \textbf{orthonormal} if each vector in the list has norm 1 and 
@@ -657,12 +603,10 @@ for all \(x \in E\), reaching a contradiction (\(u = v\)).
     Every orthonormal list of vectors is linearly independent. 
 \end{corollary}
 
-
 \begin{thm}[Bessel's inequality]
     Suppose \(e_1, \ldots, e_m\) is an orthonormal list of vectors in \(V\). If \(v \in V\) then 
     \[ |\langle v,e_1 \rangle|^2 + \cdots + |\langle v,e_m \rangle|^2 \leq \norm{v}^2\]
 \end{thm}
-
 
 \begin{definition}[orthonormal basis]
     An \textbf{orthonormal basis} of \(V\) is an orthogonal list of vectors in \(V\) that is 
@@ -689,8 +633,7 @@ for all \(x \in E\), reaching a contradiction (\(u = v\)).
     \end{enumerate}
 \end{lemma}
 
-
-\begin{thm}[Gram-Schmitdt procedure]
+\begin{thm}[Gram-Schmidt procedure]
     Suppose \(v_1, \ldots, v_m\) is a linearly independent list of vectors in \(V\). Let \(f_1 = v_1\). 
     For \(k = 2, \ldots, m\), define \(f_k\) inductively by 
     \[f_k = v_k - \frac{\langle v_k,f_1 \rangle}{\norm{f_1}^2}f_1 - \cdots - \frac{\langle v_k, f_{k-1} \rangle}{\norm{f_{k-1}}^2}f_{k-1}.\]
@@ -699,7 +642,6 @@ for all \(x \in E\), reaching a contradiction (\(u = v\)).
     \[\text{span}(v_1, \ldots, v_k) = \text{span}(e_1, \ldots, e_k)\]
     for each \(k = 1, \ldots, m\).
 \end{thm}
-
 
 \begin{corollary}
     Every finite-dimensional inner product space has an orthornormal basis.
@@ -728,16 +670,12 @@ for all \(x \in E\), reaching a contradiction (\(u = v\)).
     for every \(u \in V\).
 \end{thm}
 
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 6B PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage 
 \addcontentsline{toc}{subsection}{6B Problem Sets}
-
 
 \begin{problem}{1}
     Suppose \(e_1, \ldots, e_m\) is a list of vectors in \(V\) such that 
@@ -749,7 +687,7 @@ for all \(x \in E\), reaching a contradiction (\(u = v\)).
 We have that 
 \begin{align*}
     \norm{\sum_{i=1}^{m} a_i e_i}^2 
-    &= \langle \sum_{i=1}^{m} a_i e_i , \sum_{i=1}^{m} a_i e_i \rangle    \\ 
+    &= \left\langle \sum_{i=1}^{m} a_i e_i , \sum_{i=1}^{m} a_i e_i \right\rangle    \\ 
     &= \sum_{i=1}^{m} \sum_{j=1}^{m} a_i \overline{a_j} \langle e_i, e_j \rangle  \\ 
     &= \sum_{i=1}^{m} |a_i|^2 
 \end{align*}
@@ -760,7 +698,6 @@ which shows the vectors are orthogonal to each other. To see each of them is nor
 set \(a_k = 1\) and \(a_j = 0\) for all \(j \neq k\), which gives that \(\norm{e_k}^2 = |a_k| = 1\), and 
 thus each of the vector is normalized, completing the proof. 
 \end{proof}
-
 
 \begin{problem}{3}
     Suppose \(e_1, \ldots, e_m\) is an orthonormal list in \(V\) and \(v \in V\). Prove that 
@@ -773,10 +710,9 @@ thus each of the vector is normalized, completing the proof.
 \langle v,e_i \rangle e_i\), which is the orthogonal projection of \(v\) onto the subspace 
 spanned by \(e_1, \ldots, e_m\). We claim that \(v - v_{proj}\) is orthogonal to \(v_{proj}\). 
 This can be seen as 
-
 \begin{align*}
     \langle v_{proj}, v - v_{proj} \rangle 
-    &= \langle \sum_{i=1}^{m} \langle v,e_i \rangle e_i, v - \sum_{j=1}^{m} \langle v,e_j \rangle e_j \rangle \\ 
+    &= \left\langle \sum_{i=1}^{m} \langle v,e_i \rangle e_i, v - \sum_{j=1}^{m} \langle v,e_j \rangle e_j \right\rangle \\ 
     &= \sum_{i=1}^{m} |\langle v,e_i \rangle|^2 - \sum_{i=1}^{m} |\langle v,e_i \rangle|^2 = 0 
 \end{align*}
 
@@ -790,7 +726,6 @@ where \(\norm{v}^2 = \norm{v_{proj}^2}\) and thus \(v = v_{proj}\). Equivalently
 repeatedly applying the Pythagorean theorem. 
 \end{proof}
 
-
 \begin{problem}{4}
     Suppose \(n\) is a positive integer. Prove that 
     \[\frac{1}{\sqrt{2\pi}}, \frac{\cos x}{\sqrt{\pi}}, \frac{\cos 2x}{\sqrt{\pi}}, 
@@ -801,10 +736,8 @@ repeatedly applying the Pythagorean theorem.
     \[\langle f,g \rangle = \int_{-\pi}^{\pi} fg.\]
 \end{problem}
 
-
 \begin{proof}
-First we show each of the element has norm 1. 
-
+First, we show each of the element has norm 1. 
 \begin{align*}    
     \norm{\frac{1}{\sqrt{2\pi}}} 
     = \sqrt{ \int_{-\pi }^{\pi} \frac{1}{2 \pi} dx } = 1 \\ 
@@ -817,9 +750,8 @@ First we show each of the element has norm 1.
     \sqrt{ \frac{1}{\pi} [  \frac{x}{2} - \frac{\cos (2nx)}{4n}  ]_{-\pi}^\pi  } = 1
 \end{align*}
 
-Next we show that each element is orthogonal to each other, there are many different cases, we begin 
+Next, we show that each element is orthogonal to each other, there are many different cases, we begin 
 examine here: 
-
 \begin{align*}
     \langle \frac{1}{\sqrt{2\pi}}, \frac{\cos nx}{\sqrt{\pi}} \rangle 
     =  \frac{1}{\sqrt{2}\pi} \int_{-\pi}^{\pi} \cos nx dx = \frac{1}{\sqrt{2}\pi} [\frac{\sin nx}{n}]_{-\pi}^\pi 
@@ -830,16 +762,8 @@ examine here:
 \end{align*}
 
 Similarly, one can derive between every different pairs of element, their inner product is 0 for different 
-index. The derivation is ommitted.
-
-
+index. The derivation is omitted.
 \end{proof}
-
-
-
-
-
-
 
 \begin{problem}{6}
     Suppose \(e_1, \ldots, e_n\) is an orthonormal basis of \(V\). 
@@ -863,17 +787,16 @@ which means that
 
 Note that 
 \[\norm{\sum_{i=1}^{n} a_i (v_i - e_i)} \leq \sum_{i=1}^{n} \norm{a_i (v_i - e_i)} 
-= \sum_{i=1}^{n} |a_i| \norm{v_i - e_i} < \sum_{i=1}^{n} \frac{|a_i|}{\sqrt{n}} \leq  (\sum_{i=1}^{n} |a_i|^2)^{1/2}\]
+= \sum_{i=1}^{n} |a_i| \norm{v_i - e_i} < \sum_{i=1}^{n} \frac{|a_i|}{\sqrt{n}} \leq \left(\sum_{i=1}^{n} |a_i|^2\right)^{1/2}\]
 
-where the last inequality is shown by a Cauchy-Schwarz. This reaches a contradiction, as 
-\[\norm{\sum_{i=1}^{n} a_i e_i} = (\sum_{i=1}^{n} |a_i|^2)^{1/2} < (\sum_{i=1}^{n} |a_i|^2)^{1/2}\]
+where the last inequality is shown by the Cauchy-Schwarz. This reaches a contradiction, as 
+\[\norm{\sum_{i=1}^{n} a_i e_i} = \left(\sum_{i=1}^{n} |a_i|^2 \right)^{1/2} < \left(\sum_{i=1}^{n} |a_i|^2 \right)^{1/2}\]
 
 (b) Suppose \(v_1 = e_1 + \frac{1}{\sqrt{n}}e_2\) and \(v_j = e_j\) for \(2 \leq j \leq n\). Hence we have 
 \[\norm{e_1 - v_1} = \norm{\frac{1}{\sqrt{n}} e_2} = \frac{1}{\sqrt{n}}\]
 where other conditions hold trivially. However, we can clearly tell that \(v_1, \ldots, v_n\) is not 
 linearly independent. 
 \end{proof}
-
 
 \begin{problem}{9}
     Suppose \(e_1, \ldots, e_m\) is the result of applying the Gram-Schmidt procedure to a linearly 
@@ -882,15 +805,12 @@ linearly independent.
 \end{problem}
 
 \begin{proof}
-
 In the Gram-Schmidt process, we decompose \(v_k\) into \(v_{proj}\) and \(f_k\) where \(v_{proj}\) is 
 the Orthogonal projection of \(v_k\) onto the \(\text{span}(v_1, \ldots, v_{k-1}) = \text{span}(e_1, \ldots, e_{k-1})\). 
 To show \(\langle v_k,e_k \rangle > 0\), it's equivalent to show \(\langle v_k, f_k \rangle > 0\), which 
 naturally holds as 
 \[\langle v_k,f_k \rangle = \langle f_k + v_{proj},f_k \rangle = \langle f_k,f_k \rangle > 0\]
 \end{proof}
-
-
 
 \begin{problem}{11}
     Find a polynomial \(q \in \Pc_2(\R)\) such that \(p(\frac{1}{2}) = \int_{0}^{1}pq \) for every 
@@ -905,17 +825,16 @@ can derive that
 where we can consider the orthonormal basis \(\sqrt{\frac{1}{2}}, \sqrt{\frac{3}{2}}x, 
 \sqrt{\frac{45}{8}}(x^2 - \frac{1}{3})\). Then 
 \begin{align*}
-    q(x) &= (\sqrt{\frac{1}{2}})\sqrt{\frac{1}{2}}  + (\sqrt{\frac{3}{2}} \frac{1}{2}) \sqrt{\frac{3}{2}x}
-    + \sqrt{\frac{45}{8}}(\frac{1}{4} - \frac{1}{3}) \sqrt{\frac{45}{8}}(x^2 - \frac{1}{3}) \\ 
+    q(x) &= \sqrt{\frac{1}{2}} \sqrt{\frac{1}{2}}  + \sqrt{\frac{3}{2}} \frac{1}{2} \sqrt{\frac{3}{2}x}
+    + \sqrt{\frac{45}{8}}\left(\frac{1}{4} - \frac{1}{3}\right) \sqrt{\frac{45}{8}} \left(x^2 - \frac{1}{3}\right) \\ 
     &= \frac{1}{2} + \frac{3}{4}x + \frac{5}{32} - \frac{15}{32}x^2 \\ 
     &= -\frac{15}{32}x^2 + \frac{3}{4}x + \frac{21}{32} 
 \end{align*}
-
 \end{proof}
 
 \begin{problem}{13}
     Show that a list \(v_1, \ldots, v_m\) of vectors in \(V\) is linearly dependent if and only if 
-    the Gram-Schmitdt formula produces \(f_k = 0\) for some \(k \in \{1, \ldots, m\}\).
+    the Gram-Schmidt formula produces \(f_k = 0\) for some \(k \in \{1, \ldots, m\}\).
 \end{problem}
 
 \begin{proof}
@@ -925,9 +844,8 @@ means that \(v_k = v_{proj}\), which means that \(v \in \text{span}(e_1, \ldots,
 = \text{span}(v_1, \ldots, v_{k-1})\) and therefore renders the list to be linearly dependent. 
 \end{proof}
 
-
 \begin{problem}{14}
-    Suppose \(V\) is a real inner product space and \(v_1, \ldots, v_m\) is a linealry independent list of 
+    Suppose \(V\) is a real inner product space and \(v_1, \ldots, v_m\) is a linearly independent list of 
     vectors in \(V\). Prove that there exist exactly \(2^m\) orthonormal lists \(e_1, \ldots, e_m\) of 
     vectors in \(V\) such that 
     \[\text{span}(v_1, \ldots, v_k)  = \text{span}(e_1, \ldots, e_k)\]
@@ -942,7 +860,7 @@ So there are exactly \(2^1 = 1\) orthonormal list of vectors.
 For induction, assume that for \(v_1, \ldots, v_{k-1}\) linearly independent list of vectors in \(V\), 
 there exist exactly \(2^{k-1}\) orthonormal lists \(e_1, \ldots, e_{k-1}\) of vectors in \(V\) such that 
 \[\Span (v_1, \ldots, v_{k-1}) = \Span (e_1, \ldots, e_{k-1})\]
-For \(k\), by Gram-Schmitdt, we have the \(e_k\) such that 
+For \(k\), by the Gram-Schmidt, we have the \(e_k\) such that 
 \[\Span (v_1, \ldots, v_k) = \Span (e_1, \ldots, e_k)\]
 Suppose such choice of \(e_k\) is not unique and there's other \(e_k'\) also satisfies 
 \[\Span(e_1, \ldots, e_k') = \Span(e_1, \ldots, e_k)\]
@@ -951,43 +869,37 @@ which indicates that \(e_k' = \sum_{i=1}^{k} \langle e_k',e_i \rangle e_i = \lan
 so \(e_k' = \pm e_k\) and this gives \(2 * 2^{m-1} = 2^m\) choices of orthonormal lists of vectors.
 \end{proof}
 
-
 \begin{problem}{15}
     Suppose \(\langle \cdot,\cdot \rangle_1\) and \(\langle \cdot,\cdot \rangle_2\) are inner products on 
     \(V\) such that \(\langle u,v \rangle_1 = 0\) if and only if \(\langle u,v \rangle_2 = 0\). Prove that 
-    there is a postive number \(c\) such that \(\langle u,v \rangle_1 = c \langle u,v \rangle_2\) for 
+    there is a positive number \(c\) such that \(\langle u,v \rangle_1 = c \langle u,v \rangle_2\) for 
     every \(u, v \in V\).
 \end{problem}
 
-
 \begin{proof}
-
 It suffices to prove that \(c = \frac{\langle u,v \rangle_1}{\langle u,v \rangle_2}\) for every 
 \(u, v \in V\) is a constant number.
 
-First pick nonzero \(u \in V\). Then we know that \(\langle u,u \rangle_1 > 0, \langle u,u \rangle_2 > 0\).
+First, pick nonzero \(u \in V\). Then we know that \(\langle u,u \rangle_1 > 0, \langle u,u \rangle_2 > 0\).
 Pick \(v \in V\) s.t. \(\langle u,v \rangle_1 \neq 0, \langle u,v \rangle_2 \neq 0\) (i.e. they are not 
 orthogonal). So we have that 
-\[ \langle u - \frac{\langle u,v \rangle_2}{\langle v,v \rangle_2}v, v \rangle_1 = 0  = 
-\langle u - \frac{\langle u,v \rangle_2}{\langle v,v \rangle_2}v, v \rangle_2 \]
+\[ \left\langle u - \frac{\langle u,v \rangle_2}{\langle v,v \rangle_2}v, v \right\rangle_1 = 0  = 
+\left\langle u - \frac{\langle u,v \rangle_2}{\langle v,v \rangle_2}v, v \right\rangle_2 \]
 by the orthogonal decomposition of \(u\). This gives that 
 
 \[\frac{\langle u,v \rangle_1}{\langle u,v \rangle_2} = \frac{\langle v,v \rangle_1}{\langle v,v \rangle_2}\]
 
 Similarly, we have 
 
-\[ \langle u , v - \frac{\langle u,v \rangle_2}{\langle v,v \rangle_2}u \rangle_1 = 0  = 
-\langle u , v - \frac{\langle u,v \rangle_2}{\langle v,v \rangle_2}u \rangle_2 \]
+\[ \left\langle u , v - \frac{\langle u,v \rangle_2}{\langle v,v \rangle_2}u \right\rangle_1 = 0  = 
+\left\langle u , v - \frac{\langle u,v \rangle_2}{\langle v,v \rangle_2}u \right\rangle_2 \]
 
 and that 
 \[\frac{\langle u,v \rangle_1}{\langle u,v \rangle_2} = \frac{\langle u,u \rangle_1}{\langle u,u \rangle_2} 
 = \frac{\langle v,v \rangle_1}{\langle v,v \rangle_2} = c\]
 
 which yields the desired solution. 
-
 \end{proof}
-
-
 
 \begin{problem}{16}
     Suppose \(V\) is finite-dimensional. Suppose \(\langle \cdot,\cdot \rangle_1\) and 
@@ -1011,7 +923,6 @@ We can proceed with that
 which completes the proof.
 \end{proof}
 
-
 \begin{problem}{17}
     Suppose \(\F = \C\) and \(V\) is finite-dimensional. Prove that if \(T\) is an operator on \(V\)
     such that \(1\) is the only eigenvalue of \(T\) and \(\norm{Tv} \leq \norm{v}\) for all \(v \in V\), 
@@ -1019,17 +930,15 @@ which completes the proof.
 \end{problem}
 
 \begin{proof}
-
     By Schur's theorem, there exists an orthonormal basis \(e_1, \ldots, e_n\) such that the matrix of \(T\) is 
-    upper-triangular. Then \(1\) is the only component on the diagnoal entries. Hence, 
+    upper-triangular. Then \(1\) is the only component on the diagonal entries. Hence, 
     \[\norm{T e_k} \leq \norm{e_k} = 1\]
-    Note that \(Te_k = \sum_{i=1}^{k-1}a_i e_i + e_k\) since we know the upper-triangular matrix has diagnoal term to be 1. 
+    Note that \(Te_k = \sum_{i=1}^{k-1}a_i e_i + e_k\) since we know the upper-triangular matrix has diagonal term to be 1. 
     This gives that 
     \[\norm{\sum_{i=1}^{k-1} a_i e_i + e_k} = \norm{e_k} + \sum_{i=1}^{k-1}|a_i| \norm{e_i} \leq \norm{e_k}\]
-    so for each \(e_k\), the off-diagnoal entries \(a_i\) are all 0 and thus the matrix of \(T\) is the identity 
+    so for each \(e_k\), the off-diagonal entries \(a_i\) are all 0 and thus the matrix of \(T\) is the identity 
     matrix, and \(T\) is the identity operator.
 \end{proof}
-
 
 \begin{problem}{18}
     Suppose \(u_1, \ldots, u_m\) is a linearly independent list in \(V\). Show that there exists \(v \in V\)
@@ -1042,16 +951,13 @@ there is a unique \(v \in V\) s.t.
 \[\varphi(u_k) = \langle u_k, v \rangle = 1\]
 \end{proof}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 6C %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \newpage 
 \section*{6C: Orthogonal Complements and Minimization Problems}
 \addcontentsline{toc}{section}{6C: Orthogonal Complements and Minimization Problems}
-
 
 \begin{definition}[orthogonal complement, \(U^{\perp}\)]
     If \(U\) is a subset of \(V\), then the \textbf{orthogonal complement} of \(U\), denoted by 
@@ -1077,7 +983,7 @@ there is a unique \(v \in V\) s.t.
 
 \begin{corollary}
     Suppose \(U\) is a finite-dimensional subspace of \(V\). Then 
-    \[U^\perp = \{0\} \Leftrightarrow U = V.\]
+    \[U^\perp = \{0\} \Longleftrightarrow U = V.\]
 \end{corollary}
 
 \begin{definition}[orthogonal projection, \(P_U\)]
@@ -1088,14 +994,13 @@ there is a unique \(v \in V\) s.t.
 
 \begin{remark}
     Suppose \(u \in V\) with \(u \neq 0\) and \(U = \Span(u)\). If \(v \in V\), then 
-    \[v = \frac{\langle v,u \rangle}{\norm{u}^2}u + (v - \frac{\langle v,u \rangle}{\norm{u}^2}u).\]
+    \[v = \frac{\langle v,u \rangle}{\norm{u}^2}u + \left(v - \frac{\langle v,u \rangle}{\norm{u}^2}u \right).\]
     Then this implies that 
     \[P_U v = \frac{\langle v,u \rangle}{\norm{u}^2}u\]
 \end{remark}
 
-
 \begin{corollary}[properties of orthogonal projection \(P_U\)]
-    Suppoes \(U\) is a finite-dimensional subspace of \(V\). Then 
+    Suppose \(U\) is a finite-dimensional subspace of \(V\). Then 
     \begin{enumerate}[label=(\alph*)]
         \item \(P_U \in \Lc(V)\); 
         \item \(P_U u = u\) for every \(u \in U\); 
@@ -1110,14 +1015,12 @@ there is a unique \(v \in V\) s.t.
     \end{enumerate}
 \end{corollary}
 
-
 \begin{thm}[Riesz representation theorem, revisited]
     Suppose \(V\) is finite-dimensional. For each \(v \in V\), define \(\varphi_v \in V'\) by 
     \[\varphi_v (u) = \langle u,v \rangle\]
     for each \(u \in V\). Then \(v \mapsto \varphi_v\) is a one-to-one function from \(V\) to 
     \(V'\).
 \end{thm}
-
 
 \begin{thm}[minimizing distance to a subspace]
     Suppose \(U\) is a finite-dimensional subspace of \(V\), \(v \in V\), and \(u \in U\). Then 
@@ -1129,7 +1032,6 @@ there is a unique \(v \in V\) s.t.
     Suppose \(V\) is finite-dimensional and \(T \in \Lc(V, W)\). Then \(T |_{(\nul T)^\perp}\) is an 
     injective map of \((\nul T)^\perp\) onto \(\range T\).
 \end{lemma}
-
 
 \begin{definition}[pseudoinverse, \(T^\dagger\)]
     Suppose that \(V\) is finite-dimensional and \(T \in \Lc(V, W)\). The \textbf{pseudoinverse} 
@@ -1160,12 +1062,6 @@ there is a unique \(v \in V\) s.t.
     \end{enumerate}
 \end{thm}
 
-
-
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 6C PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1173,18 +1069,16 @@ there is a unique \(v \in V\) s.t.
 \newpage 
 \addcontentsline{toc}{subsection}{6C Problem Sets}
 
-
 \begin{problem}{1}
     Suppose \(v_1, \ldots, v_m \in V\). Prove that 
     \[\{v_1, \ldots, v_m\}^\perp  = (\Span (v_1, \ldots, v_m))^\perp. \]
 \end{problem}
 
 \begin{proof}
-
 Denote \(A = \{v_1, \ldots, v_m\}^\perp\) and \(B = \Span (v_1, \ldots, v_m)^\perp\)
 
 \(\Rightarrow\) Let \( v \in A\), then \(\langle v,v_i \rangle =0 \) for all \(i\). So we have 
-\[\langle v,\sum_{i=1}^{m} a_i v_i \rangle = \sum_{i=1}^{m} \overline{a_i} \langle v,v_i \rangle = 0\]
+\[\left\langle v,\sum_{i=1}^{m} a_i v_i \right\rangle = \sum_{i=1}^{m} \overline{a_i} \langle v,v_i \rangle = 0\]
 which means that \(v \in B\). 
 
 \(\Leftarrow\) Conversely, let \(v \in B\), then naturally by definition \(v \in A\).
@@ -1206,7 +1100,7 @@ This gives that \(\langle e_i,e_j \rangle = 0\) for all \(i \neq j\), completing
 \end{proof}
 
 \begin{problem}{5}
-    Suppoe that \(V\) is finite-dimensional and \(U\) is a subspace of \(V\). Show that 
+    Suppose that \(V\) is finite-dimensional and \(U\) is a subspace of \(V\). Show that 
     \(P_{U^\perp} = I - P_U\), where \(I\) is the identity operator on \(V\).
 \end{problem}
 
@@ -1226,11 +1120,7 @@ Take arbitrary \(v \in V\), then \(v = u + w\) for \(u \in \nul T\) and \(w \in 
 
 Furthermore, since \(Tv \in \range T\), \(P_{\range T}\) acts as an identity operator for \(Tv\), thus 
 we have the second equality.
-
-
-
 \end{proof}
-
 
 \begin{problem}{7}
     Suppose that \(X\) and \(Y\) are finite-dimensional subspaces of \(V\). Prove that 
@@ -1263,14 +1153,13 @@ Then take \(v = v_1 + v_2\) where \(v_1 \in \nul P, v_2 \in \range P\), then we 
 
 \begin{problem}{11}
     Suppose \(T \in \Lc(U)\) and \(U\) is a finite-dimensional subspace of \(V\). Prove that 
-    \[U \text{ is invariant under } T \Leftrightarrow P_U T P_U = T P_U\]
+    \[U \text{ is invariant under } T \Longleftrightarrow P_U T P_U = T P_U\]
 \end{problem}
 
 \begin{proof}
-\(U\) invairant under \(T\) \(\Leftrightarrow\) \(Tu \in U\) for all \(u \in U\) 
-\(\Leftrightarrow\) for \(v = u + u^\perp \in V\), \(TP_U (v) = Tu = P_U(Tu) = P_U T P_U (v) \)
+\(U\) is invariant under \(T\) \(\Longleftrightarrow\) \(Tu \in U\) for all \(u \in U\) 
+\(\Longleftrightarrow\) for \(v = u + u^\perp \in V\), \(TP_U (v) = Tu = P_U(Tu) = P_U T P_U (v) \)
 \end{proof}
-
 
 \begin{problem}{13}
     Suppose \(\F = \R\) and \(V\) is finite-dimensional. For each \(v \in V\), let \(\varphi_v\) denote 
@@ -1294,7 +1183,6 @@ Then take \(v = v_1 + v_2\) where \(v_1 \in \nul P, v_2 \in \range P\), then we 
 (b) We know that \(\dim V = \dim V'\) and combining this with (a) yields the solution.
 \end{proof}
 
-
 \begin{problem}{15}
     In \(\R^4\), let 
     \[U = \Span((1,1,0,0),(1,1,1,2))\]
@@ -1303,19 +1191,17 @@ Then take \(v = v_1 + v_2\) where \(v_1 \in \nul P, v_2 \in \range P\), then we 
 
 \begin{proof}
 We first find the orthonormal basis of \(U\) and apply the formula, i.e. \(P_U(v) = \sum_{i=1}^{n} 
-\langle v,e_i \rangle e_i\). Using Gram-Schmitdt we can find that 
-\[\{(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}, 0, 0), (0, 0, \frac{1}{\sqrt{5}}, \frac{2}{\sqrt{5}})\}\]
+\langle v,e_i \rangle e_i\). Using the Gram-Schmidt, we can find that 
+\[\left\{\left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}, 0, 0 \right), \left(0, 0, \frac{1}{\sqrt{5}}, \frac{2}{\sqrt{5}}\right)\right\}\]
 Then we can get that 
-
 \begin{align*}
-    u = &\langle (1,2,3,4),(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}, 0, 0) \rangle 
-(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}, 0, 0) +  \\ 
-&\langle (1,2,3,4),(0, 0, \frac{1}{\sqrt{5}}, \frac{2}{\sqrt{5}}) \rangle 
-(0, 0, \frac{1}{\sqrt{5}}, \frac{2}{\sqrt{5}}) \\ 
-&= (\frac{3}{2}, \frac{3}{2}, \frac{11}{5}, \frac{22}{5})
+    u &= \left\langle (1,2,3,4),\left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}, 0, 0\right) \right\rangle 
+\left(\frac{1}{\sqrt{2}}, \frac{1}{\sqrt{2}}, 0, 0 \right) +  \\ 
+&\quad \left\langle (1,2,3,4),\left(0, 0, \frac{1}{\sqrt{5}}, \frac{2}{\sqrt{5}}\right) \right\rangle 
+\left(0, 0, \frac{1}{\sqrt{5}}, \frac{2}{\sqrt{5}}\right) \\ 
+&= \left(\frac{3}{2}, \frac{3}{2}, \frac{11}{5}, \frac{22}{5}\right)
 \end{align*}
 \end{proof}
-
 
 % \begin{problem}{17}
 %     Find \(p \in \Pc_3 (\R)\) such that \(p(0) = 0, p'(0) = 0\), and \(\int_{0}^{1} 
@@ -1331,7 +1217,6 @@ Then we can get that
 % \[\frac{1}{\sqrt{5}}x^2, x^\]
 % \end{proof}
 
-
 \begin{problem}{19}
     Suppose \(V\) is finite-dimensional and \(P \in \Lc(V)\) is an orthogonal projection of \(V\) onto 
     some subspace of \(V\). Prove that \(P^\dagger = P\).
@@ -1343,7 +1228,7 @@ Suppose the subspace is \(U\). Take \(u \in U\), then we know that \(u \in \rang
     P^\dagger u = (P|_{(\nul P)^\perp})^{-1} P_{\range P} u =  (P|_{(\nul P)^\perp})^{-1} u  = u = Pu 
 \end{align*}
 
-Take \(u \in U^\perp\), then we have \(Pu = 0\) and also \(P^\dagger u = 0\) by definition. Thus these two oeprators 
+Take \(u \in U^\perp\), then we have \(Pu = 0\) and also \(P^\dagger u = 0\) by definition. Thus these two operators 
 equal each other.
 \end{proof}
 
@@ -1357,12 +1242,10 @@ We know that \(T^\dagger = (T|_{(\nul T)^\perp})^{-1} P_{\range T}\) and the fir
 we've shown it's bijective with the restriction in book's lemma. So for \(v \in \nul T^\dagger\), 
 \(P_{\range T}v = 0\) and thus \(v \in (\range T)^\perp\). Conversely, it holds by definition. 
 
-
 For the other equality, take \(v \in \range T^\dagger\), then there exists \(u \in \range T\) s.t. 
 \(T|_{(\nul T)^\perp} v = u\), so \(v \in (\nul T)^\perp\). Conversely, take \(v \in (\nul T)^\perp\), then 
 there exists \(u \in \range T\) s.t. \(Tv = u\), and we have \(T^\dagger u =v\) so \(v \in \range T^\dagger\).
 \end{proof}
-
 
 \begin{problem}{22}
     Suppose \(V\) is finite-dimensional and \(T \in \Lc(V, W)\). Prove that 
@@ -1396,7 +1279,6 @@ where we use the conclusion from problem 20. Note that if \(v \in \nul T\), then
 Expanding the definition gives that 
 \[(S|_{\range T})^{-1}v = (((T|_{(\nul T)^\perp})^{-1} P_{\range T})|_{\range T})^{-1} v
 = T|_{(\nul T)^\perp}v = Tv\]
-therefore we complete the proof. 
+Therefore, we complete the proof. 
 
 \end{document}
-

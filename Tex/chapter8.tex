@@ -2,29 +2,22 @@
 \sloppy
 \input{packages.tex}
 \input{math_commands.tex}
-\usepackage{hyperref}
-
 
 \title{\vspace{-2em}Chapter 8: Operators on Complex Vector Spaces}
-\author{\emph{Linear Algebra Done Right}, by Sheldon Axler}
-\date{}
+\author{\emph{Linear Algebra Done Right (4th Edition)}, by Sheldon Axler}
+\date{Last updated: \today}
 
 \begin{document}
 \maketitle 
 \tableofcontents
-
 \newpage 
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 8A %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-\newpage 
 \section*{8A: Generalized Eigenvectors and Nilpotent Operators}
 \addcontentsline{toc}{section}{8A: Generalized Eigenvectors and Nilpotent Operators}
-
 
 \begin{lemma}[sequence of increasing null spaces]
     Suppose \(T \in \Lc(V)\). Then 
@@ -130,9 +123,6 @@
     \end{itemize}
 \end{thm}
 
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 8A PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -141,7 +131,7 @@
 \addcontentsline{toc}{subsection}{8A Problem Sets}
 
 \begin{problem}{1}
-    SUppose \(T \in \Lc(V)\). Prove that if \(\dim \nul T^4 = 8\) and \(\dim 
+    Suppose \(T \in \Lc(V)\). Prove that if \(\dim \nul T^4 = 8\) and \(\dim 
     \nul T^6 = 9\), then \(\dim \nul T^m = 9\) for all  integers \(m \geq 5\).
 \end{problem}
 
@@ -149,7 +139,6 @@
 Suppose not, then \(\dim \nul T^5 = 8 = \dim \nul T^6\), forming a contradiction. Therefore, 
 the statement holds. 
 \end{proof}
-
 
 \begin{problem}{2}
     Suppose \(T \in \Lc(V)\), \(m\) is a positive integer, \(v \in V\), and \(T^{m-1}v  \neq 0\) 
@@ -162,7 +151,7 @@ Consider
 Apply \(T^{m-1}\) on both sides yields that 
 \[a_0 T^{m-1} v = 0\]
 and therefore \(a_0 = 0\). Note that \(v \neq \nul T^{m-1}\) and therefore 
-\(v \neq \nul T^j\) for \(j \leq m-1\). Hence continuing apply the argument above will 
+\(v \neq \nul T^j\) for \(j \leq m-1\). Hence, continuing apply the argument above will 
 gets that all \(a_i = 0\).
 \end{proof}
 
@@ -178,10 +167,9 @@ Therefore \(Tv \in \nul T\), but \(Tv \in \range T\) so \(Tv = 0\), which gives 
 \(v \in \nul T\).
 
 \(\Leftarrow\) Let \(v \in (\nul T) \cap (\range T)\). Then there exists \(u\) s.t. 
-\(Tu = v\) and \(Tv = 0\). Therefore \(T^2u = Tv = 0\) and thus \(u \in \nul T^2 
+\(Tu = v\) and \(Tv = 0\). Therefore, we have \(T^2u = Tv = 0\) and thus \(u \in \nul T^2 
 =\nul T\). So \(v = T0  = 0\). We've proved the claim.
 \end{proof}
-
 
 \begin{problem}{6}
     Suppose \(T \in \Lc(V)\). Show that 
@@ -189,8 +177,8 @@ Therefore \(Tv \in \nul T\), but \(Tv \in \range T\) so \(Tv = 0\), which gives 
 \end{problem}
 
 \begin{proof}
-Take \(v \in \range T^{k+1}\), then we know that ther exists \(u \in V\) s.t. 
-\(v = T^{k+1} u = T^{k}(Tu)\), therefore \(v \in \range T^k\). 
+Take \(v \in \range T^{k+1}\), then we know that there exists \(u \in V\) s.t. 
+\(v = T^{k+1} u = T^{k}(Tu)\). Therefore, we have \(v \in \range T^k\). 
 \end{proof}
 
 \begin{problem}{9}
@@ -201,7 +189,7 @@ Take \(v \in \range T^{k+1}\), then we know that ther exists \(u \in V\) s.t.
 \begin{proof}
 We know that 
 \[\dim V = \dim \nul T^m + \dim \range T^m = \dim \nul T^{m+1} + \dim \range T^{m+1}\]
-Therefore 
+Therefore, we have
 \[\nul T^m = \nul T^{m+1} \Longleftrightarrow \range T^m = \range T^{m+1}\]
 \end{proof}
 
@@ -218,11 +206,9 @@ are both invariant under \(T\), but \(v = v_1 + v_2 \in G(\lambda, T)\) is also 
 \(T\). If \(\lambda = \lambda_1\) or 
 \(\lambda_2\), then this contradicts that \(\lambda_1 \neq \lambda_2\). If \(\lambda \neq \lambda_1\)
 and \(\lambda \neq \lambda_2\), then this contradicts that \(G(\lambda_1, T) \cap G(\lambda, T) = \{0\}\).
-Therefore there is only one eigenvalue and thus \(T - \lambda I\) is nilpotent for the only 
+Therefore, there is only one eigenvalue and thus \(T - \lambda I\) is nilpotent for the only 
 eigenvaue \(\lambda\). 
-
 \end{proof}
-
 
 \begin{problem}{13}
     Suppose \(S, T \in \Lc(V)\) and \(ST\) is nilpotent. Prove that \(TS\) is nilpotent. 
@@ -242,33 +228,27 @@ We know \((ST)^k = 0\) for some \(k\). Then
 \(0\) is the only eigenvalue of \(T\) and any nonzero \(v \in V\) cannot be represented by an eigenbasis.
 \end{proof}
 
-
-
 \begin{problem}{22}
     Suppose \(T \in \Lc(\C^5)\) is such that \(\range T^4 \neq \range T^5\). Prove that 
     \(T\) is nilpotent. 
 \end{problem}
 
 \begin{proof}
-By Problem 9 we have that \(\nul T^4 \neq \nul T^5 \) and therefore \(\dim \nul T^4 < 
-\dim \nul T^5 = 5\) where \(\dim \C^5 =5 \). Hence \(T\) is nilpotent. 
+By Problem 9, we have that \(\nul T^4 \neq \nul T^5 \) and therefore \(\dim \nul T^4 < 
+\dim \nul T^5 = 5\) where \(\dim \C^5 =5 \). Hence, \(T\) is nilpotent. 
 \end{proof}
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 8B %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \newpage 
 \section*{8B: Generalized Eigenspace Decomposition}
 \addcontentsline{toc}{section}{8B: Generalized Eigenspace Decomposition}
 
-
 \begin{definition}[generalized eigenspace, \(G(\lambda, T)\)]
     Suppose \(T \in \Lc(V)\) and \(\lambda \in \F\). The \textbf{generalized eigenspace} of 
-    \(T\) corresponding to \(\lambda\), denoted by \(G(\lambda, T)\), is defined bby 
+    \(T\) corresponding to \(\lambda\), denoted by \(G(\lambda, T)\), is defined by 
     \[G(\lambda, T) = \{v \in V \colon (T - \lambda I)^k v = 0 \text{ for some positive integer }k\}.\]
     Thus \(G(\lambda, T)\) is the set of generalized eigenvectors of \(T\) corresponding to \(\lambda\), 
     along with the 0 vector. 
@@ -278,11 +258,9 @@ By Problem 9 we have that \(\nul T^4 \neq \nul T^5 \) and therefore \(\dim \nul 
     \(E(\lambda, T) \subseteq G(\lambda, T)\) as each eigenvector is a generalized eigenvector.
 \end{remark}
 
-
 \begin{corollary}[description of generalized eigenspaces]
     Suppose \(T \in \Lc(V)\) and \(\lambda \in \F\). Then \(G(\lambda, T) = \nul (T - \lambda I)^{\dim V}\).
 \end{corollary}
-
 
 \begin{thm}[generalized eigenspace decomposition]
     Suppose \(\F = \C\) and \(T \in \Lc(V)\). Let \(\lambda_1, \ldots, \lambda_m\) be the distinct 
@@ -301,7 +279,6 @@ By Problem 9 we have that \(\nul T^4 \neq \nul T^5 \) and therefore \(\dim \nul 
     equals 
     \[\dim \nul (T -\lambda I)^{\dim V}\]
 \end{definition}
-
 
 \begin{corollary}
     Suppose \(\F = \C\) and \(T \in \Lc(V)\). Then the sum of the multiplicities of all 
@@ -343,12 +320,10 @@ By Problem 9 we have that \(\nul T^4 \neq \nul T^5 \) and therefore \(\dim \nul 
     Then \(q(T) = 0\).
 \end{thm}
 
-
 \begin{corollary}
     Suppose \(\F = \C\) and \(T \in \Lc(V)\). Then the characteristic polynomial of \(T\) is 
     a polynomial multiple of the minimal polynomial of \(T\).
 \end{corollary}
-
 
 \begin{thm}
     Suppose \(\F = \C\) and \(T \in \Lc(V)\). Suppose \(v_1, \ldots, v_n\) is a basis of 
@@ -392,15 +367,12 @@ By Problem 9 we have that \(\nul T^4 \neq \nul T^5 \) and therefore \(\dim \nul 
         \end{pmatrix}  \]
 \end{thm}
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 8B PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage 
 \addcontentsline{toc}{subsection}{8B Problem Sets}
-
 
 \begin{problem}{1}
     Define \(T \in \Lc(\C^2)\) by \(T(w, z) = (-z, w)\). Find the generalized eigenspaces 
@@ -432,7 +404,6 @@ We have
 which shows that \( v \in G(\frac{1}{\lambda}, T)\). The other direction follows accordingly. 
 \end{proof}
 
-
 \begin{problem}{3}
     Suppose \(T \in \Lc(V)\). Suppose \(S \in \Lc(V)\) is invertible. Prove that \(T\)
     and \(S^{-1}TS\) have the same eigenvalues with the same multiplicities.
@@ -441,11 +412,10 @@ which shows that \( v \in G(\frac{1}{\lambda}, T)\). The other direction follows
 \begin{proof}
 Let \(\lambda\) be an eigenvalue of \(T\) with multiplicity \(d\). Then we know 
 \[(T - \lambda I)^d = 0\]
-Therefore 
+Therefore, we have
 \[(S^{-1})^d (T - \lambda I)^d S^d = (S^{-1}(T - \lambda I) S)^d = (S^{-1}TS - \lambda I)^d = 0\]
 The converse is proved identically. 
 \end{proof}
-
 
 \begin{problem}{5}
     Suppose \(T \in \Lc(V)\) and 3 and 8 are eigenvalues of \(T\). Let \(n = \dim V\). Prove that 
@@ -456,7 +426,7 @@ The converse is proved identically.
 \begin{proof}
 This means that the minimal polynomial of \(T\) can be written as 
 \[m_T(x) = (x-3)(x-8)q(x)\]
-with \(\max \deg q(x) \leq n-2\). Hence we have that \(\nul T^{n} = \nul T^{n-1} = \nul T^{n-2}\) and 
+with \(\max \deg q(x) \leq n-2\). Hence, we have that \(\nul T^{n} = \nul T^{n-1} = \nul T^{n-2}\) and 
 \(\range T^{n} = \range T^{n-1} = \range T^{n-2}\). Applying P3 from section 8A solves the problem. 
 \end{proof}
 
@@ -468,7 +438,6 @@ with \(\max \deg q(x) \leq n-2\). Hence we have that \(\nul T^{n} = \nul T^{n-1}
 \end{problem}
 
 \begin{proof}
-
 \begin{align*}
     \sum_{i=1}^{n}\norm{T e_i}^2 
     &= \sum_{i=1}^{n}\norm{U \Sigma V^* e_i}^2  \\ 
@@ -477,9 +446,8 @@ with \(\max \deg q(x) \leq n-2\). Hence we have that \(\nul T^{n} = \nul T^{n-1}
     &= \sum_{i=1}^{n} \norm{\lambda_i f_i}^2 \\ 
     &\geq \sum_{i=1}^{n} |\lambda_i|^2
 \end{align*}
-by Bessel's inequality at last step. 
+by the Bessel's inequality at the last step. 
 \end{proof}
-
 
 \begin{problem}{14}
     Give an example of an operator on \(\C^4\) whose characteristic polynomial equals 
@@ -498,7 +466,6 @@ J = \begin{pmatrix}
 \]
 \end{proof}
 
-
 \begin{problem}{17}
     Suppose \(\F = \C\) and \(P \in \Lc(V)\) is such that \(P^2 = P\). Prove that the characteristic 
     polynomial of \(P\) is \(z^m (z-1)^n\), where \(m = \dim \nul P\) and \(n = \dim \range P\).
@@ -506,24 +473,17 @@ J = \begin{pmatrix}
 
 \begin{proof}
 We know that the projection operator \(P\) has eigenvalue \(0\) and \(1\) (from definition). By many of 
-our prior exericises, we know that the (generalized eigenspace of) eigenvalue 0 partitions the null space 
+our prior exercises, we know that the (generalized eigenspace of) eigenvalue 0 partitions the null space 
 and nonzero ones partitions the range space. You may verify it by yourselves.
 \end{proof}
-
-
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 8C %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \newpage 
 \section*{8C: Consequences of Generalized Eigenspace Decomposition}
 \addcontentsline{toc}{section}{8C: Consequences of Generalized Eigenspace Decomposition}
-
 
 \begin{lemma}
     Suppose \(T \in \Lc(V)\) is nilpotent. Then \(I + T\) has a square root.
@@ -564,8 +524,6 @@ and nonzero ones partitions the range space. You may verify it by yourselves.
     \(T\). 
 \end{corollary}
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 8C PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -573,9 +531,8 @@ and nonzero ones partitions the range space. You may verify it by yourselves.
 \newpage 
 \addcontentsline{toc}{subsection}{8C Problem Sets}
 
-
 \begin{problem}{1}
-    Suppose \(T \in \Lc(\C^3)\) is the oprator defined by \(T(z_1, z_2, z_3) = (z_2, z_3, 0)\). Prove that 
+    Suppose \(T \in \Lc(\C^3)\) is the operator defined by \(T(z_1, z_2, z_3) = (z_2, z_3, 0)\). Prove that 
     \(T\) does not have a square root. 
 \end{problem}
 
@@ -598,28 +555,26 @@ reaching a contradiction.
 \begin{proof}
 Note that the goal here is to find linearly independent \(v_1, \ldots, v_5\) s.t. \(D(v_1) = 0\) and 
 \(D(v_{i}) = v_{i-1}\). This gives that 
-\[\{1, x, \frac{1}{2}x^2, \frac{1}{6}x^3, \frac{1}{24}x^4\}\]
+\[\left\{1, x, \frac{1}{2}x^2, \frac{1}{6}x^3, \frac{1}{24}x^4\right\}\]
 \end{proof}
 
-
 Skip the rest of questions.
+
 % \begin{problem}{8}
 %     Suppose \(T \in \Lc(V)\) and \(v_1, \ldots, v_n\) is a basis of \(V\) that is a Jordan basis for \(T\). 
 %     Describe the matrix of \(T^2\) wrt. this basis.
 % \end{problem}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 8D %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 \newpage 
 \section*{8D: Trace: A Connection Between Matrices and Operators}
 \addcontentsline{toc}{section}{8D: Trace: A Connection Between Matrices and Operators}
 
 \begin{definition}[trace of a matrix]
-    Suppose \(A\) is a square matrix with entires in \(\F\). The \textbf{trace} of \(A\), denoted by 
+    Suppose \(A\) is a square matrix with entries in \(\F\). The \textbf{trace} of \(A\), denoted by 
     \(\tr A\), is defined to be the diagonal entries of \(A\).
 \end{definition}
 
@@ -634,13 +589,11 @@ Skip the rest of questions.
     = \tr \Mc \left( T, \left( v_1, \ldots, v_n \right) \right)\]
 \end{lemma}
 
-
 \begin{definition}[trace of an operator]
     Suppose \(T \in \Lc(V)\). The \textbf{trace} of \(T\), denoted by \(\tr T\), is defined by 
     \[\tr \ T = \tr \ \Mc \left( T, \left( v_1, \ldots, v_n \right) \right)\]
     where \(v_1, \ldots, v_n\) is any basis of \(V\).
 \end{definition}
-
 
 \begin{corollary}
     Suppose \(\F = \C\) and \(T \in \Lc(V)\). Then \(\tr \ T\) equals the sum of the eigenvalues of \(T\), with 
@@ -664,11 +617,9 @@ Skip the rest of questions.
     for all \(S, T \in \Lc(V)\).
 \end{thm}
 
-
 \begin{corollary}
     There do not exist operators \(S, T \in \Lc(V)\) such that \(ST - TS = I\).
 \end{corollary}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 8D PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -694,7 +645,6 @@ Let \(e_1, \ldots, e_n\) be the standard orthonormal basis of \(V\). Then we hav
 \end{align*}
 \end{proof}
 
-
 \begin{problem}{2}
     Suppose \(P \in \Lc(V)\) satisfies \(P^2 = P\). Prove that 
     \[\tr \ P = \dim \range P\]
@@ -705,7 +655,6 @@ Note that \(\tr P = \sum_{i=1}^{n} \lambda_i\) where \(\lambda_i = 1 \) or \(0\)
 \(\lambda_i = 1\) determines the \(\dim \range P\) and thus gives the desired conclusion.  
 \end{proof}
 
-
 \begin{problem}{5}
     Suppose \(V\) is an inner product space. Suppose \(T \in \Lc(V)\) is a positive operator and 
     \(\tr \ T = 0\). Prove that \(T = 0\).
@@ -713,7 +662,7 @@ Note that \(\tr P = \sum_{i=1}^{n} \lambda_i\) where \(\lambda_i = 1 \) or \(0\)
 
 \begin{proof}
 We know that \(\lambda_i \geq 0\) for all \(i\) for positive \(T\). Since \(\tr = 0\), all eigenvalues 
-are 0 and thus \(T = 0\) (as it's self-adjoint by positvitiy).
+are 0 and thus \(T = 0\) (as it's self-adjoint by positivity).
 \end{proof}
 
 \begin{problem}{9}
@@ -722,10 +671,9 @@ are 0 and thus \(T = 0\) (as it's self-adjoint by positvitiy).
 
 \begin{proof}
 Consider orthonormal basis \(e_1, \ldots, e_n\) and define \(S_{ij}\) to be such that 
-maps \(e_j\) to \(e_i\) while keep all other zero. Therefore \(\tr \ (S_{ij}T) = T_{ij} = 0\) 
-for all \(i, j\). Hence \(T = 0\).
+maps \(e_j\) to \(e_i\) while keep all other zero. Therefore, \(\tr \ (S_{ij}T) = T_{ij} = 0\) 
+for all \(i, j\). Hence, we proved \(T = 0\).
 \end{proof}
-
 
 \begin{problem}{11}
     Suppose \(V\) and \(W\) are inner product spaces and \(T \in \Lc(V, W)\). Prove that if \(e_1, \ldots, e_n\)
@@ -744,7 +692,6 @@ We have that
 \end{align*}
 \end{proof}
 
-
 \begin{problem}{12}
     Suppose \(V\) and \(W\) are finite-dimensional inner product spaces. 
     \begin{enumerate}[label=(\alph*)]
@@ -752,12 +699,12 @@ We have that
         \item Suppose \(e_1, \ldots, e_n\) is an orthonormal basis of \(V\) and \(f_1, \ldots, f_m\) 
         is an orthonormal basis of \(W\). Show that the inner product on \(\Lc(V, W)\) from (a) is the same 
         as the standard inner product on \(\F^{mn}\), where we identify each element of \(\Lc(V, W)\) with 
-        its matrix (with repsect to the bases just mentioned) and then with an element of \(\F^{mn}\). 
+        its matrix (with respect to the bases just mentioned) and then with an element of \(\F^{mn}\). 
     \end{enumerate}
 \end{problem}
 
 \begin{remark}
-    The norm from (a) is called the Frbenius norm or the Hilbert-Schmidt norm.
+    The norm from (a) is called the Frobenius norm or the Hilbert-Schmidt norm.
 \end{remark}
 
 \begin{proof}
@@ -767,7 +714,7 @@ We have that
     = \sum_{i=1}^{n} \sum_{j=1}^{m} A^*_{ij} A_{ji} 
     = \sum_{i=1}^{n} \sum_{j=1}^{m} |A_{ij}|^2 \geq 0\) with equality 
     iff \(S = 0\). 
-    \item Linearity in first slot: \(\langle \lambda S_1 + S_2, T \rangle 
+    \item Linearity in the first slot: \(\langle \lambda S_1 + S_2, T \rangle 
     = \tr (T^* (\lambda S_1 + S_2)) 
     = \lambda\tr (T^* S_1) + \tr (T^* S_2) =\lambda \langle S_1,T \rangle + \langle S_2,T \rangle\)
     \item Conjugate symmetry: \( \overline{ \langle S,T \rangle } =\overline{\tr (T^* S)}  
@@ -780,6 +727,4 @@ We have that
 \end{itemize}
 \end{proof}
 
-
 \end{document}
-

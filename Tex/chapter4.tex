@@ -3,10 +3,9 @@
 \input{packages.tex}
 \input{math_commands.tex}
 
-
 \title{\vspace{-2em}Chapter 4: Polynomials}
-\author{\emph{Linear Algebra Done Right}, by Sheldon Axler}
-\date{}
+\author{\emph{Linear Algebra Done Right (4th Edition)}, by Sheldon Axler}
+\date{Last updated: \today}
 
 \begin{document}
 \maketitle 
@@ -18,7 +17,6 @@
         \item The \textbf{imaginary part} of \(z\), denoted by Im\(z\), is defined by Im\(z=a\).
     \end{itemize}
 \end{definition}
-
 
 \begin{definition}[complex conjugate, \(\zo\), absolute value, \(|z|\)]
     Suppose \(z \in \C\). 
@@ -40,7 +38,6 @@ for all \(z \in \F\).
     \(p \in\Pc(\F)\) if 
     \[p(\lambda) = 0.\]
 \end{definition}
-
 
 \begin{lemma}[each zero of a polynomial corresponds to a degree-one factor]
     Suppose \(m\) is a positive integer and \(p \in \Pc(\F)\) is a polynomial of degree \(m\). 
@@ -84,7 +81,6 @@ for all \(z \in \F\).
     with \(\lambda_1, \lambda_2 \in \R\) if and only if \(b^2 \geq 4c\). 
 \end{thm}
 
-
 \begin{thm}[factorization of a polynomial over \(\R\)]
     Suppose \(p \in \Pc(\R)\) is a nonconstant polynomial. Then \(p\) has a unique factorization 
     (except for the order of the factors) of the form 
@@ -92,9 +88,6 @@ for all \(z \in \F\).
     where \(c, \lambda_1, \ldots, \lambda_m, c_1, \ldots, c_M \in \R\), with 
     \(b_k^2 < 4 c_k\) for each \(k\). 
 \end{thm}
-
-
-
 
 \newpage 
 
@@ -149,7 +142,6 @@ Suppose \(z = a + b i, w = c + d i\). We have that
 Taking the square root gets the desired equality. 
 \end{proof}
 
-
 \begin{problem}{3}
     Suppose \(V\) is a complex vector space and \(\varphi \in V'\). Define 
     \(\sigma \colon V \to \R\) by \(\sigma(v) = \Re \varphi(v)\) for each \(v \in V\). Show that 
@@ -166,9 +158,8 @@ Taking the square root gets the desired equality.
 \end{align*}
 \end{proof}
 
-
 \begin{problem}{6}
-    Suppose that \(m\) and \(n\) are positive integers wih \(m \leq n\), and suppose 
+    Suppose that \(m\) and \(n\) are positive integers with \(m \leq n\), and suppose 
     \(\lambda_1, \ldots, \lambda_m \in \F\). Prove that there exists a polynomial 
     \(p \in \Pc(\F)\) with \(\deg p = n\) such that \(0 = p(\lambda_1) = \cdots = p(\lambda_m)\)
     and such that \(p\) has no other zeros. 
@@ -181,8 +172,6 @@ introducing additional roots, we can make that \(p(x) = (x - \lambda_1)\cdots(x 
 This polynomial doesn't have additional roots, as the proof procedure follows from the second 
 version of fundamental theorem of algebra. 
 \end{proof}
-
-
 
 \begin{problem}{7}
     Suppose that \(m\) is a nonnegative integer, \(z_1, \ldots, z_{m+1}\) are distinct elements 
@@ -224,21 +213,14 @@ Suppose \(p(z) = \sum_{i=0}^{n} a_i z^i\) for \(a_i \in \C, z \in \C\). Then we 
 and thus  
 \[\overline{p(\zo)} = \overline{\sum_{i=0}^{n}a_i \zo^i}
 = \sum_{i=0}^{n} \ao_i z^i\]
-Finally we can get that 
+Finally, we can get that 
 \[q(z) = p(z)\overline{p(\zo)} 
-= (\sum_{i=0}^{n}a_i z^i)(\sum_{i=0}^{n}\ao_i z^i)\]
+= \left(\sum_{i=0}^{n}a_i z^i \right) \left(\sum_{i=0}^{n}\ao_i z^i \right)\]
 
 We can consider the general form of a coefficient of \(z^k\):
 \[c_k = \sum_{i+j=k} a_i \ao_j = \sum_{j+i=k} \ao_j a_i = \overline{c_k}\]
 
 Thus the coefficients are real.
-
-
 \end{proof}
 
-
-
-
-
 \end{document}
-
