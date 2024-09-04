@@ -2,18 +2,16 @@
 \sloppy
 \input{packages.tex}
 \input{math_commands.tex}
-\usepackage{hyperref}
-
 
 \title{\vspace{-2em}Chapter 3: Linear Maps}
-\author{\emph{Linear Algebra Done Right}, by Sheldon Axler}
-\date{}
+\author{\emph{Linear Algebra Done Right (4th Edition)}, by Sheldon Axler}
+\date{Last updated: \today}
 
 \begin{document}
 \maketitle 
 \tableofcontents
-
 \newpage 
+
 \section*{3A: Vector Space of Linear Maps}
 \addcontentsline{toc}{section}{3A: Vector Space of Linear Maps}
 
@@ -32,7 +30,6 @@ Notation: \(\Lcal(V, W), \Lcal(V)\)
     \item The set of linear maps from \(V\) to \(W\) is denoted by \(\Lcal (V, W)\).
     \item The set of linear maps from \(V\) to \(V\) is denoted by \(\Lcal (V)\). 
 \end{itemize}
-
 
 \begin{lemma}[linear map basis lemma]
     Suppose \(v_1, \ldots, v_n\) is a basis of \(V\) and \(w_1, \ldots, w_n \in W\). Then 
@@ -60,7 +57,7 @@ Notation: \(\Lcal(V, W), \Lcal(V)\)
 \end{definition}
 
 \begin{remark}[algebraic properties of product of linear maps]
-We have associativity, identity and distributive properties whenever such properties are defined. 
+We have associativity, identity, and distributive properties whenever such properties are defined. 
 \end{remark}
 
 \begin{thm}[linear maps take 0 to 0]
@@ -76,8 +73,8 @@ We have associativity, identity and distributive properties whenever such proper
 \end{problem}
 
 \begin{proof}
-\(T\) is linear \(\Leftrightarrow\) \(T(x, y, z = 0)\)
-\(\Leftrightarrow\) \(b = 0\)
+\(T\) is linear \(\Longleftrightarrow\) \(T(x, y, z = 0)\)
+\(\Longleftrightarrow\) \(b = 0\)
 
 In addition, let's only consider the second coordinate, then we have 
 
@@ -102,7 +99,6 @@ Take arbitrary \((x_1, \ldots, x_n) \in \F^n\), we have that
 thus we have that 
 
 \[T(x_1, \cdots, x_n) = (A_{1,1} x_1 + \cdots + A_{1,n} x_n, \cdots, A_{m, 1}x_1 + \cdots + A_{m, n} x_n)\]
-
 \end{proof}
 
 \begin{problem}{4}
@@ -115,7 +111,6 @@ thus we have that
 This means that the only solution to \(\sum_{i=1}^{m} a_i T(v_i) = \sum_{i=1}^{m} T(a_i v_i) = 0\)
 is all \(a_i = 0\). However, as we know \(T(0) = 0\) so \(a_i v_i = 0\) and thus we've proved the claim. 
 \end{proof}
-
 
 \begin{problem}{7}
     Show that every linear map from a one-dimensional vector space to itself is multiplication 
@@ -149,7 +144,6 @@ However, \(f((x_1 + y_1 , x_2 + y_2)) = (x_1 + y_1)^2 / (x_2 + y_2) \neq f(x_1, 
 
 \(\Leftarrow\) Let \(v_1, \ldots, v_m\) be a basis of \(V\). Pick \(S_i\) such that \(S_i (\sum_{i=1}^{m}a_i v_i)
 = a_i v_i\), which is clearly a linear operator. Then we have that 
-
 \begin{align*}
     S_i T(v) &= T S_i (v) \\ 
     S_i \sum_{j=1}^{m} b_j v_j & = T(a_i v_i) \\ 
@@ -161,15 +155,15 @@ we show that such \(\lambda_i\) does not depend on \(i\). Construct \(S_{ij}\) s
 \(S_{ij}\sum_{k=1}^{n} a_k v_k = a_j v_i + a_i v_j\). 
 
 Then we have that 
-
 \begin{align*}
     S_{ij} T v &= T S_{ij} v \\ 
-    S_{ij} (\sum_{k=1}^{n}\lambda_k a_k v_k) &= T(a_j v_i + a_i v_j) \\ 
+    S_{ij} \left(\sum_{k=1}^{n}\lambda_k a_k v_k\right) &= T(a_j v_i + a_i v_j) \\ 
     \lambda_j a_j v_i + \lambda_i a_i v_j &= \lambda_i a_j v_i + \lambda_j a_i v_j 
 \end{align*}
 
 This shows that \(\lambda_i = \lambda_j\) for all \(i,j\) and thus we've shown that \(T = \lambda I\)
 for some \(\lambda\). 
+\end{proof}
 
 \begin{problem}{12}
     Suppose \(U\) is a subspace of \(V\) with \(U \neq V\). Suppose \(S \in \Lcal(U, W)\)
@@ -183,10 +177,9 @@ and \(S \neq 0\). Define \(T \colon V \to W\) by
 Prove that \(T\) is not a linear map on \(V\). 
 \end{problem}
 
-
 \begin{proof}
-Take \(u \in U\) such that \(u \notin \text{Null}(S)\). Take \(v \in V \backslash U\), then 
-\(u + v \in V \backslash U\). This means that 
+Take \(u \in U\) such that \(u \notin \text{Null}(S)\). Take \(v \in V \setminus U\), then 
+\(u + v \in V \setminus U\). This means that 
 \[T(u + v) = S(u + v) = 0 \neq T(u) + T(v) = Su\]
 \end{proof}
 
@@ -198,18 +191,15 @@ Take \(u \in U\) such that \(u \notin \text{Null}(S)\). Take \(v \in V \backslas
 \end{problem}
 
 \begin{proof}
-
 Note that there exists subspace \(P\) s.t. \(V = P \oplus U\). For all \(v \in V\),
 \(v = p + u\) for some \(p, u\). Then define \(T(v) = Su + p\). Clearly we have that 
 \(T(u) = Su \) for all \(u \in U\). It now only suffices to prove \(T\) is a linear map.
-Homogeneity is trivial to show. For addivity, \(T(v_1 + v_2) = T(u_1 + u_2 + p_1 + p_2)
+Homogeneity is trivial to show. For additivity, \(T(v_1 + v_2) = T(u_1 + u_2 + p_1 + p_2)
 = S(u_1 + u_2) + p_1 + p_2 = (S u_1 + p_1) + (S u_2 + p_2) = Tv_1 + T v_2\).
-
 \end{proof}
 
-
 \begin{problem}{14}
-    Suppose \(V\)  is finite-dimensional with \(\dim V > 0\), and suppose \(W\)
+    Suppose \(V\) is finite-dimensional with \(\dim V > 0\), and suppose \(W\)
     is infinite-dimensional. Prove that \(\Lcal (V, W)\) is infinite-dimensional. 
 \end{problem}
 
@@ -229,15 +219,13 @@ Then we have that for every positive integer \(m\), the solution for the followi
 is all \(a_i = 0\). 
 \[a_1T_1(v) + \cdots + a_m T_m(v) = a_1 v_1 + \cdots + a_m v_m = 0\]
 
-This shows that \(\Lcal(V, W)\) is infinite-diemsnional.
-
-
+This shows that \(\Lcal(V, W)\) is infinite-dimensional.
 \end{proof}
 
 \begin{problem}{15}
     Suppose \(v_1, \ldots, v_m\) is a linearly dependent list of vectors in \(V\). Suppose also that 
     \(W \neq \{0\}\). Prove that there exist \(w_1, \ldots, w_m \in W\) such that no 
-    \(T \in \Lcal(V, W)\) satifies \(Tv_k = w_k\) for each \(k = 1, \ldots, m\). 
+    \(T \in \Lcal(V, W)\) satisfies \(Tv_k = w_k\) for each \(k = 1, \ldots, m\). 
 \end{problem}
 
 \begin{proof}
@@ -247,10 +235,7 @@ Take \(w_1, \ldots, w_m\) to be linearly independent list of vectors in \(W\). T
 
 The only solution is that \(a_i = 0\) for all \(i\), but this contradicts that \(v_1, \ldots, v_m\)
 is linearly dependent. 
-
 \end{proof}
-
-
 
 \begin{problem}{16}
     Suppose \(V\) is finite-dimensional with \(\dim V > 1\). Prove that there exist \(S, T \in \Lcal(V)\)
@@ -279,14 +264,10 @@ the sake of contradiction that such \(\Ecal\) exists. Let \(e_1, \ldots, e_m\) b
 \(e_1, \ldots e_m, e_{m+1}, \ldots, e_n\) be the basis for \(V\). Define \(T(v) = 
 T(\sum_{i=1}^{n}a_i e_i) = \sum_{i=1}^{n}a_i e_{n-i}\) to be a linear map in \(V\) (ez to verify), and 
 \(E_j (u) = E_j(\sum_{k=1}^{m}b_k e_k) = b_j e_j\). We have reached the contradicting example such 
-that \(TE_j (v) = a_j e_{n - j} \in V \backslash \Ecal\). 
-
-\end{proof}
-
+that \(TE_j (v) = a_j e_{n - j} \in V \setminus \Ecal\). 
 \end{proof}
 
 \newpage 
-
 
 \section*{3B: Null Spaces and Ranges}
 \addcontentsline{toc}{section}{3B: Null Spaces and Ranges}
@@ -312,17 +293,16 @@ that \(TE_j (v) = a_j e_{n - j} \in V \backslash \Ecal\).
 \begin{definition}[range]
     For \(T \in \Lcal(V, W)\), the \textbf{range} of \(T\) is the subset of \(W\) consisting of those 
     vectors that are equal to \(T v\) for some \(v \in V\):
-    \[\text{range} T = \{Tv \colon v \in V\}\]
+    \[\text{range } T = \{Tv \colon v \in V\}\]
 \end{definition}
 
 \begin{corollary}
-    Suppose \(T \in \Lcal(V, W)\), then \(\text{range} T\) is a subspace of \(W\). 
+    Suppose \(T \in \Lcal(V, W)\), then \(\text{range } T\) is a subspace of \(W\). 
 \end{corollary}
 
 \begin{definition}[surjective]
     A function \(T \colon V \to W\) is called \textbf{surjective} if its range equals \(W\). 
 \end{definition}
-
 
 \begin{thm}[fundamental theorem of linear map]
     Suppose \(V\) is finite-dimensional and \(T \in \Lcal(V, W)\). Then range \(T\) is finite-dimensional 
@@ -342,7 +322,6 @@ they are linearly independent, we have
 \[\sum_{j=1}^{n} b_j T v_j =  T \sum_{j=1}^{n} b_j v_j = 0\]
 
 The only solution is that all \(b_j = 0\). 
-
 \end{proof}
 
 \begin{corollary}[linear map to a lower-dimen space is not injective]
@@ -357,7 +336,7 @@ The only solution is that all \(b_j = 0\).
 
 \noindent
 \paragraph{Application} Consider the system of linear equation defined by the map \(T \colon \F^n \to \F^m\):
-\[T(x_1, \ldots, x_n) = (\sum_{k=1}^{n}A_{1, k}x_k, \ldots, \sum_{k=1}^{n}A_{m, k}x_k)\]
+\[T(x_1, \ldots, x_n) = \left(\sum_{k=1}^{n}A_{1, k}x_k, \ldots, \sum_{k=1}^{n}A_{m, k}x_k \right)\]
 
 \begin{corollary}[homogeneous systems of linear equations]
     A homogeneous system of linear equations with more variables than equations has nonzero solutions.
@@ -379,7 +358,6 @@ Consider \(T(x_1, x_2, x_3, x_4, x_5) = (0,0,0,x_4,x_5)\).
 It's easy to verify that \(\dim\) null \(T = 3\) and applying the theorem of linear map solves the problem.
 \end{proof}
 
-
 \begin{problem}{2}
     Suppose \(S, T \in \Lcal(V)\) are such that range \(S \subseteq \) null \(T\). Prove that 
     \((ST)^2 = 0\).
@@ -400,7 +378,6 @@ This means that take \(x \in V\), \(T (S(x)) = 0 \). We have \((ST)^2 = STST = 0
     independent?
 \end{problem}
 
-
 \begin{proof}
 (a) surjective (range = \(V\)) 
 
@@ -408,12 +385,10 @@ This means that take \(x \in V\), \(T (S(x)) = 0 \). We have \((ST)^2 = STST = 0
 \(z_1 v_1 + \cdots + z_m v_m = 0\))
 \end{proof}
 
-
 \begin{problem}{4}
     Show that \(\{T \in \Lcal(\R^5, \R^4) \colon \dim \text{null } T > 2\}\)
     is not a subspace of \(\Lcal(\R^5, \R^4)\).
 \end{problem}
-
 
 \begin{proof}
 % dim range (\(T\)) = 5 - dim null (\(T\)) \(< 3\).
@@ -423,9 +398,7 @@ we have that null \(f = \{0,e_2,e_3,0,e_5\}\) and null \(g = \{e_1, 0, 0, e_4, e
 so both in \(\{T \in \Lcal(\R^5, \R^4) \colon \text{dim null } T > 2\}\). However,
 \(f + g (e_1, e_2, e_3, e_4, e_5) = \{(e_1,e_2,e_3,e_4)\}\) and this means 
 their dim null = 5 - 4 = 1 < 3. 
-
 \end{proof}
-
 
 \begin{problem}{7}
     Suppose \(V\) and \(W\) are finite-dimensional and \(2 \leq \dim V 
@@ -433,12 +406,10 @@ their dim null = 5 - 4 = 1 < 3.
     not injective}\}\) is not a subspace of \(\Lcal(V, W)\). 
 \end{problem}
 
-
 \begin{proof}
-\(T\) iss not injective means that \(\dim V > \dim W \), which contradicts the 
+\(T\) is not injective means that \(\dim V > \dim W \), which contradicts the 
 assumption in the question. 
 \end{proof}
-
 
 \begin{problem}{9}
     Suppose \(T \in \Lcal(V, W)\) is injective and \(v_1, \ldots, v_n\) is 
@@ -447,7 +418,7 @@ assumption in the question.
 \end{problem}
 
 \begin{proof}
-\[\sum_{i=1}^{n}z_iv_i = 0 \Leftrightarrow \sum_{i=1}^{n} z_iT(v_i) = 0\]
+\[\sum_{i=1}^{n}z_i v_i = 0 \Longleftrightarrow \sum_{i=1}^{n} z_i T(v_i) = 0\]
 \end{proof}
 
 \begin{problem}{10}
@@ -461,7 +432,6 @@ Then we know there exists \(v \in V\) such that \(w = T(v)\) and
 thus \(w = T(\sum_{i=1}^{n} a_i v_i) = \sum_{i=1}^{n}a_i T(v_i)\). 
 \end{proof}
 
-
 \begin{problem}{11}
     Suppose that \(V\) is finite-dimensional and that \(T \in \Lcal(V, W)\). Prove 
     that there exists a subspace \(\Ucal\) of \(V\) such that 
@@ -469,14 +439,12 @@ thus \(w = T(\sum_{i=1}^{n} a_i v_i) = \sum_{i=1}^{n}a_i T(v_i)\).
     = \{T u \colon u \in \Ucal\}\]
 \end{problem}
 
-
 \begin{proof}
 Since we know null \(T\) is a subspace of \(V\), then there exists \(\Ucal\) 
 such that \(\Ucal \oplus \text{null }T = V\). We can define \(\Ucal\) to be such 
 case. To finish the proof, let \(v = u + t, u \in \Ucal, t \in null T\), then \(range T 
 = \{T(u + t) = T u \colon u \in \Ucal\}\). 
 \end{proof}
-
 
 \begin{problem}{16}
     Suppose \(V\) and \(W\) are both finite-dimensional. Prove that there exists an injective 
@@ -490,11 +458,10 @@ case. To finish the proof, let \(v = u + t, u \in \Ucal, t \in null T\), then \(
 \(\Leftarrow\) By assumption, we can define a linear map \(T\) such that 
 \(T v_i = w_i\) where \(v_i, w_i\) are the respective basis of \(V\) and \(W\). 
 Then we have that 
-\[\sum_{i=1}^{n} a_i T v_i = \sum_{i=1}^{n} a_i w_i = 0 \Leftrightarrow a_i \text{ are identically zero} \]
+\[\sum_{i=1}^{n} a_i T v_i = \sum_{i=1}^{n} a_i w_i = 0 \Longleftrightarrow a_i \text{ are identically zero} \]
 
 This means that null \(T\) is \(\{0\}\) and thus it is injective. 
 \end{proof}
-
 
 \begin{problem}{17}
     Suppose \(V\) and \(W\) are both finite-dimensional. Prove that there exists 
@@ -511,7 +478,6 @@ same time, we know that for all \(w_i\), there exists \(v_i\) s.t. \(T v_i = w_i
 therefore we have \(w = \sum_{i=1}^{\dim W} a_i Tv_i\) and thus \(T\) is surjective.   
 \end{proof}
 
-
 \begin{problem}{18}
     Suppose \(V\) and \(W\) are finite-dimensional and that \(\Ucal\) is a 
     subspace of \(V\). Prove that there exists \(T \in \Lcal(V, W)\) such 
@@ -521,9 +487,7 @@ therefore we have \(w = \sum_{i=1}^{\dim W} a_i Tv_i\) and thus \(T\) is surject
 \begin{proof}
 We know \(\dim V = \text{null } T + \text{range } T\) and range \(T \leq \dim W\).
 Therefore, \(\dim \Uc = \dim \text{null } T \geq \dim V - \dim W\).  
-
 \end{proof}
-
 
 \begin{problem}{19}
     Suppose \(W\) is finite-dimensional and \(T \in \Lc(V, W)\). Prove that 
@@ -532,8 +496,8 @@ Therefore, \(\dim \Uc = \dim \text{null } T \geq \dim V - \dim W\).
 \end{problem}
 
 \begin{proof}
-\(T\) is injective \(\Leftrightarrow\) \(T(v)\) is unique for \(v \in V\). 
-\(\Leftrightarrow\) We can define \(S \colon S Tv = v\). 
+\(T\) is injective \(\Longleftrightarrow\) \(T(v)\) is unique for \(v \in V\). 
+\(\Longleftrightarrow\) We can define \(S \colon S Tv = v\). 
 \end{proof}
 
 \begin{problem}{21}
@@ -550,42 +514,39 @@ we have that range(S) \(\in \Uc  \cap\) range(\(T\)) and that null \(T\) =
 null \(S\). Hence we have proved the claim. 
 \end{proof}
 
-
 \begin{problem}{22}
     Suppose \(\Uc\) and \(V\) are finite-dimensional vector spaces and \(S 
     \in \Lc(V, W)\) and \(T \in \Lc(\Uc, V)\). Prove that 
-    \[\dim \nul ST \leq \dim \nul S + \dim \nul T\]. 
+    \[\dim \nul ST \leq \dim \nul S + \dim \nul T\] 
 \end{problem}
 
 \begin{proof}
 We can write that 
 \[\nul ST = \{u \in \Uc \colon T(u) \in \nul (S)\}\]
 
-By the previous question we know that 
+By the previous question, we know that 
 \[\dim \nul ST = \dim \nul T + \dim \nul S \cap \range T \leq \dim \nul T + \dim \nul S\]
 \end{proof}
 
 \begin{problem}{23}
     Suppose \(\Uc\) and \(V\) are finite-dimensional vector spaces and \(S \in \Lc(V, W)\)
     and \(T \in \Lc(\Uc, V)\). Prove that 
-    \[\dim \range ST \leq \min \{\dim \range S, \dim \range T\}\].
+    \[\dim \range ST \leq \min \{\dim \range S, \dim \range T\}\]
 \end{problem}
 
 \begin{proof}
 First note that \(\dim \range ST \leq \dim \range S\). This because \(\range ST \subseteq \range S\). 
 
-To prove \(\dim \range ST \leq \dim \range T\). We have that \(\dim \Uc = \dim \nul T 
+To prove \(\dim \range ST \leq \dim \range T\), we have that \(\dim \Uc = \dim \nul T 
 + \dim \range T = \dim \nul ST + \dim \range ST\). Since we know \(\dim \nul T \geq \dim \nul 
 ST\), \(\dim \range ST \leq \dim \range T\). 
 \end{proof}
-
 
 \begin{problem}{24}
     (a) Suppose \(\dim V = 5\) and \(S, T \in \Lc(V)\) are such 
     that \(ST = 0\). Prove that \(\dim \range TS \leq 2\). 
 
     (b) Give an example of \(S, T \in \Lc(\F^5)\) with \(ST=0\) and \(\dim \range TS = 2\).
-    
 \end{problem}
 
 
@@ -594,13 +555,12 @@ ST\), \(\dim \range ST \leq \dim \range T\).
 
 We also know that  \(5 = \dim \nul T + \dim \range T = \dim \range S + \dim \nul S\) 
 and thus we have that \(\dim \range T + \dim \range S \leq 5\). This implies that \(\min 
-\{\dim \range T, \dim \range S\} \leq 2\). Hence by applying P23 we finish the proof. 
+\{\dim \range T, \dim \range S\} \leq 2\). Hence, by applying P23, we finish the proof. 
 
 (b) Consider \(T(x_1, x_2, x_3, x_4, x_5) = (x_3, x_4, 0, 0, 0), S(x_1, x_2, x_3, 
 x_4, x_5) = (0,0,x_3,x_4, x_5)\). Then we have that \(ST(x_1, x_2, x_3,x_4,x_5)
 = S(x_3, x_4, 0,0,0) = (0,0,0,0,0)\) while \(TS(x_1, x_2, x_3, x_4, x_5)
 = T(0,0,x_3,x_4, x_5) = (x_3, x_4, 0,0,0)\).
-
 \end{proof}
 
 \begin{problem}{25}
@@ -625,7 +585,6 @@ The other direction is trivial.
 \end{problem}
 
 \begin{proof}
-
     \(\range S \subseteq \range T \Rightarrow\) Take \(v_1, \ldots, v_m\) to be the basis 
     of \(V\), define the linear map \(S v_i = s_i\) for \(s_i \in \range S \subseteq \range T\).
     Then there exists \(u_1, \ldots, u_m\) such that \(T u_i = s_i\) for all \(i\). Then we 
@@ -633,7 +592,6 @@ The other direction is trivial.
 
     The other direction is trivial. 
 \end{proof}
-
 
 \begin{problem}{27}
 Suppose \(P \in \Lc(V)\) and \(P^2 = P\). Prove that \(V = \nul P \oplus \range P\).
@@ -662,14 +620,13 @@ that \(\nul P \cap \range P = \{0\}\). Since \(P\) is defined on \(\Lc(P)\), we 
 %     Suppose \(V\) is finite-dimensional, \(X\) is a 
 % \end{problem}
 
-
 \newpage
 
 \section*{3C: Matrices}
 \addcontentsline{toc}{section}{3C: Matrices}
 
 \begin{definition}[matrix, \(\Ab_{j,k}\)]
-    Suppose \(m\) and \(n\) are nonnegative integers. An  m-by-n matrix \emph{matrix}
+    Suppose \(m\) and \(n\) are nonnegative integers. An \(m\)-by-\(n\) matrix \emph{matrix}
     \(\Ab\) is a rectangular array of elements of \(\F\) with \(m\) rows and \(n\) columns:
     \[\Ab = \begin{pmatrix}
         \Ab_{1, 1} & \cdots & \Ab_{1, n} \\ 
@@ -679,11 +636,10 @@ that \(\nul P \cap \range P = \{0\}\). Since \(P\) is defined on \(\Lc(P)\), we 
 where the notation \(\Ab_{j, k}\) denotes the entry in row \(j\) and column \(k\). 
 \end{definition}
 
-
 \begin{definition}[matrix of a linear map, \(\Mc(T)\)]
     Suppose \(T \in \Lc(V, W)\) and \(v_1, \ldots, v_n\) is a basis of \(V\) and \(w_1, \ldots, 
     w_m\) is a basis of \(W\). The \emph{matrix of} \(T\) with respect to these bases is the 
-    m-by-n matrix \(\Mc(T)\) whose entries \(\Ab_{j,k}\) are defined by 
+    \(m\)-by-\(n\) matrix \(\Mc(T)\) whose entries \(\Ab_{j,k}\) are defined by 
     \[T v_k = \Ab_{1, k} w_1 + \cdots + \Ab_{m, k} w_m\]. 
 
     If the bases \(v_1, \ldots, v_n\) and \(w_1, \ldots, w_m\) are not clear from the context, then 
@@ -698,14 +654,14 @@ where the notation \(\Ab_{j, k}\) denotes the entry in row \(j\) and column \(k\
 
 \begin{remark}
     If \(T\) is a linear map from \(n\)-dimensional vector space to an \(m\)-dimensional vector 
-    space, then \(\Mc(T)\) is an m-by-n matrix. 
+    space, then \(\Mc(T)\) is an \(m\)-by-\(n\) matrix. 
 \end{remark}
 
 \begin{corollary}[Matrix addition and scalar multiplication]
     Suppose \(S, T \in \Lc(V, W)\) and \(\lambda \in \F\). Then \(\Mc(\lambda S + T) =\lambda \Mc(S) + \Mc(T)\). 
 \end{corollary}
 
-For \(m\) and \(n\) positive integers, the set of all m-by-n matrices with entries in \(F\)
+For \(m\) and \(n\) positive integers, the set of all \(m\)-by-\(n\) matrices with entries in \(F\)
 is denoted by \(\F^{m,n}\). 
 
 \begin{thm}
@@ -714,8 +670,8 @@ is denoted by \(\F^{m,n}\).
 \end{thm}
 
 \begin{definition}[matrix multiplication]
-    Suppose \(\Ab\) is an m-by-n matrix and \(\Bb\) is an n-by-p matrix. Then \(AB\) is defined 
-    to be the m-by-p matrix whose entry in row \(j\), column \(k\), is given by the equation
+    Suppose \(\Ab\) is an \(m\)-by-\(n\) matrix and \(\Bb\) is an \(n\)-by-\(p\) matrix. Then \(AB\) is defined 
+    to be the \(m\)-by-\(p\) matrix whose entry in row \(j\), column \(k\), is given by the equation
     \[(\Ab \Bb)_{j,k} = \sum_{r=1}^{n} \Ab_{j, r} \Bb_{r, k}\]
     In words, the entry in row \(j\), column \(k\) of \(\Ab \Bb\) is computed by taking row \(j\)
     of \(\Ab\) and column \(k\) of \(\Bb\).  
@@ -728,54 +684,53 @@ For \(1 \leq k \leq p\), we have
 
 \begin{align*}
     (ST) u_k 
-    &= S(\sum_{r=1}^{n}\Bb_{r, k} v_r) \\ 
-    &=\sum_{r=1}^{n} \Bb_{r, k} (S v_r) \\ 
+    &= S \left(\sum_{r=1}^{n}\Bb_{r, k} v_r \right) \\ 
+    &= \sum_{r=1}^{n} \Bb_{r, k} (S v_r) \\ 
     &= \sum_{r=1}^{n} \Bb_{r,k} \sum_{j=1}^{m} \Ab_{j, r} w_j \\ 
-    &= \sum_{j=1}^{m} (\sum_{r=1}^{n} \Ab_{j, r} \Bb_{r, k}) w_j
+    &= \sum_{j=1}^{m} \left(\sum_{r=1}^{n} \Ab_{j, r} \Bb_{r, k} \right) w_j
 \end{align*}
 
 \begin{thm}[matrix of product of linear maps]
     If \(T \in \Lc(U, V)\) and \(S \in \Lc(V, W)\), then \(\Mc(ST) = \Mc(S)\Mc(T)\).
 \end{thm}
 
-
 \begin{definition}[\(\Ab_{j, \cdot}, \Ab_{\cdot, k}\)]
-    Suppose \(\Ab\) is an m-by-n matrix 
+    Suppose \(\Ab\) is an \(m\)-by-\(n\) matrix 
     \begin{itemize}
-        \item If \(1 \leq j \leq m\), then \(\Ab_{j, \cdot}\) denotes the 1-by-n matrix 
+        \item If \(1 \leq j \leq m\), then \(\Ab_{j, \cdot}\) denotes the \(1\)-by-\(n\) matrix 
         consisting of row \(j\) of \(\Ab\). 
-        \item If \(1 \leq k \leq n\), then \(\Ab_{\cdot, k}\) denotes the m-by-1 matrix consisting 
+        \item If \(1 \leq k \leq n\), then \(\Ab_{\cdot, k}\) denotes the \(m\)-by-\(1\) matrix consisting 
         of column \(k\) of \(\Ab\). 
     \end{itemize}
 \end{definition}
 
 \begin{corollary}[entry of matrix product equals row times column]
-    Suppose \(\Ab\) is an m-by-n matrix and \(\Bb\) is an n-by-p matrix. Then 
+    Suppose \(\Ab\) is an \(m\)-by-\(n\) matrix and \(\Bb\) is an \(n\)-by-\(p\) matrix. Then 
     \[(\Ab \Bb)_{j, k} = \Ab_{j, \cdot} \Bb_{\cdot, k}\]
     if \(1 \leq j \leq m\) and \(1 \leq k \leq p\). In other words, the entry in row \(j\), 
     column \(k\), of \(\Ab \Bb\) equals (row \(j\) of \(\Ab\)) times (column \(k\) of \(\Bb\)). 
 \end{corollary}
 
 \begin{corollary}[column of matrix product equals matrix times column]
-Suppose \(\Ab\) is an m-by-n matrix and \(\Bb\) is an n-by-p matrix. Then 
+Suppose \(\Ab\) is an \(m\)-by-\(n\) matrix and \(\Bb\) is an \(n\)-by-\(p\) matrix. Then 
 \[(\Ab \Bb)_{\cdot, k} = \Ab \Bb_{\cdot, k}\]
 if \(1 \leq k \leq p\). In other words, column \(k\) of \(\Ab \Bb\) equals \(\Ab\) times 
 column \(k\) of \(\Bb\). 
 \end{corollary}
 
 \begin{corollary}[linear combination of columns]
-    Suppose \(\Ab\) is an m-by-n matrix and \(\bb = \begin{pmatrix}
+    Suppose \(\Ab\) is an \(m\)-by-\(n\) matrix and \(\bb = \begin{pmatrix}
         b_1 \\ 
         \vdots \\ 
         b_n
-    \end{pmatrix}\) is an n-by-1 matrix. Then 
+    \end{pmatrix}\) is an \(n\)-by-\(1\) matrix. Then 
     \[\Ab \bb = \bb_1 \Ab_{\cdot, 1} + \cdots + \bb_n \Ab_{\cdot, n}.\]
     In other words, \(\Ab \bb\) is a linear combination of the columns of \(\Ab\), with the scalars 
     that multiply the columns coming from \(\bb\). 
 \end{corollary}
 
 \begin{thm}[matrix multiplication as linear combination of columns]
-    Suppose \(C\) is an m-by-c matrix and \(R\) is a c-by-n matrix. 
+    Suppose \(C\) is an \(m\)-by-\(c\) matrix and \(R\) is a \(c\)-by-\(n\) matrix. 
 
     \begin{itemize}
         \item If \(k \in \{1, \ldots, n\}\), then column \(k\) of \(CR\) is a linear combination 
@@ -787,9 +742,8 @@ column \(k\) of \(\Bb\).
     \end{itemize}
 \end{thm}
 
-
 \begin{definition}[column rank, row rank]
-    Suppose \(\Ab\) is an m-by-n matrix with entries in \(\F\). 
+    Suppose \(\Ab\) is an \(m\)-by-\(n\) matrix with entries in \(\F\). 
     \begin{itemize}
         \item The column rank of \(\Ab\) is the dimension of the span of the columns of \(\Ab\)
         in \(\F^{m, 1}\). 
@@ -799,26 +753,26 @@ column \(k\) of \(\Bb\).
 
 \begin{definition}[transpose, \(\Ab^\top\)]
     The transpose of a matrix \(\Ab\), denoted by \(\Ab^\top\), is the matrix obtained from \(\Ab\)
-    by interchanging rows and columns. Specificially, if \(\Ab\) is an m-by-n matrix, then 
-    \(\Ab^\top\) is the n-by-m matrix whose entries are given by the equation 
+    by interchanging rows and columns. Specifically, if \(\Ab\) is an \(m\)-by-\(n\) matrix, then 
+    \(\Ab^\top\) is the \(n\)-by-\(m\) matrix whose entries are given by the equation 
     \[(\Ab^\top)_{k, j} = \Ab_{j, k}\]
 \end{definition}
 
 \begin{lemma}[column-row factorization]
-    Suppose \(\Ab\) is an m-by-n matrix with entries in \(\F\) and column rank \(c \geq 1\). Then 
-    there exists an m-by-c matrix \(\Cb\) and a c-by-n matrix \(\Rb\), both with entries in \(\F\), 
+    Suppose \(\Ab\) is an \(m\)-by-\(n\) matrix with entries in \(\F\) and column rank \(c \geq 1\). Then 
+    there exists an \(m\)-by-\(c\) matrix \(\Cb\) and a \(c\)-by-\(n\) matrix \(\Rb\), both with entries in \(\F\), 
     such that \(\Ab = \Cb \Rb\). 
 \end{lemma}
 
 \begin{proof}
-Each column of \(\Ab\) is an m-by-1 matrix. The list \(\Ab_{\cdot, 1}, \ldots, \Ab_{\cdot, n}\)
+Each column of \(\Ab\) is an \(m\)-by-\(1\) matrix. The list \(\Ab_{\cdot, 1}, \ldots, \Ab_{\cdot, n}\)
 of columns of \(\Ab\) can be reduced to a basis of the span of the columns of \(\Ab\). This 
-basis has length \(c\). The \(c\) columns in this basis can be put together to form an m-by-c 
+basis has length \(c\). The \(c\) columns in this basis can be put together to form an \(m\)-by-\(c\) 
 matrix \(\Cb\). 
 
 If \(k \in \{1, \ldots, n\}\), then column \(k\) of \(\Ab\) is a linear combination 
 of the columns of \(\Cb\). Make the coefficients of this linear combination into column 
-\(k\) of a c-by-n matrix that we call \(\Rb\). Then \(\Ab = \Cb \Rb\). 
+\(k\) of a \(c\)-by-\(n\) matrix that we call \(\Rb\). Then \(\Ab = \Cb \Rb\). 
 \end{proof}
 
 \begin{thm}[column rank equals row rank]
@@ -827,7 +781,7 @@ of the columns of \(\Cb\). Make the coefficients of this linear combination into
 
 \begin{proof}
 Let \(c\) denote the column rank of \(\Ab\). Let \(\Ab = \Cb \Rb\) be the column-row factorization 
-of \(\Ab\) given by the proof before, where \(\Cb\) is m-by-c and \(\Rb\) is c-by-n. Then the 
+of \(\Ab\) given by the proof before, where \(\Cb\) is \(m\)-by-\(c\) and \(\Rb\) is \(c\)-by-\(n\). Then the 
 column-row factorization lemma tells us that every row of \(\Ab\) is a linear combination of 
 the rows of \(\Rb\). Because \(\Rb\) has \(c\) rows, this implies that the row of \(\Ab\) is 
 less than or equal to the column rank \(c\) of \(\Ab\).
@@ -858,8 +812,6 @@ that \(\dim \range T < \dim \range - 1\) which forms a contradiction.
 \end{problem}
 
 \begin{proof}
-
-
 \(\Rightarrow\) We solve this problem through careful construction of the basis. That is, 
 we will construct basis \(v_1, \ldots, v_n\) of \(V\) and \(w_1, \ldots, w_m\) of \(W\)
 such that \(T v_i = w_1 + \cdots + w_m\) for all \(i\). We can achieve this again mainly 
@@ -871,17 +823,16 @@ basis as follows: let \(w_j = (a_j - (m - r))u_j, w_k = a_k u_k \) for all \(k \
 and \(w_k = u_k + u_j\) for all \(k \notin I\). Then we have that \(w = \sum_{l=1}^{m}w_l\). 
 Since we know \(w \in \range T\), then there exists \(v_1 \in V\) s.t. \(T(v_1) = w\). Let 
 \(v_2, \ldots, v_n\) be the basis of \(\nul T\). Since we know \(\dim V = \nul T + 1\) so 
-\(v_1, v_2, \ldots, v_n\) consistutes a basis of \(V\). In this way, we successfully constructs
+\(v_1, v_2, \ldots, v_n\) constitutes a basis of \(V\). In this way, we successfully constructs
 the basis such that all entries of \(\Mc(T)\) equal 1. 
-
 
 \(\Leftarrow\) There exists basis \(v_1, \ldots, v_n\) of \(V\) and 
 \(w_1, \ldots, w_m\) of \(W\) such that 
 all entries of \(\Mc(T)\) equal 1. This means that \(T v_1 = \cdots = T v_n = w_1 + \cdots + w_m\). 
 So we first have that \(\dim \range T \neq 0\). To prove \(\dim \range T = 1\), take arbitrary 
 \(u_1, u_2 \in \range T\). Then we know that \(u_1 = T(\sum_{i=1}^{n} a_i v_i) = \sum_{i=1}^{n}a_i (w_1 + \cdots + w_n)\)
-and similarly \(u_2 = \sum_{i=1}^{n}b_i (w_1 + \cdots + w_n)\). Here we have that 
-\[u_1 =(\sum_i^n a_i) / (\sum_i^n b_i) u_2 \]
+and similarly \(u_2 = \sum_{i=1}^{n}b_i (w_1 + \cdots + w_n)\). Here, we have that 
+\[u_1 = \left(\sum_i^n a_i \right) / \left(\sum_i^n b_i \right) u_2 \]
 and thus \(\dim \range T\) has to be 1-dimensional since every two arbitrary vector is simply a 
 scalar multiple of each other. 
 \end{proof}
@@ -900,7 +851,6 @@ scalar multiple of each other.
     &= \lambda \sum_{i=1}^{m} \Ab_{i, k} w_i + \sum_{i=1}^{m} \Bb_{i, k} w_i 
 \end{align*}
 \end{proof}
-
 
 \begin{problem}{5}
     Suppose \(V\) and \(W\) are finite-dimensional and \(T \in \Lc(V, W)\). Prove that 
@@ -924,8 +874,6 @@ we extend the basis to \(V\) through considering the null space. We further clai
 extending the basis from \(K\) with the basis from \(\nul T\) completes the proof.  
 \end{proof}
 
-
-
 \begin{problem}{6}
     Suppose \(v_1, \ldots, v_m\) is a basis of \(V\) and \(W\) is finite-dimensional. Suppose 
     \(T \in \Lc(V, W)\). Prove that there exists a basis \(w_1, \ldots, w_n\) of \(W\) such 
@@ -933,12 +881,10 @@ extending the basis from \(K\) with the basis from \(\nul T\) completes the proo
     except for possibly a 1 in the first row, first column. 
 \end{problem}
 
-
 \begin{proof}
 Let \(w_1 = T v_1\) and extend \(w_1\) to basis of \(W\). Then we automatically obtains \(T\) 
 that gets the desired property. 
 \end{proof}
-
 
 \begin{problem}{7}
     Suppose \(w_1, \ldots, w_n\) is a basis of \(W\) and \(V\) is finite-dimensional. Suppose 
@@ -948,7 +894,6 @@ that gets the desired property.
 \end{problem}
 
 \begin{proof}
-
 Take arbitrary \(u_1 \in V\) and we have that \(T u_1 = \sum_{i=1}^{n} a_{i, 1} w_i\). Take 
 \(v_1 = u_1 / a_{1, 1}\), then \(T v_1 = w_1 + \sum_{j=2}^{n} b_{j, 1} w_j\). We can extend 
 \(v_1, u_2, \ldots, u_m\) to be the basis of \(V\). Then consider 
@@ -967,10 +912,8 @@ The only solution is that \(q_1 - (q_2 b_{1,2} + \cdots + q_m b_{1, m}) = q_2 = 
 and thus we have completed the proof. 
 \end{proof}
 
-
-
 \begin{problem}{8}
-    Suppose \(\Ab\) is an m-by-n matrix and \(\Bb\) is an n-by-p matrix. Prove that 
+    Suppose \(\Ab\) is an \(m\)-by-\(n\) matrix and \(\Bb\) is an \(n\)-by-\(p\) matrix. Prove that 
     \[(\Ab \Bb)_{j, \cdot} = \Ab_{j, \cdot} \Bb\]
     for each \(1 \leq j \leq m \). In other words, show that row \(j\) of \(\Ab \Bb\) equals 
     (row \(j\) of \(\Ab\)) times \(\Bb\). 
@@ -986,32 +929,29 @@ Similarly, \((\Ab \Bb)_{j, k} = \Ab_{j, \cdot} \Bb_{\cdot, k}\) and thus by trea
 \end{proof}
 
 \begin{problem}{9}
-    Suppose \(\ab = (a_1, \cdots, a_n)\) is a 1-by-n matrix and \(\Bb\) is an n-by-p matrix. 
+    Suppose \(\ab = (a_1, \cdots, a_n)\) is a \(1\)-by-\(n\) matrix and \(\Bb\) is an \(n\)-by-\(p\) matrix. 
     Prove that 
     \[\ab \Bb = a_1 \Bb_{1, \cdot} + \cdots + a_n \Bb_{n, \cdot}\]
     In other words, show that \(\ab \Bb\) is a linear combination of the rows of \(\Bb\), 
     with the scalars that multiply the rows coming from \(\ab\).
 \end{problem}
 
-
 \begin{proof}
-By definiion of matrix multiplicaion, the entry in the column \(k\) of the l.h.s. equals 
+By definition of matrix multiplication, the entry in the column \(k\) of the l.h.s. equals 
 \[(\ab \Bb)_{1, k} = a_1 \Bb_{1, k} + \cdots + a_n \Bb_{n, k}\]
-which equals the right side. 
+which equals the right-hand side. 
 \end{proof}
-
 
 \begin{problem}{11}
     Prove that the distributive property holds for matrix addition and multiplication. In 
-    other words, suppose \(\Ab, \Bb, \Cb, \Db, \Eb, \Fb\) aare matrices whose sizes are such that 
+    other words, suppose \(\Ab, \Bb, \Cb, \Db, \Eb, \Fb\) are matrices whose sizes are such that 
     \(\Ab(\Bb + \Cb)\) and \((\Db + \Eb)\Fb\) make sense. Explain this and prove that 
     \[\Ab(\Bb + \Cb) = \Ab \Bb + \Ab \Cb \ \ \ \ (\Db + \Eb)\Fb = \Db \Fb + \Eb \Fb\]
 \end{problem}
 
 \begin{proof}
-We let \(\Ab, \Db, \Eb\) to be m-by-n matrix and \(\Bb, \Cb, \Fb\) to be n-by-p matrix. Then 
+We let \(\Ab, \Db, \Eb\) to be \(m\)-by-\(n\) matrix and \(\Bb, \Cb, \Fb\) to be \(n\)-by-\(p\) matrix. Then 
 all the matrix multiplication make sense. We proceed to prove the equality:
-
 \begin{align*}
     (\Ab (\Bb + \Cb))_{j, k} 
     &= \sum_{i=1}^{n} \Ab_{j, i} (\Bb + \Cb)_{i, k} \\ 
@@ -1020,40 +960,32 @@ all the matrix multiplication make sense. We proceed to prove the equality:
     &= \Ab \Bb + \Ab \Cb 
 \end{align*}
 
-
 For the other one, we have that 
-
 \begin{align*}
     ((\Db + \Eb)\Fb)_{j, k} 
     &= \sum_{i=1}^{n} (\Db + \Eb)_{j, i} \Fb_{i, k} \\ 
     &= \sum_i^n (\Db_{j, i} \Fb_{i, k}) + (\Eb_{j, i} \Fb_{i, k}) \\ 
     &= \Db \Fb + \Eb \Fb 
 \end{align*}
-
 \end{proof}
 
-
 \begin{problem}{13}
-    Suppose \(\Ab\) is an n-by-n matrix and \(1 \leq j, k \leq n\). Show that the entry 
+    Suppose \(\Ab\) is an \(n\)-by-\(n\) matrix and \(1 \leq j, k \leq n\). Show that the entry 
     in row \(j\), column \(k\) of \(\Ab^3\) (which is defined to mean \(\Ab \Ab \Ab\)) is 
     \[\sum_{p=1}^{n} \sum_{r=1}^{n} \Ab_{j, p} \Ab_{p, r} \Ab_{r, k}\]
 \end{problem}
 
-
 \begin{proof}
-
 \begin{align*}
     (\Ab (\Ab \Ab))_{j, k }
     &= \sum_p^n \Ab_{j, p} (\Ab \Ab)_{p, k} \\ 
     &= \sum_p^n \Ab_{j, p} \sum_{r=1}^{n} \Ab_{p, r} \Ab_{r, k} \\ 
     &= \sum_{p}^{n} \sum_r^n \Ab_{j, p} \Ab_{p, r} \Ab{r, k}
 \end{align*}
-
 \end{proof}
 
-
 \begin{problem}{14}
-    Suppose \(m\) and \(n\) are postiive integers. Prove that the function \(\Ab \mapsto \Ab^\top\)
+    Suppose \(m\) and \(n\) are positive integers. Prove that the function \(\Ab \mapsto \Ab^\top\)
     is a linear map from \(\Fb^{m, n}\) to \(\Fb^{n, m}\).  
 \end{problem}
 
@@ -1063,7 +995,7 @@ Let \(T\) denote the linear map such that \(T(\Ab) = \Ab^\top\). Then we have th
 \end{proof}
 
 \begin{problem}{15}
-    Prove that if \(\Ab\) is an m-by-n matrix and \(\Cb\) is an n-by-p matrix, then 
+    Prove that if \(\Ab\) is an \(m\)-by-\(n\) matrix and \(\Cb\) is an \(n\)-by-\(p\) matrix, then 
     \[(\Ab \Cb)^\top = \Cb^\top \Ab^\top\] 
 \end{problem}
 
@@ -1082,9 +1014,8 @@ On the other hand,
 \end{align*}
 \end{proof}
 
-
 \begin{problem}{16}
-    Suppose \(\Ab\) is an m-by-n matrix with \(\Ab \neq 0\). Prove that the rank of \(\Ab\)
+    Suppose \(\Ab\) is an \(m\)-by-\(n\) matrix with \(\Ab \neq 0\). Prove that the rank of \(\Ab\)
     is 1 if and only if there exist \((c_1, \ldots, c_m) \in \F^m\) and 
     \((d_1, \ldots, d_n) \in \F^n\) such that \(\Ab_{j, k} = c_j d_k\)
     for every \(j = 1, \ldots, m\) and every \(k = 1, \ldots, n\). 
@@ -1099,7 +1030,6 @@ For every other columns, they are the scalar multiple of the the first one, so
 there exists \(d_2, \ldots, d_n\) s.t. \(\Ab_{j, k}  = c_j d_k\) (we take 
 \(d_1 = 1\)). 
 
-
 \(\Leftarrow\) If we denote \( \vecc = (c_1, \ldots, c_m)\), then 
 \[\Ab =  \begin{pmatrix}
     d_1 \vecc & \cdots & d_n \vecc
@@ -1112,7 +1042,7 @@ so each column is a scalar multiple of the other and thus \(\Ab\) has rank 1.
     Prove that the following are equivalent:
 
     (a) \(T\) is injective. \\ 
-    (b) The column of \(\Mc(T)\) are linearly independent in \(\F^{n, 1}\) \\ 
+    (b) The column of \(\Mc(T)\) are linearly independent in \(\F^{n, 1}\). \\ 
     (c) The columns of \(\Mc(T)\) span \(\F^{n, 1}\). \\ 
     (d) The rows of \(\Mc(T)\) span \(\F^{1 , n}\). \\ 
     (e) The rows of \(\Mc(T)\) are linearly independent in \(\F^{1, n}\). \\ 
@@ -1120,18 +1050,16 @@ so each column is a scalar multiple of the other and thus \(\Ab\) has rank 1.
 \end{problem}
 
 \begin{proof}
-
     Let \(\Ab\) represents the matrix of \(\Mc(T)\). 
 
 \((a) \Rightarrow (b) \colon\) \(a_1 \Ab_{\cdot, 1} + \cdots + a_n \Ab_{\cdot, n} = 0 \). We also 
 know that \(T v_i = \sum_{j=1}^{n}\Ab_{j, i} u_j\). Then we have that 
 \[T(a_1 v_1 + \cdots + a_n v_n) = \sum_{i=1}^{n} a_i T(v_i) = \sum_{i=1}^{n}a_i \sum_{j=1}^{n}\Ab_{j, i} u_j 
-= \sum_{j=1}^{n} (\sum_{i=1}^n a_i \Ab_{j, i}) u_j = 0 \]
+= \sum_{j=1}^{n} \left(\sum_{i=1}^n a_i \Ab_{j, i} \right) u_j = 0 \]
 
-To prove all \(a_i\) is zero 
+To prove all \(a_i\) is zero, 
 we note that \(a_1 v_1 + \cdots + a_n v_n \in \nul T\) and since \(T\) is injective, the only possible case 
-is that all \(a_i = 0\) and thus wee prove the claim. 
-
+is that all \(a_i = 0\) and thus we prove the claim. 
 
 \((b) \Rightarrow (c)\) The columns of \(\Mc(T)\) forms a basis and thus span the space. 
 
@@ -1144,15 +1072,11 @@ span \(\F^{1, n}\).
 \(a_i = 0\). Suppose for the sake of contradiction that \(T\) is not injective so there exists nonzero 
 \( v \in \nul T\). We know that \(v = \sum_{i=1}^{n} a_i v_i\) and that \(T v_i = \sum_{j=1}^{n} \Ab_{j, i} u_j\). Then 
 \[T v = \sum_{i=1}^{n} a_i T(v_i) = \sum_{i=1}^{n} a_i \sum_{j=1}^{n} \Ab_{j, i} u_j = \sum_{i=1}^{n}
-(\sum_{j=1}^{n} a_i \Ab_{j, i})u_j = 0 \]
+\left(\sum_{j=1}^{n} a_i \Ab_{j, i} \right) u_j = 0 \]
 
 and thus \(\sum_{j=1}^{n} a_i \Ab_{j, i} = 0\) for all \(j\). We know not all \(a_i = 0\) since \(v\) is 
-non-trivial and thus the solution contraidicts that the rows are all linearly independent. Proof completed.
-
+non-trivial and thus the solution contradicts that the rows are all linearly independent. Proof completed.
 \end{proof}
-
-
-
 
 \newpage 
 
@@ -1175,7 +1099,6 @@ non-trivial and thus the solution contraidicts that the rows are all linearly in
 
 If \(T\) is invertible, then its inverse is denoted by \(T^{-1}\). 
 
-
 \begin{thm}
     A linear map is invertible if and only if it is injective and surjective. 
 \end{thm}
@@ -1190,15 +1113,13 @@ To show \(T\) is surjective, we have that for any \(w \in W, w = T(T^{-1}w)\).
 s.t. \(T(S(w)) = w\). (we can do this due to injectivity and surjectivity). Then we have that 
 \(T(ST)v = (TS)Tv = Tv\) and thus \(ST v = v\) and thus \(ST = I\). So we suffices the identity 
 operator condition. It's easy to show that \(S\) is a linear map.
-
 \end{proof}
-
 
 \begin{thm}
     Suppose that \(V\) and \(W\) are finite-dimensional vector spaces, \(\dim V = \dim W\), 
     and \(T \in \Lc(V, W)\). Then 
 
-    \[T \text{ is invertible } \Leftrightarrow T \text{ is injective } \Leftrightarrow T \text{ is surjective.}\]
+    \[T \text{ is invertible } \Longleftrightarrow T \text{ is injective } \Longleftrightarrow T \text{ is surjective.}\]
 \end{thm}
 
 \begin{corollary}
@@ -1206,25 +1127,21 @@ operator condition. It's easy to show that \(S\) is a linear map.
     \Lc(W, V)\), and \(T \in \Lc(V, W)\). Then \(ST = I\) if and only if \(TS = I\). 
 \end{corollary}
 
-
 \begin{definition}[Isomorphism]
     An \textbf{Isomorphism} is an invertible linear map. \\ 
     Two vector spaces are called \textbf{isomorphic} if there is an isomorphism from one vector space 
     onto the other one. 
 \end{definition}
 
-
 \begin{thm}[dimension shows whether vector spaces are isomorphic]
     Two finite-dimensional vector spaces over \(\F\) are isomorphic if and only if they have 
     the same dimension. 
 \end{thm}
 
-
 \begin{thm}
-    Suppose \(v_1, \ldots, v_n\) is a basis of \(V\) and \(w_1, \ldots, w_m\) is abasis of \(W\). 
+    Suppose \(v_1, \ldots, v_n\) is a basis of \(V\) and \(w_1, \ldots, w_m\) is a basis of \(W\). 
     Then \(\Mc\) is an isomorphism between \(\Lc(V, W)\) and \(\F^{m, n}\). 
 \end{thm}
-
 
 \begin{corollary}
     Suppose \(V\) and \(W\) are finite-dimensional. Then \(\Lc(V, W)\) is finite-dimensional and 
@@ -1233,7 +1150,7 @@ operator condition. It's easy to show that \(S\) is a linear map.
 
 \begin{definition}[matrix of a vector, \(\Mc(v)\)]
     Suppose \(v \in V\) and \(v_1, \ldots, v_n\) is a basis of \(V\). Then \textbf{matrix of \(v\)} 
-    with respect to the basis is the n-by-1 matrix 
+    with respect to the basis is the \(n\)-by-\(1\) matrix 
     \[\Mc(v) = \begin{pmatrix}
         b_1 \\ 
         \vdots \\ 
@@ -1243,10 +1160,9 @@ operator condition. It's easy to show that \(S\) is a linear map.
     \[v = b_1 v_1 + \cdots + b_n v_n\] 
 \end{definition}
 
-
 \begin{remark}
     The matrix \(\Mc(v)\) of a vector \(v \in V\) depends on the basis \(v_1, \ldots, v_n\) and \(v\). We 
-    can think of elements of \(V\) as relabeled to be n-by-1 matrices, i.e. \(V \mapsto \F^{n , 1}\).
+    can think of elements of \(V\) as relabeled to be \(n\)-by-\(1\) matrices, i.e. \(V \mapsto \F^{n , 1}\).
 \end{remark}
 
 \begin{corollary}
@@ -1254,7 +1170,6 @@ operator condition. It's easy to show that \(S\) is a linear map.
     is a basis of \(W\). Let \(1 \leq k \leq n\). Then \(k\)th column of \(\Mc(T)\), which is denoted 
     by \(\Mc(T)_{\cdot, k}\), equals \(\Mc(T v_k)\)
 \end{corollary}
-
 
 \begin{thm}[linear maps act like matrix multiplication]
     Suppose \(T \in \Lc(V, W)\) and \(v \in V\). Suppose \(v_1, \ldots, v_n\) is a basis of \(V\)
@@ -1272,7 +1187,7 @@ operator condition. It's easy to show that \(S\) is a linear map.
 \end{proof}
 
 \begin{remark}
-    Each m-by-n matrix \(\Ab\) induces a linear map from \(\F^{n, 1}\) to \(\F^{m, 1}\), namely the matrix 
+    Each \(m\)-by-\(n\) matrix \(\Ab\) induces a linear map from \(\F^{n, 1}\) to \(\F^{m, 1}\), namely the matrix 
     multiplication function that takes \(x \in \F^{n, 1}\) to \(\Ab x \in \F^{m, 1}\). We can think of 
     every linear map (from a finite vector space to another) as a matrix multiplication map 
     after suitable relabeling via the isomorphisms given by \(\Mc\). Specifically, if \(T \in \Lc(V, W)\)
@@ -1285,8 +1200,6 @@ operator condition. It's easy to show that \(S\) is a linear map.
     equals the column rank of \(\Mc(T)\). 
 \end{thm}
 
-
-
 \begin{thm}[change-of-basis-formula]
     Suppose \(T \in \Lc(V)\). Suppose \(u_1, \ldots, u_n\) and \(v_1, \ldots, v_n\) are bases of 
     \(V\). Let 
@@ -1298,6 +1211,7 @@ operator condition. It's easy to show that \(S\) is a linear map.
 \begin{proof}
 
 \end{proof}
+
 \addcontentsline{toc}{subsection}{3D Problem Sets}
 \begin{problem}{1}
     Suppose \(T \in \Lc(V, W)\) is invertible. Show that \(T^{-1}\) is invertible and 
@@ -1305,14 +1219,12 @@ operator condition. It's easy to show that \(S\) is a linear map.
 \end{problem}
 
 \begin{proof}
-
     \(T^{-1}\) is invertible because there exists \(T\) such that \(T T^{-1} = T^{-1} T  = I\). 
 
 \[T^{-1} T = TT^{-1} = I\]
 
 so \((T^{-1})^{-1} = T\).
 \end{proof}
-
 
 \begin{problem}{2}
     Suppose \(T \in \mathcal{L}(U, V)\) and \(S \in \Lc(V, W)\) are both invertible linear maps. 
@@ -1343,7 +1255,6 @@ since \(T\) is injective and thus the only solution is all \(a_i\) are identical
 \(S(T v_i) = v_i\) for all \(i\). Such \(S\) is the inverse of \(T\) (one can verify) and thus 
 \(T\) is invertible. 
 \end{proof}
-
 
 \begin{problem}{5}
     Suppose \(V\) is finite-dimensional, \(U\) is a subspace of \(V\), and \(S \in \Lc(U, V)\). Prove 
@@ -1390,7 +1301,7 @@ take \(v \in \nul S\), then \(T(v) = E^{-1}S(v) = 0\) so \(v \in \nul T\). Thus 
 Then we can define an invertible map \(\Ebar\) from \(\nul S\) to \(\nul T\). We can define the map \(E\) as follows:
 Denote \(V = \nul S \oplus P\), then \(E(v) = \ET(v_1) + \Ebar(v_2)\) for \(v = v_1 + v_2\), where 
 \(v_1 \in P, v_2 \in \nul S\) and now \(\ET = \ET |_P\). Then we have that \(TE(v) = T(\ET(v_1) + \Ebar(v_2)) = S(v_1)
-+ S(v_2) = S(v)\). Now it left to verify that our proposed \(E\) is invertible. 
++ S(v_2) = S(v)\). Now, it left to verify that our proposed \(E\) is invertible. 
 
 To show this, we mainly aim at proving \(\range \Et \cap \range \Ebar = \{0\}\), as if we have this, we 
 know that \(E(v) = \ET(v_1) + \Ebar(v_2) = 0 \Rightarrow \ET(v_1) = \Ebar(v_2) = 0\). We know \(\Ebar\) is 
@@ -1400,7 +1311,7 @@ have \(S v_1 = T \ET v_1 = T 0 = 0\) and thus \(v_1 \in \nul S \cap P = 0\), so 
 
 To complete the proof, let \(u \in \range \ET \cap \range \Ebar\), then we know there exists 
 \(v_1 \in P, v_2 \in \nul S\) s.t. \(u = \ET(v_1) = \Ebar(v_2)\). We also know that \(u \in \nul T\)
-as \(\range \Ebar = \nul T\). Now we have that \(S (v_1) = T \ET(v_1) = T \Ebar(v_2) = 0\) and thus 
+as \(\range \Ebar = \nul T\). Now, we have that \(S (v_1) = T \ET(v_1) = T \Ebar(v_2) = 0\) and thus 
 \(v_1 \in \nul S\). So \(v_1 \in  P \cap \nul S = \{0\}\) and thus we have that \(u = \{0\}\), finishing 
 the proof.
 
@@ -1411,13 +1322,10 @@ the proof.
 % This means that \(\dim \nul S = \dim \nul T\) and thus we can define an invertible map 
 % \(\Eh\) from \(\nul S\) to \(\nul T\). 
 
-
 \(\Leftarrow\) Take any \(s \in \range S\), then there exists \(E(s)\) s.t. \(T(E(s)) = s\). Conversely, 
 take any \(t \in \range T\), then there exists \(v \in V\) s.t. \(t = Tu = TE E^{-1}v = S (E^{-1}v)\). 
 Thus \(\range S = \range T\). 
-
 \end{proof}
-
 
 \begin{problem}{8}
     Suppose \(V\) and \(W\) are finite-dimensional and \(S, T \in \Lc(V, W)\). Prove that 
@@ -1432,8 +1340,8 @@ then we can also derive \(\dim \range T \leq \dim \range S\) and thus \(\dim \ra
 By the fundamental theorem of linear map, we can get that \(\dim \nul S = \dim \nul T\). 
 
 \(\Leftarrow\) We know \(\dim \nul S = \dim \nul T\), so there exists an isomorphism \(\ET_1 \colon 
-\nul S \mapsto \nul T\). Extending \(\ET_1 \colon \nul S \mapsto V\) stil preserves its injectivity. Therefore 
-by P5 we have an invertible \(E_1 \colon V \mapsto V\) such that \(E_1 u = \ET_1 u\) for all \(u \in \nul S\). 
+\nul S \mapsto \nul T\). Extending \(\ET_1 \colon \nul S \mapsto V\) still preserves its injectivity. Therefore, 
+by P5, we have an invertible \(E_1 \colon V \mapsto V\) such that \(E_1 u = \ET_1 u\) for all \(u \in \nul S\). 
 Now we intend to show that \(\nul S = \nul T E_1\), as proving so would imply there exists an invertible 
 \(E_2 \in \Lc(W)\) such that \(S=E_2 T E_1\) by P6. To see this, take \(s \in \nul S\), then 
 \(TE_1(s) = T(\ET_1 s) = 0\) and thus \(s \in \nul TE_1\). To see the other direction, take 
@@ -1441,7 +1349,6 @@ Now we intend to show that \(\nul S = \nul T E_1\), as proving so would imply th
 s.t. \(E_1 t = \ET_1 v = E_1 v\). As \(E_1\) is invertible, \(t = v \in \nul S\) and thus we have shown 
 \(\nul S = \nul TE_1\), completing the proof.   
 \end{proof}
-
 
 \begin{problem}{9}
     Suppose \(V\) is finite-dimensional and \(T \colon V \to W\) is a surjective linear map of \(V\)
@@ -1482,16 +1389,12 @@ Next we claim \(\range \Phi = \Lc(U, W)\). Take any \(S \in \Lc(U, W)\), then we
 Thus we have that \(\dim \Ec = \dim \nul \Phi\) and \(\dim \range \Phi = \dim \Lc(U, W) = \dim U \dim W\)
 and \(\dim \Lc(V, W) = \dim V \dim W = \dim \nul \Phi + \dim \range \Phi\), thus we derive that 
 \[\dim V \dim W = \dim \Ec + \dim U \dim W.\]
-
 \end{proof}
-
-
 
 \begin{problem}{14}
     Prove or give a counterexample: If \(V\) is finite-dimensional and \(R, S, T \in \Lc(V)\) are such 
     that \(RST\) is surjective, then \(S\) is injective. 
 \end{problem}
-
 
 \begin{proof}
 We know that \[\dim \range RST = \dim \range V \leq \min \{\dim \range R, \dim \range S, \dim \range T\} \]
@@ -1510,13 +1413,11 @@ We can reduce the list to basis and use previous conclusions. Since \(T v_1, \ld
 we can reduce the list to \(T v_1, \ldots, T v_n\) such that the list is the basis of \(V\). By previous 
 results, \(v_1, \ldots, v_n\) is also linearly independent and its dimension equals the \(\dim V\) and thus 
 is the basis of \(V\). It thus spans \(V\). Extending the list to \(v_1, \ldots, v_m\) also spans \(V\). 
-
 \end{proof}
-
 
 \begin{problem}{16}
     Prove that every linear map from \(\F^{n, 1}\) to \(\F^{m, 1}\) is given by a matrix multiplication. 
-    In other words, prove that if \(T \in \Lc(\F^{n, 1}, \F^{m, 1})\), then there exists an m-by-n matrix 
+    In other words, prove that if \(T \in \Lc(\F^{n, 1}, \F^{m, 1})\), then there exists an \(m\)-by-\(n\) matrix 
     \(\Ab\) such that \(Tx =\Ab x\) for every \(x \in \F^{n, 1}\).
 \end{problem}
 
@@ -1544,16 +1445,14 @@ of \(T\) wrt these bases. Then we have that by definition,
 \[\dim \range \Ac = \dim V (\dim V - \dim \nul S) = \dim V \dim \range S.\]
 \end{proof}
 
-
 \begin{problem}{18}
     Show that \(V\) and \(\Lc(\F, V)\) are isomorphic vector spaces. 
 \end{problem}
 
 \begin{proof}
 For simplicity, assume \(V\) is finite-dimensional, then \(\dim V = \dim \F \dim V = \dim \Lc(\F, V)\) and 
-thus they are isomorpic. One might do a more careful construction for infinite-dimensional \(V\). 
+thus they are isomorphic. One might do a more careful construction for infinite-dimensional \(V\). 
 \end{proof}
-
 
 \begin{problem}{19}
     Suppose \(V\) is finite-dimensional and \(T \in \Lc(V)\). Prove that \(T\) has the same matrix with 
@@ -1592,13 +1491,11 @@ thus they are isomorpic. One might do a more careful construction for infinite-d
     is a vector space over \(\F\). 
 \end{thm}
 
-
 \begin{thm}[dimension of a product is the sum of dimensions]
     Suppose \(V_1, \ldots, V_m\) are finite-dimensional vector spaces. Then \(V_1 \times \cdots \times 
     V_m\) is finite-dimensional and 
     \[\dim (V_1 \times \cdots \times V_m) = \dim V_1 + \cdots + \dim V_m.\]
 \end{thm}
-
 
 \begin{lemma}[products and direct sums]
     Suppose that \(V_1, \ldots, V_m\) are subspaces of \(V\). Define a linear map \(\Gamma \colon 
@@ -1613,14 +1510,12 @@ thus they are isomorpic. One might do a more careful construction for infinite-d
     \[\dim(V_1 + \cdots + V_m) = \dim V_1 + \cdots + \dim V_m.\]
 \end{thm}
 
-
 \begin{definition}[\(v + U\), translation]
     Suppose \(v \in V\) and \(U \subset V\). Then \(v + U\) is the subset of \(V\) defined by 
     \[v + U = \{v + u \colon  u \in U\}.\]
 
     The set \(v + U\) is said to be a \textbf{translate} of \(U\).
 \end{definition}
-
 
 \begin{definition}[\textbf{quotient space}, \(V/U\)]
     Suppose \(U\) is a subspace of \(V\). Then the \textbf{quotient space} \(V / U\) is the set of 
@@ -1633,11 +1528,10 @@ thus they are isomorpic. One might do a more careful construction for infinite-d
     \(\R^2\) that have slope 2. 
 \end{remark}
 
-
 \begin{lemma}[two translates of a subspace are equal or disjoint]
     Suppose \(U\) is a subspace of \(V\) and \(v, w \in V\). Then 
 
-    \[v - w \in U \Leftrightarrow v + U = w + U \Leftrightarrow (v + U) \cap (w + U) = \emptyset\]
+    \[v - w \in U \Longleftrightarrow v + U = w + U \Longleftrightarrow (v + U) \cap (w + U) = \emptyset\]
 \end{lemma}
 
 \begin{definition}[addition and scalar multiplication on \(V / U\)]
@@ -1649,7 +1543,6 @@ thus they are isomorpic. One might do a more careful construction for infinite-d
     \end{align*}
     for all \(v, w \in V\) and all \(\lambda \in \F\). 
 \end{definition}
-
 
 \begin{thm}[quotient space is a vector space]
     Suppose \(U\) is a subspace of \(V\). Then \(V / U\), with the operations of addition and 
@@ -1663,23 +1556,20 @@ thus they are isomorpic. One might do a more careful construction for infinite-d
     for each \(v \in V\). 
 \end{definition}
 
-
 \begin{thm}[dimension of quotient space]
     Suppose \(V\) is finite-dimensional and \(U\) is a subspace of \(V\). Then 
     \[\dim V/U = \dim V - \dim U\]
 \end{thm}
-
 
 \begin{definition}
     Suppose \(T \in \Lc(V, W)\). Define \(\TT \colon V / (\nul T) \to W\) by 
     \[\TT (v + \nul T) = Tv.\]
 \end{definition}
 
-
 Another interpretation of quotient space is on \textbf{congruence of subspaces}. The definition goes 
 as follows:
 
-If \(Y\) is a subspace of \(X\), then two vectors \(x_1, x_2 \in X\) are \textbf{congrugent modulo} \(Y\),
+If \(Y\) is a subspace of \(X\), then two vectors \(x_1, x_2 \in X\) are \textbf{congruent modulo} \(Y\),
 denoted \(x_1 \cong x_2 (\mod Y)\) if \(x_1 - x_2 \in Y\).
 
 The quotient space \(X / Y\) denotes the set of equivalence classes in \(X\), modulo \(Y\) by defining that 
@@ -1704,14 +1594,14 @@ It represents all vectors in \(V\) that differ from \(v\) by a vector in \(\nul 
 The null space is 
 \[\nul (\Tt) = \{v + \nul(T) \colon \Tt(v + \nul (T)) = 0\}. \]
 Since we know that \(\Tt(v + \nul T) = Tv\), we have that 
-\[\Tt(v + \nul T) = 0 \ \Leftrightarrow \ Tv = 0.\]
+\[\Tt(v + \nul T) = 0 \ \Longleftrightarrow \ Tv = 0.\]
 
 so \(v \in \nul T\) and thus \(\nul \Tt = \{\nul T\}\). We have that \(\range \Tt = \range T\).
 
 \begin{thm}
     Suppose \(T \in \Lc(V, W)\). Then \\ 
     (a) \(\Tt \circ \pi = T\), where \(\pi\) is the quotient map of \(V\) onto \(V / \nul T\); \\ 
-    (b) \(\Tt\) is injectve;\\ 
+    (b) \(\Tt\) is injective;\\ 
     (c) \(\range \Tt = \range T\);\\ 
     (d) \(V / \nul T\) and \(\range T\) are isomorphic vector spaces. 
 \end{thm}
@@ -1733,9 +1623,9 @@ so \(v \in \nul T\) and thus \(\nul \Tt = \{\nul T\}\). We have that \(\range \T
 
 \begin{proof}
 The two properties closely relate to each other:
-\[(v_1, Tv_1) + (v_2, Tv_2) \in V \times W \colon v \in V \Leftrightarrow Tv_1 + Tv_2 = T(v_1 + v_2)\]
+\[(v_1, Tv_1) + (v_2, Tv_2) \in V \times W \colon v \in V \Longleftrightarrow Tv_1 + Tv_2 = T(v_1 + v_2)\]
 and 
-\[(\lambda v, T \lambda v) \in V \times W \colon v \in V \Leftrightarrow T \lambda v = \lambda T v\]
+\[(\lambda v, T \lambda v) \in V \times W \colon v \in V \Longleftrightarrow T \lambda v = \lambda T v\]
 \end{proof}
 
 \begin{problem}{2}
@@ -1767,7 +1657,6 @@ and
 \end{problem}
 
 \begin{proof}
-
 We define a permutation invariant set function \(S \colon \Lc(V_1, W) \times \cdots \times \Lc(V_m, W)
 \to \Lc(V_1 \times \cdots \times V_m, W)\) such that 
 \[S(T_1, \ldots, T_m) = T_1 + \cdots + T_m\]
@@ -1778,7 +1667,6 @@ For surjectivity, take \(\phi \in \Lc(V_1 \times \cdots \times V_m, W)\), we can
 \(T_i(v_i) = \phi((0, \ldots, v_i, \ldots, 0))\) where \(i\) means for the space \(V_i\). Then we can 
 naturally get that \(\phi((v_1, \ldots, v_m))= \phi(\sum_{i=1}^{m}e_i^\top v_i) = \sum_{i=1}^{m} T_i (v_i) \)
 and thus we finish the proof.
-
 \end{proof}
 
 \begin{problem}{4}
@@ -1793,7 +1681,6 @@ We prove this linear map is an isomorphism. The injective property can be proved
 above. For surjectivity, take \(\phi \in Lc(V, W_1 \times \cdots \times W_m)\), then we can naturally 
 obtain \(T_k = \pi_k \phi\) where \(\pi_k\) means projecting the \(k\)-th component of the input. Note that 
 \(T_k \in \Lc(V, W_k)\) and therefore we finish the proof. 
-
 
 \begin{problem}{5}
     For \(m\) a positive integer, define \(V^m\) by 
@@ -1833,7 +1720,6 @@ have that take \(u \in U, u = (x + w) - v = (x - v) + w \in W\). Similarly, take
 first \(0 = -x + x \in U\). Next, take \(v_1 - x\) and \(v_2 - x \in U\). We have that 
 \(v_1 - x + v_2 - x = (-x) + (2v_1 - x)/2 + (2v_2 - x)/2 \in A\) as \(2v_i - x \in A\)
 by taking \(\lambda = 2\). Finally, \(\lambda (-x + v) = (-x) + (\lambda v + (1 - \lambda) x) \in A\). 
-
 \end{proof}
 
 \begin{problem}{10}
@@ -1849,7 +1735,7 @@ it is the empty set.
 \end{proof}
 
 \begin{problem}{11}
-    Suppose \(U = \{(x_1, x_2, \ldots) \in \F^\infty \colon x_k \neq 0 \text{ for only finitely many }k\}.\).\\ 
+    Suppose \(U = \{(x_1, x_2, \ldots) \in \F^\infty \colon x_k \neq 0 \text{ for only finitely many }k\}\).\\ 
     (a) Show that \(U\) is a subspace of \(\F^\infty\). \\ 
     (b) Prove that \(\F^\infty / U\) is infinite-dimensional. 
 \end{problem}
@@ -1862,7 +1748,6 @@ since each of them has only finitely many nonzero entries. Same holds for \(\lam
 (b) Let's consider a ``standard basis'' \(\{v_i\}_{i=1}^\infty\) that only has 0 on \(i\)-th spot and all 1 otherwise. 
 We can see that for all \(m\), \(v_1, \ldots, v_m\) is linearly independent. And so does \(v_1 + U, \ldots, 
 v_m + U\) since each \(v_i \notin U\), 
-
 \end{proof}
 
 \begin{problem}{12}
@@ -1904,9 +1789,7 @@ the only way to write \(\sum_{i=1}^{m} \lambda_i v_i = 0\) is to let all
 of contradiction that \(w \in U\). 
 This implies that \(0 = w + (-w) \in w + U = A\), forming a contradiction. 
 Hence we finish the proof. 
-
 \end{proof}
-
 
 \begin{problem}{13}
     Suppose \(U\) is a subspace of \(V\) such that \(V / U\) is finite-dimensional. 
@@ -1939,9 +1822,7 @@ Next we show that the list spans \(V / U\). Take arbitrary \(v + U \in V / U\), 
 \[v + U = \sum_{i=1}^{m} \lambda_i w_i + U = \sum_{i=1}^{m} \lambda_i (w_i + U).\]
 
 Thus the list spans the quotient space. 
-
 \end{proof}
-
 
 \begin{problem}{15}
     Suppose \(U\) is a subspace of \(V\) and \(v_1 + U, \ldots, v_m + U\) is a basis of 
@@ -1960,9 +1841,8 @@ any \(v \in V\). Then we have that
 Thus \(v - \sum_{i=1}^{m}\lambda_i v_i \in U\). So 
 \[v = \sum_{i=1}^{m} \lambda_i v_i + \sum_{j=1}^{n} \alpha_j u_i.\]
 
-Hence we finish the proof. 
+Hence, we finish the proof. 
 \end{proof}
-
 
 \begin{problem}{16}
     Suppose \(\varphi \in \Lc(V, \F)\) and  \(\varphi \neq 0\). Prove that 
@@ -1975,9 +1855,7 @@ Hence we finish the proof.
 
 We know that \(\dim \range \varphi  = 1 \) and thus 
 \[\dim V / \nul \varphi = \dim V  - \dim \nul \varphi = \dim \range \varphi = 1.\]
-
 \end{proof}
-
 
 \begin{problem}{17}
     Suppose that \(U\) is a subspace of \(V\) such that \(\dim V / U = 1\). Prove that there exists 
@@ -1988,7 +1866,7 @@ We know that \(\dim \range \varphi  = 1 \) and thus
 We make construction as follows: (1) there exists a natural isomorphism \(T \colon V / U \to 
 \F\). We further define \(S \colon V \to V / U\) by \(S(v) = v + U\). Then we show the map 
 \[\varphi = TS\]
-satifies the requirement. 
+satisfies the requirement. 
 
 First take \(u \in U\). Then we have that 
 \[\varphi(u) = TS(u) = T(u + U) = T(0) = 0\]
@@ -1999,7 +1877,6 @@ Conversely take \(u \in \nul \varphi\), then
 \[0 = \varphi(u) = T(S(u)) = T^{-1} T(S(u)) = S(u).\]
 Thus \(u \in \nul S = U\). We've finished the proof. 
 \end{proof}
-
 
 \begin{problem}{18}
     Suppose \(U\) is a subspace of \(V\) such that \(V / U\) is finite-dimensional. 
@@ -2050,7 +1927,6 @@ It now only suffices to show that this map is valid for the equivalence mapping.
 = 0 = T v_1 - T v_2\) and thus \(S(v_1 + U) = T v_1 = Tv_2 = S(v_2 + U)\). This map is clearly 
 linear and thus we have \(T = S \circ \pi\).  
 \end{proof}
-
 
 \newpage 
 
@@ -2125,11 +2001,10 @@ The goal of this section is to describe \(\nul T'\) and \(\range T'\) in terms o
     \[\dim U^0 = \dim V - \dim U.\]
 \end{thm}
 
-
 \begin{lemma}
     Suppose \(V\) is finite-dimensional and \(U\) is a subspace of \(V\). Then \\ 
-    (a) \(U^0 = 0 \Leftrightarrow U = V\); \\ 
-    (b) \(U^0 = V' \Leftrightarrow U = \{0\}\). 
+    (a) \(U^0 = 0 \Longleftrightarrow U = V\); \\ 
+    (b) \(U^0 = V' \Longleftrightarrow U = \{0\}\). 
 \end{lemma}
 
 \begin{lemma}[the null space of \(T'\)]
@@ -2140,7 +2015,7 @@ The goal of this section is to describe \(\nul T'\) and \(\range T'\) in terms o
 
 \begin{thm}[\(T\) surjective is equivalent to \(T'\) injective]
     Suppose \(V\) and \(W\) are finite-dimensional and \(T \in \Lc(V, W)\). Then 
-    \[T \text{ is surjective } \Leftrightarrow T' \text{ is injective}.\]
+    \[T \text{ is surjective } \Longleftrightarrow T' \text{ is injective}.\]
 \end{thm}
 
 \begin{lemma}[the range of \(T'\)]
@@ -2151,9 +2026,8 @@ The goal of this section is to describe \(\nul T'\) and \(\range T'\) in terms o
 
 \begin{thm}[\(T\) surjective is equivalent to \(T'\) injective]
     Suppose \(V\) and \(W\) are finite-dimensional and \(T \in \Lc(V, W)\). Then 
-    \[T \text{ is surjective } \Leftrightarrow T' \text{ is injective}.\]
+    \[T \text{ is surjective } \Longleftrightarrow T' \text{ is injective}.\]
 \end{thm}
-
 
 \begin{thm}[matrix of \(T'\) is transpose of matrix of \(T\)]
     Suppose \(V\) and \(W\) are finite-dimensional and \(T \in \Lc(V, W)\). Then 
@@ -2180,16 +2054,14 @@ At the same time, we have that
 \begin{align*}
     (\psi_j \circ T) (v_k)
     &= \psi_j (T v_k) \\ 
-    &= \psi_j(\sum_{r=1}^{m}A_{r, k} w_r) \\ 
+    &= \psi_j \left(\sum_{r=1}^{m}A_{r, k} w_r \right) \\ 
     &= \sum_{r=1}^{m} A_{r, k} \psi_j (w_r) \\ 
     &= A_{j, k}
 \end{align*}
 
 Here we have that \(C_{k, j} = A_{j, k}\) and thus \(C = A^\top\). Hence, \(\Mc(T') = (\Mc(T))^\top\), 
 as desired. 
-
 \end{proof}
-
 
 We can use duality to provide an alternative proof for the rank of matrix:
 
@@ -2197,7 +2069,6 @@ We can use duality to provide an alternative proof for the rank of matrix:
     Suppose \(\Ab \in \F^{m, n}\). Then the column rank of \(\Ab\) equals the row 
     rank of \(\Ab\). 
 \end{thm}
-
 
 \newpage 
 \addcontentsline{toc}{subsection}{3F Problem Sets}
@@ -2227,7 +2098,6 @@ then we have that \(\beta(v) = \beta(v_0 + u) = \beta(v_0) = c \varphi(v_0)\) fo
 \(\nul \varphi \subseteq \nul \beta\). 
 \end{proof}
 
-
 \begin{problem}{8}
     Suppose \(v_1, \ldots, v_n\) is a basis of \(V\) and \(\varphi_1, \ldots, \varphi_n\) is 
     the dual basis of \(V'\). Define \(\Gamma \colon V \to \F^n\) and \(\Lambda \colon 
@@ -2250,7 +2120,6 @@ Take \(a_1, \ldots, a_n \in \F^n\), then
 
 Similarly, take \(v = a_1 v_1 + \cdots + a_n v_n\), we can get that 
 \[\Lambda(\Gamma(v)) = v\]
-
 \end{proof}
 
 \begin{problem}{9}
@@ -2276,7 +2145,6 @@ Hence, we have that
 \end{cases}\]
 \end{proof}
 
-
 \begin{problem}{11} 
     Suppose \(v_1, \ldots, v_n\) is a basis of \(V\) and \(\varphi_1, \ldots, \varphi_n\) is 
     the corresponding dual basis of \(V'\). Prove that 
@@ -2293,9 +2161,8 @@ Apply \(v_k\) on both sides give that
     & = a_1 \varphi_1 (v_k) + \cdots + a_n \varphi_n (v_k) \\ 
     & = a_k
 \end{align*}
-Substitue this back gives the desired equality. 
+Substitute this back gives the desired equality. 
 \end{proof}
-
 
 \begin{problem}{13}
     Show that the dual map of the identity operator on \(V\) is the identity operator on \(V'\). 
@@ -2309,7 +2176,7 @@ for all \(v \in V\).
 
 \begin{problem}{16}
     Suppose \(W\) is finite-dimensional and \(T \in \Lc(V, W)\). Prove that 
-    \[T' = 0 \Leftrightarrow T = 0.\]
+    \[T' = 0 \Longleftrightarrow T = 0.\]
 \end{problem}
 
 \begin{proof}
@@ -2331,7 +2198,6 @@ This follows from definition.
 \end{problem}
 
 \begin{proof}
-
     Denote \(K = \{v \in V \colon \varphi(v) = 0 \text{ for every } \varphi \in U^0\}\).
 
 Take \(u \in U\) and \(\varphi \in U^0\), then by definition \(\varphi(u) = 0\), and thus 
@@ -2340,7 +2206,6 @@ Take \(u \in U\) and \(\varphi \in U^0\), then by definition \(\varphi(u) = 0\),
 Conversely, take \(\varphi \in U^0\). Suppose for the sake of contradiction 
 that there exist \(v \notin U\) but \(v \in K\), then \(\varphi(v) \neq 0\), contradicting that 
 \(v \in K\), thus completing the proof. 
-
 \end{proof}
 
 \begin{problem}{21}
@@ -2348,7 +2213,6 @@ that there exist \(v \notin U\) but \(v \in K\), then \(\varphi(v) \neq 0\), con
     (a) Prove that \(W^0 \subseteq U^0\) if and only if \(U \subseteq W\). \\ 
     (b) Prove that \(W^0 = U^0\) if and only if \(U = W\).  
 \end{problem}
-
 
 \begin{proof}
 (a) \(\Rightarrow\) We know that there exists \(\psi \in V'\) such that \(\nul \psi = W\). Then 
@@ -2358,12 +2222,9 @@ that there exist \(v \notin U\) but \(v \in K\), then \(\varphi(v) \neq 0\), con
 for the sake of contradiction that \(\psi \notin U^0\), then there exists \(u \in U\) s.t. 
 \(\psi(u) \neq 0\). However, as \(u \in W\), we have reached a contradiction. 
 
-
-(b) \(W^0 = U^0 \Leftrightarrow W_0 \subseteq U_0 \text{ and } U_0 \subseteq W_0 
-\Leftrightarrow U \subseteq W \text{ and } W \subseteq W \Leftrightarrow U = W\).
+(b) \(W^0 = U^0 \Longleftrightarrow W_0 \subseteq U_0 \text{ and } U_0 \subseteq W_0 
+\Longleftrightarrow U \subseteq W \text{ and } W \subseteq W \Longleftrightarrow U = W\).
 \end{proof}
-
-
 
 \begin{problem}{22}
     Suppose \(V\) is finite-dimensional and \(U\) and \(W\) are subspaces of \(V\). 
@@ -2405,15 +2266,14 @@ Note that
 Thus we have completed the proof. 
 \end{proof}
 
-
 \begin{problem}{23}
     Suppose \(V\) is finite-dimensional and \(\varphi_1, \ldots, \varphi_m \in V'\). Prove 
     that the following three sets are equal to each other.
 
     (a) span(\(\varphi_1, \ldots, \varphi_m\)). \\ 
-    (b) \(((\nul \varphi_1) \cap \cdots \cap (\nul \varphi_m))^0 \coloneq A\) \\ 
+    (b) \(((\nul \varphi_1) \cap \cdots \cap (\nul \varphi_m))^0 \coloneq A\). \\ 
     (c) \(\{\varphi \in V' \colon (\nul \varphi_1) \cap \cdots \cap (\nul \varphi_m) \subseteq \nul \varphi\}
-    \coloneq B\) 
+    \coloneq B\).
 \end{problem}
 
 \begin{proof}
@@ -2466,7 +2326,7 @@ ensures that \(\Gamma\) is surjective.
 \(\Leftarrow\) Suppose for the sake of contradiction that \(v_1, \ldots, v_m\) are not linearly 
 independent, then we know there exists nonzero \(a_i's\) such that \(a_1 v_1 + \cdots + a_m 
 v_m = 0\). Applying any linear function \(\varphi \in V'\) to this linear combination yields that 
-\[\varphi(\sum_{i=1}^{m}a_iv_i) = \varphi(0) = 0\]
+\[\varphi \left(\sum_{i=1}^{m}a_i v_i \right) = \varphi(0) = 0\]
 
 This equals that 
 \[\sum_{i=1}^{m}a_i \varphi(v_i) = \sum_{i=1}^{m}a_i \Gamma(\varphi)_i = 0\]
@@ -2522,8 +2382,6 @@ This equals that
 
 Since there is nonzero \(a_i\)'s, this means that the image of \(\Gamma\) is a strict subspace 
 of \(\F^m\), therefore contradicting the hypothesis that it's surjective.
-
-
 \end{proof}
 
 \begin{problem}{26}
@@ -2536,7 +2394,6 @@ Denote \(U = \{v \in V \colon \varphi(v) = 0 \text{ for every } \varphi \in \Ome
 So we have that 
 
 \[U^0 = \{\psi\in V' \colon \psi(v) = 0 \text{ for every } v \in U\}\]
-
 
 \(\Rightarrow\) Take \(\varphi \in \Omega\) and \(v \in U\), then by definition \(\varphi(v) = 0\)
 and thus \(\varphi \in U^0\). 
@@ -2582,7 +2439,6 @@ see this, \(0 = \sum_{i=1}^{m} a_i v_i\). Apply \(\varphi_i\) on both side yield
 \(0 = \varphi_i(0) = \varphi(\sum_{i=1}^{m} a_i v_i) = a_i\). Thus all coefficients are zero.
 \end{proof}
 
-
 \begin{problem}{32}
     The \emph{double dual} space of \(V\), denoted by \(V''\), is defined to be the dual space of 
     \(V'\). In other words, \(V'' = (V')'\). Define \(\Lambda \colon V \to V''\) by 
@@ -2595,7 +2451,6 @@ see this, \(0 = \sum_{i=1}^{m} a_i v_i\). Apply \(\varphi_i\) on both side yield
     (c) Show that if \(V\) is finite-dimensional, then \(\Lambda\) is an isomorphism from \(V\)
     onto \(V''\). 
 \end{problem}
-
 
 \begin{proof}
 (a) First, \(\Lambda(0)(\varphi) = \varphi(0) = 0\). Next, take \(v_1, v_2 \in V\), then 
@@ -2613,11 +2468,9 @@ further equals that \(T''(\psi) = \psi \varphi \circ T(v)\) for \(v \in V\).
     &= \Lambda \circ T 
 \end{align*}
 
-
 (c) First we have that \(\dim V = \dim V' = \dim V''\). Note that if we take \(v \in \nul \Lambda\), 
 then this means for all linear functional \(\varphi \in V'\), we have that \(\Lambda v (\varphi)
 = \varphi(v) = 0\). So \(v = 0\) and thus \(\Lambda\) is injective and therefore an isomorphism.
 \end{proof}
 
 \end{document}
-

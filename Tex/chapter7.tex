@@ -2,29 +2,22 @@
 \sloppy
 \input{packages.tex}
 \input{math_commands.tex}
-\usepackage{hyperref}
-
 
 \title{\vspace{-2em}Chapter 7: Operators on Inner Product Spaces}
-\author{\emph{Linear Algebra Done Right}, by Sheldon Axler}
-\date{}
+\author{\emph{Linear Algebra Done Right (4th Edition)}, by Sheldon Axler}
+\date{Last updated: \today}
 
 \begin{document}
 \maketitle 
 \tableofcontents
-
 \newpage 
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 7A %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-\newpage 
 \section*{7A: Self-Adjoint and Normal Operators}
 \addcontentsline{toc}{section}{7A: Self-Adjoint and Normal Operators}
-
 
 \begin{definition}[adjoint, \(T^*\)]
     Suppose \( T \in \Lc(V, W)\). The \textbf{adjoint} of \(T\) is the function \(T^* \colon W \to V\) such 
@@ -37,7 +30,6 @@
     If \(T \in \Lc(V, W)\), then \(T^* \in \Lc(W, V)\). In other words, the adjoint of 
     a linear map is a linear map.
 \end{corollary}
-
 
 \begin{corollary}[properties of the adjoint]
     Suppose \(T \in \Lc(V, W)\). Then 
@@ -62,9 +54,8 @@ Suppose \(T \in \Lc(V, W)\). Then
 \end{enumerate}
 \end{thm}
 
-
 \begin{definition}[conjugate transpose, \(A^*\)]
-    The \textbf{conjugate transpose} of an m-by-n matrix \(A\) is the n-by-m matrix 
+    The \textbf{conjugate transpose} of an \(m\)-by-\(n\) matrix \(A\) is the \(n\)-by-\(m\) matrix 
     \(A^*\) obtained by interchanging the rows and columns and then taking the complex conjugate 
     of each entry. In other words, if \(j \in \{1, \ldots, n\}\) and \(k \in \{1, \ldots, m\}\), 
     then 
@@ -76,7 +67,6 @@ Suppose \(T \in \Lc(V, W)\). Then
     bases, the matrix of \(T^*\) does not necessarily equal the conjugate transpose of the matrix 
     of \(T\).
 \end{remark}
-
 
 \begin{thm}[matrix of \(T^*\) equals conjugate transpose of matrix of \(T\)]
     Let \(T \in \Lc(V, W)\). Suppose \(e_1, \ldots, e_n\) is an orthonormal basis of \(V\) and 
@@ -102,12 +92,10 @@ Suppose \(T \in \Lc(V, W)\). Then
     Every eigenvalue of a self-adjoint operator is real. 
 \end{corollary}
 
-
 \begin{corollary}
     Suppose \(V\) is a \textbf{complex} inner product space and \(T \in \Lc(V)\). Then 
     \[\langle Tv,v \rangle = 0 \text{ for every } v \in V \Longleftrightarrow T = 0.\]
 \end{corollary}
-
 
 \begin{corollary}
     Suppose \(V\) is a \textbf{complex} inner product space and \(T \in \Lc(V)\). Then 
@@ -117,7 +105,6 @@ Suppose \(T \in \Lc(V, W)\). Then
 \begin{remark}
     The above two corollaries do not hold for real inner product spaces.
 \end{remark}
-
 
 \begin{thm}
     Suppose \(T\) is a self-adjoint operator on \(V\). Then 
@@ -160,18 +147,12 @@ Suppose \(T \in \Lc(V, W)\). Then
     commuting self-adjoint operators \(A\) and \(B\) such that \(T = A + i B\).
 \end{thm}
 
-
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 7A PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage 
 \addcontentsline{toc}{subsection}{7A Problem Sets}
-
 
 \begin{problem}{1}
     Suppose \(n\) is a positive integer. Define \(T \in \Lc(\F^n)\) by 
@@ -208,7 +189,6 @@ where \(T^*(z_1, \ldots, z_n) = (z_2, \ldots, z_n, 0)\).
 \end{align*}
 \end{proof}
 
-
 \begin{problem}{4}
     Suppose \(T \in \Lc(V)\) and \(U\) is a subspace of \(V\). Prove that 
     \[U \text{ is invariant under } T \Longleftrightarrow U^\perp \text{ is invariant under }T^*\]
@@ -222,7 +202,6 @@ Thus
 which implies the desired result.
 \end{proof}
 
-
 \begin{problem}{5}
     Suppose \(T \in \Lc(V, W)\). Suppose \(e_1, \ldots, e_n\) is an orthonormal basis of \(V\) and 
     \(f_1, \ldots, f_m\) is an orthonormal basis of \(W\). Prove that 
@@ -232,7 +211,7 @@ which implies the desired result.
 \begin{proof}
 Note that first we have 
 \[\norm{T e_k}^2 = \langle T e_k, T e_k \rangle 
-= \langle Te_k, \sum_{j=1}^{m} \langle T e_k, f_j \rangle f_j \rangle 
+= \left\langle T e_k, \sum_{j=1}^{m} \langle T e_k, f_j \rangle f_j \right\rangle 
 = \sum_{j=1}^{m} |\langle T e_k, f_j \rangle|^2\]
 
 At the same time, we have 
@@ -245,7 +224,6 @@ Combining the two equations yields that
     = \sum_{j=1}^{m} \norm{T^* f_j}^2
 \end{align*}
 \end{proof}
-
 
 \begin{problem}{9}
     Prove that the product of two self-adjoint operators on \(V\) is self-adjoint if and only if the 
@@ -265,7 +243,6 @@ Then we know that \((ST)^* = T^* S^* = S^* T^* = (TS)^*\). This implies that for
 This implies that \(TS = ST\).
 \end{proof}
 
-
 \begin{problem}{10}
     Suppose \(\F = \C\) and \(T \in \Lc(V)\). Prove that \(T\) is self-adjoint if and only if 
     \[\langle Tv,v \rangle = \langle T^* v,v \rangle\]
@@ -274,8 +251,9 @@ This implies that \(TS = ST\).
 
 \begin{proof}
 \begin{align*}
-    T \text{ self-adjoint } \Longleftrightarrow
-    T = T^* \Longleftrightarrow \langle Tv,v \rangle = \langle T^*v,v \rangle
+    T \text{ self-adjoint } \quad \Longleftrightarrow \quad 
+    T = T^* \quad \Longleftrightarrow \quad 
+    \langle Tv,v \rangle = \langle T^*v,v \rangle
 \end{align*}
 \end{proof}
 
@@ -305,7 +283,6 @@ Therefore \(AA^* = A^*A\) and \(A\) is self-adjoint. For \(B\), we have that
 since \(A\) and \(B\) commute. 
 \end{proof}
 
-
 \begin{problem}{15}
     Suppose \(T \in \Lc(V)\) is invertible. Prove that 
     \begin{enumerate}[label=(\alph*)]
@@ -321,9 +298,6 @@ since \(A\) and \(B\) commute.
 (b) \(T\) is normal \(\Longleftrightarrow\) \(TT^* = T^*T\) \(\Longleftrightarrow\)
 \((T^*)^{-1}T^{-1} = T^{-1}(T^*)^{-1}\) \(\Longleftrightarrow\) \(T^{-1}\) is normal.
 \end{proof}
-
-
-
 
 \begin{problem}{19}
     Suppose \(T \in \Lc(V)\) and \(\norm{T^* v} \leq \norm{Tv}\) for every \(v \in V\). Prove that 
@@ -352,10 +326,8 @@ which means that the sum of the eigenvalues are 0. However, by the fact derived 
 meaning that \(\lambda \leq 0\) and therefore all \(\lambda = 0\). Notice that 
 \(T^*T - TT^*\) is self-adjoint as 
 \[(T^*T - TT^*)^* = (T^* T)^* - (TT^*)^* = T^* T - TT^*\]
-Hence we can claim that \(T^* T - TT^* = 0\), and by the result 7.20 \(T\) is normal.
+Hence, we can claim that \(T^* T - TT^* = 0\), and by the result 7.20 \(T\) is normal.
 \end{proof}
-
-
 
 \begin{problem}{20}
     Suppose \(P \in \Lc(V)\) is such that \(P^2 = P\). Prove that the following are equivalent. 
@@ -387,8 +359,6 @@ which means that \(P = P_{\range P}\).
 \end{align*}
 \end{proof}
 
-
-
 \begin{problem}{23}
     Suppose \(T\) is a normal operator on \(V\). Suppose also that \(v, w \in V\) satisfy the 
     equations 
@@ -405,7 +375,6 @@ We note that \(v\) and \(w\) are distinct eigenvectors with different eigenvalue
 which shows the desired result. 
 \end{proof}
 
-
 \begin{problem}{25}
     Suppose \(T \in \Lc(V)\). Prove that  \(T\) is diagnoalizable if and only if \(T^*\) is diagnoalizable. 
 \end{problem}
@@ -417,16 +386,13 @@ consisting of \(T\)'s eigenvectors iff \(V\) has eigenbasis consisting of \(T^*\
 completing the proof.
 \end{proof}
 
-
 \begin{problem}{27}
     Suppose \(T \in \Lc(V)\) is normal. Prove that 
     \[\nul T^k = \nul T \text{ and } \range T^k = \range T\]
     for every positive integer \(k\).
 \end{problem}
 
-
 \begin{proof}
-
 It is obvious that \(\nul T \subseteq \nul T^k\) and \(\range T^k \subseteq 
 \range T\). We aim at proving the other direction. 
 
@@ -446,10 +412,7 @@ For proving the range-related inclusion, this can relate to the null space, wher
 \begin{align*}
     \range (T^k) = (\nul (T^k)^*)^\perp = (\nul (T^*)^k)^\perp = (\nul T^*)^\perp = \range T  
 \end{align*}
-
 \end{proof}
-
-
 
 \begin{problem}{30}
     Suppose that \(T \in \Lc(\F^3)\) is normal and \(T(1, 1 ,1) = (2, 2, 2)\). Suppose 
@@ -460,9 +423,8 @@ For proving the range-related inclusion, this can relate to the null space, wher
 We can see that \((1,1,1)\) is an eigenvector of \(T\) with \(2\) to be the eigenvalue. Then 
 \(z_1, z_2, z_3\) is orthogonal to \((1,1,1)\), so we have that 
 \[z_1 + z_2 + z_3 = 0\]
-by takng the inner product. 
+by taking the inner product. 
 \end{proof}
-
 
 \begin{problem}{32}
     Suppose \(T \colon V \to W\) is a linear map. Show that under the standard identification of 
@@ -477,25 +439,21 @@ by takng the inner product.
 \begin{proof}
 We first know that \(T'(\varphi_w) = \varphi_w \circ T\), so 
 \[T'(\varphi_w)(u) = \langle Tu, w \rangle = \langle u, T^* w \rangle = \varphi_{T^* w}(u)\]
-
 \end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 7B %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \newpage 
 \section*{7B: Spectral Theorem}
 \addcontentsline{toc}{section}{7B: Spectral Theorem}
-
 
 \begin{lemma}[invertible quadratic expressions]
     Suppose \(T \in \Lc(V)\) is self-adjoint and \(b, c \in \R\) are such that \(b^2 < 4c\). Then 
     \[T^2 + bT + cI\]
     is an invertible operator. 
 \end{lemma}
-
 
 \begin{lemma}[minimal polynomial of self-adjoint operator]
     Suppose \(T \in \Lc(V)\) is self-adjoint. Then the minimal polynomial of \(T\) equals 
@@ -511,7 +469,6 @@ Suppose \(\F = \R\) and \(T \in \Lc(V)\). Then the following are equivalent.
 \end{enumerate}    
 \end{thm}
 
-
 \begin{thm}[\textcolor{red}{COMPLEX SPECTRAL THEOREM}]
     Suppose \(\F = \C\) and \(T \in \Lc(V)\). Then the following are equivalent. 
     \begin{enumerate}[label=(\alph*)]
@@ -520,14 +477,6 @@ Suppose \(\F = \R\) and \(T \in \Lc(V)\). Then the following are equivalent.
         \item \(V\) has an orthonormal basis consisting of eigenvectors of \(T\).
     \end{enumerate}
 \end{thm}
-
-
-
-
-
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 7B PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -549,10 +498,9 @@ of \(T\) if and only if \((\overline{\lambda}, v)\) is an eigenpair of \(T^*\). 
 \(\lambda = \overline{\lambda}\) and thus all eigenvalues are real. 
 
 \(\Leftarrow\) Conversely, since \(T\) is normal, \(T\) has a diagnoal entry wrt some orthonormal 
-basis of \(V\) where the entires are the eigenvalues. Since the eigenvalues are real, the conjugate transpose of 
+basis of \(V\) where the entries are the eigenvalues. Since the eigenvalues are real, the conjugate transpose of 
 the matrix equals itself, therefore completing the proof.
 \end{proof}
-
 
 \begin{problem}{3}
     Suppose \(\F = \C\) and \(T \in \Lc(V)\) is normal. Prove that the set of eigenvalues 
@@ -561,7 +509,7 @@ the matrix equals itself, therefore completing the proof.
 \end{problem}
 
 \begin{proof}
-Since \(T\) is normal, there exists a diagnoal matrix representation of \(T\) wrt. some orthonormal 
+Since \(T\) is normal, there exists a diagonal matrix representation of \(T\) wrt. some orthonormal 
 basis \(e_1, \ldots, e_n\). Then we have that 
 \begin{align*}
     \text{eigenvalues of } T \text{ contained in } \{0, 1\} 
@@ -571,11 +519,9 @@ basis \(e_1, \ldots, e_n\). Then we have that
 \end{align*}
 \end{proof}
 
-
-
 \begin{problem}{4}
     Prove that a normal operator on a complex inner product space is skew (meaning it equals the negative 
-    of its adjoint) if and only if all its eigenvalues are purely imaginary (meaining that they have 
+    of its adjoint) if and only if all its eigenvalues are purely imaginary (meaning that they have 
     real part equal to 0).
 \end{problem}
 
@@ -590,7 +536,6 @@ Suppose \(T\) is normal, then we know that \(\lambda\) is an eigenvalue of \(T\)
 \end{align*}
 \end{proof}
 
-
 \begin{problem}{6}
     Suppose \(V\) is a complex inner product space and \(T \in \Lc(V)\) is a normal operator such 
     that \(T^9 = T^8\). Prove that \(T\) is self-adjoint and \(T^2 = T\).
@@ -603,7 +548,6 @@ Therefore \(\lambda^9 = \lambda^8\) and thus \(\lambda = \{0, 1\}\), then by P1 
 is self-adjoint and by P3 we know that \(T\) is a projection operator and thus \(T^2 = T\).
 \end{proof}
 
-
 \begin{problem}{8}
     Suppose \(\F = \C\) and \(T \in \Lc(V)\). Prove that \(T\) is normal if and only if 
     every eigenvector of \(T\) is also an eigenvector of \(T^*\).
@@ -613,15 +557,14 @@ is self-adjoint and by P3 we know that \(T\) is a projection operator and thus \
 \(\Rightarrow\) This follows by the theorem on the book. 
 
 \(\Leftarrow\) Since we are concerned with the field \(\C\), there exists a matrix of \(T\) that 
-is upper-triangular wrt some orthonormal basis \(e_1, \ldots, e_n\) such that 
+is upper-triangular wrt. some orthonormal basis \(e_1, \ldots, e_n\) such that 
 \(T e_j = \sum_{i=1}^{j} a_{ij} e_i\). In particular, \(e_1\) is an eigenvector of \(T\) and it is 
 also an eigenvector of \(T^*\). So the first column of \(T^*\) only has the first term nonzero. We can 
 repeat the statement for other eigenvectors of \(T\) to that of \(T^*\). Note that since the field 
 is taken over \(\C\), \(T\) is guaranteed to have \(n\) eigenvalues and therefore the corresponding 
-eigenvectors. This means that \(T\) and \(T^*\) are simultaenously diagnoalizable and thus they 
+eigenvectors. This means that \(T\) and \(T^*\) are simultaneously diagonalizable and thus they 
 commute, completing the proof.  
 \end{proof}
-
 
 \begin{problem}{10}
     Suppose \(V\) is a complex inner product space. Prove that every normal operator on \(V\) 
@@ -631,16 +574,15 @@ commute, completing the proof.
 
 \begin{proof}
 Suppose \(T\) is a normal operator on \(V\). By complex spectral theorem, \(T = \diag(\lambda_1, 
-\ldots, \lambda_n)\) wrt to some orthonormal bases \(e_1, \ldots, e_n\). We can naturally define 
+\ldots, \lambda_n)\) wrt. to some orthonormal bases \(e_1, \ldots, e_n\). We can naturally define 
 an operator \(S\) such that 
 \[Se_k = \sqrt{\lambda_k} e_k\]
 Then we have that 
 \begin{align*}
-    S^2(v) = S(\sum_{i=1}^{n} a_i S(e_i)) = S(\sum_{i=1}^{n} a_i \sqrt{\lambda_i} e_i) 
+    S^2(v) = S\left(\sum_{i=1}^{n} a_i S(e_i)\right) = S\left(\sum_{i=1}^{n} a_i \sqrt{\lambda_i} e_i \right) 
     = \sum_{i=1}^{n} a_i \lambda_i e_i = \sum_{i=1}^{n} a_i T(e_i) = T(v)
 \end{align*}
 \end{proof}
-
 
 \begin{problem}{11}
     Prove that every self-adjoint operator on \(V\) has a cube root. 
@@ -651,7 +593,6 @@ We can do the similar proof as above. The only difference is that the self-adjoi
 real eigenvales and therefore their cube root is also real and uniquely determined. 
 \end{proof}
 
-
 \begin{problem}{12}
     Suppose \(V\) is a complex vector space and \(T \in \Lc(V)\) is normal. Prove that if \(S\)
     is an operator on \(V\) that commutes with \(T\), then \(S\) commutes with \(T^*\).
@@ -661,12 +602,10 @@ real eigenvales and therefore their cube root is also real and uniquely determin
 Let \(v\) be an eigenvector of \(T\) with eigenvalue of \(\lambda\). We have that 
 \[T(Sv) = STv = S (\lambda v) = \lambda(Sv)\]
 So \(Sv\) is an eigenvector of \(T\) with eigenvalue \(\lambda\). This means that it is also an eigenvector 
-of \(T^*\) with eigenvalue \(\overline{\lambda}\). Hence we have 
+of \(T^*\) with eigenvalue \(\overline{\lambda}\). Hence, we have 
 \[T^*(Sv) = \overline{\lambda}Sv = S(\overline{\lambda} v) = S T^*v\]
 completing the proof. 
 \end{proof}
-
-
 
 \begin{problem}{14}
     Suppose \(\F = \R\) and \(T \in \Lc(V)\). Prove that \(T\) is self-adjoint if and only if 
@@ -684,11 +623,10 @@ of \(V\) consisting of eigenvectors of \(T\) and thus we know that \(V = E(\lamb
     0 = \langle Tv_1,v_2 \rangle - \langle v_1,Tv_2 \rangle 
     = (\lambda_1 - \lambda_2) \langle v_1,v_2 \rangle
 \end{align*}
-Therefore \(\langle v_1,v_2 \rangle = 0\). 
+Therefore, we have \(\langle v_1,v_2 \rangle = 0\). 
 
 \(\Leftarrow\) Conversely, Such eigenvectors form a basis of \(V\) and thus \(T\) is self-adjoint. 
 \end{proof}
-
 
 \begin{problem}{16}
     Suppose \(\F = \C\) and \(\Ec \subseteq \Lc(V)\). Prove that there is an orthonormal basis of 
@@ -702,7 +640,6 @@ Therefore \(\langle v_1,v_2 \rangle = 0\).
 \(\Leftarrow\) This side follows as what we've done in ch5E P2.
 \end{proof}
 
-
 \begin{problem}{19}
     Suppose \(T \in \Lc(V)\) is self-adjoint and \(U\) is a subspace of \(V\) that is invariant 
     under \(T\). 
@@ -712,7 +649,6 @@ Therefore \(\langle v_1,v_2 \rangle = 0\).
         \item Prove that \(T |_{U^\perp} \in \Lc(U^\perp)\) is self-adjoint.
     \end{enumerate}
 \end{problem}
-
 
 \begin{proof}
 (a) Let \(u \in U\) and \(w \in U^\perp\), then 
@@ -725,7 +661,6 @@ which shows that \(T|_U\) is self-adjoint.
 
 (c) This follows similarly.
 \end{proof}
-
 
 \begin{problem}{21}
     Suppose that \(T\) is a self-adjoint operator on a finite-dimensional inner product space and 
@@ -765,21 +700,17 @@ Furthermore,
 \end{align*}
 
 where we define \(\lambda' = \text{argmin}_i |\lambda_i - \lambda| \). This gives that 
-\[|\lambda' - \lambda| < \epsilon / (\sum_{i=1}^{n} |a_i|) = \epsilon / 1 = \epsilon\]
+\[|\lambda' - \lambda| < \epsilon / \left(\sum_{i=1}^{n} |a_i|\right) = \epsilon / 1 = \epsilon\]
 where in the last step we use the fact that \(\norm{v} = 1\).
-
 \end{proof}
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 7C %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \newpage 
 \section*{7C: Positive Operators}
 \addcontentsline{toc}{section}{7C: Positive Operators}
-
 
 \begin{definition}[positive operator]
     An operator \(T \in \Lc(V)\) is called \textbf{positive} if \(T\) is self-adjoint and 
@@ -812,23 +743,14 @@ where in the last step we use the fact that \(\norm{v} = 1\).
     Every positive operator on \(V\) has a unique positive square root. 
 \end{thm}
 
-
 \begin{remark}
     For \(T\) a positive operator, \(\sqrt{T}\) denotes the unique positive square root of \(T\).
 \end{remark}
-
 
 \begin{corollary}
     Suppose \(T\) is a positive operator on \(V\) and \(v \in V\) is such that \(\langle Tv,v \rangle = 0\). 
     Then \(Tv = 0\).
 \end{corollary}
-
-
-
-
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 7C PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -849,15 +771,15 @@ for all \(v \in V\), so \(T = 0\).
 \end{proof}
 
 \begin{problem}{3}
-    Suppose \(n\) is a positive integer and \(T \in \Lc(\F^n)\) is the operator whose matrix (wrt 
-    the standard basis) consists of all 1's. Show that \(T\) is a positive operator.
+    Suppose \(n\) is a positive integer and \(T \in \Lc(\F^n)\) is the operator whose matrix (wrt. 
+    the standard basis) consists of all \(1\)'s. Show that \(T\) is a positive operator.
 \end{problem}
 
 \begin{proof}
 Suppose \(v = (v_1, \ldots, v_n) \in V\), then we have that 
 \[\langle Tv,v \rangle 
-= \langle (\sum_{i=1}^{n} v_i, \ldots, \sum_{i=1}^{n} v_i), (v_1, \ldots, v_n) \rangle
-= (\sum_{i=1}^{n} v_i)^2 \geq 0\]
+= \left\langle \left(\sum_{i=1}^{n} v_i, \ldots, \sum_{i=1}^{n} v_i \right), (v_1, \ldots, v_n) \right\rangle
+= \left(\sum_{i=1}^{n} v_i \right)^2 \geq 0\]
 \end{proof}
 
 \begin{problem}{6}
@@ -869,7 +791,6 @@ Let \(S, T\) be two positive operator and take \(v \in V\). Then
 \[\langle (S+T)v,v \rangle = \langle Sv,v \rangle + \langle Tv,v \rangle \geq 0\]
 \end{proof}
 
-
 \begin{problem}{7}
     Suppose \(S \in \Lc(V)\) is an invertible positive operator and \(T \in \Lc(V)\) is a positive 
     operator. Prove that \(S + T\) is invertible.
@@ -880,7 +801,6 @@ Take any nonzero \(v \in V\), then
 \[\langle (S+T)v,v \rangle = \langle Sv,v \rangle + \langle Tv,v \rangle > 0\]
 So \(\nul (S+T) = \{0\}\) and thus \(S+T\) is injective and therefore invertible.
 \end{proof}
-
 
 \begin{problem}{9}
     Suppose \(T \in \Lc(V)\) is a positive operator and \(S \in \Lc(W, V)\). Prove that 
@@ -896,7 +816,6 @@ We have that
 as \(T\) is positive.
 \end{proof}
 
-
 \begin{problem}{10}
     Suppose \(T\) is a positive operator on \(V\). Suppose \(v, w \in V\) are such that 
     \[Tv = w \ \ \ Tw = v\]
@@ -911,7 +830,6 @@ Thus \((T^2 - I)v = 0\). This means that either \(v = 0\) or \(T = \pm I\). In t
 \(T\) cannot be \(-I\) as \(T\) is a positive operator (all eigenvalues nonnegative).
 \end{proof}
 
-
 \begin{problem}{12}
     Suppose \(T \in \Lc(V)\) is a positive operator. Prove that \(T^k\) is a positive operator 
     for every positive integer \(k\).
@@ -924,7 +842,6 @@ If \(k\) is odd, then
 \[\langle T^k v,v \rangle = \langle T(T^{\frac{k-1}{2}}v), (T^{\frac{k-1}{2}}v) \rangle \geq 0\]
 as \(T\) is positive.
 \end{proof}
-
 
 \begin{problem}{13}
     Suppose \(T \in \Lc(V)\) is self-adjoint and \(\alpha \in \R\). 
@@ -946,9 +863,7 @@ may verify this.
 \(\Longleftrightarrow\) \(\alpha \leq \lambda_i\) for all \(i\). 
 (b) \(\alpha I  -T\) positive \(\Longleftrightarrow\) \(\alpha - \lambda_n \geq 0\) 
 \(\Longleftrightarrow\) \(\alpha \geq \lambda_i\) for all \(i\).
-
 \end{proof}
-
 
 \begin{problem}{14}
     Suppose \(T\) is a positive operator on \(V\) and \(v_1, \ldots, v_m \in V\). Prove that 
@@ -957,7 +872,7 @@ may verify this.
 
 \begin{proof}
 \[\sum_{j=1}^{m} \sum_{k=1}^{m} \langle Tv_k,v_j \rangle  
-= \langle T(\sum_{i=1}^{m} v_i), (\sum_{i=1}^{m} v_i) \rangle \geq 0\]
+= \left\langle T\left(\sum_{i=1}^{m} v_i \right), \left(\sum_{i=1}^{m} v_i \right) \right\rangle \geq 0\]
 \end{proof}
 
 \begin{problem}{15}
@@ -969,11 +884,10 @@ may verify this.
 \begin{proof}
 Define \(|T| = \sqrt{T^2}\) and that 
 \[A = \frac{|T| + T}{2} \ \ \ B = \frac{|T| - T}{2}\]
-So \(A - B = T\) and \(A+B = |T| = \sqrt{T^* T}\). Finally, 
+So \(A - B = T\) and \(A+B = |T| = \sqrt{T^* T}\). Finally, we have
 \[AB = \frac{|T| + T}{2} \frac{|T| - T}{2} = \frac{|T|^2 - |T|T + T|T| - T^2}{4} = 0\] 
 As \(|T|^2 = T^2\) and \(|T|T = T|T|\). Similarly, \(BA = 0\).
 \end{proof}
-
 
 \begin{problem}{16}
     Suppose \(T\) is a positive operator on \(V\). Prove that 
@@ -985,7 +899,6 @@ We've shown that the unique square root \(\sqrt{T}\) is obtained from simply tak
 of the eigenvalues of \(T\). This means that \(\sqrt{T}\) and \(T\) share the same eigenbasis, which 
 determines the respective null and range space and completes the proof.
 \end{proof}
-
 
 \begin{problem}{18}
     Suppose \(S\) and \(T\) are positive operators on \(V\). Prove that \(ST\) is a positive 
@@ -999,7 +912,6 @@ determines the respective null and range space and completes the proof.
 \(\Leftarrow\) Given \(ST = TS\), then \((ST)^* = T^* S^* = TS = ST\). In addition,
 \[\langle ST v,v \rangle = \langle S\sqrt{T}v,\sqrt{T}v \rangle \geq 0\]
 \end{proof}
-
 
 \begin{problem}{22}
     Suppose \(T \in \Lc(V)\) is a positive operator and \(u \in V\) is such that 
@@ -1017,19 +929,13 @@ We can take \(v = e_n\), then we have that
 which shows the desired conclusion. 
 \end{proof}
 
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 7D %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \newpage 
 \section*{7D: Isometries, Unitary Operators, and Matrix Factorization}
 \addcontentsline{toc}{section}{7D: Isometries, Unitary Operators, and Matrix Factorization}
-
 
 \begin{definition}[isometry]
     A linear map \(S \in \Lc(V, W)\) is called an \textbf{isometry} if 
@@ -1053,7 +959,6 @@ which shows the desired conclusion.
         list in \(\F^m\) with respect to the Euclidean inner product. 
     \end{enumerate}
 \end{thm}
-
 
 \begin{definition}[Unitary Operators]
     An operator \(S \in \Lc(V)\) is called \textbf{unitary} if \(S\) is an invertible isometry. 
@@ -1080,7 +985,6 @@ which shows the desired conclusion.
     \end{enumerate}
 \end{thm}
 
-
 \begin{corollary}
     Suppoe \(\lambda\) is an eigenvalue of a unitary operator. Then 
     \(|\lambda| = 1\).
@@ -1095,15 +999,12 @@ which shows the desired conclusion.
     \end{enumerate}
 \end{corollary}
 
-
-
 \begin{definition}[unitary matrix]
-    An n-by-n matrix is called \textbf{unitary} if its columns form an orthonormal list in \(\F^n\).
+    An \(n\)-by-\(n\) matrix is called \textbf{unitary} if its columns form an orthonormal list in \(\F^n\).
 \end{definition}
 
-
 \begin{thm}[characterizations of unitary matrices]
-    Suppose \(Q\) is an n-by-n matrix. Then the following are equivalent. 
+    Suppose \(Q\) is an \(n\)-by-\(n\) matrix. Then the following are equivalent. 
     \begin{enumerate}[label=(\alph*)]
         \item \(Q\) is a unitary matrix. 
         \item The rows of \(Q\) form an orthonormal list in \(\F^n\). 
@@ -1111,7 +1012,6 @@ which shows the desired conclusion.
         \item \(Q^* Q = Q Q^* = I_n\).
     \end{enumerate}
 \end{thm}
-
 
 \begin{thm}[QR factorization]
     Suppose \(A\) is a square matrix with linearly independent columns. Then there exists 
@@ -1137,17 +1037,12 @@ which shows the desired conclusion.
     \[B = R^* R\]
 \end{thm}
 
-
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 7D PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage 
 \addcontentsline{toc}{subsection}{7D Problem Sets}
-
 
 \begin{problem}{1}
     Suppose \(\dim V \geq 2\) and \(S \in \Lc(V, W)\). Prove that \(S\) is an isometry if 
@@ -1165,7 +1060,6 @@ which shows the desired conclusion.
 = |\langle v,e_1 \rangle|^2 + |\langle v,e_2 \rangle|^2 = \norm{v}^2\]
 as \(Se_1, Se_2\) are orthonormal basis with norm 1.
 \end{proof}
-
 
 \begin{problem}{2}
     Suppose \(T \in \Lc(V, W)\). Prove that \(T\) is a scalar multiple of an isometry if and only 
@@ -1192,7 +1086,6 @@ This means that
 for some \(a\) and thus completes the proof (\(\frac{1}{a} T\) is an isometry).
 \end{proof}
 
-
 \begin{problem}{3}
     \begin{enumerate}[label=(\alph*)]
         \item Show that the product of two unitary operators on \(V\) is a unitary operator. 
@@ -1208,8 +1101,6 @@ Let \(T, S\) be two unitary operators.
 
 (b) since \(S^{-1} = S^*\) and \(S^*\) is a unitary operator, \(S^{-1}\) is also unitary. 
 \end{proof}
-
-
 
 \begin{problem}{5}
     Suppose \(S \in \Lc(V)\). Prove that the following are equivalent. 
@@ -1239,7 +1130,6 @@ Next assume (c) holds, then Let \(P\) define to be the projection operator into 
 applying the previous proof finishes the problem. 
 \end{proof}
 
-
 \begin{problem}{6}
     Suppose \(T_1, T_2\) are both normal operators on \(\F^3\) with 2,5,7 as eigenvalues. Prove 
     that there exists a unitary operator \(S \in \Lc(\F^3)\) such that \(T_1 = S^* T_2 S\).
@@ -1250,15 +1140,15 @@ By complex spectral theorem, \(T_1\) has \(\{a_1, a_2, a_3\}\) as a set of ortho
 form a basis with eigenvalues 2,5,7. Similarly, \(T_2\) has \(\{b_1, b_2, b_3\}\). What we want to 
 do here is simply define a change-of-basis operator that is also unitary. Define \(S \in \Lc(\F^3)\) s.t. 
 \[S a_i = b_i\] 
-Clearly \(S\) is unitary. Now it suffices to prove that the desired equation holds. 
+Clearly, \(S\) is unitary. Now, it suffices to prove that the desired equation holds. 
 We also have that \(S^{-1} = S^* \) so \(S^* b_i = a_i\). Take any 
 \(v = \alpha_1 a_1 + \alpha_2 a_2 + \alpha_3 a_3\), then 
 \begin{align*}
     S^*T_2S (v) 
-    &= S^*T_2S(\sum_{i=1}^{3} \alpha_i a_i) \\ 
-    &= S^*T_2( \sum_{i=1}^{3} \alpha_i S(a_i) ) \\ 
-    &= S^* (\sum_{i=1}^{3} \alpha_i T_2(b_i)) \\ 
-    &= S^*( \alpha_1 2b_1 + \alpha_2 5b_2 + \alpha_3 7b_3) \\ 
+    &= S^*T_2 S \left(\sum_{i=1}^{3} \alpha_i a_i \right) \\ 
+    &= S^*T_2 \left( \sum_{i=1}^{3} \alpha_i S(a_i) \right) \\ 
+    &= S^* \left(\sum_{i=1}^{3} \alpha_i T_2(b_i) \right) \\ 
+    &= S^* (\alpha_1 2b_1 + \alpha_2 5b_2 + \alpha_3 7b_3) \\ 
     &= 2 \alpha_1 a_1 + 5 \alpha_2 a_2 + 7 \alpha_3 a_3 
 \end{align*}
 
@@ -1266,11 +1156,10 @@ Note that we also have that
 
 \begin{align*}
     T_1 (v) 
-    &= T_1 (\sum_{i=1}^{3} \alpha_i a_i) \\ 
+    &= T_1 \left(\sum_{i=1}^{3} \alpha_i a_i \right) \\ 
     &= 2\alpha_1 a_1 + 5 \alpha_2 a_2 + 7 \alpha_3 a_3
 \end{align*}
 \end{proof}
-
 
 \begin{problem}{9}
     Suppose \(\F = \C\) and \(T \in \Lc(V)\). Suppose every eigenvalue of \(T\) has absolute value 
@@ -1289,9 +1178,6 @@ which gives that \(T^*T \leq I\). Since the eigenvalue of \(T^*T\) are all one a
 self-adjoint, there exists eigenbasis all with eigenvalue one. This implies that \(T^*T = I\) 
 and thus \(T\) is unitary. 
 \end{proof}
-
-
-
 
 \begin{problem}{10}
     Suppose \(\F = \C\) and \(T \in \Lc(V)\) is a self-adjoint operator such that 
@@ -1319,7 +1205,6 @@ self-adjoint. Note that \(AB = BA\) algebraically. Thus, we have that
 which shows that \(A+Bi\) is unitary.
 \end{proof}
 
-
 \begin{problem}{11}
     Suppose \(S \in \Lc(V)\). Prove that \(S\) is a unitary operator if and only if 
     \[\{Sv \colon v \in V \text{ and } \norm{v} \leq 1\} = \{v \in V \colon \norm{v} \leq 1\}\]
@@ -1333,9 +1218,7 @@ so \(v \in l.h.s.\). Conversely, take any \(Sv \in l.h.s.\), then \(\norm{Sv} = 
 
 \(\Leftarrow\) Take any \(v \in V\) and consider \(u \coloneqq \frac{v}{\norm{v}}\). Then we know that 
 there exists \(w\) with \(\norm{w} \leq 1\) such that \(Sw = u \).  
-
 \end{proof}
-
 
 \begin{problem}{13}
     Explain why the columns of a square matrix of complex numbers form an orthonormal list in \(\C^n\) 
@@ -1345,7 +1228,6 @@ there exists \(w\) with \(\norm{w} \leq 1\) such that \(Sw = u \).
 \begin{proof}
 A square matirx \(Q\) is unitary iff \(Q^*\) is unitary, completing the proof.
 \end{proof}
-
 
 \begin{problem}{18}
     A square matrix \(A\) is called \emph{symmetric} if it equals its transpose. Prove that if 
@@ -1361,7 +1243,7 @@ as
 Writing this in matrix form gives that 
 \[AQ = QD\]
 for unitary matrix \(Q\) and diagonal matrix \(D\) with entries to be the corresponding eigenvalues. 
-Hence we get that 
+Hence, we get that 
 \[Q^*AQ\]
 is diagonal. 
 \end{proof}
@@ -1369,7 +1251,6 @@ is diagonal.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 7E %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 
 \newpage 
 \section*{7E: Singular Value Decomposition}
@@ -1391,7 +1272,6 @@ is diagonal.
     times as the dimension of the corresponding eigenspace of \(T^*T\). 
 \end{definition}
 
-
 \begin{thm}[role of positive singular values]
     Suppose that \(T \in \Lc(V, W)\). Then 
     \begin{enumerate}[label=(\alph*)]
@@ -1401,12 +1281,10 @@ is diagonal.
     \end{enumerate}
 \end{thm}
 
-
 \begin{corollary}
     Suppose \(S \in \Lc(V, W)\). Then 
     \[S \text{ is an isometry } \Longleftrightarrow \text{ all singular values of } S \text{ equal 1.}\]
 \end{corollary}
-
 
 \begin{thm}[\textcolor{red}{SINGULAR VALUE DECOMPOSITION}]
     Suppose \(T \in \Lc(V, W)\) and the positive singular values of \(T\) are \(s_1, \ldots, s_m\). 
@@ -1415,7 +1293,6 @@ is diagonal.
     \[Tv = s_1 \langle v,e_1 \rangle f_1 + \cdots + s_m \langle v,e_m \rangle f_m\]
     for every \(v \in V\).
 \end{thm}
-
 
 \begin{remark}
     In the proof, we first let \(s_1, \ldots, s_n\) to denote the singular values of \(T\) (thus 
@@ -1437,9 +1314,8 @@ is diagonal.
     \end{cases}\]
 \end{remark}
 
-
 \begin{definition}[diagonal matrix]
-    An M-by-N matrix \(A\) is called a \textbf{diagonal matrix} if all entries of the matrix are 0 
+    An \(M\)-by-\(N\) matrix \(A\) is called a \textbf{diagonal matrix} if all entries of the matrix are 0 
     except possibly \(A_{k, k}\) for \(k = 1, \ldots \min \{M, N\}\).
 \end{definition}
 
@@ -1456,9 +1332,9 @@ is diagonal.
 \end{thm}
 
 \begin{thm}[matrix version of SVD]
-    Suppose \(A\) is a p-by-n matrix of rank \(m \geq 1\). Then there exist a p-by-m matrix 
-    \(B\) with orthonormal columns, an m-by-m diagonal matrix \(D\) with positive numbers on 
-    the diagonal, and an n-by-m matrix \(C\) with orthonormal columns such that 
+    Suppose \(A\) is a \(p\)-by-\(n\) matrix of rank \(m \geq 1\). Then there exist a \(p\)-by-\(m\) matrix 
+    \(B\) with orthonormal columns, an \(m\)-by-\(m\) diagonal matrix \(D\) with positive numbers on 
+    the diagonal, and an \(n\)-by-\(m\) matrix \(C\) with orthonormal columns such that 
     \[A = BDC^*\]
 \end{thm}
 
@@ -1467,14 +1343,12 @@ is diagonal.
     could be considerably smaller than \(A\).
 \end{remark}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 7E PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \newpage 
 \addcontentsline{toc}{subsection}{7E Problem Sets}
-
 
 \begin{problem}{1}
     Suppose \(T \in \Lc(V, W)\). Show that \(T = 0\) if and only if all singular 
@@ -1498,16 +1372,14 @@ is diagonal.
 \(\Rightarrow\) This means that there exists nonzero eigenvector \(v \in V\) such that 
 \[T^*T v = s^2 v\]
 let \(w = \frac{Tv}{s}\), then 
-\[Tv = s(\frac{Tv}{s}) = sw\]
+\[Tv = s\left(\frac{Tv}{s}\right) = sw\]
 and 
 \[T^*w  = \frac{T^* Tv}{s} = sv\]
 
 \(\Leftarrow\) we have that 
 \[T^*Tv = T^*(sw) = s^2v\]
-therefore completing the proof.
+Therefore, completing the proof.
 \end{proof}
-
-
 
 \begin{problem}{4}
     Suppose that \(T \in \Lc(V, W)\), \(s_1\) is the largest singular value of \(T\), and 
@@ -1528,7 +1400,7 @@ basis \(e_1, \ldots, e_n\). Then we have
     \norm{Tv}^2 
     &= \langle Tv,Tv \rangle \\ 
     &= \langle v,T^*Tv \rangle \\ 
-    &= \langle \sum_{i=1}^{n} a_i e_i, \sum_{i=1}^{n} s_i^2a_ie_i \rangle \\ 
+    &= \left\langle \sum_{i=1}^{n} a_i e_i, \sum_{i=1}^{n} s_i^2a_ie_i \right\rangle \\ 
     &= \sum_{i=1}^{n} a_i \sum_{j=1}^{n} \overline{a_j} \overline{s_j^2} \langle e_i,e_j \rangle \\ 
     &= \sum_{i=1}^{n} |a_i|^2 s_i^2 \\ 
 \end{align*}
@@ -1538,7 +1410,6 @@ v \to Tv\) is continuous on the unit sphere \(\{v \in V \colon \norm{v}  =1\}\),
 continuous image of the compact set is therefore also compact. Hence, we prove that 
 \[A = [s_n, s_1]\]
 \end{proof}
-
 
 % \begin{problem}{8}
 %     Suppose \(T \in \Lc(V, W)\). Suppose \(s_1 \geq s_2 \geq \cdots \geq s_m > 0\)
@@ -1562,7 +1433,6 @@ continuous image of the compact set is therefore also compact. Hence, we prove t
 
 % \end{proof} 
 
-
 \begin{problem}{9}
     Suppose \(T \in \Lc(V, W)\). Show that \(T\) and \(T^*\) have the same positive singular 
     values.
@@ -1573,9 +1443,8 @@ We know that \(T^*T\) is self-adjoint, and that its eigenvalue equals the eigenv
 Therefore the squared root of the eigenvalue of \(T^*T = TT^*\), and thus \(T\) and \(T^*\) have 
 the same positive singular values.
 
-Question 10 follows similarly. 
+Problem 10 follows similarly. 
 \end{proof}
-
 
 \begin{problem}{11}
     Suppose that \(T \in \Lc(V, W)\) and \(v_1, \ldots, v_n\) is an orthonormal basis of \(V\). 
@@ -1588,7 +1457,7 @@ Question 10 follows similarly.
 \end{problem}
 
 \begin{proof}
-We first know from previous problems that for any two orthonormal basis, \(e_1, \ldots, e_n\)
+We first know from the previous problems that for any two orthonormal basis, \(e_1, \ldots, e_n\)
 in \(V\) and \(f_1, \ldots, f_m\) in \(W\), then 
 \[\sum_{i=1}^{n} \norm{Te_i}^2 = \sum_{j=1}^{m} \norm{T^* f_j}^2\]
 
@@ -1598,15 +1467,13 @@ that
 \[\sum_{i=1}^{n} \norm{T v_i}^2 = \sum_{i=1}^{n} \norm{T^*f_i}^2 = 
 \sum_{i=1}^{n} \norm{ \frac{T^*T e_i}{s_i}}^2 = \sum_{i=1}^{n} \norm{s_i e_i}^2 = \sum_{i=1}^{n} s_i^2\]
 
-where \(e_1, \ldots, e_n\) are the orthonormal eigenbasis that diagonizes \(T^*T\). 
-
+where \(e_1, \ldots, e_n\) are the orthonormal eigenbasis that diagonalizes \(T^*T\). 
 
 (b) Note that since \(T\) is positive, the singular value is eigenvalue, as \(\lambda(T^*T) 
-= \lambda(T^2)\) and the eigenvalue is positive. Therefore for each \(i\), \(T v_i = s_i v_i\)
+= \lambda(T^2)\) and the eigenvalue is positive. Therefore, for each \(i\), \(T v_i = s_i v_i\)
 and we have that 
 \[\sum_{i=1}^{n} \langle Tv_i,v_i \rangle = \sum_{i=1}^{n} s_i\]
 \end{proof}
-
 
 \begin{problem}{13}
     Suppose \(T_1, T_2 \in \Lc(V)\). Prove that \(T_1\) and \(T_2\) have the same singular values 
@@ -1617,7 +1484,7 @@ and we have that
 \begin{proof}
 \(\Rightarrow\) Let \(A\) be the matrix of \(T_2\) and \(B\) be the matrix of \(T_1\) then we know that 
 \(A = U_1 D V_1^*\) and \(B = U_2 D V_2^*\) for unitary matrix \(U_1, V_1, U_2, V_2\) and 
-diagnoal matrix \(D\). Then we have 
+diagonal matrix \(D\). Then we have 
 \[B = \underbrace{(U_1 U_2^*)}_{S_1} \underbrace{(U_2 D V_2^*)}_A \underbrace{(V_2 V_1^*)}_{S_2} \]
 
 where we have \(S_1, S_2\) to be unitary. 
@@ -1626,9 +1493,8 @@ where we have \(S_1, S_2\) to be unitary.
 \(U\) and \(V^*\) is unitary, then we have that (let \(B\) be the matrix of \(T_1\))
 \[B = (S_1 U)D(V^*S_2)\]
 where \(S_1 U\) and \(V^*S_2\) are both unitary, therefore \(B\) (\(T_2\)) also have the singular values 
-as in the diagnoal of \(D\). Therefore \(T_1\) and \(T_2\) shares same eigenvalues.  
+as in the diagonal of \(D\). Therefore, \(T_1\) and \(T_2\) shares same eigenvalues.  
 \end{proof}
-
 
 \begin{problem}{15}
     Suppose \(T \in \Lc(V)\) and \(s_1 \geq \cdots \geq s_n\) are the singular values of \(T\). 
@@ -1643,16 +1509,13 @@ Since this holds for all vectors, substitute any eigenvector \(v\) we can get th
 which is the desired result. 
 \end{proof}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 7F %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
 \newpage 
 \section*{7F: Consequences of Singular Value Decomposition}
 \addcontentsline{toc}{section}{7F: Consequences of Singular Value Decomposition}
-
 
 \begin{thm}[upper bound for \(\norm{Tv}\)]
     Suppose \(T \in \Lc(V, W)\). Let \(s_1\) be the largest singular value of \(T\). Then 
@@ -1685,9 +1548,8 @@ which is the desired result.
 \begin{remark}
     For \(S, T \in \Lc(V, W)\), the quantity \(\norm{S - T}\) is often called the distance between 
     \(S\) and \(T\). Informally, think of the condition that \(\norm{S - T}\) is a small number 
-    as meanining \(S\) and \(T\) are close together. 
+    as meaning \(S\) and \(T\) are close together. 
 \end{remark}
-
 
 \begin{thm}[alternative formulas for \(\norm{T}\)]
     Suppose \(T \in \Lc(V, W)\). Then 
@@ -1710,13 +1572,13 @@ which is the desired result.
 \end{corollary}
 
 \begin{thm}[best approximation by linear map whose range has dimension \(\leq k\)]
-Suppose \(T \in \Lc(V, W)\) and \(s_1 \geq \cdots \geq s_m\) are the singualr 
+Suppose \(T \in \Lc(V, W)\) and \(s_1 \geq \cdots \geq s_m\) are the singular 
 values of \(T\). Suppose \(1 \leq k < m\). Then 
 \[\min \{\norm{T - S} \colon S \in \Lc(V, W) \text{ and } 
 \dim \range S \leq k\} = s_{k+1}\]
 Furthermore, if 
 \[Tv = s_1 \langle v,e_1 \rangle f_1 + \cdots + s_m \langle v,e_m \rangle f_m\]
-is a singualr value decomposition of \(T\) and \(T_k \in \Lc(V, W)\) is 
+is a singular value decomposition of \(T\) and \(T_k \in \Lc(V, W)\) is 
 defined by 
 \[T_k v = s_1 \langle v,e_1 \rangle f_1 + \cdots + s_k \langle v,e_k \rangle f_k\]
 for each \(v \in V\), then \(\dim \range T_k = k\) and \(\norm{T - T_k} = s_{k+1}\).
@@ -1737,7 +1599,6 @@ for each \(v \in V\), then \(\dim \range T_k = k\) and \(\norm{T - T_k} = s_{k+1
     \[B = \{v \in V \colon \norm{v} \leq 1\}\]
 \end{definition}
 
-
 \begin{definition}[ellipsoid, \(E(s_1f_1, \ldots, s_n f_n)\), principle axes]
     Suppose that \(f_1, \ldots, f_n\) is an orthonormal basis of \(V\) and 
     \(s_1, \ldots, s_n\) are positive numbers. The \textbf{ellipsoid} 
@@ -1747,7 +1608,6 @@ for each \(v \in V\), then \(\dim \range T_k = k\) and \(\norm{T - T_k} = s_{k+1
     \frac{|\langle v,f_1 \rangle|^2}{s_1} 
     + \cdots + \frac{|\langle v,f_n \rangle|^2}{s_n} < 1\}\]
 \end{definition}
-
 
 \begin{remark}
     If \(\dim V = 2\), the word ``disk'' is sometimes used to denote ball and 
@@ -1778,7 +1638,6 @@ for each \(v \in V\), then \(\dim \range T_k = k\) and \(\norm{T - T_k} = s_{k+1
     the \textbf{edges} of the parallelepiped.
 \end{definition}
 
-
 \begin{proposition}[invertible operator takes parallelepiped to parallelepiped]
     Suppose \(u \in V\) and \(v_1, \ldots, v_n \) is a basis of \(V\). Suppose 
     \(T \in \Lc(V)\) is invertible. Then 
@@ -1794,8 +1653,6 @@ for each \(v \in V\), then \(\dim \range T_k = k\) and \(\norm{T - T_k} = s_{k+1
 
 Rest of Notes are omitted. 
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%% 7F PS %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1805,11 +1662,10 @@ Rest of Notes are omitted.
 
 \begin{problem}{1}
     Prove that if \(S, T \in \Lc(V, W)\), then 
-    \(|\norm{S} - \norm{T}| \leq \norm{S - T}\)
+    \(|\norm{S} - \norm{T}| \leq \norm{S - T}\).
 \end{problem}
 
 \begin{proof}
-
 We have 
 \begin{align*}
     \norm{S} &= \norm{S - T + T} \leq \norm{S - T} + \norm{T} \\ 
@@ -1817,10 +1673,7 @@ We have
 \end{align*}
 This means that 
 \[\norm{S - T} \geq |\norm{S} - \norm{T}|\]
-
-
 \end{proof}
-
 
 \begin{problem}{2}
     Suppose that \(T \in \Lc(V)\) is self-adjoint and 
@@ -1842,25 +1695,22 @@ Given by the conditions we know that the eigenvalues of
 \end{problem}
 
 \begin{proof}
-
-\(\Rightarrow\) we have that 
+\(\Rightarrow\) We have that 
 \(\norm{Tv} = \norm{Tv / \norm{v}} \norm{v} = \norm{T} \norm{v}\). 
 Therefore \(\norm{Tv / \norm{v}} = \norm{T}\) which 
 gives that \(v/\norm{v}\) being the vector corresponds to the largest 
 singular value of \(T\). This gives that  
 \[T^*T v/\norm{v} = \norm{T^2}v / \norm{v}\]
 
-multiplying \(\norm{v}\) on both sides solves the problem. 
+Multiplying \(\norm{v}\) on both sides solves the problem. 
 
 \(\Leftarrow\) Given \(T^*Tv = \norm{T}^2 v\), then we know 
 that \(v\) is the eigenvector of \(T^*T\) corresponding to 
 its largest eigenvalue \(s_1^2\), (i.e. it is the vector 
 that corresponds the largest singular value of \(T\)). 
-Therefore \(\norm{Tv} =
+Therefore, we have \(\norm{Tv} =
 \norm{Tv / \norm{v}} \norm{v}= \norm{T} \norm{v}\). 
-
 \end{proof}
-
 
 \begin{problem}{4}
     Suppose \(T \in \Lc(V, W), v \in V\), and 
@@ -1883,7 +1733,6 @@ By P3 we know that \(T^*T v = \norm{T}^2 v\), then
 \end{problem}
 
 \begin{proof}
-
 Take \(v \in V\) with \(\norm{v} \leq 1\) and 
 \(\norm{ST} = \norm{ST v}\), then 
 \begin{align*}
@@ -1896,7 +1745,6 @@ Take \(v \in V\) with \(\norm{v} \leq 1\) and
 \end{align*}
 \end{proof}
 
-
 \begin{problem}{7}
     Show that defining \(d(S, T) = \norm{S - T}\) for 
     \(S, T \in \Lc(V, W)\) makes \(d\) a metric on 
@@ -1906,7 +1754,7 @@ Take \(v \in V\) with \(\norm{v} \leq 1\) and
 \begin{proof}
 We will examine the definitions one by one:
 \begin{itemize}
-    \item \(d(S, S) = \norm{S - S} = 0\) 
+    \item \(d(S, S) = \norm{S - S} = 0\).
     \item If \(S \neq T\), then \(d(S, T) 
     = \norm{S - T} = \sigma_{\max}(S - T) \). Since 
     \(S - T \neq 0\), its largest singular value is nonzero
@@ -1919,7 +1767,6 @@ We will examine the definitions one by one:
     = d(S, T) + d(T, G)\). 
 \end{itemize}
 \end{proof}
-
 
 \begin{problem}{8}
     \begin{enumerate}[label=(\alph*)]
@@ -1940,7 +1787,7 @@ We will examine the definitions one by one:
 (a) Let \(S = I - T\) and \(S_n = \sum_{i=1}^{n} S^{i}\).
 Then 
 \[(I - S)S_n = I - S^{n+1} \to I\]
-as \(n \to \infty\) because \(\norm{S} < 1\). Therefore the operator 
+as \(n \to \infty\) because \(\norm{S} < 1\). Therefore, the operator 
 \[S_\infty = \sum_{i=1}^{\infty} S_i\]
 is also bounded. This gives that 
 \[(I - S)S_{\infty} = S_{\infty} (I - S) = I\]
@@ -1951,7 +1798,6 @@ and thus \(S\) is invertible, which leads to that \(T\) is also invertible.
 So \(TS^{-1}\) is invertible. Since we already know that 
 \(S\) is invertible, \(T\) is therefore also invertbile. 
 \end{proof}
-
 
 \begin{problem}{9}
     Suppose \(T \in \Lc(V)\). Prove that for every \(\epsilon > 0\)
@@ -1967,9 +1813,6 @@ which satisifes the desired condition. Note that if \(T\) is invertible, we can
 simply choose a sufficiently small \(\delta < 1/\norm{T^{-1}}\); if not, then any 
 \(\delta\) in \((0, 1)\) can make \(S\) invertible. 
 \end{proof}
-
-
-
 
 \begin{problem}{12}
     Suppose \(T \in \Lc(V)\) is a positive operator. Show 
@@ -1988,7 +1831,7 @@ Let \(\norm{T} = \sigma_1\), then \(\norm{\sqrt{T}}
 
 \begin{proof}
 We have that 
-\[\norm{\varphi_u} = \sup_{\norm{v} = 1} |\langle v,u \rangle| = |\langle \frac{u}{\norm{u}},u \rangle| = \norm{u}\]
+\[\norm{\varphi_u} = \sup_{\norm{v} = 1} |\langle v,u \rangle| = \left|\left\langle \frac{u}{\norm{u}},u \right\rangle \right| = \norm{u}\]
 \end{proof}
 
 \begin{problem}{18}
@@ -2007,32 +1850,30 @@ such that \(\norm{T(f_n)} = s_1\) for some \(f_n\). This finishes the l.h.s. To 
 let \(v \in V\) with \(\norm{v} = 1\) to be such that \(\norm{Tv} = \norm{T}\). Then we have 
 \begin{align*}
     \norm{T}^2 = \norm{Tv}^2 = \norm{ \sum_{i=1}^{n} a_i  Te_i}^2
-    \leq (\sum_{i=1}^{n} |a_i|^2) (\sum_{i=1}^{n} \norm{Te_i}^2) 
+    \leq \left(\sum_{i=1}^{n} |a_i|^2 \right) \left(\sum_{i=1}^{n} \norm{Te_i}^2 \right) 
     = \sum_{i=1}^{n} \norm{Te_i}^2
 \end{align*}
 
 Taking the square root solves the problem. 
 
-(b) \(\Rightarrow\) By Cauchy-Schwarz inequality, we know that this is an equality if and only if 
+(b) \(\Rightarrow\) By the Cauchy-Schwarz inequality, we know that this is an equality if and only if 
 \(Te_i\) must be proportional to each other. That is, there exists 
 a unit vector \(w\) such that \(Te_i = a_i w\). So \(\dim \range T \leq 1\). 
-
 
 \(\Leftarrow\) If \(\dim \range T \leq 1\), then there exists a unit vector \(w\) and 
 \(\beta_i \geq 0\) s.t. 
 \[Te_i = \beta_i w\]
 We now have that for some \(v\) with unit norm, 
 \[\norm{Tv} = \norm{\sum_{i=1}^{n} a_i T e_i} = 
-\norm{\sum_{i=1}^{n}a_i \beta_i w} \leq |\sum_{i=1}^{n} a_i \beta_i|\]
+\norm{\sum_{i=1}^{n}a_i \beta_i w} \leq \left|\sum_{i=1}^{n} a_i \beta_i \right|\]
 
 We know that 
-\[|\sum_{i=1}^{n} a_i \beta_i| \leq (\sum_{i=1}^{n} a_i^2)^{1/2} (\sum_{i=1}^{n} \beta_i^2)^{1/2} 
-= (\sum_{i=1}^{n} \beta_i^2)^{1/2}\]
+\[\left|\sum_{i=1}^{n} a_i \beta_i \right| \leq \left(\sum_{i=1}^{n} a_i^2 \right)^{1/2} \left(\sum_{i=1}^{n} \beta_i^2 \right)^{1/2} 
+= \left(\sum_{i=1}^{n} \beta_i^2 \right)^{1/2}\]
 with equality obtained when \(\beta_i = c a_i\) for all \(i\). That is, the sup of \(\norm{Tv}\) 
 occurs under this condition and that we have 
-\[\norm{T} = (\sum_{i=1}^{n} \beta_i^2)^{1/2} = (\sum_{i=1}^{n} \norm{Te_i}^2)^{1/2}\]
+\[\norm{T} = \left(\sum_{i=1}^{n} \beta_i^2 \right)^{1/2} = \left(\sum_{i=1}^{n} \norm{Te_i}^2 \right)^{1/2}\]
 \end{proof}
-
 
 \begin{problem}{24}
     Suppose \(T \in \Lc(V)\) is invertible. Prove that 
@@ -2044,11 +1885,10 @@ occurs under this condition and that we have
 \[\norm{Ux} \leq \norm{U}\norm{x} = \norm{x}\]
 and 
 \[\norm{x} = \norm{U^{-1}Ux} \leq \norm{U^{-1}}\norm{Ux} = \norm{Ux}\]
-Therefore \(\norm{Ux} = \norm{x}\) and therefire it is an invertible isometry and thus unitary. 
+Therefore, we have \(\norm{Ux} = \norm{x}\) and therefore it is an invertible isometry and thus unitary. 
 
-\(\Leftarrow\) Conversely, we have \(\norm{U} = 1 = \norm{U^{-1}}\) by it being unitary. Therefore 
+\(\Leftarrow\) Conversely, we have \(\norm{U} = 1 = \norm{U^{-1}}\) by it being unitary. Therefore, we have 
 \(\norm{T^{-1}} = \norm{T}^{-1}\)
 \end{proof}
 
 \end{document}
-

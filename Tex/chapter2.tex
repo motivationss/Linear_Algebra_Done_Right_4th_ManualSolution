@@ -2,17 +2,15 @@
 \sloppy
 \input{packages.tex}
 \input{math_commands.tex}
-\usepackage{hyperref}
 
-\title{\vspace{-2em}Chapter 2: Finite-Dimensional Vector Space}
-\author{\emph{Linear Algebra Done Right}, by Sheldon Axler}
-\date{}
+\title{\vspace{-2em}Chapter 2: Finite-Dimensional Vector Spaces}
+\author{\emph{Linear Algebra Done Right (4th Edition)}, by Sheldon Axler}
+\date{Last updated: \today}
 
 \begin{document}
 \maketitle 
 \tableofcontents
 \newpage
-
 
 \section*{2A: Span and Linear Independence}
 \addcontentsline{toc}{section}{2A: Span and Linear Independence}
@@ -31,7 +29,6 @@
     \[\text{span}(v_1, \ldots, v_m) = \{a_1 v_1 + \cdots a_m v_m \colon a_1, \ldots, a_m \in \F\}\]
     The span of the empty list \(()\) is defined to be \(\{0\}\).
 \end{definition}
-
 
 \begin{thm}
     The span of a list of vectors in \(V\) is the smallest subspace of \(V\) 
@@ -71,7 +68,7 @@
     there exists \(k \in \{1, 2, \ldots, m\}\) s.t. 
     \[v_k \in \text{span}(v_1, \ldots, v_{k-1})\]
     Furthermore, if \(k\) satisfies the condition above and the \(k^{\text{th}}\)
-    term is removed from \(v_1, \ldots v_m\), then the span of the reamining list 
+    term is removed from \(v_1, \ldots v_m\), then the span of the remaining list 
     equals \(\text{span}(v_1, \ldots, v_m)\).
 \end{lemma}
 
@@ -106,7 +103,6 @@ Take any \(v \in V\), then we have \(v = a_1 v_1 + a_2 v_2 + a_3 v_3
     of these vectors still belong to \(V\).
 \end{proof}
 
-
 \begin{problem}{3}
     Suppose \(v_1, \ldots, v_m\) is a list of vectors in \(V\). 
     For \(k \in \{1, \ldots, m\}\), let 
@@ -123,11 +119,10 @@ Take \(v = \sum_{i=1}^m a_i v_i\) from l.h.s, then we can write
     &= (a_1 - a_m) v_1 +\cdots (a_{m-1} - a_{m}) v_{m-1} + a_m w_m \\ 
     &= (a_1 - a_m - a_{m-1}) v_1 + \cdots (a_{m - 2} - a_{m-1} - a_m) v_{m-2}
     +(a_{m-1} - a_m) w_{m-1}  + a_m w_m \\ 
-    &= \sum_{i=1}^m (a_i - \sum_{j=i+1}^m a_j)w_i \in \text{r.h.s}
+    &= \sum_{i=1}^m \left(a_i - \sum_{j=i+1}^m a_j \right)w_i \in \text{r.h.s}
 \end{align*}
 
 Conversely, take \(w = \sum_{i=1}^m b_i w_i = \sum_{i=1}^m (b_i \sum_{j=1}^i c_j) v_j \in \text{l.h.s.}\).
-
 \end{proof}
 
 \begin{problem}{4}
@@ -146,7 +141,6 @@ Conversely, take \(w = \sum_{i=1}^m b_i w_i = \sum_{i=1}^m (b_i \sum_{j=1}^i c_j
 cannot be a multiple of \(v_2\); vice versa.  \(\Leftarrow\) same reason.
 \end{proof}
 
-
 \begin{problem}{8}
     Suppose \(v_1, v_2, v_3, v_4\) is linearly independent in \(V\). Prove that the list 
     \[v_1 - v_2, v_2 - v_3, v_3 - v_4 , v_4\]
@@ -154,13 +148,11 @@ cannot be a multiple of \(v_2\); vice versa.  \(\Leftarrow\) same reason.
 \end{problem}
 
 \begin{proof}
-
     \[a_1(v_1 - v_2) + a_2 (v_2 - v_3) + a_3 (v_3 - v_4) + a_4 v_4 = a_1v_1 
     + (-a_1 + a_2)v_2 + (-a_2 + a_3)v_3 + (-a_3 + a_4) v_4\]
 
     The only solution is \(a_1 = 0, -a_1 + a_2 = 0, -a_2 + a_3 = 0, -a_3 + a_4 = 0\).
 \end{proof}
-
 
 \begin{problem}{9}
     Prove or give a counter example: If \(v_1, \ldots, v_m\) is a linearly independent 
@@ -170,22 +162,19 @@ cannot be a multiple of \(v_2\); vice versa.  \(\Leftarrow\) same reason.
 \end{problem}
 
 \begin{proof}
-
 \begin{align*}
     &a_1 (5v_1 - 4v_2) + a_2 v_2 + \ldots a_m v_m \\ 
     &=5a_1 v_1 + (-4a_1  + a_2)v_2 + \ldots a_m v_m
 \end{align*}
 
 The only solution is \(5a_1 = -4a_1 + a_2 = \ldots = a_m = 0\).
-
 \end{proof}
-
 
 \begin{problem}{10}
     Prove or give a counterexample: If \(v_1, \ldots, v_m\) is a linearly 
     independent list of vectors in \(V\)  and \(\lambda \in \F\) with 
     \(\lambda \neq 0\), then \(\lambda v_1, \ldots, \lambda v_m\) is linearly 
-    indepedent.
+    independent.
 \end{problem}
 
 \begin{proof}
@@ -195,7 +184,7 @@ The only solution is \(a_i = 0\) for all \(i\).
 \end{proof}
 
 \begin{problem}{12}
-    Suppose \(v_1, \ldots, v_m\) is linearly independet in \(V\) 
+    Suppose \(v_1, \ldots, v_m\) is linearly independent in \(V\) 
     and \(w \in V\). Prove that if \(v_1 + w, \ldots, v_m + w\) is 
     linearly dependent, then \(w \in \text{span}(v_1, \ldots, v_m)\).
 \end{problem}
@@ -209,17 +198,16 @@ Thus \(w = \frac{\sum_i^m a_i v_i}{\sum_i^m a_i}\) which completes the proof.
 \begin{problem}{13}
     Suppose \(v_1, \ldots, v_m\) is linearly independent in \(V\) and 
     \(w \in V\). Show that 
-    \[v_1, \ldots, v_m, w \text{ is linearly independent } \Leftrightarrow 
+    \[v_1, \ldots, v_m, w \text{ is linearly independent } \Longleftrightarrow 
     w \notin \text{ span}(v_1, \ldots, v_m)\]
 \end{problem}
 
 \begin{proof}
-\(\Rightarrow\) By contradiction if \(w\) in the span then it can be written 
-as linear combination for some nonzero \(a_i\) and thus they are ld. 
+\(\Rightarrow\) By contradiction, if \(w\) in the span then it can be written 
+as linear combination for some nonzero \(a_i\) and thus they are linearly dependent. 
 
 \(\Leftarrow\) Similarly. 
 \end{proof}
-
 
 \begin{problem}{17}
 Prove that \(V\) is infinite-dimensional if and only if there is a sequence 
@@ -239,7 +227,6 @@ that spans \(V\), forming a contradiction.
 
 \(\Leftarrow\) Suppose for contradiction. Then there exists a span, contradicting 
 the linear independence claim for every \(m\).
-
 \end{proof}
 
 \begin{problem}{18}
@@ -248,10 +235,9 @@ the linear independence claim for every \(m\).
 
 \begin{proof}
 We apply Problem 17. Construct \(v_i\) to be the vector that has 1 on the 
-i-th coordinate and 0 elsewhere. clearly \(v_1, v_2, \ldots\) are s.t. 
-\(v_1, \ldots, v_m\) is linearly indepedent for every positive integer \(m\).
+\(i\)-th coordinate and 0 elsewhere. clearly \(v_1, v_2, \ldots\) are s.t. 
+\(v_1, \ldots, v_m\) is linearly independent for every positive integer \(m\).
 \end{proof}
-
 
 \newpage 
 \addcontentsline{toc}{section}{2B: Bases}
@@ -284,7 +270,7 @@ i-th coordinate and 0 elsewhere. clearly \(v_1, v_2, \ldots\) are s.t.
 \end{lemma}
 
 \begin{lemma}
-    Suppose \(V\) is finite-dimensional and \(\Ucal\) is a subspce of \(V\). 
+    Suppose \(V\) is finite-dimensional and \(\Ucal\) is a subspace of \(V\). 
     Then there is a subspace \(W\) of \(V\) such that \(V = \Ucal \oplus W\).
 \end{lemma}
 
@@ -330,7 +316,6 @@ Let \(\{v_i\}_{i=1}^m\) denote the basis for the vector space \(V\). By definiti
 \(\sum_i^m a_i (u_i + w_i)\), which can be reduced to a basis by the lemma.
 \end{proof}
 
-
 \begin{problem}{7}
     Suppose \(v_1, v_2, v_3, v_4\) is a basis of \(V\). Prove that 
     \[v_1 + v_2, v_2 + v_3, v_3+v_4, v_4\]
@@ -346,7 +331,6 @@ which shows the linear independence. For proving spanning, let \(v \in V\) then
 \[v = \sum_{i=1}^4 a_i v_i = a_1(v_1 + v_2) + (a_2 - a_1)(v_2 + v_3)
 + (a_3 - a_2)(v_3 + v_4) + (a_4 - a_3)v_4\]
 \end{proof}
-
 
 \begin{problem}{8}
     Prove or give a counterexample: If \(v_1, v_2, v_3, v_4\) is a basis of \(V\) and 
@@ -367,15 +351,12 @@ we disprove the claim.
     is a basis of \(V\). 
 \end{problem}
 
-
 \begin{proof}
 We know 
 that this set is linearly independent (otherwise violating the direct sum assumption) 
 so it sufficies to prove the spanning. Let \(v \in V\),
 then \(v = u + w = \sum_{i=1}^m a_i u_i + \sum_{j=1}^n b_j w_j\). 
-
 \end{proof}
-
 
 \newpage 
 
@@ -422,7 +403,6 @@ then \(v = u + w = \sum_{i=1}^m a_i u_i + \sum_{j=1}^n b_j w_j\).
 \newpage 
 \addcontentsline{toc}{subsection}{2C Problem Sets}
 
-
 \begin{problem}{1}
     Show that the subspaces of \(\R^2\) are precisely \(\{0\}\), all lines in \(\R^2\)
     containing the origin and \(\R^2\).
@@ -432,8 +412,6 @@ then \(v = u + w = \sum_{i=1}^m a_i u_i + \sum_{j=1}^n b_j w_j\).
 We know \(\dim (\R^2) = 2\) so the subspace dimension is either 0 (\(\{0\}\)) or 
 1 (then this means it has to be lines crossing the origin). 
 \end{proof}
-
-
 
 \begin{problem}{5}
     (a) Let \(\Ucal = \{p \in \Pcal_4 (\F) \colon p(2) = p(5)\}\). Find a basis of \(\Ucal\).
@@ -460,7 +438,6 @@ The basis now becomes \(\{1, x^2 - 7x, x^3 - 39x, x^4 - 203x\}\)
 (b) \(\{1, x, x^2 - 7x, x^3 - 39x, x^4 - 203x\}\)
 
 (c) \(\Wcal = \{x\}\)
-
 \end{proof}
 
 \begin{problem}{8}
@@ -476,9 +453,7 @@ We claim that
 as \(v_{i+1} - v_i = (v_{i+1} + w) - (v_i + w)\). Thus \(v_2 - v_1, \ldots, v_m - v_{m-1}\) is 
 in the \(\text{span}(v_1 + w, \ldots, v_m + w)\). We've proved that \(v_2 - v_1, \ldots, v_m - v_{m-1}\)
 is linearly independent and this list has \(m - 1\) vectors and thus we've proved the claim.
-
 \end{proof}
-
 
 \begin{problem}{9}
     Suppose \(m\) is a positive integer and \(p_0, p_1, \ldots, p_m \in \Pcal(\F)\) are 
@@ -498,25 +473,24 @@ we can decompose that by degrees and get each component to be some multiple of \
 \end{problem}
 
 \begin{proof}
-It suffices to prove that \(p_k(x)\) are linearly indepedent. We know from binomial theorem 
+It suffices to prove that \(p_k(x)\) are linearly independent. We know from binomial theorem 
 that 
-\[(x+y)^m = \sum_{i=0}^{m} {m \choose i} x^i y^{m-i} \]
+\[(x+y)^m = \sum_{i=0}^{m} \binom{m}{i} x^i y^{m-i} \]
 
 Applying this identity here we get that 
-\[p_k(x) = x^k \sum_{i=0}^{m-k} {m-k \choose i} 1^{m-i} (-1)^{i} x^{i} = \sum_{i=0}^{m-k}
+\[p_k(x) = x^k \sum_{i=0}^{m-k} \binom{m-k}{i} 1^{m-i} (-1)^{i} x^{i} = \sum_{i=0}^{m-k}
 a_i x^{k + i}\]
 
-where \(a_i = {m - k \choose i} (-1)^i\). For the polynomial to be identically 0 (\(\sum_{k=0}^{m}c_k p_k (x) = 0\)), for each 
-power \(x^i\) we need the coefficient to be 0:
+where \(a_i = \binom{m-k}{i} (-1)^i\). For the polynomial to be identically 0 (\(\sum_{k=0}^{m}c_k p_k (x) = 0\)), 
+for each power \(x^i\) we need the coefficient to be 0:
 
-\[\sum_{k=0}^{\min(i, m)} c_k {m - k \choose i - k} (-1)^{i - k} = 0\]
+\[\sum_{k=0}^{\min(i, m)} c_k \binom{m-k}{i-k} (-1)^{i - k} = 0\]
 
 We can prove the only solution for this is all \(c_k = 0\) by induction on \(m\). 
 
 The base case is trivial. Assume the statement holds for \(k = m - 1\), then we try 
 to prove for \(p_m(x)\), where we have \(P(x) - c_m p_m (x) = \sum_{k=0}^{m-1}c_kp_k(x)=0\). 
 This means that \(c_m = 0\) and we've proved the linear independence. 
-
 \end{proof}
 
 \begin{problem}{11}
@@ -534,13 +508,12 @@ So there must exist two linearly independent vectors in the intersection.
 \begin{problem}{12}
     Suppose that \(\Ucal\) and \(\Wcal\) are subspaces of \(\R^8\) such that 
     \(\dim \Ucal = 3, \dim \Wcal = 5\) and \(\Ucal + \Wcal = \R^8\). Prove that 
-    \(\R^8 = \Ucal \oplus \Wcal\)
+    \(\R^8 = \Ucal \oplus \Wcal\).
 \end{problem}
 
 \begin{proof}
-Similar to problem 11, we can get tht \(\dim (\Ucal \cap \Wcal) = 0\). 
+Similar to problem 11, we can get that \(\dim (\Ucal \cap \Wcal) = 0\). 
 \end{proof}
-
 
 \begin{problem}{14}
     Suppose \(V\) is a ten-dimensional vector space and \(V_1, V_2, V_3\) are subspaces 
@@ -566,10 +539,7 @@ Hence we know
     (V_1 \cap V_2) + V_3
 )) > 0\]
 We've thus proved the claim.
-
 \end{proof}
-
-
 
 \begin{problem}{16}
     Suppose \(V\) is finite-dimensional and \(\Ucal\) is a subspace of \(V\)
@@ -578,14 +548,11 @@ We've thus proved the claim.
     intersection equals \(\Ucal\). 
 \end{problem}
 
-
 \begin{proof}
-
     To show existence, we can start with the basis for \(\Ucal: u_1, \ldots, u_m\). 
     We extend the basis to \(V: \{ u_1, \ldots, u_m, v_1, \ldots, v_{n-m}\} \coloneqq K\). Construct 
-    the subspace \(V_i = \text{span}\{K \backslash \{v_i\}\}\). Then we know that 
+    the subspace \(V_i = \text{span}\{K \setminus \{v_i\}\}\). Then we know that 
     \(\bigcap_i V_i = \text{span}\{\{u_1, \ldots, u_m\}\}\). 
-
 \end{proof}
 
 \begin{problem}{17}
@@ -595,7 +562,7 @@ We've thus proved the claim.
 \end{problem}
 
 \begin{proof}
-We prove by induction on \(m\). The base case is trivial. Asume the statement hold for \(k\),
+We prove by induction on \(m\). The base case is trivial. Assume the statement hold for \(k\),
 then for \(k+1\), we have that (Denote \(V_1 + \ldots + V_k = M_k\))
 
 \begin{align*}
@@ -603,7 +570,6 @@ then for \(k+1\), we have that (Denote \(V_1 + \ldots + V_k = M_k\))
 \end{align*}
 
 which is finite.
-
 \end{proof}
 
 \begin{problem}{18}
@@ -616,7 +582,6 @@ which is finite.
 We know there are basis \(\{v_1, \ldots, v_n\}\) for \(V\). Hence we can construct 
 \[V_i = \text{span}\{v_i\}\]
 \end{proof}
-
 
 \begin{problem}{19}
     Prove or give a counter example:
@@ -643,11 +608,7 @@ Here we can get that
     &= \dim(V_1 \cap V_3) + \dim(V_2 \cap V_3) - \dim(V_1 \cap V_2 \cap V_3)
 \end{align*}
 
-Substitute this back we can get the desired solution. 
-
-
+By substituting this back, we can get the desired solution. 
 \end{proof}
-
-
 
 \end{document}

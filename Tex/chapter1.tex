@@ -3,31 +3,22 @@
 \input{packages.tex}
 \input{math_commands.tex}
 
-% \newcommand{\sb}{\mathbf{s}}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% DOCUMENT START              																			           %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{\vspace{-2em}Chapter 1: Vector Spaces}
-\author{\emph{Linear Algebra Done Right}, by Sheldon Axler}
-\date{}
+\author{\emph{Linear Algebra Done Right (4th Edition)}, by Sheldon Axler}
+\date{Last updated: \today}
 
 \begin{document}
-\maketitle
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% SECTION A            																			           
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \section{$\R$ and}
+\maketitle 
+\tableofcontents
+\newpage
 
 \section*{1A: $\R^n$ and $\C^n$}
+\addcontentsline{toc}{section}{1A: $\R^n$ and $\C^n$}
 
 \begin{problem}{1}
     Show that \(\alpha + \beta = \beta + \alpha\) for all \(\alpha, 
     \beta \in \C\). 
 \end{problem}
-
 
 \begin{proof}
     Let \(\alpha = a + bi, \beta = c + di\). Then we have that 
@@ -44,7 +35,6 @@
     \beta, \gamma \in \C\). 
 \end{problem}
 
-
 \begin{proof}
 Choose arbitrary \(\alpha, \beta, \gamma \in \C\). Denote \(\alpha = a + bi,
 \beta=c + di, \gamma = e + fi\). Then we have that 
@@ -55,7 +45,7 @@ Choose arbitrary \(\alpha, \beta, \gamma \in \C\). Denote \(\alpha = a + bi,
     &=( ace - bde - adf - bcf ) + (ade + bce + acf - bdf)i
 \end{align*}
 
-At the same time we have 
+At the same time, we have 
 
 \begin{align*}
     \alpha (\beta \gamma) 
@@ -63,10 +53,8 @@ At the same time we have
     &= (ace - adf - bcf - bde) + (ade + acf + bce - bdf)i
 \end{align*}
 
-Hence \((\alpha \beta)\gamma = \alpha (\beta \gamma)\). 
-
+Hence, \((\alpha \beta)\gamma = \alpha (\beta \gamma)\). 
 \end{proof}
-
 
 \begin{problem}{5}
     Show that for any \(\alpha \in \C\), there exists a unique \(\beta \in \C\) such
@@ -74,7 +62,7 @@ Hence \((\alpha \beta)\gamma = \alpha (\beta \gamma)\).
 \end{problem}
 
 \begin{proof}
-Denote \(\alpha = a + bi\). By property of filed, we know there exists unique 
+Denote \(\alpha = a + bi\). By the property of a field, we know there exists unique 
 \(c = -a\) and \(d = -b\) such that \(\beta = c + di\) and \(\alpha + \beta=0\). Suppose
 for the sake of contradiction that \(\beta\) is not unique, then there exists 
 \(c' + d'i\) such that \((a + c') + (b + d')i = 0\) while \(c' \neq a\) or \(d' \neq d\),
@@ -111,7 +99,6 @@ Then \(|a| = |b|, 2ab = 1 \). So we get the solution to be
 \end{align*}
 \end{proof}
 
-
 \begin{problem}{14}
     Show that \(\gamma(\xb + \yb) = \gamma \xb + \gamma \yb \ \forall \gamma \in \F, \xb, \yb \in \F^n\).
 \end{problem}
@@ -127,11 +114,10 @@ Then \(|a| = |b|, 2ab = 1 \). So we get the solution to be
 \end{align*}
 \end{proof}
 
-
 \newpage 
 
-\section*{1B: Definition of the Vector Space}
-
+\section*{1B: Definition of Vector Space}
+\addcontentsline{toc}{section}{1B: Definition of Vector Space}
 
 \begin{thm}
     A vector space is a set that is closed under \emph{vector addition} and \emph{scalar multiplication}. 
@@ -153,7 +139,6 @@ function). e.g. \(f \in \F^S\).
 
 Comment: \(\F^S\) is a vector space; One can think of \(f \in \F^n\) as \(f:
 \{1, 2,\ldots, n\} \to \F\). 
-
 
 \begin{problem}{1}
     Prove that \(-(-\vb) = \vb\) for all \(\vb \in V\). 
@@ -228,6 +213,7 @@ We have that
 
 \newpage 
 \section*{1C: Subspaces}
+\addcontentsline{toc}{section}{1C: Subspaces}
 
 \begin{definition}[subspace]
     A subset \(\Ucal\) of \(V\) is called \emph{subspace} of \(V\) if \(\Ucal\)
@@ -244,7 +230,6 @@ We have that
     The subspace of \(\R^2\) are precisely \(\{0\}\), all lines in \(\R^2\)
     containing the origin, \(\R^2\). 
 \end{remark}
-
 
 \begin{definition}[Sum of subspace] 
     Suppose \(V_1, \cdots, V_m\) are subspaces. The \emph{sum} of them, denoted
@@ -296,7 +281,6 @@ are all zero but \(k\)-th coordinate. Then we have
     \end{align*}
 \end{example}
 
-
 \begin{thm}
     Suppose \(V_1, \ldots, V_m\) are subspaces of \(V\). Then \(V_1 + \cdots + V_m\) 
     is a direct sum if and only if the only way to write 0 as a sum of \(v_1 + \cdots + v_m\),
@@ -305,9 +289,8 @@ are all zero but \(k\)-th coordinate. Then we have
 
 \begin{thm}
     Suppose that \(\Ucal\) and \(\Wcal\) are subspaces of \(V\). Then 
-    \[\Ucal + \Wcal \text{ is a direct sum} \Leftrightarrow \Ucal \cap \Wcal = \{0\}\]
+    \[\Ucal + \Wcal \text{ is a direct sum} \Longleftrightarrow \Ucal \cap \Wcal = \{0\}\]
 \end{thm}
-
 
 \begin{problem}{1}
 Verify the following examples to be valid subspaces:
@@ -323,8 +306,6 @@ Verify the following examples to be valid subspaces:
     \item The set of all sequences of complex numbers with limit 0 is a subspace of \(\C^\infty\).
 \end{enumerate}
 \end{problem}
-
-
 
 \begin{proof}
 \begin{enumerate}
@@ -374,7 +355,6 @@ have that \(a\zb = (z_1(x+yi), z_2 (x+yi)) \notin \R^2\).
 No. \(\Ucal = \{(x_1, x_2) \colon x_1, x_2 \in \Z\}\). Then \(\frac{1}{2}(1, 1) \notin \Ucal\).
 \end{proof}
 
-
 \begin{problem}{9}
     A function \(f\colon \R \to \R\) is called \emph{periodic} if there exists a 
     positive number \(p\) s.t. \(f(x) = f(x + p)\) for all \(x \in \R\). Is the 
@@ -385,8 +365,6 @@ No. \(\Ucal = \{(x_1, x_2) \colon x_1, x_2 \in \Z\}\). Then \(\frac{1}{2}(1, 1) 
 No, problem occurs with the addition. Suppose we have \(f(x) = f(x + p)\) and 
 \(g(x) = g(x + q)\). Then \((f + g)(x) = f(x) + g(x) = f(x + p) + g(x + q) \neq 
 (f + g)(x + l)\) for some fixed \(l\) for all \(p,q\). 
-
-
 \end{proof}
 
 \begin{problem}{11}
@@ -412,7 +390,7 @@ Let \(V_1, V_2\) be two subspaces of \(V\).
 there exists \(v_1 \in V_1\) s.t. \(v_1 \notin V_2\) and \(v_2 \in V_2\) s.t. 
 \(v_2 \notin V_1\). Then by assumption we have that \(v_1 + v_2 \in V_1 \cup V_2\).
 Here we can also show that \(v_1 + v_2 \notin V_1\) because if it does, \(v_1 +
-v_2 + (-v_1) = v_2 \in V_1\). Similarily, \(v_1 + v_2 \notin V_2\). Thus we've reached
+v_2 + (-v_1) = v_2 \in V_1\). Similarly, \(v_1 + v_2 \notin V_2\). Thus we've reached
 a contradiction. 
 
 \(\Leftarrow\) This direction is trivial. 
@@ -465,7 +443,6 @@ Take \(\ub_1 + \ub_2 \in \Ucal + \Ucal\), then \(\ub_1 + \ub_2 \in \Ucal\). Conv
 take \(\ub \in \Ucal\), then \(\ub = \ub + 0 \in \Ucal + \Ucal\).
 \end{proof}
 
-
 \begin{problem}{16}
     Is the operation of addition on the subspaces of \(V\) commutative (\(\Ucal +
     \Wcal = \Wcal + \Ucal\))? 
@@ -485,7 +462,6 @@ Yes, the zero subspace \emph{i.e.} \(\{0\}\) is the additive identity. The subsp
 that have additive inverses is only \(\{0\}\). 
 \end{proof}
 
-
 \begin{problem}{19}
     Prove or disprove: If \(V_1, V_2, \Ucal\) are subspaces of \(V\) such that 
     \[V_1 + \Ucal = V_2 + \Ucal\]
@@ -500,7 +476,7 @@ while \(V_1 \neq V_2\).
 \begin{problem}{20}
     Suppose 
     \[\Ucal = \{(x,x,y,y) \in \F^4 \colon x, y \in \F\}\]
-    Find a subspace \(\Wcal \in\) \(\F^4\) st. \(\F^4  =\Ucal \oplus \Wcal\).
+    Find a subspace \(\Wcal \in\) \(\F^4\) s.t. \(\F^4  =\Ucal \oplus \Wcal\).
 \end{problem}
 
 \begin{proof}
@@ -530,10 +506,9 @@ rest follows exactly as in P20.
 \end{proof}
 
 \begin{problem}{23}
-    Porve or disprove: If \(V_1, V_2, \Ucal\) are subspaces of \(V\) s.t. 
-    \[V = V_1 \oplus \Ucal \text{ and } V = V_2 \oplus \Ucal\], 
-
-    then \(V_1 = V_2\)
+    Prove or disprove: If \(V_1, V_2, \Ucal\) are subspaces of \(V\) s.t. 
+    \[V = V_1 \oplus \Ucal \text{ and } V = V_2 \oplus \Ucal ,\] 
+    then \(V_1 = V_2\).
 \end{problem}
 
 \begin{proof}
@@ -541,14 +516,12 @@ Counterexample: Let \(\Ucal = \{(x,x) \colon x \in \F\}, V_1 = \{(x,0)\colon x \
 V_2 = \{(0, x) \colon x \in \F\}\). 
 \end{proof}
 
-
 \begin{problem}{24}
     A function \(f \colon \R \to \R\) is called \emph{even} if \(f(-x)=f(x)\) and 
     \emph{odd} if \(f(-x) = -f(x)\) for all \(x \in \R\). Let \(V_e\) denote the 
     set of real-valued even functions on \(\R\) and let \(V_o\) denote the 
     set of real-valued odd functions on \(\R\). Show that \(\R^\R = V_e \oplus V_o\).
 \end{problem}
-
 
 \begin{proof}
 \(\Leftarrow\) Trivial direction. 
